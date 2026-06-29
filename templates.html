@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Templates - mypropfolio</title>
+  <meta name="description" content="Browse our property microsite templates by type. HDB, Condo, Landed, and Commercial listing designs for Singapore agents.">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-180.png">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="mypropfolio home">
+        <img src="Asset/MyPropFolio Logo.png" alt="mypropfolio" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="add-ons.html">Add-Ons</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a href="contact.html" class="nav-cta">Get Started</a>
+      <button class="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-overlay">
+    <a href="how-it-works.html">How It Works</a>
+    <a href="add-ons.html">Add-Ons</a>
+        <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-cta-mobile">Get Started</a>
+  </div>
+
+  <main id="content">
+
+    <!-- PAGE HERO -->
+    <header class="page-hero hero-with-bg" data-bg="#FAFAFA">
+      <div class="hero-bg-image" aria-hidden="true">
+        <img src="Asset/Template Page Banner.jpg" alt="" loading="eager">
+        <div class="hero-bg-blur"></div>
+      </div>
+      <div class="container">
+        <div class="line-reveal">
+          <h1 class="display-lg">
+            <div class="line-clip"><span class="line">Built for every</span></div>
+            <div class="line-clip"><span class="line">type of listing.</span></div>
+          </h1>
+        </div>
+        <p class="reveal reveal-delay-1">Browse our template styles by property type. Each one is designed to give your listing its own story.</p>
+      </div>
+    </header>
+
+    <!-- TEMPLATES GRID -->
+    <section class="section" aria-label="Template gallery" data-bg="#FFFFFF">
+      <div class="container">
+
+        <!-- Filter tabs -->
+        <div class="filter-tabs" role="tablist" aria-label="Filter by property type">
+          <button class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-tab" data-filter="hdb" role="tab" aria-selected="false">HDB</button>
+          <button class="filter-tab" data-filter="condo" role="tab" aria-selected="false">Condo</button>
+          <button class="filter-tab" data-filter="landed" role="tab" aria-selected="false">Landed</button>
+          <button class="filter-tab" data-filter="commercial" role="tab" aria-selected="false">Commercial</button>
+        </div>
+
+        <!-- Cards -->
+        <div class="cards-grid">
+
+          <article class="property-card reveal" data-type="hdb">
+            <div class="property-card-image">
+              <img src="https://picsum.photos/seed/sg-hdb-resale/800/600" alt="HDB listing template" loading="lazy">
+            </div>
+            <div class="property-card-info">
+              <div>
+                <span class="property-card-type">HDB</span>
+                <p style="font-size:13px; color: var(--color-text-muted); margin-top:4px;">4-Room Resale</p>
+              </div>
+              <span class="property-card-link">Demo coming soon</span>
+            </div>
+          </article>
+
+          <article class="property-card reveal reveal-delay-1" data-type="condo">
+            <div class="property-card-image">
+              <img src="https://picsum.photos/seed/sg-condo-pool/800/600" alt="Condo listing template" loading="lazy">
+            </div>
+            <div class="property-card-info">
+              <div>
+                <span class="property-card-type">Condo</span>
+                <p style="font-size:13px; color: var(--color-text-muted); margin-top:4px;">2-Bedroom Freehold</p>
+              </div>
+              <span class="property-card-link">Demo coming soon</span>
+            </div>
+          </article>
+
+          <article class="property-card reveal reveal-delay-2" data-type="landed">
+            <div class="property-card-image">
+              <img src="https://picsum.photos/seed/sg-terrace-house/800/600" alt="Landed property listing template" loading="lazy">
+            </div>
+            <div class="property-card-info">
+              <div>
+                <span class="property-card-type">Landed</span>
+                <p style="font-size:13px; color: var(--color-text-muted); margin-top:4px;">Semi-Detached</p>
+              </div>
+              <span class="property-card-link">Demo coming soon</span>
+            </div>
+          </article>
+
+          <article class="property-card reveal reveal-delay-3" data-type="commercial">
+            <div class="property-card-image">
+              <img src="https://picsum.photos/seed/sg-shophouse-row/800/600" alt="Commercial listing template" loading="lazy">
+            </div>
+            <div class="property-card-info">
+              <div>
+                <span class="property-card-type">Commercial</span>
+                <p style="font-size:13px; color: var(--color-text-muted); margin-top:4px;">Shophouse</p>
+              </div>
+              <span class="property-card-link">Demo coming soon</span>
+            </div>
+          </article>
+
+        </div>
+
+        <p style="font-size:13px; color: var(--color-text-muted); margin-top:24px; text-align:center;">Live demos launching soon. <a href="contact.html" style="text-decoration:underline; text-underline-offset:3px;">Get notified</a> when they go live.</p>
+
+      </div>
+    </section>
+
+    <!-- CUSTOM REQUEST -->
+    <section class="section-sm section-dark" data-bg="#0A0A0A" aria-label="Custom request">
+      <div class="container">
+        <div style="display: flex; align-items: center; justify-content: space-between; gap: 40px; flex-wrap: wrap;">
+          <div class="reveal">
+            <h2 class="display-md" style="color:#fff; margin-bottom:12px;">Need something different?</h2>
+            <p style="color:rgba(255,255,255,0.55); font-size:16px; max-width:420px;">We build custom layouts for GCB, new launches, executive condos, and more. Tell us what you need.</p>
+          </div>
+          <a href="https://wa.me/6596273238" target="_blank" rel="noopener" class="btn-white reveal reveal-delay-1">Talk to Us</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA to pricing -->
+    <section class="section-sm" aria-label="Pricing CTA" data-bg="#FAFAFA">
+      <div class="container" style="text-align:center;">
+        <p class="reveal" style="font-size:17px; color: var(--color-text-muted); margin-bottom:24px;">Ready to get your listing live?</p>
+        <a href="pricing.html" class="btn-primary reveal reveal-delay-1">View Pricing</a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" data-bg="#FAFAFA" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="Asset/MyPropFolio Logo.png" alt="mypropfolio" class="nav-logo-img">
+          </a>
+          <p class="tagline">Your listing. Your brand.</p>
+        </div>
+        <div class="footer-links-group">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="add-ons.html">Add-Ons</a>
+        <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <a href="https://wa.me/6596273238" target="_blank" rel="noopener">WhatsApp Us</a>
+
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 mypropfolio &nbsp;·&nbsp; <a href="pricing.html#terms" style="color:var(--color-text-muted); text-decoration:none; font-size:inherit;">Terms</a></p>
+        <p class="footer-partner">Photography partner: <a href="https://www.gradepixel.com" target="_blank" rel="noopener">GradePixel</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

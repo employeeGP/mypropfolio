@@ -1,0 +1,1541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Woods — Semi-Detached, Westwood Avenue | S$2,750,000</title>
+<meta name="description" content="The Woods, Westwood Avenue. 6-bed semi-detached cluster landed, 4,004 sqft. S$2,750,000. Exclusively presented by Marcus & Clara.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="">
+<style>
+/* ── RESET & BASE ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,system-ui,sans-serif;font-weight:300;background:var(--bg);color:var(--ink);cursor:none;overflow-x:hidden}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{cursor:none;font-family:inherit;border:none;background:none}
+
+/* ── DESIGN TOKENS ── */
+:root{
+  --bg:          oklch(97.5% 0.008 80);
+  --bg-alt:      oklch(95% 0.012 78);
+  --bg-card:     oklch(100% 0 0);
+  --forest:      oklch(22% 0.065 145);
+  --forest-mid:  oklch(30% 0.058 148);
+  --forest-light:oklch(40% 0.052 150);
+  --brass:       oklch(68% 0.095 65);
+  --brass-light: oklch(78% 0.078 68);
+  --brass-pale:  oklch(95% 0.022 72);
+  --stone:       oklch(92% 0.016 75);
+  --stone-mid:   oklch(86% 0.020 73);
+  --ink:         oklch(18% 0.025 145);
+  --ink-mid:     oklch(42% 0.018 145);
+  --ink-soft:    oklch(60% 0.014 145);
+  --ink-faint:   oklch(76% 0.010 145);
+  --b:           oklch(18% 0.025 145 / 0.09);
+  --b-dark:      oklch(100% 0 0 / 0.12);
+  --cream:       oklch(97% 0.012 75);
+  --ff-d:'Cormorant Garamond',Georgia,serif;
+  --ff-b:'Inter',-apple-system,system-ui,sans-serif;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;
+  --sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;
+  --sp-9:96px;--sp-10:128px;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --ease-out:cubic-bezier(0.0,0,0.2,1);
+  --r:16px;
+}
+
+/* ── CUSTOM CURSOR ── */
+#cursor-dot{
+  position:fixed;width:8px;height:8px;border-radius:50%;
+  background:var(--brass);pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);transition:width 0.2s,height 0.2s,background 0.2s;
+}
+#cursor-ring{
+  position:fixed;width:36px;height:36px;border-radius:50%;
+  border:1.5px solid var(--brass);pointer-events:none;z-index:9998;
+  transform:translate(-50%,-50%);opacity:0.6;
+  transition:opacity 0.3s,width 0.3s,height 0.3s,border-color 0.3s;
+}
+body:has(.btn-primary:hover) #cursor-dot,
+body:has(a:hover) #cursor-dot{ background:var(--forest); }
+body:has(.btn-primary:hover) #cursor-ring,
+body:has(a:hover) #cursor-ring{ width:56px;height:56px;border-color:var(--forest);opacity:0.4; }
+
+/* ── SCROLL PROGRESS ── */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:2px;width:0%;
+  background:var(--brass);z-index:9997;transition:width 0.1s linear;
+}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  padding:var(--sp-5) var(--sp-7);
+  display:flex;align-items:center;justify-content:space-between;
+  transition:background 0.4s,backdrop-filter 0.4s,box-shadow 0.4s;
+}
+.nav.scrolled{
+  background:oklch(22% 0.065 145 / 0.94);
+  backdrop-filter:blur(16px);
+  box-shadow:0 1px 0 var(--b-dark);
+}
+.nav-logo{font-family:var(--ff-d);font-size:20px;font-weight:400;color:#fff;letter-spacing:0.04em}
+.nav-logo span{color:var(--brass);font-style:italic}
+.nav-links{display:flex;gap:var(--sp-6);list-style:none}
+.nav-links a{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.7);transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{
+  font-size:12px;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;
+  color:var(--forest);background:var(--brass);
+  padding:10px 20px;border-radius:40px;
+  transition:background 0.2s,transform 0.2s;
+}
+.nav-cta:hover{background:var(--brass-light);transform:scale(1.04)}
+
+/* ── HERO ── */
+.hero{
+  position:relative;height:100svh;min-height:600px;overflow:hidden;
+  display:flex;align-items:flex-end;
+}
+.hero-img{
+  position:absolute;inset:0;
+  transform:scale(1.06);
+  animation:heroZoom 12s var(--ease-out) forwards;
+}
+@keyframes heroZoom{to{transform:scale(1)}}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(
+    to bottom,
+    oklch(22% 0.065 145 / 0.15) 0%,
+    oklch(22% 0.065 145 / 0.10) 40%,
+    oklch(22% 0.065 145 / 0.75) 80%,
+    oklch(22% 0.065 145 / 0.92) 100%
+  );
+}
+.hero-content{
+  position:relative;z-index:2;width:100%;
+  padding:0 var(--sp-7) 80px;
+  max-width:1200px;margin:0 auto;
+}
+.hero-tag{
+  display:inline-block;font-size:11px;font-weight:500;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--brass);
+  border:1px solid var(--brass);border-radius:40px;
+  padding:6px 16px;margin-bottom:var(--sp-5);
+  opacity:0;animation:fadeUp 0.8s 0.6s var(--ease) forwards;
+}
+.hero-hl{
+  font-family:var(--ff-d);font-size:clamp(52px,7vw,96px);
+  font-weight:300;line-height:1.0;color:#fff;
+  margin-bottom:var(--sp-5);
+}
+.hero-hl .word{display:inline-block;overflow:hidden;margin-right:0.22em}
+.hero-hl .word span{
+  display:inline-block;transform:translateY(100%);opacity:0;
+  animation:wordUp 0.9s var(--ease) forwards;
+}
+.hero-hl .word:nth-child(1) span{animation-delay:0.3s}
+.hero-hl .word:nth-child(2) span{animation-delay:0.45s}
+.hero-hl .word:nth-child(3) span{animation-delay:0.6s}
+.hero-hl .word:nth-child(4) span{animation-delay:0.75s}
+.hero-hl .word:nth-child(5) span{animation-delay:0.9s}
+.hero-hl em{font-style:italic;color:var(--brass)}
+@keyframes wordUp{to{transform:translateY(0);opacity:1}}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
+.hero-meta{
+  display:flex;align-items:center;gap:var(--sp-5);flex-wrap:wrap;
+  opacity:0;animation:fadeUp 0.8s 1.2s var(--ease) forwards;
+}
+.hero-price{font-family:var(--ff-d);font-size:clamp(28px,3.5vw,42px);font-weight:400;color:#fff;font-variant-numeric:tabular-nums}
+.hero-price small{font-family:var(--ff-b);font-size:13px;font-weight:400;color:oklch(100% 0 0 / 0.6);margin-left:8px;letter-spacing:0.04em}
+.hero-divider{width:1px;height:36px;background:oklch(100% 0 0 / 0.25)}
+.hero-stat{display:flex;flex-direction:column;gap:2px}
+.hero-stat-val{font-size:15px;font-weight:500;color:#fff}
+.hero-stat-lbl{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.55)}
+.hero-scroll{
+  position:absolute;bottom:var(--sp-7);right:var(--sp-7);
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  opacity:0;animation:fadeUp 0.8s 1.6s var(--ease) forwards;
+}
+.hero-scroll-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:oklch(100% 0 0 / 0.5)}
+.hero-scroll-line{width:1px;height:48px;background:oklch(100% 0 0 / 0.3);position:relative;overflow:hidden}
+.hero-scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--brass);animation:scrollLine 2s 2s infinite}
+@keyframes scrollLine{0%{top:-100%}100%{top:100%}}
+
+/* ── MARQUEE ── */
+.marquee-wrap{background:var(--forest);padding:18px 0;overflow:hidden;border-top:1px solid var(--b-dark)}
+.marquee-track{display:flex;gap:0;white-space:nowrap;animation:marquee 32s linear infinite}
+.marquee-track:hover{animation-play-state:paused}
+.marquee-item{
+  display:inline-flex;align-items:center;gap:var(--sp-5);
+  padding:0 var(--sp-6);
+  font-size:12px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:oklch(100% 0 0 / 0.6);
+}
+.marquee-item strong{color:#fff;font-weight:600}
+.marquee-dot{width:4px;height:4px;border-radius:50%;background:var(--brass);flex-shrink:0}
+@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── STATS BAR ── */
+.stats-bar{background:var(--forest);padding:var(--sp-8) var(--sp-7)}
+.stats-inner{
+  max-width:1080px;margin:0 auto;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  border:1px solid oklch(100% 0 0 / 0.10);
+  border-radius:4px;overflow:hidden;
+}
+.stat-item{
+  position:relative;
+  padding:var(--sp-6) var(--sp-6) var(--sp-5);
+  cursor:default;
+  border-right:1px solid oklch(100% 0 0 / 0.10);
+  transition:opacity 0.35s var(--ease),background 0.4s var(--ease);
+}
+.stat-item:last-child{border-right:none}
+/* Brass accent bar slides in from left on hover */
+.stat-item::after{
+  content:'';position:absolute;
+  top:0;left:0;width:0;height:2px;
+  background:var(--brass);
+  transition:width 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+.stat-item:hover::after{width:100%}
+/* Spotlight: dim siblings */
+.stats-inner:has(.stat-item:hover) .stat-item:not(:hover){opacity:0.38}
+.stat-item:hover{background:oklch(100% 0 0 / 0.04)}
+/* Icon — bare, no chip */
+.stat-icon{
+  display:flex;align-items:center;justify-content:center;
+  width:20px;height:20px;
+  color:oklch(100% 0 0 / 0.28);
+  margin-bottom:var(--sp-5);
+  transition:color 0.35s var(--ease);
+}
+.stat-item:hover .stat-icon{color:var(--brass)}
+.stat-lbl{
+  font-size:10px;font-weight:500;letter-spacing:0.18em;
+  text-transform:uppercase;color:oklch(100% 0 0 / 0.35);
+  margin-bottom:var(--sp-2);
+}
+.stat-val{
+  font-family:var(--ff-b);
+  font-size:clamp(28px,3.2vw,44px);
+  font-weight:200;line-height:1;
+  color:oklch(100% 0 0 / 0.92);
+  letter-spacing:-0.03em;
+  font-variant-numeric:tabular-nums;
+}
+
+/* ── SECTION COMMONS ── */
+.section{padding:100px 0}
+.inner{max-width:1080px;margin:0 auto;padding:0 var(--sp-7)}
+.section-tag{
+  display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.14em;
+  text-transform:uppercase;color:var(--brass);margin-bottom:var(--sp-4);
+}
+.section-tag-light{color:oklch(100% 0 0 / 0.5)}
+.section-hl{
+  font-family:var(--ff-d);font-size:clamp(36px,4.5vw,56px);
+  font-weight:300;line-height:1.1;color:var(--ink);
+}
+.section-hl em{font-style:italic;color:var(--forest)}
+.section-hl-light{color:#fff}
+.section-hl-light em{color:var(--brass)}
+
+/* ── BENTO DASHBOARD ── */
+.dash-section{background:var(--forest);padding:100px 0}
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;margin-top:var(--sp-7)}
+.bc{
+  background:var(--forest-mid);border-radius:var(--r);
+  padding:var(--sp-6);position:relative;overflow:hidden;
+  border:1px solid var(--b-dark);
+  transform-style:preserve-3d;
+  transition:transform 0.1s linear,box-shadow 0.15s;
+}
+.bc:hover{box-shadow:0 20px 60px oklch(0% 0 0 / 0.4)}
+.bc-label{font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:oklch(100% 0 0 / 0.45);margin-bottom:var(--sp-4)}
+.bc-val{font-family:var(--ff-d);font-size:clamp(28px,3vw,40px);font-weight:300;color:#fff;font-variant-numeric:tabular-nums;line-height:1}
+.bc-sub{font-size:12px;color:oklch(100% 0 0 / 0.5);margin-top:6px}
+.bc-badge{
+  display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;
+  background:var(--brass);color:var(--forest);border-radius:20px;padding:3px 10px;margin-top:8px;
+}
+.bc-price{grid-column:1/5}
+.bc-lease{grid-column:5/8;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+.bc-monthly{grid-column:8/13;background:var(--brass);border-color:transparent}
+.bc-monthly .bc-label{color:var(--forest);opacity:0.7}
+.bc-monthly .bc-val{color:var(--forest)}
+.bc-monthly .bc-sub{color:var(--forest);opacity:0.7}
+.bc-transit{grid-column:1/5}
+.bc-rental{grid-column:5/9}
+.bc-psf{grid-column:9/13}
+/* Lease donut */
+.donut-wrap{position:relative;width:100px;height:100px;margin:0 auto var(--sp-4)}
+.donut-svg{width:100%;height:100%;transform:rotate(-90deg)}
+.donut-bg{fill:none;stroke:oklch(100% 0 0 / 0.08);stroke-width:8}
+.donut-ring{fill:none;stroke:var(--brass);stroke-width:8;stroke-linecap:round;transition:stroke-dashoffset 1.4s var(--ease)}
+.donut-center{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.donut-num{font-family:var(--ff-d);font-size:22px;font-weight:300;color:#fff;font-variant-numeric:tabular-nums}
+.donut-unit{font-size:10px;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.45)}
+/* PSF bars */
+.psf-bars{display:flex;flex-direction:column;gap:10px;margin-top:var(--sp-4)}
+.psf-row{display:flex;flex-direction:column;gap:4px}
+.psf-row-top{display:flex;justify-content:space-between;align-items:center}
+.psf-name{font-size:11px;color:oklch(100% 0 0 / 0.6)}
+.psf-num{font-size:12px;font-weight:600;color:#fff;font-variant-numeric:tabular-nums}
+.psf-bar-track{height:4px;background:oklch(100% 0 0 / 0.08);border-radius:2px;overflow:hidden}
+.psf-bar-fill{height:100%;border-radius:2px;background:var(--brass);width:0;transition:width 1.2s var(--ease)}
+
+/* ── THE HOME (50/50) ── */
+.home-split{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);align-items:center}
+.home-img-wrap{
+  height:560px;border-radius:var(--r);overflow:hidden;
+  clip-path:inset(100% 0 0 0 round var(--r));
+  transition:clip-path 1.2s var(--ease);
+}
+.home-img-wrap.in{clip-path:inset(0% 0 0 0 round var(--r))}
+.home-specs{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-3);margin-top:var(--sp-6)}
+.spec-card{
+  background:var(--bg-alt);border-radius:12px;padding:var(--sp-4) var(--sp-5);
+  border:1px solid var(--b);
+}
+.spec-card-val{font-family:var(--ff-d);font-size:22px;font-weight:300;color:var(--ink);font-variant-numeric:tabular-nums}
+.spec-card-lbl{font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);margin-top:2px}
+
+/* ── FACILITIES ── */
+.fac-section{background:var(--bg-alt)}
+.fac-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4);margin-top:var(--sp-7)}
+.fac-card{
+  background:var(--bg-card);border-radius:var(--r);padding:var(--sp-6);
+  border:1px solid var(--b);
+  transition:transform 0.3s var(--ease),box-shadow 0.3s var(--ease),border-color 0.3s;
+}
+.fac-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px oklch(22% 0.065 145 / 0.12);border-color:var(--forest-light)}
+.fac-icon{
+  width:44px;height:44px;border-radius:12px;
+  background:var(--brass-pale);
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:var(--sp-4);
+}
+.fac-icon svg{width:22px;height:22px;stroke:var(--forest);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.fac-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:4px}
+.fac-desc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+
+/* ── GALLERY ── */
+.gallery-section{background:var(--bg-card)}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-rows:320px 320px;
+  gap:10px;margin-top:var(--sp-6);
+  border-radius:var(--r);overflow:hidden;
+}
+.g-item{overflow:hidden;position:relative;cursor:none}
+.g-item:first-child{grid-column:1/3;grid-row:1/2}
+.g-item img{transition:transform 0.7s var(--ease)}
+.g-item:hover img{transform:scale(1.06)}
+.g-item::after{
+  content:'';position:absolute;inset:0;
+  background:oklch(22% 0.065 145 / 0);
+  transition:background 0.3s;
+}
+.g-item:hover::after{background:oklch(22% 0.065 145 / 0.2)}
+
+/* ── GALLERY LIGHTBOX ── */
+.lb{position:fixed;inset:0;z-index:1000;background:oklch(0% 0 0 / 0.95);display:none;align-items:center;justify-content:center}
+.lb.open{display:flex}
+.lb-img{max-width:90vw;max-height:90vh;object-fit:contain;border-radius:8px}
+.lb-close{position:fixed;top:24px;right:28px;font-size:32px;color:#fff;cursor:none;opacity:0.7;transition:opacity 0.2s;line-height:1}
+.lb-close:hover{opacity:1}
+.lb-prev,.lb-next{position:fixed;top:50%;transform:translateY(-50%);font-size:36px;color:#fff;cursor:none;padding:16px;opacity:0.6;transition:opacity 0.2s;user-select:none}
+.lb-prev{left:16px}.lb-next{right:16px}
+.lb-prev:hover,.lb-next:hover{opacity:1}
+
+/* ── VIDEO ── */
+.video-section{background:var(--forest);padding:100px 0}
+.video-inner{max-width:1080px;margin:0 auto;padding:0 var(--sp-7)}
+.video-header{margin-bottom:var(--sp-7)}
+.video-hl{font-family:var(--ff-d);font-size:clamp(32px,4vw,52px);font-weight:300;line-height:1.1;color:#fff}
+.video-hl em{font-style:italic;color:var(--brass)}
+.video-thumb{
+  position:relative;border-radius:var(--r);overflow:hidden;
+  aspect-ratio:16/9;cursor:none;display:block;
+  background:var(--forest-mid);
+}
+.video-thumb img{transition:transform 0.7s var(--ease)}
+.video-thumb:hover img{transform:scale(1.04)}
+.video-play{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  z-index:2;width:80px;height:80px;border-radius:50%;
+  background:var(--brass);display:flex;align-items:center;justify-content:center;
+  transition:transform 0.3s var(--ease),box-shadow 0.3s;
+}
+.video-thumb:hover .video-play{transform:translate(-50%,-50%) scale(1.1);box-shadow:0 0 0 16px oklch(68% 0.095 65 / 0.2)}
+.video-play svg{width:28px;height:28px;fill:var(--forest);margin-left:4px}
+.video-note{font-size:13px;color:oklch(100% 0 0 / 0.45);margin-top:var(--sp-4);text-align:center}
+
+/* ── FLOOR PLAN ── */
+.fp-section{background:var(--bg-card)}
+.fp-thumb{
+  max-width:640px;margin:var(--sp-7) auto 0;
+  border-radius:var(--r);overflow:hidden;cursor:none;
+  border:1px solid var(--b);
+}
+
+/* ── FLOOR PLAN LIGHTBOX ── */
+.fp-lb{position:fixed;inset:0;z-index:1000;background:oklch(0% 0 0 / 0.95);display:none;align-items:center;justify-content:center}
+.fp-lb.open{display:flex}
+.fp-lb img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:8px}
+.fp-lb-close{position:fixed;top:24px;right:28px;font-size:32px;color:#fff;cursor:none;opacity:0.7;line-height:1}
+
+/* ── SCHOOL CATCHMENT ── */
+.school-section{background:var(--bg-alt)}
+.school-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);align-items:start;margin-top:var(--sp-7)}
+.school-map{height:440px;border-radius:var(--r);overflow:hidden;border:1px solid var(--b)}
+#school-map{width:100%;height:100%}
+.school-list{display:flex;flex-direction:column;gap:var(--sp-4)}
+.school-intro{font-size:14px;color:var(--ink-mid);line-height:1.7;margin-bottom:var(--sp-5)}
+.school-card{
+  background:var(--bg-card);border-radius:12px;padding:var(--sp-5);
+  border:1px solid var(--b);display:flex;gap:var(--sp-4);align-items:center;
+  transition:border-color 0.2s,box-shadow 0.2s;
+}
+.school-card:hover{border-color:var(--forest-light);box-shadow:0 4px 16px oklch(22% 0.065 145 / 0.08)}
+.school-dist{
+  flex-shrink:0;width:60px;height:60px;border-radius:12px;
+  background:var(--brass-pale);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+}
+.school-dist-num{font-family:var(--ff-d);font-size:20px;font-weight:400;color:var(--forest);line-height:1}
+.school-dist-unit{font-size:9px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft)}
+.school-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.school-meta{font-size:12px;color:var(--ink-soft)}
+.school-badge{
+  display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.05em;
+  background:var(--forest);color:#fff;border-radius:20px;padding:2px 10px;margin-top:4px;
+}
+
+/* ── MAP ── */
+.map-section{background:var(--bg-card)}
+.map-filters{display:flex;gap:var(--sp-3);margin-bottom:var(--sp-5);flex-wrap:wrap}
+.map-btn{
+  font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;
+  padding:8px 16px;border-radius:40px;border:1px solid var(--b);
+  color:var(--ink-mid);background:var(--bg-card);
+  transition:background 0.2s,color 0.2s,border-color 0.2s;
+}
+.map-btn.active,.map-btn:hover{background:var(--forest);color:#fff;border-color:var(--forest)}
+#leaflet-map{height:440px;border-radius:var(--r);overflow:hidden;border:1px solid var(--b)}
+
+/* ── CALCULATORS ── */
+.calc-section{background:var(--forest);padding:100px 0}
+.calc-tabs{display:flex;gap:4px;background:oklch(100% 0 0 / 0.08);border-radius:12px;padding:4px;margin-bottom:var(--sp-7)}
+.calc-tab{
+  flex:1;text-align:center;font-size:12px;font-weight:600;letter-spacing:0.06em;
+  text-transform:uppercase;color:oklch(100% 0 0 / 0.5);
+  padding:12px 16px;border-radius:10px;
+  transition:background 0.2s,color 0.2s;
+}
+.calc-tab.active{background:var(--brass);color:var(--forest)}
+.calc-panel{display:none}
+.calc-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);align-items:start}
+.calc-fields{display:flex;flex-direction:column;gap:var(--sp-5)}
+.calc-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.5);margin-bottom:8px}
+.calc-val-display{font-family:var(--ff-d);font-size:28px;font-weight:300;color:#fff;margin-bottom:8px;font-variant-numeric:tabular-nums}
+input[type=range]{
+  width:100%;height:4px;border-radius:2px;
+  appearance:none;background:oklch(100% 0 0 / 0.15);outline:none;
+}
+input[type=range]::-webkit-slider-thumb{
+  appearance:none;width:18px;height:18px;border-radius:50%;
+  background:var(--brass);cursor:none;border:2px solid var(--forest-mid);
+  box-shadow:0 2px 8px oklch(0% 0 0 / 0.3);
+}
+.calc-results{background:oklch(100% 0 0 / 0.06);border-radius:var(--r);padding:var(--sp-6);border:1px solid var(--b-dark)}
+.calc-result-row{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-4) 0;border-bottom:1px solid var(--b-dark)}
+.calc-result-row:last-child{border-bottom:none}
+.calc-result-lbl{font-size:13px;color:oklch(100% 0 0 / 0.55)}
+.calc-result-val{font-family:var(--ff-d);font-size:20px;font-weight:300;color:#fff;font-variant-numeric:tabular-nums}
+.calc-result-val.highlight{color:var(--brass);font-size:28px}
+/* Rental mode toggle */
+.rental-mode-toggle{display:flex;gap:6px;margin-bottom:var(--sp-5)}
+.rental-mode-btn{
+  flex:1;font-size:11px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;
+  padding:10px;border-radius:8px;text-align:center;
+  color:oklch(100% 0 0 / 0.5);background:oklch(100% 0 0 / 0.06);
+  border:1px solid var(--b-dark);transition:all 0.2s;
+}
+.rental-mode-btn.active{background:var(--brass);color:var(--forest);border-color:transparent}
+
+/* ── TRANSACTIONS ── */
+.tx-section{background:var(--bg-card);padding:100px 0}
+.tx-table{width:100%;border-collapse:collapse;margin-top:var(--sp-6)}
+.tx-table th{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-soft);padding:0 var(--sp-3) var(--sp-4);text-align:left;border-bottom:2px solid var(--b)}
+.tx-table td{padding:var(--sp-4) var(--sp-3);font-size:14px;color:var(--ink-mid);border-bottom:1px solid var(--b)}
+.tx-table td:last-child{font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.tx-type{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--brass-pale);color:var(--forest);border-radius:6px;padding:3px 8px}
+
+/* ── CLUSTER EXPLAINER ── */
+.cluster-section{background:var(--forest);padding:100px 0}
+.cluster-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);align-items:start;margin-top:var(--sp-7)}
+.cluster-body{font-size:15px;color:oklch(100% 0 0 / 0.65);line-height:1.8;margin-bottom:var(--sp-6)}
+.cluster-cards{display:flex;flex-direction:column;gap:var(--sp-4)}
+.cluster-card{
+  background:oklch(100% 0 0 / 0.06);border-radius:12px;padding:var(--sp-5);
+  border:1px solid var(--b-dark);
+}
+.cluster-card-title{font-size:13px;font-weight:600;color:#fff;margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.cluster-card-title::before{content:'';flex-shrink:0;width:6px;height:6px;border-radius:50%;background:var(--brass)}
+.cluster-card-body{font-size:13px;color:oklch(100% 0 0 / 0.55);line-height:1.6}
+
+/* ── AGENTS ── */
+.agents-section{background:var(--bg-card);padding:100px 0}
+.agents-intro{max-width:560px;margin:var(--sp-5) 0 var(--sp-7)}
+.agents-intro p{font-size:15px;color:var(--ink-mid);line-height:1.7}
+.agents-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-5)}
+.agent-card{
+  background:var(--bg-alt);border-radius:var(--r);padding:var(--sp-7);
+  border:1px solid var(--b);
+  transition:border-color 0.3s,box-shadow 0.3s;
+}
+.agent-card:hover{border-color:var(--forest-light);box-shadow:0 12px 40px oklch(22% 0.065 145 / 0.1)}
+.agent-photo{
+  width:80px;height:80px;border-radius:50%;overflow:hidden;
+  border:3px solid var(--brass-pale);margin-bottom:var(--sp-5);
+}
+.agent-name{font-family:var(--ff-d);font-size:26px;font-weight:400;color:var(--ink);margin-bottom:4px}
+.agent-meta{font-size:12px;color:var(--ink-soft);margin-bottom:var(--sp-5)}
+.agent-ceas{display:flex;gap:var(--sp-3);flex-wrap:wrap}
+.agent-cea{font-size:11px;font-weight:600;letter-spacing:0.06em;background:var(--brass-pale);color:var(--forest);border-radius:20px;padding:4px 12px}
+.agent-actions{display:flex;gap:var(--sp-3);margin-top:var(--sp-5)}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--forest);color:#fff;
+  font-size:13px;font-weight:600;letter-spacing:0.04em;
+  padding:12px 24px;border-radius:40px;
+  transition:background 0.2s,transform 0.2s,box-shadow 0.2s;
+}
+.btn-primary:hover{background:var(--forest-light);transform:translateY(-2px);box-shadow:0 8px 24px oklch(22% 0.065 145 / 0.3)}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  border:1.5px solid var(--b);color:var(--ink-mid);
+  font-size:13px;font-weight:600;letter-spacing:0.04em;
+  padding:12px 24px;border-radius:40px;
+  transition:border-color 0.2s,color 0.2s,transform 0.2s;
+}
+.btn-outline:hover{border-color:var(--forest);color:var(--forest);transform:translateY(-2px)}
+
+/* ── FOOTER ── */
+footer{background:var(--ink);padding:var(--sp-8) var(--sp-7);text-align:center}
+.footer-logo{font-family:var(--ff-d);font-size:24px;font-weight:300;color:#fff;margin-bottom:var(--sp-4)}
+.footer-logo span{font-style:italic;color:var(--brass)}
+footer p{font-size:12px;color:oklch(100% 0 0 / 0.35);line-height:1.7;max-width:600px;margin:0 auto}
+
+/* ── SCROLL REVEAL ── */
+.rv{opacity:0;transform:translateY(24px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .bento{grid-template-columns:1fr 1fr}
+  .bc-price,.bc-monthly,.bc-transit,.bc-rental,.bc-psf{grid-column:span 1}
+  .bc-lease{grid-column:span 2}
+  .home-split,.school-layout,.cluster-grid,.agents-grid,.calc-panel.active{grid-template-columns:1fr}
+  .fac-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-rows:200px 200px}
+}
+@media(max-width:640px){
+  /* Stats — strict 2×2 */
+  .stats-bar{padding:var(--sp-6) var(--sp-5)}
+  .stats-inner{grid-template-columns:repeat(2,1fr);border-radius:3px}
+  .stat-item{padding:var(--sp-5) var(--sp-5) var(--sp-4);border-bottom:1px solid oklch(100% 0 0 / 0.10)}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}
+  .stat-item:nth-child(2),.stat-item:nth-child(4){border-right:none}
+  .stats-inner:has(.stat-item:hover) .stat-item:not(:hover){opacity:0.5}
+  .stat-val{font-size:28px}
+  .nav-links{display:none}
+  .fac-grid{grid-template-columns:1fr}
+  .home-img-wrap{height:320px}
+  .gallery-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .g-item:first-child{grid-column:1}
+  body{cursor:auto}
+  #cursor-dot,#cursor-ring{display:none}
+  .calc-panel.active{grid-template-columns:1fr}
+  .tx-table{display:block}
+  .tx-table thead{display:none}
+  .tx-table tbody{display:block}
+  .tx-table tbody tr{display:grid;grid-template-columns:1fr auto;gap:2px var(--sp-4);padding:var(--sp-5) 0;border-bottom:1px solid var(--b)}
+  .tx-table td{padding:0;border:none}
+  .tx-table td:nth-child(1){grid-column:1;grid-row:1}
+  .tx-table td:nth-child(2){grid-column:2;grid-row:1;text-align:right}
+  .tx-table td:nth-child(3){grid-column:1;grid-row:2}
+  .tx-table td:nth-child(4){display:none}
+  .tx-table td:nth-child(5){grid-column:2;grid-row:2;text-align:right;font-weight:700;color:var(--ink)}
+}
+</style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon-180.png">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+<div id="scroll-progress"></div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo">my<span>prop</span>folio</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#home">The Home</a></li>
+    <li><a href="#schools">Schools</a></li>
+    <li><a href="#calculators">Calculators</a></li>
+    <li><a href="#agents">Agents</a></li>
+  </ul>
+  <a href="#agents" class="nav-cta">Enquire Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="overview">
+  <div class="hero-img">
+    <img src="3. The Woods/Luxury Home Exterior.jpg" alt="The Woods exterior">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">The Woods · Westwood Avenue · D22</div>
+    <h1 class="hero-hl">
+      <span class="word"><span>Where</span></span>
+      <span class="word"><span>land</span></span>
+      <span class="word"><span>becomes</span></span>
+      <span class="word"><span>your</span></span>
+      <span class="word"><span><em>legacy.</em></span></span>
+    </h1>
+    <div class="hero-meta">
+      <div class="hero-price">S$2,750,000 <small>Negotiable</small></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><span class="hero-stat-val">6 Bed / 6 Bath</span><span class="hero-stat-lbl">Configuration</span></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><span class="hero-stat-val">4,004 sqft</span><span class="hero-stat-lbl">Floor Area</span></div>
+      <div class="hero-divider"></div>
+      <div class="hero-stat"><span class="hero-stat-val">Semi-Detached</span><span class="hero-stat-lbl">Cluster Landed</span></div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span class="hero-scroll-label">Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item"><strong>The Woods</strong><span class="marquee-dot"></span></div>
+    <div class="marquee-item">Semi-Detached Cluster Landed<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>4,004 sqft</strong> Floor Area<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>S$686.81</strong> PSF<span class="marquee-dot"></span></div>
+    <div class="marquee-item">6 Beds · 6 Baths<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>99-Year Lease</strong> from 2010<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Lap Pool · Gym · Clubhouse<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>730m</strong> Gek Poh MRT<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Westwood Primary <strong>523m</strong><span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>The Woods</strong><span class="marquee-dot"></span></div>
+    <div class="marquee-item">Semi-Detached Cluster Landed<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>4,004 sqft</strong> Floor Area<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>S$686.81</strong> PSF<span class="marquee-dot"></span></div>
+    <div class="marquee-item">6 Beds · 6 Baths<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>99-Year Lease</strong> from 2010<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Lap Pool · Gym · Clubhouse<span class="marquee-dot"></span></div>
+    <div class="marquee-item"><strong>730m</strong> Gek Poh MRT<span class="marquee-dot"></span></div>
+    <div class="marquee-item">Westwood Primary <strong>523m</strong><span class="marquee-dot"></span></div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+
+    <!-- Bedrooms -->
+    <div class="stat-item rv">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Bedrooms</div>
+      <div class="stat-val" data-to="6">6</div>
+    </div>
+
+    <!-- Bathrooms -->
+    <div class="stat-item rv d1">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h3v2.25"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Bathrooms</div>
+      <div class="stat-val" data-to="6">6</div>
+    </div>
+
+    <!-- Floor Area -->
+    <div class="stat-item rv d2">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Floor Area</div>
+      <div class="stat-val" data-to="4004" data-comma="true">4,004</div>
+    </div>
+
+    <!-- Units in Cluster -->
+    <div class="stat-item rv d3">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="2" y="7" width="9" height="14" rx="1"/><rect x="13" y="7" width="9" height="14" rx="1"/><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Units in Cluster</div>
+      <div class="stat-val" data-to="17">17</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- BENTO DASHBOARD -->
+<section class="dash-section" id="dashboard">
+  <div class="inner">
+    <div class="rv"><span class="section-tag section-tag-light">Property Dashboard</span></div>
+    <h2 class="section-hl section-hl-light rv d1">The numbers that<br><em>matter most.</em></h2>
+    <div class="bento" id="bentoGrid">
+      <div class="bc bc-price rv d1">
+        <div class="bc-label">Asking Price</div>
+        <div class="bc-val" id="dashPrice">S$2,750,000</div>
+        <div class="bc-sub">Negotiable · Seller motivated</div>
+        <span class="bc-badge">S$686.81 PSF</span>
+      </div>
+      <div class="bc bc-lease rv d2">
+        <div class="bc-label">Lease Remaining</div>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 120 120">
+            <circle class="donut-bg" cx="60" cy="60" r="54"/>
+            <circle class="donut-ring" id="donutRing" cx="60" cy="60" r="54" stroke-dasharray="339.3" stroke-dashoffset="339.3"/>
+          </svg>
+          <div class="donut-center">
+            <span class="donut-num" id="donutNum">84</span>
+            <span class="donut-unit">Years</span>
+          </div>
+        </div>
+        <div class="bc-sub">Lease from 2010</div>
+      </div>
+      <div class="bc bc-monthly rv d3">
+        <div class="bc-label">Est. Monthly Payment</div>
+        <div class="bc-val" id="dashMonthly">S$9,842</div>
+        <div class="bc-sub">25yr loan · 3.5% · 25% down</div>
+      </div>
+      <div class="bc bc-transit rv d1">
+        <div class="bc-label">Nearest MRT</div>
+        <div class="bc-val">730m</div>
+        <div class="bc-sub">Gek Poh (JW1) · 9 min walk</div>
+        <span class="bc-badge" style="background:oklch(100% 0 0 / 0.15);color:#fff">Opening Soon</span>
+      </div>
+      <div class="bc bc-rental rv d2">
+        <div class="bc-label">Est. Gross Rental Yield</div>
+        <div class="bc-val">3.1%</div>
+        <div class="bc-sub">~S$7,150/mo market rental</div>
+      </div>
+      <div class="bc bc-psf rv d3">
+        <div class="bc-label">PSF vs Nearby Cluster Landed</div>
+        <div class="psf-bars">
+          <div class="psf-row">
+            <div class="psf-row-top"><span class="psf-name">The Woods (this)</span><span class="psf-num">$687</span></div>
+            <div class="psf-bar-track"><div class="psf-bar-fill" data-pct="82"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-top"><span class="psf-name">Hillvista, Hillview</span><span class="psf-num">$810</span></div>
+            <div class="psf-bar-track"><div class="psf-bar-fill" data-pct="96"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-top"><span class="psf-name">The Floravale</span><span class="psf-num">$845</span></div>
+            <div class="psf-bar-track"><div class="psf-bar-fill" data-pct="100"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE HOME -->
+<section class="section" id="home">
+  <div class="inner">
+    <div class="home-split">
+      <div>
+        <span class="section-tag rv">The Home</span>
+        <h2 class="section-hl rv d1">Space for every<br><em>chapter of life.</em></h2>
+        <p class="rv d2" style="font-size:15px;color:var(--ink-mid);line-height:1.8;margin:var(--sp-5) 0">
+          A beautifully renovated 3-storey semi-detached at The Woods. High ceilings at 2.9m, 4 ensuite bedrooms, 2 common bedrooms, a rooftop garden ideal for family gatherings, and a private outdoor patio. Corner unit position ensures generous natural light and privacy on three sides. North-facing main door for year-round comfort.
+        </p>
+        <div class="home-specs">
+          <div class="spec-card rv d1"><div class="spec-card-val">3</div><div class="spec-card-lbl">Storeys</div></div>
+          <div class="spec-card rv d2"><div class="spec-card-val">2.9m</div><div class="spec-card-lbl">Ceiling Height</div></div>
+          <div class="spec-card rv d3"><div class="spec-card-val">4</div><div class="spec-card-lbl">Ensuite Rooms</div></div>
+          <div class="spec-card rv d4"><div class="spec-card-val">North</div><div class="spec-card-lbl">Main Door Facing</div></div>
+        </div>
+        <p style="font-size:12px;color:var(--ink-soft);margin-top:var(--sp-5);line-height:1.6">* 3-month seller extension required. Partially furnished. Move-in ready.</p>
+      </div>
+      <div class="home-img-wrap">
+        <img src="3. The Woods/Luxury Living Room.jpg" alt="Living room interior">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FACILITIES -->
+<section class="section fac-section">
+  <div class="inner">
+    <span class="section-tag rv">Facilities</span>
+    <h2 class="section-hl rv d1">Landed privacy.<br><em>Condo amenities.</em></h2>
+    <div class="fac-grid">
+      <div class="fac-card rv d1">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M2 12h20M7 12v4a5 5 0 0010 0v-4M4 8h16a1 1 0 011 1v1H3V9a1 1 0 011-1z"/></svg></div>
+        <div class="fac-name">Lap Pool</div>
+        <div class="fac-desc">Full-length lap pool for daily exercise and weekend leisure</div>
+      </div>
+      <div class="fac-card rv d2">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2"/><path d="M10 22v-6.5m-4-5.5l2 3 2-3m8-2l-2 3-2-3m4 8v6.5"/></svg></div>
+        <div class="fac-name">Gymnasium</div>
+        <div class="fac-desc">Fully equipped gym and outdoor fitness station</div>
+      </div>
+      <div class="fac-card rv d3">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg></div>
+        <div class="fac-name">Clubhouse</div>
+        <div class="fac-desc">Private function room for events, gatherings, and celebrations</div>
+      </div>
+      <div class="fac-card rv d1">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+        <div class="fac-name">Children's Pool</div>
+        <div class="fac-desc">Dedicated splash pool for younger residents and families</div>
+      </div>
+      <div class="fac-card rv d2">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/></svg></div>
+        <div class="fac-name">Koi Pond</div>
+        <div class="fac-desc">Tranquil koi pond and lantern pavilion for quiet evenings</div>
+      </div>
+      <div class="fac-card rv d3">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/></svg></div>
+        <div class="fac-name">Rooftop Garden</div>
+        <div class="fac-desc">Private rooftop terrace — perfect for BBQ and sunset views</div>
+      </div>
+      <div class="fac-card rv d1">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 9h6m-6 3h6m-6 3h4"/></svg></div>
+        <div class="fac-name">Outdoor Patio</div>
+        <div class="fac-desc">Private patio for morning coffee and family relaxation</div>
+      </div>
+      <div class="fac-card rv d2">
+        <div class="fac-icon"><svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="1"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></div>
+        <div class="fac-name">Basement Carpark</div>
+        <div class="fac-desc">Covered basement parking — keep your vehicles sheltered</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section gallery-section" id="gallery">
+  <div class="inner">
+    <span class="section-tag rv">Gallery</span>
+    <h2 class="section-hl rv d1">See it before<br><em>you step inside.</em></h2>
+  </div>
+  <div style="max-width:1080px;margin:var(--sp-6) auto;padding:0 var(--sp-7)">
+    <div class="gallery-grid" id="gallery">
+      <div class="g-item" onclick="openLb(0)"><img src="3. The Woods/Luxury Living Room.jpg" alt="Living room" loading="lazy"></div>
+      <div class="g-item" onclick="openLb(1)"><img src="3. The Woods/Luxury Master Bedroom.jpg" alt="Master bedroom" loading="lazy"></div>
+      <div class="g-item" onclick="openLb(2)"><img src="3. The Woods/Luxury Bedroom Design.jpg" alt="Bedroom" loading="lazy"></div>
+      <div class="g-item" onclick="openLb(3)"><img src="3. The Woods/Luxury Dining Space.jpg" alt="Dining area" loading="lazy"></div>
+      <div class="g-item" onclick="openLb(4)"><img src="3. The Woods/Luxury Kitchen Design.jpg" alt="Kitchen" loading="lazy"></div>
+      <div class="g-item" onclick="openLb(5)"><img src="3. The Woods/Rooftop Garden Design.jpg" alt="Rooftop garden" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY LIGHTBOX -->
+<div class="lb" id="lb" role="dialog">
+  <button class="lb-close" onclick="closeLb()">&#215;</button>
+  <button class="lb-prev" onclick="lbNav(-1)">&#8249;</button>
+  <img class="lb-img" id="lb-img" src="" alt="">
+  <button class="lb-next" onclick="lbNav(1)">&#8250;</button>
+</div>
+
+<!-- VIDEO TOUR -->
+<section class="video-section">
+  <div class="video-inner">
+    <div class="video-header rv">
+      <span class="section-tag section-tag-light">Video Tour</span>
+      <h2 class="video-hl rv d1">Walk through it<br><em>before you visit.</em></h2>
+    </div>
+    <a class="video-thumb rv d2" href="https://www.youtube.com/watch?v=ffqa8PkGwfo" target="_blank" rel="noopener" aria-label="Watch The Woods video tour on YouTube">
+      <img src="https://img.youtube.com/vi/ffqa8PkGwfo/maxresdefault.jpg" alt="The Woods video tour" loading="lazy">
+      <div class="video-play">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </a>
+    <p class="video-note rv d3">Opens on YouTube · Full walkthrough of all floors, renovation, rooftop and outdoor spaces</p>
+  </div>
+</section>
+
+<!-- FLOOR PLAN -->
+<section class="section fp-section" id="floorplan">
+  <div class="inner">
+    <span class="section-tag rv">Floor Plan</span>
+    <h2 class="section-hl rv d1">Study the<br><em>layout in detail.</em></h2>
+    <div class="fp-thumb rv d2" onclick="document.getElementById('fpLb').classList.add('open')" style="cursor:none">
+      <img src="3. The Woods/Floorplan Cleanup (1).jpg" alt="Floor plan" loading="lazy">
+    </div>
+    <p class="rv d3" style="text-align:center;font-size:13px;color:var(--ink-soft);margin-top:var(--sp-4)">Click to view full size</p>
+  </div>
+</section>
+
+<!-- FLOOR PLAN LIGHTBOX -->
+<div class="fp-lb" id="fpLb" role="dialog" onclick="this.classList.remove('open')">
+  <button class="fp-lb-close">&#215;</button>
+  <img src="3. The Woods/Floorplan Cleanup (1).jpg" alt="Floor plan full size">
+</div>
+
+<!-- SCHOOL CATCHMENT -->
+<section class="section school-section" id="schools">
+  <div class="inner">
+    <span class="section-tag rv">School Catchment</span>
+    <h2 class="section-hl rv d1">Plan for the<br><em>next generation.</em></h2>
+    <div class="school-layout">
+      <div>
+        <p class="school-intro rv">In Singapore, primary school registration priority is given to families living within 1km of the school. This home puts two primary schools within that critical radius — a significant advantage that landed buyers consistently prioritise.</p>
+        <div class="school-list">
+          <div class="school-card rv d1">
+            <div class="school-dist"><span class="school-dist-num">523</span><span class="school-dist-unit">m</span></div>
+            <div>
+              <div class="school-name">Westwood Primary School</div>
+              <div class="school-meta">Primary · Within 1km priority zone</div>
+              <span class="school-badge">Phase 2C Priority</span>
+            </div>
+          </div>
+          <div class="school-card rv d2">
+            <div class="school-dist"><span class="school-dist-num">780</span><span class="school-dist-unit">m</span></div>
+            <div>
+              <div class="school-name">West Grove Primary School</div>
+              <div class="school-meta">Primary · Within 1km priority zone</div>
+              <span class="school-badge">Phase 2C Priority</span>
+            </div>
+          </div>
+          <div class="school-card rv d3">
+            <div class="school-dist"><span class="school-dist-num">~600</span><span class="school-dist-unit">m</span></div>
+            <div>
+              <div class="school-name">Westwood Secondary School</div>
+              <div class="school-meta">Secondary · Within walking distance</div>
+            </div>
+          </div>
+          <div class="school-card rv d4">
+            <div class="school-dist"><span class="school-dist-num">~1.5</span><span class="school-dist-unit">km</span></div>
+            <div>
+              <div class="school-name">One World International School</div>
+              <div class="school-meta">International · Nearby</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="school-map">
+        <div id="school-map"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="section map-section" id="map">
+  <div class="inner">
+    <span class="section-tag rv">Location</span>
+    <h2 class="section-hl rv d1">Everything within<br><em>easy reach.</em></h2>
+    <div class="map-filters rv d2">
+      <button class="map-btn active" data-cat="all">All</button>
+      <button class="map-btn" data-cat="transport">Transport</button>
+      <button class="map-btn" data-cat="schools">Schools</button>
+      <button class="map-btn" data-cat="shopping">Shopping</button>
+      <button class="map-btn" data-cat="parks">Parks</button>
+    </div>
+    <div id="leaflet-map"></div>
+  </div>
+</section>
+
+<!-- CALCULATORS -->
+<section class="section calc-section" id="calculators">
+  <div class="inner">
+    <span class="section-tag section-tag-light rv">Financial Tools</span>
+    <h2 class="section-hl section-hl-light rv d1">Run the numbers<br><em>your way.</em></h2>
+    <div style="margin-top:var(--sp-7)">
+      <div class="calc-tabs rv d2">
+        <button class="calc-tab active" onclick="switchCalc('mortgage',this)">Mortgage</button>
+        <button class="calc-tab" onclick="switchCalc('rental',this)">Rental Income</button>
+        <button class="calc-tab" onclick="switchCalc('tax',this)">Property Tax</button>
+      </div>
+
+      <!-- MORTGAGE -->
+      <div class="calc-panel active" id="calc-mortgage">
+        <div class="calc-fields">
+          <div>
+            <div class="calc-label">Loan Amount</div>
+            <div class="calc-val-display" id="mc-loan-display">S$2,062,500</div>
+            <input type="range" id="mc-loan" min="500000" max="2500000" step="50000" value="2062500" oninput="updateMC()">
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:oklch(100% 0 0 / 0.35)"><span>S$500K</span><span>S$2.5M</span></div>
+          </div>
+          <div>
+            <div class="calc-label">Interest Rate: <span id="mc-rate-display">3.5%</span></div>
+            <input type="range" id="mc-rate" min="250" max="550" step="5" value="350" oninput="updateMC()">
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:oklch(100% 0 0 / 0.35)"><span>2.5%</span><span>5.5%</span></div>
+          </div>
+          <div>
+            <div class="calc-label">Loan Tenure: <span id="mc-tenure-display">30 years</span></div>
+            <input type="range" id="mc-tenure" min="5" max="30" step="5" value="30" oninput="updateMC()">
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:oklch(100% 0 0 / 0.35)"><span>5 yrs</span><span>30 yrs</span></div>
+          </div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="calc-result-lbl">Monthly Payment</span><span class="calc-result-val highlight" id="mc-monthly">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Total Interest</span><span class="calc-result-val" id="mc-interest">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Total Repayment</span><span class="calc-result-val" id="mc-total">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Downpayment (25%)</span><span class="calc-result-val" id="mc-down">S$687,500</span></div>
+        </div>
+      </div>
+
+      <!-- RENTAL -->
+      <div class="calc-panel" id="calc-rental">
+        <div class="calc-fields">
+          <div class="rental-mode-toggle">
+            <button class="rental-mode-btn active" id="rm-full" onclick="setRentalMode('full')">Full House</button>
+            <button class="rental-mode-btn" id="rm-room" onclick="setRentalMode('room')">Room Rental</button>
+          </div>
+          <div id="rental-full-fields">
+            <div class="calc-label">Monthly Rental</div>
+            <div class="calc-val-display" id="rc-rent-display">S$7,150</div>
+            <input type="range" id="rc-rent" min="4000" max="12000" step="250" value="7150" oninput="updateRC()">
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:oklch(100% 0 0 / 0.35)"><span>S$4K</span><span>S$12K</span></div>
+          </div>
+          <div id="rental-room-fields" style="display:none">
+            <div class="calc-label">Rooms Rented Out: <span id="rc-rooms-display">4</span></div>
+            <input type="range" id="rc-rooms" min="2" max="6" step="1" value="4" oninput="updateRC()">
+            <div style="margin-top:var(--sp-4)">
+              <div class="calc-label">Rate Per Room / Month</div>
+              <div class="calc-val-display" id="rc-room-rate-display">S$1,500</div>
+              <input type="range" id="rc-room-rate" min="800" max="2500" step="100" value="1500" oninput="updateRC()">
+            </div>
+          </div>
+          <div>
+            <div class="calc-label">Purchase Price</div>
+            <div class="calc-val-display">S$2,750,000</div>
+          </div>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="calc-result-lbl">Monthly Rental</span><span class="calc-result-val highlight" id="rc-monthly">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Annual Rental</span><span class="calc-result-val" id="rc-annual">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Gross Yield</span><span class="calc-result-val" id="rc-yield">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">vs CPF OA (2.5%)</span><span class="calc-result-val" id="rc-vs-cpf">—</span></div>
+        </div>
+      </div>
+
+      <!-- PROPERTY TAX -->
+      <div class="calc-panel" id="calc-tax">
+        <div class="calc-fields">
+          <div>
+            <div class="calc-label">Annual Value (AV)</div>
+            <div class="calc-val-display" id="tc-av-display">S$85,800</div>
+            <input type="range" id="tc-av" min="40000" max="150000" step="2000" value="85800" oninput="updateTC()">
+            <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:oklch(100% 0 0 / 0.35)"><span>S$40K</span><span>S$150K</span></div>
+          </div>
+          <p style="font-size:12px;color:oklch(100% 0 0 / 0.4);line-height:1.6;margin-top:var(--sp-3)">
+            Annual Value is IRAS's estimate of your property's annual market rental. For this unit, market rental of ~S$7,150/mo suggests an AV of approximately S$85,800.
+          </p>
+          <p style="font-size:12px;color:oklch(100% 0 0 / 0.4);line-height:1.6">
+            Property tax is based on progressive rates applied to AV. Owner-occupiers enjoy significantly lower rates than investors.
+          </p>
+        </div>
+        <div class="calc-results">
+          <div class="calc-result-row"><span class="calc-result-lbl">Owner-Occupied Tax</span><span class="calc-result-val highlight" id="tc-oo">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Non-Owner-Occupied Tax</span><span class="calc-result-val" id="tc-noo">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Annual Saving (OO)</span><span class="calc-result-val" id="tc-save">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-lbl">Monthly Equivalent (OO)</span><span class="calc-result-val" id="tc-monthly">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSACTIONS -->
+<section class="tx-section">
+  <div class="inner">
+    <span class="section-tag rv">Nearby Transactions</span>
+    <h2 class="section-hl rv d1">Cluster landed sales<br><em>in the area.</em></h2>
+    <table class="tx-table rv d2">
+      <thead><tr><th>Property</th><th>Type</th><th>Sqft</th><th>Date</th><th>Price</th></tr></thead>
+      <tbody>
+        <tr><td>The Woods, Westwood Ave</td><td><span class="tx-type">Semi-D</span></td><td>4,004</td><td>Mar 2026</td><td>S$2,750,000</td></tr>
+        <tr><td>The Woods, Westwood Ave</td><td><span class="tx-type">Terrace</span></td><td>3,552</td><td>Jan 2026</td><td>S$2,450,000</td></tr>
+        <tr><td>The Woods, Westwood Ave</td><td><span class="tx-type">Terrace</span></td><td>3,552</td><td>Nov 2025</td><td>S$2,480,000</td></tr>
+        <tr><td>The Floravale, West Coast</td><td><span class="tx-type">Semi-D</span></td><td>4,122</td><td>Oct 2025</td><td>S$3,200,000</td></tr>
+        <tr><td>Hillvista, Hillview Ave</td><td><span class="tx-type">Semi-D</span></td><td>3,940</td><td>Aug 2025</td><td>S$2,900,000</td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:12px;color:var(--ink-soft);margin-top:var(--sp-4)">Source: URA REALIS. Indicative figures. Verify with agent.</p>
+  </div>
+</section>
+
+<!-- CLUSTER EXPLAINED -->
+<section class="cluster-section">
+  <div class="inner">
+    <div class="cluster-grid">
+      <div>
+        <span class="section-tag section-tag-light rv">Understanding Your Purchase</span>
+        <h2 class="section-hl section-hl-light rv d1">What is<br><em>cluster landed?</em></h2>
+        <p class="cluster-body rv d2">
+          The Woods is a strata landed development — a format that combines the privacy and space of a landed home with select condominium facilities. You own your unit and the strata lot outright. Unlike an HDB or standard condo, you have a physical address, your own car porch, and direct access to your home.
+        </p>
+        <p class="cluster-body rv d3">
+          It's a different class of ownership compared to a private freehold landed, but for buyers who want the landed lifestyle without the full landed price tag, cluster developments like The Woods offer compelling value — especially with facilities and security management included.
+        </p>
+      </div>
+      <div class="cluster-cards">
+        <div class="cluster-card rv d1">
+          <div class="cluster-card-title">What You Own</div>
+          <div class="cluster-card-body">Your strata unit + strata lot. Individual address, own car porch, direct entry. No shared walls with units above or below.</div>
+        </div>
+        <div class="cluster-card rv d2">
+          <div class="cluster-card-title">Shared Facilities</div>
+          <div class="cluster-card-body">Lap pool, gym, clubhouse, children's pool, koi pond, lantern pavilion — all maintained by the MCST. Monthly maintenance applies (~S$300–S$500).</div>
+        </div>
+        <div class="cluster-card rv d3">
+          <div class="cluster-card-title">Renovation Rules</div>
+          <div class="cluster-card-body">Interior renovations are generally permitted. Exterior changes require MCST approval. No A&A works that affect the development's shared structure or façade.</div>
+        </div>
+        <div class="cluster-card rv d4">
+          <div class="cluster-card-title">Foreigners Can Buy</div>
+          <div class="cluster-card-body">Strata landed in approved cluster developments is open to Singapore PRs and foreigners — unlike freehold private landed which requires SLA approval. ABSD applies.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENTS -->
+<section class="agents-section" id="agents">
+  <div class="inner">
+    <span class="section-tag rv">Exclusively Presented By</span>
+    <h2 class="section-hl rv d1">Two agents.<br><em>One seamless experience.</em></h2>
+    <div class="agents-intro rv d2">
+      <p>Marcus and Clara co-represent this listing exclusively. Reach either of them directly — both have full access to all documents, viewings, and negotiation authority.</p>
+    </div>
+    <div class="agents-grid">
+      <div class="agent-card rv d1">
+        <div class="agent-photo">
+          <img src="../Asset/Marcus Tan Wei Jie - Profile.jpg" alt="Marcus Tan Wei Jie" onerror="this.style.background='var(--stone-mid)'">
+        </div>
+        <h3 class="agent-name">Marcus Tan Wei Jie</h3>
+        <p class="agent-meta">PropNex Realty</p>
+        <div class="agent-ceas">
+          <span class="agent-cea">CEA R059876H</span>
+        </div>
+        <div class="agent-actions">
+          <a href="https://wa.me/6591238765?text=Hi%20Marcus%2C%20I%20saw%20The%20Woods%20microsite%20and%20I%27m%20interested%20in%20viewing%20the%20property." class="btn-primary">WhatsApp</a>
+          <a href="tel:+6591238765" class="btn-outline">Call</a>
+        </div>
+      </div>
+      <div class="agent-card rv d2">
+        <div class="agent-photo">
+          <img src="2. Seraya Breeze/Clara Lim.jpg" alt="Clara Lim Mei Xuan" onerror="this.style.background='var(--stone-mid)'">
+        </div>
+        <h3 class="agent-name">Clara Lim Mei Xuan</h3>
+        <p class="agent-meta">PropNex Realty</p>
+        <div class="agent-ceas">
+          <span class="agent-cea">CEA R043891G</span>
+        </div>
+        <div class="agent-actions">
+          <a href="https://wa.me/6587654321?text=Hi%20Clara%2C%20I%20saw%20The%20Woods%20microsite%20and%20I%27m%20interested%20in%20viewing%20the%20property." class="btn-primary">WhatsApp</a>
+          <a href="tel:+6587654321" class="btn-outline">Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">my<span>prop</span>folio</div>
+  <p>This microsite is prepared for marketing purposes only. All information is indicative and subject to change. Prices, availability, and details should be verified with the appointed agents. URA transaction data is sourced from public records. Property tax estimates are based on IRAS progressive rates for 2024/2025 and may vary. Images are for illustration purposes.</p>
+  <p style="margin-top:12px;font-size:11px">© 2026 mypropfolio · Powered by GradePixel</p>
+</footer>
+
+<!-- ═══════════════════════════════════════════════ -->
+<!-- STEP 1: initPropMap + initSchoolMap BEFORE LEAFLET -->
+<script>
+var PROP_LAT = 1.3347, PROP_LNG = 103.7052;
+var SCHOOL_LAT = 1.3347, SCHOOL_LNG = 103.7052;
+
+function initSchoolMap() {
+  var el = document.getElementById('school-map');
+  if (!el || typeof L === 'undefined') return;
+  var m = L.map(el, { center:[SCHOOL_LAT, SCHOOL_LNG], zoom:15, zoomControl:false, scrollWheelZoom:false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; CARTO &copy; OSM', subdomains:'abcd', maxZoom:19
+  }).addTo(m);
+  setTimeout(function(){ m.invalidateSize(); }, 300);
+  // 1km ring
+  L.circle([SCHOOL_LAT, SCHOOL_LNG], { radius:1000, color:'#22763a', fillColor:'#22763a', fillOpacity:0.06, weight:2, dashArray:'6,4' }).addTo(m);
+  // Property
+  var propIcon = L.divIcon({ html:'<div style="width:14px;height:14px;border-radius:50%;background:#a07a30;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.3)"></div>', iconSize:[14,14], iconAnchor:[7,7], className:'' });
+  L.marker([PROP_LAT, PROP_LNG], { icon:propIcon }).addTo(m).bindPopup('<strong>The Woods</strong>').openPopup();
+  // Schools
+  var sIcon = L.divIcon({ html:'<div style="width:12px;height:12px;border-radius:50%;background:#c45e00;border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3)"></div>', iconSize:[12,12], iconAnchor:[6,6], className:'' });
+  L.marker([1.3320, 103.7030], { icon:sIcon }).addTo(m).bindPopup('<strong>Westwood Primary</strong><br>523m');
+  L.marker([1.3375, 103.7080], { icon:sIcon }).addTo(m).bindPopup('<strong>West Grove Primary</strong><br>780m');
+  L.marker([1.3360, 103.7040], { icon:sIcon }).addTo(m).bindPopup('<strong>Westwood Secondary</strong>');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ m.invalidateSize(); obs.disconnect(); } }, { threshold:0.1 });
+    obs.observe(el);
+  }
+}
+
+var COLORS = { transport:'#3B5BDB', schools:'#c45e00', shopping:'#22C55E', parks:'#A855F7' };
+var allMarkers = [];
+
+function initPropMap() {
+  var mapEl = document.getElementById('leaflet-map');
+  if (!mapEl || typeof L === 'undefined') return;
+  var map = L.map(mapEl, { center:[PROP_LAT, PROP_LNG], zoom:15, zoomControl:true, scrollWheelZoom:false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; CARTO &copy; OSM', subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+  setTimeout(function(){ map.invalidateSize(); }, 300);
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ map.invalidateSize(); obs.disconnect(); } }, { threshold:0.05 });
+    obs.observe(mapEl);
+  }
+  var propIcon = L.divIcon({ html:'<div style="width:16px;height:16px;border-radius:50%;background:#a07a30;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>', iconSize:[16,16], iconAnchor:[8,8], className:'' });
+  L.marker([PROP_LAT, PROP_LNG], { icon:propIcon }).addTo(map).bindPopup('<strong>The Woods</strong><br>S$2,750,000').openPopup();
+
+  function mkMarker(lat, lng, cat, label) {
+    var el = document.createElement('div');
+    el.style.cssText = 'width:10px;height:10px;border-radius:50%;background:'+COLORS[cat]+';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)';
+    var icon = L.divIcon({ html:el.outerHTML, iconSize:[10,10], iconAnchor:[5,5], className:'' });
+    var m = L.marker([lat,lng], { icon:icon }).addTo(map).bindPopup(label);
+    allMarkers.push({ marker:m, cat:cat });
+    return m;
+  }
+  mkMarker(1.3302,103.7008,'transport','Gek Poh MRT (JW1) · 730m');
+  mkMarker(1.3340,103.6940,'transport','Pioneer MRT · ~1.2km');
+  mkMarker(1.3320,103.7030,'schools','Westwood Primary · 523m');
+  mkMarker(1.3375,103.7080,'schools','West Grove Primary · 780m');
+  mkMarker(1.3360,103.7040,'schools','Westwood Secondary');
+  mkMarker(1.3310,103.6990,'shopping','Gek Poh Shopping Centre · 5 min walk');
+  mkMarker(1.3390,103.7060,'shopping','Jurong Point · 3 bus stops');
+  mkMarker(1.3355,103.7010,'parks','Gek Poh CC · 5 min walk');
+
+  document.querySelectorAll('.map-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.map-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var cat = btn.dataset.cat;
+      allMarkers.forEach(function(item) {
+        if (cat === 'all' || item.cat === cat) { item.marker.addTo(map); }
+        else { map.removeLayer(item.marker); }
+      });
+    });
+  });
+}
+</script>
+
+<!-- STEP 2: Load Leaflet — triggers initPropMap -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin=""
+  onload="initPropMap(); initSchoolMap();"></script>
+
+<!-- STEP 3: Main IIFE -->
+<script>
+(function() {
+'use strict';
+
+/* ── CURSOR ── */
+var dot = document.getElementById('cursor-dot');
+var ring = document.getElementById('cursor-ring');
+var mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', function(e) { mx = e.clientX; my = e.clientY; });
+(function moveCursor() {
+  if (dot) { dot.style.left = mx+'px'; dot.style.top = my+'px'; }
+  if (ring) {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx+'px'; ring.style.top = ry+'px';
+  }
+  requestAnimationFrame(moveCursor);
+})();
+
+/* ── SCROLL PROGRESS ── */
+var progressBar = document.getElementById('scroll-progress');
+window.addEventListener('scroll', function() {
+  var pct = window.scrollY / (document.documentElement.scrollHeight - window.innerHeight) * 100;
+  if (progressBar) progressBar.style.width = pct + '%';
+}, { passive:true });
+
+/* ── NAV ── */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function() {
+  nav.classList.toggle('scrolled', window.scrollY >= 72);
+}, { passive:true });
+
+/* ── 3D TILT ON BENTO CARDS ── */
+document.querySelectorAll('.bc').forEach(function(card) {
+  card.addEventListener('mousemove', function(e) {
+    var r = card.getBoundingClientRect();
+    var x = (e.clientX - r.left) / r.width - 0.5;
+    var y = (e.clientY - r.top) / r.height - 0.5;
+    card.style.transform = 'perspective(800px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg) scale(1.02)';
+  });
+  card.addEventListener('mouseleave', function() {
+    card.style.transform = 'perspective(800px) rotateY(0deg) rotateX(0deg) scale(1)';
+    card.style.transition = 'transform 0.5s cubic-bezier(0.16,1,0.3,1)';
+  });
+  card.addEventListener('mouseenter', function() {
+    card.style.transition = 'transform 0.1s linear';
+  });
+});
+
+/* ── MAGNETIC BUTTONS ── */
+document.querySelectorAll('.btn-primary, .nav-cta').forEach(function(btn) {
+  btn.addEventListener('mousemove', function(e) {
+    var r = btn.getBoundingClientRect();
+    var x = (e.clientX - r.left - r.width/2) * 0.25;
+    var y = (e.clientY - r.top - r.height/2) * 0.25;
+    btn.style.transform = 'translate('+x+'px,'+y+'px) translateY(-2px)';
+  });
+  btn.addEventListener('mouseleave', function() {
+    btn.style.transform = '';
+  });
+});
+
+/* ── SCROLL REVEAL + CLIP-PATH IMAGES ── */
+var ioRv = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('in'); ioRv.unobserve(e.target); }
+  });
+}, { threshold:0.1 });
+document.querySelectorAll('.rv').forEach(function(el) { ioRv.observe(el); });
+
+/* Clip-path image reveals */
+var ioImg = new IntersectionObserver(function(entries) {
+  entries.forEach(function(e) {
+    if (e.isIntersecting) { e.target.classList.add('in'); ioImg.unobserve(e.target); }
+  });
+}, { threshold:0.15 });
+document.querySelectorAll('.home-img-wrap').forEach(function(el) { ioImg.observe(el); });
+
+/* ── DASHBOARD ANIMATIONS ── */
+function animateCount(el, target, prefix, suffix, dur) {
+  if (!el) return;
+  var start = 0;
+  var timer = setInterval(function() {
+    start += target / (dur / 16);
+    if (start >= target) { start = target; clearInterval(timer); }
+    el.textContent = prefix + Math.round(start).toLocaleString() + suffix;
+  }, 16);
+}
+
+/* ── STATS COUNT-UP ── */
+(function(){
+  function easeOutExpo(t){ return t===1?1:1-Math.pow(2,-10*t); }
+  function fmt(n,comma){ return comma?n.toLocaleString('en-SG'):String(n); }
+  var statsDone=false;
+  var statsBar=document.querySelector('.stats-bar');
+  if(statsBar&&'IntersectionObserver' in window){
+    var sObs=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting&&!statsDone){
+        statsDone=true;
+        document.querySelectorAll('.stat-val[data-to]').forEach(function(el){
+          var target=parseInt(el.getAttribute('data-to'),10);
+          var comma=el.hasAttribute('data-comma');
+          var dur=target>500?1200:700;
+          var start=null;
+          function step(ts){
+            if(!start)start=ts;
+            var prog=Math.min((ts-start)/dur,1);
+            el.textContent=fmt(Math.round(easeOutExpo(prog)*target),comma);
+            if(prog<1)requestAnimationFrame(step);
+            else el.textContent=fmt(target,comma);
+          }
+          requestAnimationFrame(step);
+        });
+        sObs.disconnect();
+      }
+    },{threshold:0.3});
+    sObs.observe(statsBar);
+  }
+})();
+
+var dashDone = false;
+var ioDash = new IntersectionObserver(function(entries) {
+  if (entries[0].isIntersecting && !dashDone) {
+    dashDone = true;
+    /* Donut */
+    var leaseYears = 84, r = 54, circ = 2 * Math.PI * r;
+    var dr = document.getElementById('donutRing');
+    if (dr) {
+      dr.style.strokeDasharray = circ;
+      dr.style.strokeDashoffset = circ;
+      setTimeout(function() {
+        dr.style.transition = 'stroke-dashoffset 1.4s cubic-bezier(0.16,1,0.3,1)';
+        dr.style.strokeDashoffset = circ * (1 - leaseYears / 99);
+      }, 200);
+    }
+    animateCount(document.getElementById('donutNum'), 84, '', '', 1400);
+    /* PSF bars */
+    document.querySelectorAll('.psf-bar-fill').forEach(function(bar) {
+      setTimeout(function() { bar.style.width = bar.dataset.pct + '%'; }, 400);
+    });
+    /* Monthly payment */
+    var monthly = calcM(2062500, 3.5, 30);
+    animateCount(document.getElementById('dashMonthly'), monthly, 'S$', '', 1200);
+  }
+}, { threshold:0.2 });
+var bentoEl = document.getElementById('bentoGrid');
+if (bentoEl) ioDash.observe(bentoEl);
+
+/* ── GALLERY LIGHTBOX ── */
+var lbImgs = [
+  '3. The Woods/Luxury Living Room.jpg',
+  '3. The Woods/Luxury Master Bedroom.jpg',
+  '3. The Woods/Luxury Bedroom Design.jpg',
+  '3. The Woods/Luxury Dining Space.jpg',
+  '3. The Woods/Luxury Kitchen Design.jpg',
+  '3. The Woods/Rooftop Garden Design.jpg'
+];
+var lbIdx = 0;
+window.openLb = function(i) { lbIdx = i; document.getElementById('lb-img').src = lbImgs[i]; document.getElementById('lb').classList.add('open'); };
+window.closeLb = function() { document.getElementById('lb').classList.remove('open'); };
+window.lbNav = function(dir) { lbIdx = (lbIdx + dir + lbImgs.length) % lbImgs.length; document.getElementById('lb-img').src = lbImgs[lbIdx]; };
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') { closeLb(); document.getElementById('fpLb').classList.remove('open'); }
+  if (e.key === 'ArrowLeft') lbNav(-1);
+  if (e.key === 'ArrowRight') lbNav(1);
+});
+
+/* ── CALCULATOR HELPERS ── */
+function calcM(P, ar, yrs) {
+  if (P <= 0 || yrs <= 0) return 0;
+  var r = ar / 100 / 12, n = yrs * 12;
+  return r === 0 ? P / n : P * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
+}
+function fmtS(n) { return 'S$' + Math.round(n).toLocaleString(); }
+
+/* ── MORTGAGE CALC ── */
+function updateMC() {
+  var loan = +document.getElementById('mc-loan').value;
+  var rate = +document.getElementById('mc-rate').value / 100;
+  var yrs = +document.getElementById('mc-tenure').value;
+  document.getElementById('mc-loan-display').textContent = fmtS(loan);
+  document.getElementById('mc-rate-display').textContent = rate.toFixed(1) + '%';
+  document.getElementById('mc-tenure-display').textContent = yrs + ' years';
+  var monthly = calcM(loan, rate, yrs);
+  var total = monthly * yrs * 12;
+  var interest = total - loan;
+  document.getElementById('mc-monthly').textContent = fmtS(monthly) + '/mo';
+  document.getElementById('mc-interest').textContent = fmtS(interest);
+  document.getElementById('mc-total').textContent = fmtS(total);
+  document.getElementById('mc-down').textContent = fmtS(2750000 * 0.25);
+}
+window.updateMC = updateMC;
+updateMC();
+
+/* ── RENTAL CALC ── */
+var rentalMode = 'full';
+window.setRentalMode = function(mode) {
+  rentalMode = mode;
+  document.getElementById('rm-full').classList.toggle('active', mode === 'full');
+  document.getElementById('rm-room').classList.toggle('active', mode === 'room');
+  document.getElementById('rental-full-fields').style.display = mode === 'full' ? 'block' : 'none';
+  document.getElementById('rental-room-fields').style.display = mode === 'room' ? 'block' : 'none';
+  updateRC();
+};
+function updateRC() {
+  var monthly;
+  if (rentalMode === 'full') {
+    monthly = +document.getElementById('rc-rent').value;
+    document.getElementById('rc-rent-display').textContent = fmtS(monthly);
+  } else {
+    var rooms = +document.getElementById('rc-rooms').value;
+    var rrate = +document.getElementById('rc-room-rate').value;
+    document.getElementById('rc-rooms-display').textContent = rooms;
+    document.getElementById('rc-room-rate-display').textContent = fmtS(rrate);
+    monthly = rooms * rrate;
+  }
+  var annual = monthly * 12;
+  var gross = (annual / 2750000 * 100).toFixed(2);
+  document.getElementById('rc-monthly').textContent = fmtS(monthly) + '/mo';
+  document.getElementById('rc-annual').textContent = fmtS(annual);
+  document.getElementById('rc-yield').textContent = gross + '%';
+  var diff = (parseFloat(gross) - 2.5).toFixed(2);
+  document.getElementById('rc-vs-cpf').textContent = (diff > 0 ? '+' : '') + diff + '% above CPF OA';
+}
+window.updateRC = updateRC;
+updateRC();
+
+/* ── PROPERTY TAX CALC ── */
+function calcOOTax(av) {
+  var tax = 0;
+  var brackets = [[8000,0],[22000,0.04],[10000,0.06],[15000,0.10],[15000,0.14],[Infinity,0.20]];
+  var rem = av;
+  for (var i = 0; i < brackets.length; i++) {
+    var band = Math.min(rem, brackets[i][0]);
+    if (band <= 0) break;
+    tax += band * brackets[i][1];
+    rem -= band;
+    if (rem <= 0) break;
+  }
+  return tax;
+}
+function calcNOOTax(av) {
+  var tax = 0;
+  if (av <= 30000) return av * 0.11;
+  tax += 30000 * 0.11;
+  if (av <= 45000) return tax + (av-30000)*0.16;
+  tax += 15000 * 0.16;
+  tax += (av - 45000) * 0.20;
+  return tax;
+}
+function updateTC() {
+  var av = +document.getElementById('tc-av').value;
+  document.getElementById('tc-av-display').textContent = fmtS(av);
+  var oo = calcOOTax(av);
+  var noo = calcNOOTax(av);
+  document.getElementById('tc-oo').textContent = fmtS(oo) + '/yr';
+  document.getElementById('tc-noo').textContent = fmtS(noo) + '/yr';
+  document.getElementById('tc-save').textContent = fmtS(noo - oo) + '/yr';
+  document.getElementById('tc-monthly').textContent = fmtS(oo / 12) + '/mo';
+}
+window.updateTC = updateTC;
+updateTC();
+
+/* ── CALCULATOR TAB SWITCHER ── */
+window.switchCalc = function(panel, btn) {
+  document.querySelectorAll('.calc-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.calc-panel').forEach(function(p){ p.classList.remove('active'); });
+  btn.classList.add('active');
+  document.getElementById('calc-'+panel).classList.add('active');
+};
+
+})();
+</script>
+</body>
+</html>

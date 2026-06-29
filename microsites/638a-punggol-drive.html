@@ -1,0 +1,2154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>638A Punggol Drive · The Meadows · S$588,000</title>
+  <meta name="description" content="4-Room Premium HDB at 638A Punggol Drive. S$588,000 · 990 sqft · Level 7 · 3 min to Kadaloor LRT. Listed by Marcus Tan Wei Jie, PropNex Realty.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin=""/>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-optical-sizing: auto; }
+    img  { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a    { text-decoration: none; color: inherit; }
+    button { border: none; background: none; cursor: pointer; font: inherit; }
+    input[type=range] { -webkit-appearance: none; appearance: none; }
+    body { -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+    /* ── Design Tokens ─── */
+    :root {
+      --bg:          oklch(97.5% 0.007 250);
+      --bg-card:     oklch(100% 0.000 0);
+      --bg-alt:      oklch(95.5% 0.014 252);
+      --navy:        oklch(14% 0.042 264);
+      --navy-mid:    oklch(20% 0.038 264);
+      --navy-light:  oklch(27% 0.034 264);
+      --blue:        oklch(58% 0.225 262);
+      --blue-hover:  oklch(52% 0.210 262);
+      --blue-pale:   oklch(96% 0.038 262);
+      --blue-mid:    oklch(88% 0.060 262);
+      --green:       oklch(62% 0.165 152);
+      --green-pale:  oklch(96% 0.036 152);
+      --amber:       oklch(74% 0.155 70);
+      --amber-pale:  oklch(97% 0.035 70);
+      --ink:         oklch(18% 0.035 264);
+      --ink-mid:     oklch(46% 0.030 260);
+      --ink-soft:    oklch(64% 0.022 258);
+      --ink-faint:   oklch(76% 0.016 256);
+      --cream:       oklch(97% 0.010 252);
+      --cream-dim:   oklch(82% 0.018 258);
+      --cream-faint: oklch(70% 0.015 260);
+      --b:           oklch(18% 0.035 264 / 0.09);
+      --b-dark:      oklch(100% 0.000 0 / 0.12);
+
+      --ff-d: 'Cormorant Garamond', Georgia, serif;
+      --ff-b: 'Inter', -apple-system, system-ui, sans-serif;
+
+      --sp-1:4px; --sp-2:8px; --sp-3:12px; --sp-4:16px;
+      --sp-5:24px; --sp-6:32px; --sp-7:48px; --sp-8:64px;
+      --sp-9:96px; --sp-10:128px;
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --r: 16px;
+    }
+
+    body {
+      font-family: var(--ff-b);
+      font-size: 1rem;
+      line-height: 1.6;
+      color: var(--ink);
+      background: var(--bg);
+    }
+
+    /* ── NAV ─── */
+    .nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--sp-8);
+      height: 60px;
+      border-bottom: 1px solid transparent;
+      transition: background 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+
+    .nav.scrolled {
+      background: oklch(100% 0 0 / 0.92);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-color: var(--b);
+    }
+
+    .nav-links { display: flex; align-items: center; gap: var(--sp-7); list-style: none; }
+
+    .nav-links a {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: oklch(97% 0.010 252 / 0.70);
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--cream); }
+    .nav.scrolled .nav-links a { color: var(--ink-soft); }
+    .nav.scrolled .nav-links a:hover { color: var(--ink); }
+
+    .nav-right { display: flex; align-items: center; gap: var(--sp-4); }
+
+    .nav-agent { font-size: 11px; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase; color: oklch(97% 0.010 252 / 0.40); }
+    .nav.scrolled .nav-agent { color: var(--ink-soft); }
+
+    .nav-cta {
+      display: inline-flex; align-items: center;
+      padding: var(--sp-2) var(--sp-5);
+      background: var(--blue); color: #fff;
+      border-radius: 100px; font-size: 11px; font-weight: 500; letter-spacing: 0.06em;
+      transition: background 0.2s;
+    }
+
+    .nav-cta:hover { background: var(--blue-hover); }
+
+    /* ── HERO ─── */
+    .hero {
+      position: relative;
+      height: 100svh;
+      min-height: 640px;
+      overflow: hidden;
+    }
+
+    .hero-bg { position: absolute; inset: 0; }
+
+    .hero-bg img {
+      transform: scale(1.07);
+      transition: transform 10s cubic-bezier(0.05, 0, 0.15, 1);
+    }
+
+    .hero-bg img.loaded { transform: scale(1.0); }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(0deg,  oklch(14% 0.042 264 / 0.88) 0%, oklch(14% 0.042 264 / 0.38) 55%, oklch(14% 0.042 264 / 0.10) 100%),
+        linear-gradient(90deg, oklch(14% 0.042 264 / 0.22) 0%, transparent 60%);
+    }
+
+    .hero-content {
+      position: relative; z-index: 1; height: 100%;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 var(--sp-8) var(--sp-9);
+    }
+
+    .hero-over {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+      color: oklch(97% 0.010 252 / 0.45); margin-bottom: var(--sp-5);
+    }
+
+    .hero-hl {
+      font-family: var(--ff-d);
+      font-weight: 300;
+      font-size: clamp(72px, 11.5vw, 158px);
+      line-height: 0.86;
+      letter-spacing: -0.015em;
+      color: var(--cream);
+      margin-bottom: var(--sp-7);
+    }
+
+    .hero-hl .indent { padding-left: clamp(64px, 9.5vw, 136px); }
+    .hero-hl em { font-style: italic; }
+    .hero-hl .mark { color: var(--blue); font-style: normal; }
+
+    .hero-row {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: var(--sp-7); flex-wrap: wrap;
+    }
+
+    .hero-caption { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .hero-estate { font-size: 11px; letter-spacing: 0.10em; text-transform: uppercase; color: oklch(97% 0.010 252 / 0.45); }
+    .hero-type { font-family: var(--ff-d); font-size: 18px; font-weight: 400; color: oklch(97% 0.010 252 / 0.78); }
+
+    .price-pill {
+      display: inline-flex; align-items: center;
+      padding: var(--sp-4) var(--sp-7);
+      background: var(--blue); color: #fff;
+      border-radius: 100px;
+      font-family: var(--ff-d); font-size: 24px; font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      transition: background 0.2s; white-space: nowrap;
+    }
+
+    .price-pill:hover { background: var(--blue-hover); }
+
+    .scroll-mark {
+      position: absolute; right: var(--sp-8); bottom: var(--sp-9);
+      display: flex; flex-direction: column; align-items: center; gap: var(--sp-3);
+      pointer-events: none;
+    }
+
+    .scroll-mark span { font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase; color: oklch(97% 0.010 252 / 0.32); writing-mode: vertical-rl; }
+    .scroll-mark-line { width: 1px; height: 48px; background: linear-gradient(oklch(97% 0.010 252 / 0.32), transparent); animation: tickDown 2.2s ease-in-out infinite; }
+
+    @keyframes tickDown {
+      0%   { transform: scaleY(0); transform-origin: top; opacity: 1; }
+      55%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+      80%  { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+      100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+    }
+
+    /* ── STATS ─── */
+    .stats-section {
+      background: var(--navy);
+      padding: var(--sp-8) var(--sp-8);
+    }
+
+    .stats-label {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+      text-transform: uppercase; color: oklch(100% 0 0 / 0.35);
+      margin-bottom: var(--sp-7);
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid oklch(100% 0 0 / 0.10);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .stat {
+      position: relative;
+      padding: var(--sp-7) var(--sp-7) var(--sp-6);
+      cursor: default;
+      transition: background 0.4s var(--ease);
+      border-right: 1px solid oklch(100% 0 0 / 0.10);
+    }
+    .stat:last-child { border-right: none; }
+
+    /* Top accent bar — slides in from left on hover */
+    .stat::after {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--blue);
+      transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .stat:hover::after { width: 100%; }
+
+    /* Spotlight: dim siblings when one is hovered */
+    .stats-row:has(.stat:hover) .stat:not(:hover) { opacity: 0.38; }
+    .stat { transition: opacity 0.35s var(--ease), background 0.4s var(--ease); }
+
+    .stat:hover { background: oklch(100% 0 0 / 0.04); }
+
+    /* Icon — bare, no chip */
+    .stat-icon {
+      display: flex; align-items: center; justify-content: center;
+      width: 20px; height: 20px;
+      color: oklch(100% 0 0 / 0.30);
+      margin-bottom: var(--sp-6);
+      transition: color 0.35s var(--ease);
+    }
+    .stat:hover .stat-icon { color: var(--blue); }
+
+    .stat-n {
+      font-family: var(--ff-b);
+      font-size: clamp(36px, 4vw, 52px);
+      font-weight: 200; line-height: 1;
+      color: oklch(100% 0 0 / 0.92);
+      font-variant-numeric: tabular-nums;
+      letter-spacing: -0.03em;
+    }
+    .stat-n sup   { font-size: 0.38em; font-weight: 300; vertical-align: super; opacity: 0.6; letter-spacing: 0; }
+    .stat-n small { font-size: 0.28em; font-weight: 400; margin-left: 2px; opacity: 0.5; letter-spacing: 0.04em; }
+
+    .stat-l {
+      font-size: 10px; font-weight: 500; letter-spacing: 0.14em;
+      text-transform: uppercase; color: oklch(100% 0 0 / 0.35);
+      margin-top: var(--sp-3);
+    }
+
+    /* ── DASHBOARD SECTION ─── */
+    .dash-section {
+      background: var(--bg-alt);
+      padding: var(--sp-9) var(--sp-8);
+    }
+
+    .dash-header { margin-bottom: var(--sp-7); }
+    .dash-tag { display: inline-flex; align-items: center; gap: var(--sp-3); padding: var(--sp-2) var(--sp-4); background: var(--blue-pale); color: var(--blue); border-radius: 100px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--sp-4); }
+    .dash-tag svg { flex-shrink: 0; }
+    .dash-hl { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--ink); }
+    .dash-hl em { font-style: italic; }
+
+    /* Bento grid */
+    .bento {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto auto;
+      gap: var(--sp-3);
+    }
+
+    .bcard {
+      background: var(--bg-card);
+      border: 1px solid var(--b);
+      border-radius: var(--r);
+      padding: var(--sp-5);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .bcard-label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--ink-soft);
+      margin-bottom: var(--sp-4);
+      display: flex; align-items: center; gap: var(--sp-2);
+    }
+
+    .bcard-label .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0;
+    }
+
+    .bcard-label .dot.green  { background: var(--green); }
+    .bcard-label .dot.amber  { background: var(--amber); }
+
+    /* Card 1: Price — col 1-4, row 1 */
+    .bc-price { grid-column: 1 / 5; }
+
+    .bc-price-main {
+      font-family: var(--ff-d);
+      font-size: clamp(44px, 5.5vw, 70px);
+      font-weight: 300; line-height: 0.9;
+      color: var(--ink); letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-4);
+    }
+
+    .psf-badge {
+      display: inline-flex; align-items: center;
+      padding: var(--sp-1) var(--sp-3);
+      background: var(--blue-pale); color: var(--blue);
+      border-radius: 100px; font-size: 12px; font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .bc-price-meta { margin-top: var(--sp-4); font-size: 12.5px; color: var(--ink-mid); }
+
+    /* Card 2: Lease Donut — col 5-7, row 1 */
+    .bc-lease { grid-column: 5 / 8; display: flex; flex-direction: column; }
+
+    .donut-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: var(--sp-4) 0; position: relative; }
+
+    .donut-svg { width: 120px; height: 120px; transform: rotate(-90deg); }
+
+    .donut-bg   { fill: none; stroke: var(--bg-alt); stroke-width: 10; }
+    .donut-ring {
+      fill: none; stroke: var(--blue); stroke-width: 10;
+      stroke-linecap: round;
+      stroke-dasharray: 0 377;
+      transition: stroke-dasharray 1.4s var(--ease);
+    }
+
+    .donut-ring.animated { stroke-dasharray: 328 49; } /* 86.9% of 377 */
+
+    .donut-center {
+      position: absolute;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      pointer-events: none;
+    }
+
+    .donut-num  { font-family: var(--ff-d); font-size: 28px; font-weight: 400; line-height: 1; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .donut-unit { font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); margin-top: 2px; }
+
+    .lease-note { font-size: 11.5px; color: var(--ink-mid); text-align: center; padding-top: var(--sp-3); border-top: 1px solid var(--b); }
+    .lease-note strong { color: var(--green); font-weight: 600; }
+
+    /* Card 3: Commute — col 8-12, row 1 */
+    .bc-commute { grid-column: 8 / 13; }
+
+    .commute-track {
+      margin-top: var(--sp-5);
+      position: relative;
+    }
+
+    .commute-line-bg {
+      height: 2px;
+      background: var(--b);
+      border-radius: 2px;
+      margin: 28px 0 32px;
+      position: relative;
+    }
+
+    .commute-progress {
+      position: absolute;
+      left: 0; top: 0; height: 100%;
+      background: var(--blue);
+      border-radius: 2px;
+      width: 0;
+      transition: width 1.6s var(--ease);
+    }
+
+    .commute-progress.animated { width: 75%; }
+
+    .commute-stops {
+      display: flex;
+      justify-content: space-between;
+      position: absolute;
+      top: -14px;
+      left: 0; right: 0;
+    }
+
+    .commute-stop {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+
+    .c-dot {
+      width: 12px; height: 12px; border-radius: 50%;
+      background: var(--bg-card);
+      border: 2px solid var(--b);
+      position: relative; z-index: 1;
+      transition: border-color 0.4s, background 0.4s;
+    }
+
+    .c-dot.blue  { border-color: var(--blue);  background: var(--blue); }
+    .c-dot.mrt   { border-color: var(--green); background: var(--green); }
+    .c-dot.city  { border-color: var(--ink-soft); background: var(--ink-soft); }
+
+    .commute-labels {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 0;
+    }
+
+    .c-label {
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
+      width: 80px; text-align: center;
+    }
+
+    .c-label:first-child { align-items: flex-start; text-align: left; }
+    .c-label:last-child  { align-items: flex-end; text-align: right; }
+
+    .c-name  { font-size: 11px; font-weight: 600; color: var(--ink); }
+    .c-time  { font-size: 10px; color: var(--ink-soft); }
+    .c-badge {
+      display: inline-block; padding: 1px 6px;
+      background: var(--blue-pale); color: var(--blue);
+      border-radius: 4px; font-size: 9.5px; font-weight: 600;
+    }
+
+    .c-badge.mrt  { background: var(--green-pale); color: var(--green); }
+    .c-badge.city { background: var(--bg-alt); color: var(--ink-soft); }
+
+    /* Card 4: Monthly Estimate — col 1-4, row 2 */
+    .bc-monthly { grid-column: 1 / 5; background: var(--navy); border-color: var(--navy); }
+    .bc-monthly .bcard-label { color: var(--cream-faint); }
+    .bc-monthly .bcard-label .dot { background: var(--blue); }
+
+    .monthly-amt {
+      font-family: var(--ff-d);
+      font-size: clamp(44px, 4.5vw, 60px);
+      font-weight: 300; line-height: 0.9;
+      color: var(--cream); letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-3);
+    }
+
+    .monthly-amt span { font-size: 0.40em; font-weight: 300; color: var(--cream-faint); margin-left: 4px; }
+
+    .monthly-sub  { font-size: 12px; color: var(--cream-faint); margin-bottom: var(--sp-5); }
+
+    .monthly-row  { display: flex; justify-content: space-between; align-items: baseline; padding: var(--sp-2) 0; border-bottom: 1px solid oklch(100% 0 0 / 0.08); font-size: 12.5px; }
+    .monthly-row:last-child { border-bottom: none; }
+    .monthly-row span:first-child { color: var(--cream-faint); }
+    .monthly-row span:last-child  { color: var(--cream-dim); font-variant-numeric: tabular-nums; }
+
+    .monthly-link { display: inline-flex; align-items: center; gap: var(--sp-2); margin-top: var(--sp-5); font-size: 12px; color: var(--blue); font-weight: 500; cursor: pointer; }
+    .monthly-link:hover { text-decoration: underline; }
+
+    /* Card 5: Schools — col 5-7, row 2 */
+    .bc-schools { grid-column: 5 / 8; }
+
+    .schools-count {
+      font-family: var(--ff-d);
+      font-size: 64px; font-weight: 300; line-height: 0.9;
+      color: var(--ink); font-variant-numeric: tabular-nums;
+      margin-bottom: var(--sp-2);
+    }
+
+    .schools-sub { font-size: 12.5px; color: var(--ink-mid); margin-bottom: var(--sp-5); }
+
+    .school-pills { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+    .school-pill {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3);
+      padding: var(--sp-2) var(--sp-3);
+      background: var(--bg); border: 1px solid var(--b);
+      border-radius: 8px; font-size: 11.5px;
+    }
+
+    .school-pill-name { color: var(--ink); font-weight: 400; }
+    .school-pill-dist { color: var(--ink-soft); font-size: 10.5px; white-space: nowrap; }
+
+    /* Card 6: PSF Comparison — col 8-12, row 2 */
+    .bc-psf { grid-column: 8 / 13; }
+
+    .psf-bars { display: flex; flex-direction: column; gap: var(--sp-5); margin-top: var(--sp-4); }
+
+    .psf-bar-item { display: flex; flex-direction: column; gap: var(--sp-2); }
+
+    .psf-bar-top { display: flex; justify-content: space-between; align-items: baseline; }
+    .psf-bar-label { font-size: 12.5px; color: var(--ink); font-weight: 400; }
+    .psf-bar-val   { font-size: 13px; font-weight: 600; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .psf-bar-val.highlight { color: var(--blue); }
+
+    .psf-bar-track {
+      height: 8px; background: var(--bg-alt);
+      border-radius: 100px; overflow: hidden;
+    }
+
+    .psf-bar-fill {
+      height: 100%; background: var(--blue);
+      border-radius: 100px; width: 0;
+      transition: width 1.2s var(--ease);
+    }
+
+    .psf-bar-fill.grey { background: var(--ink-faint); }
+    .psf-bar-fill.mid  { background: var(--ink-mid); }
+
+    .psf-note { margin-top: var(--sp-5); padding: var(--sp-3) var(--sp-4); background: var(--blue-pale); border-radius: 8px; font-size: 12px; color: var(--blue); }
+    .psf-note strong { font-weight: 600; }
+
+    /* ── CASE SECTION ─── */
+    .case-section { background: var(--navy); padding: var(--sp-10) var(--sp-8); }
+
+    .case-header {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: var(--sp-9); align-items: end;
+      padding-bottom: var(--sp-8); border-bottom: 1px solid var(--b-dark);
+    }
+
+    .case-hl { font-family: var(--ff-d); font-size: clamp(40px, 4.5vw, 60px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--cream); }
+    .case-hl em { font-style: italic; }
+    .case-lead { font-size: 15px; line-height: 1.78; color: var(--cream-dim); max-width: 52ch; }
+
+    .case-pillars { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--b-dark); }
+
+    .pillar { padding: var(--sp-8) var(--sp-8) var(--sp-8) 0; border-right: 1px solid var(--b-dark); display: flex; flex-direction: column; gap: var(--sp-4); }
+    .pillar:last-child  { border-right: none; padding-right: 0; }
+    .pillar:not(:first-child) { padding-left: var(--sp-8); }
+
+    .pillar-stat { font-family: var(--ff-d); font-size: clamp(52px, 6vw, 86px); font-weight: 300; line-height: 0.9; color: var(--cream); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .pillar-stat em    { font-style: italic; color: var(--blue); }
+    .pillar-stat small { font-size: 0.32em; font-weight: 300; color: var(--cream-faint); letter-spacing: 0.02em; vertical-align: baseline; margin-left: var(--sp-1); }
+
+    .pillar-rule { width: 28px; height: 1px; background: var(--blue); flex-shrink: 0; }
+
+    .pillar-claim { font-family: var(--ff-d); font-size: 20px; font-weight: 400; line-height: 1.28; color: var(--cream); letter-spacing: -0.01em; max-width: 28ch; }
+    .pillar-claim em { font-style: italic; }
+    .pillar-body  { font-size: 13px; line-height: 1.75; color: var(--cream-faint); max-width: 38ch; }
+
+    /* ── SPLIT ─── */
+    .split { display: grid; grid-template-columns: 1fr 1fr; min-height: 680px; }
+    .split.r { direction: rtl; }
+    .split.r > * { direction: ltr; }
+
+    .split-img { overflow: hidden; position: relative; }
+    .split-img img { transition: transform 0.9s var(--ease); }
+    .split:hover .split-img img { transform: scale(1.04); }
+
+    .split-body { background: var(--navy); display: flex; flex-direction: column; justify-content: center; padding: var(--sp-9); }
+    .split-body.warm { background: var(--bg-card); }
+
+    .split-eye { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--cream-faint); margin-bottom: var(--sp-5); }
+    .split-body.warm .split-eye { color: var(--ink-soft); }
+
+    .split-rule { width: 32px; height: 2px; background: var(--blue); margin-bottom: var(--sp-6); }
+
+    .split-hl { font-family: var(--ff-d); font-size: clamp(38px, 4.2vw, 56px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--cream); margin-bottom: var(--sp-5); }
+    .split-body.warm .split-hl { color: var(--ink); }
+    .split-hl em { font-style: italic; }
+
+    .split-text { font-size: 14.5px; line-height: 1.78; color: var(--cream-dim); max-width: 42ch; margin-bottom: var(--sp-7); }
+    .split-body.warm .split-text { color: var(--ink-mid); }
+
+    .mini-row { display: flex; gap: 0; border-top: 1px solid var(--b-dark); margin-bottom: var(--sp-6); }
+    .split-body.warm .mini-row { border-color: var(--b); }
+
+    .mini { flex: 1; padding: var(--sp-4) var(--sp-5) var(--sp-4) 0; border-right: 1px solid var(--b-dark); }
+    .split-body.warm .mini { border-color: var(--b); }
+    .mini:first-child { padding-left: 0; }
+    .mini:last-child  { border-right: none; padding-right: 0; }
+    .mini:not(:first-child) { padding-left: var(--sp-5); }
+
+    .mini-n { font-family: var(--ff-d); font-size: 26px; font-weight: 300; line-height: 1; color: var(--cream); font-variant-numeric: tabular-nums; margin-bottom: var(--sp-1); }
+    .split-body.warm .mini-n { color: var(--ink); }
+    .mini-l { font-size: 9.5px; font-weight: 500; letter-spacing: 0.10em; text-transform: uppercase; color: var(--cream-faint); }
+    .split-body.warm .mini-l { color: var(--ink-soft); }
+
+    .btn-pill { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-4) var(--sp-6); background: var(--blue); color: #fff; border-radius: 100px; font-size: 12.5px; font-weight: 500; letter-spacing: 0.03em; transition: background 0.2s; align-self: flex-start; }
+    .btn-pill:hover { background: var(--blue-hover); }
+    .btn-pill:focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; }
+
+    .btn-ghost { display: inline-flex; align-items: center; padding: var(--sp-4) var(--sp-6); border: 1px solid oklch(97% 0.010 252 / 0.25); color: oklch(97% 0.010 252 / 0.70); border-radius: 100px; font-size: 12.5px; font-weight: 500; letter-spacing: 0.03em; transition: all 0.2s; }
+    .btn-ghost:hover { border-color: oklch(97% 0.010 252 / 0.55); color: var(--cream); background: oklch(97% 0.010 252 / 0.06); }
+
+    /* ── FLOOR PLAN ─── */
+    .floorplan-section { background: var(--bg); padding: var(--sp-10) var(--sp-8); }
+    .floorplan-inner { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-10); align-items: center; }
+    .floorplan-text { }
+    .floorplan-hl { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--ink); }
+    .floorplan-hl em { font-style: italic; }
+    .floorplan-body { font-size: 15px; line-height: 1.8; color: var(--ink-mid); margin-top: var(--sp-5); max-width: 44ch; }
+    .floorplan-specs { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-7); }
+    .fp-spec-row { display: flex; align-items: center; justify-content: space-between; padding: var(--sp-3) 0; border-bottom: 1px solid var(--b); }
+    .fp-spec-row:last-child { border-bottom: none; }
+    .fp-spec-label { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft); }
+    .fp-spec-val { font-size: 14px; font-weight: 500; color: var(--ink); font-variant-numeric: tabular-nums; }
+    .floorplan-img-wrap { position: relative; background: var(--bg-alt); border-radius: var(--r); overflow: hidden; border: 1px solid var(--b); }
+    .floorplan-img-wrap img { width: 100%; height: auto; object-fit: contain; display: block; transition: transform 0.5s var(--ease); cursor: zoom-in; }
+    .floorplan-img-wrap:hover img { transform: scale(1.04); }
+    .fp-zoom-hint { position: absolute; bottom: var(--sp-4); right: var(--sp-4); background: var(--navy); color: var(--cream); font-size: 10px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: var(--sp-2) var(--sp-3); border-radius: 100px; opacity: 0.7; pointer-events: none; }
+    /* Lightbox */
+    .fp-lightbox { display: none; position: fixed; inset: 0; background: oklch(7% 0.02 264 / 0.92); z-index: 500; align-items: center; justify-content: center; padding: var(--sp-7); }
+    .fp-lightbox.open { display: flex; }
+    .fp-lightbox img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: var(--r); box-shadow: 0 40px 80px oklch(0% 0 0 / 0.5); }
+    .fp-close { position: absolute; top: var(--sp-5); right: var(--sp-6); background: oklch(100% 0 0 / 0.12); color: #fff; border: 1px solid oklch(100% 0 0 / 0.18); border-radius: 100px; padding: var(--sp-2) var(--sp-4); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; cursor: pointer; transition: background 0.2s; }
+    .fp-close:hover { background: oklch(100% 0 0 / 0.22); }
+
+    /* ── VIDEO WALKTHROUGH ─── */
+    .video-section { background: var(--navy); padding: var(--sp-10) var(--sp-8); }
+    .video-header { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-7); align-items: end; margin-bottom: var(--sp-8); }
+    .video-hl { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--cream); }
+    .video-hl em { font-style: italic; }
+    .video-lead { font-size: 15px; line-height: 1.78; color: var(--cream-faint); max-width: 42ch; }
+    .video-frame-wrap { position: relative; width: 100%; padding-top: 56.25%; border-radius: var(--r); overflow: hidden; background: var(--navy-mid); border: 1px solid var(--b-dark); }
+    .video-frame-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: none; }
+    .video-thumb-link { display: block; cursor: pointer; }
+    .video-thumb-link:hover .video-overlay { background: oklch(7% 0.02 264 / 0.28) !important; }
+    .video-play-circle {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: #FF0000;
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      box-shadow: 0 8px 32px oklch(0% 0 0 / 0.4);
+      transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .video-thumb-link:hover .video-play-circle {
+      transform: scale(1.10);
+      box-shadow: 0 16px 48px oklch(0% 0 0 / 0.5);
+    }
+
+    /* ── GALLERY ─── */
+    .gallery { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; height: 840px; gap: 3px; background: var(--navy); }
+    .gcell { overflow: hidden; position: relative; cursor: zoom-in; }
+    .gcell img { transition: transform 0.8s var(--ease); width: 100%; height: 100%; object-fit: cover; }
+    .gcell:hover img { transform: scale(1.05); }
+    .gcap { position: absolute; bottom: var(--sp-4); left: var(--sp-5); font-size: 9.5px; font-weight: 500; letter-spacing: 0.11em; text-transform: uppercase; color: oklch(97% 0.010 252 / 0.45); pointer-events: none; }
+
+    /* ── GALLERY LIGHTBOX ─── */
+    .glb { display: none; position: fixed; inset: 0; z-index: 600; background: oklch(5% 0.015 264 / 0.96); align-items: center; justify-content: center; }
+    .glb.open { display: flex; }
+    .glb-img-wrap { position: relative; max-width: 90vw; max-height: 88vh; }
+    .glb-img-wrap img { display: block; max-width: 90vw; max-height: 88vh; object-fit: contain; border-radius: 10px; box-shadow: 0 40px 80px oklch(0% 0 0 / 0.6); user-select: none; }
+    .glb-close { position: absolute; top: var(--sp-5); right: var(--sp-5); background: oklch(100% 0 0 / 0.12); color: #fff; border: 1px solid oklch(100% 0 0 / 0.2); border-radius: 100px; padding: var(--sp-2) var(--sp-4); font-size: 12px; font-weight: 500; letter-spacing: 0.06em; cursor: pointer; transition: background 0.2s; z-index: 1; }
+    .glb-close:hover { background: oklch(100% 0 0 / 0.22); }
+    .glb-arrow { position: fixed; top: 50%; transform: translateY(-50%); background: oklch(100% 0 0 / 0.10); color: #fff; border: 1px solid oklch(100% 0 0 / 0.18); border-radius: 100px; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 20px; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+    .glb-arrow:hover { background: oklch(100% 0 0 / 0.22); }
+    .glb-prev { left: var(--sp-5); }
+    .glb-next { right: var(--sp-5); }
+    .glb-caption { position: fixed; bottom: var(--sp-6); left: 50%; transform: translateX(-50%); font-size: 10px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: oklch(80% 0.010 252); }
+    .glb-counter { position: fixed; top: var(--sp-5); left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; color: oklch(70% 0.010 252); }
+
+    /* ── CALCULATOR ─── */
+    .calc-section { background: var(--bg); padding: var(--sp-10) var(--sp-8); }
+
+    .calc-header { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: end; margin-bottom: var(--sp-9); }
+
+    .calc-hl { font-family: var(--ff-d); font-size: clamp(38px, 4.2vw, 54px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--ink); }
+    .calc-hl em { font-style: italic; }
+    .calc-lead { font-size: 15px; line-height: 1.78; color: var(--ink-mid); max-width: 50ch; }
+
+    .section-tag { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-1) var(--sp-4); background: var(--blue-pale); color: var(--blue); border-radius: 100px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: var(--sp-5); }
+
+    .loan-tabs { display: flex; gap: 0; border: 1px solid var(--b); border-radius: 100px; padding: 3px; width: fit-content; margin-bottom: var(--sp-8); background: var(--bg); }
+
+    .loan-tab { padding: var(--sp-2) var(--sp-6); border-radius: 100px; font-size: 12px; font-weight: 500; letter-spacing: 0.04em; color: var(--ink-soft); transition: background 0.2s, color 0.2s; cursor: pointer; }
+    .loan-tab.active { background: var(--navy); color: var(--cream); }
+    .loan-tab:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+    .calc-body { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: start; }
+
+    .calc-inputs { display: flex; flex-direction: column; gap: var(--sp-7); }
+
+    .field { display: flex; flex-direction: column; gap: var(--sp-3); }
+    .field-top { display: flex; justify-content: space-between; align-items: baseline; }
+    .field-label { font-size: 11px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--ink-mid); }
+    .field-value { font-family: var(--ff-d); font-size: 20px; font-weight: 400; color: var(--ink); font-variant-numeric: tabular-nums; }
+
+    input[type=range] { width: 100%; height: 3px; background: var(--b); border-radius: 3px; cursor: pointer; outline: none; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--navy); border: 2.5px solid var(--bg-card); box-shadow: 0 0 0 3px var(--b); cursor: pointer; transition: box-shadow 0.15s; }
+    input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 6px oklch(14% 0.042 264 / 0.15); }
+    input[type=range]::-moz-range-thumb { width: 20px; height: 20px; border-radius: 50%; background: var(--navy); border: 2.5px solid var(--bg-card); cursor: pointer; }
+
+    .field-hint { font-size: 11.5px; color: var(--ink-soft); }
+
+    .calc-output { background: var(--navy); border-radius: var(--r); padding: var(--sp-7); display: flex; flex-direction: column; gap: var(--sp-6); position: sticky; top: 80px; }
+
+    .out-label { font-size: 10px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: var(--cream-faint); }
+    .out-monthly { font-family: var(--ff-d); font-size: clamp(44px, 5vw, 64px); font-weight: 300; line-height: 0.9; color: var(--cream); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .out-subtext { font-size: 12px; color: var(--cream-faint); margin-top: var(--sp-2); }
+    .out-divider { height: 1px; background: var(--b-dark); }
+
+    .out-breakdown { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+    .out-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13px; }
+    .out-row-label { color: var(--cream-dim); }
+    .out-row-val   { font-variant-numeric: tabular-nums; color: var(--cream); font-weight: 500; }
+
+    .bar-track { width: 100%; height: 5px; background: oklch(100% 0 0 / 0.08); border-radius: 5px; overflow: hidden; }
+    .bar-fill  { height: 100%; background: var(--blue); border-radius: 5px; transition: width 0.5s var(--ease); }
+
+    .cpf-note { background: oklch(97% 0.010 252 / 0.05); border: 1px solid var(--b-dark); border-radius: 10px; padding: var(--sp-4); }
+    .cpf-note p { font-size: 11.5px; line-height: 1.65; color: var(--cream-faint); }
+    .cpf-note strong { color: var(--cream-dim); font-weight: 500; }
+
+    /* ── YIELD ─── */
+    .yield-section { background: var(--bg-alt); padding: var(--sp-10) var(--sp-8); }
+
+    .yield-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: start; }
+
+    .yield-hl  { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--ink); margin-bottom: var(--sp-5); }
+    .yield-hl em { font-style: italic; }
+    .yield-text { font-size: 14.5px; line-height: 1.78; color: var(--ink-mid); margin-bottom: var(--sp-5); }
+    .yield-disc { font-size: 11.5px; line-height: 1.65; color: var(--ink-soft); padding-top: var(--sp-5); border-top: 1px solid var(--b); }
+
+    .yield-tool { background: var(--bg-card); border: 1px solid var(--b); border-radius: var(--r); padding: var(--sp-7); display: flex; flex-direction: column; gap: var(--sp-7); }
+
+    .yield-results { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+
+    .yield-card { background: var(--navy); border-radius: 12px; padding: var(--sp-5); display: flex; flex-direction: column; gap: var(--sp-1); }
+    .yield-card-n { font-family: var(--ff-d); font-size: 36px; font-weight: 300; line-height: 1; color: var(--cream); font-variant-numeric: tabular-nums; letter-spacing: -0.02em; }
+    .yield-card-n .u { font-size: 0.48em; color: var(--blue); }
+    .yield-card-l { font-size: 10px; font-weight: 600; letter-spacing: 0.10em; text-transform: uppercase; color: var(--cream-faint); }
+
+    .yield-context { display: flex; flex-direction: column; gap: var(--sp-3); padding-top: var(--sp-5); border-top: 1px solid var(--b); }
+
+    .yield-row { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; }
+    .yield-row span:first-child { color: var(--ink-mid); }
+    .yield-row span:last-child  { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+    .yield-row.good span:last-child { color: var(--green); }
+
+    /* ── FEATURES ─── */
+    .features-section { background: var(--bg); padding: var(--sp-10) var(--sp-8); }
+
+    .features-head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: end; margin-bottom: var(--sp-8); }
+    .features-hl  { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--ink); }
+    .features-hl em { font-style: italic; }
+    .features-intro { font-size: 14.5px; line-height: 1.78; color: var(--ink-mid); }
+
+    .feat-list { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--b); }
+    .feat { padding: var(--sp-7) var(--sp-7) var(--sp-7) 0; border-right: 1px solid var(--b); display: flex; flex-direction: column; gap: var(--sp-3); }
+    .feat:nth-child(3n) { border-right: none; padding-right: 0; }
+    .feat:nth-child(n+4) { border-top: 1px solid var(--b); }
+    .feat:nth-child(3n+2), .feat:nth-child(3n+3) { padding-left: var(--sp-7); }
+    .feat-num   { font-size: 11px; font-weight: 600; color: var(--blue); }
+    .feat-title { font-family: var(--ff-d); font-size: 21px; font-weight: 400; color: var(--ink); letter-spacing: -0.01em; line-height: 1.2; }
+    .feat-desc  { font-size: 13px; line-height: 1.73; color: var(--ink-mid); }
+
+    /* ── LOCATION ─── */
+    .location-section { background: var(--navy); padding: var(--sp-10) var(--sp-8); }
+
+    .loc-head { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: end; padding-bottom: var(--sp-8); border-bottom: 1px solid var(--b-dark); }
+    .loc-hl  { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--cream); }
+    .loc-hl em { font-style: italic; }
+    .loc-lead { font-size: 14.5px; line-height: 1.78; color: var(--cream-dim); max-width: 50ch; }
+
+    .amenity-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--b-dark); }
+    .amenity-col { padding: var(--sp-8) var(--sp-8) var(--sp-8) 0; border-right: 1px solid var(--b-dark); }
+    .amenity-col:last-child  { border-right: none; padding-right: 0; }
+    .amenity-col:not(:first-child) { padding-left: var(--sp-8); }
+    .amenity-col-title { font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue); margin-bottom: var(--sp-6); }
+    .amenity-row { display: flex; justify-content: space-between; align-items: baseline; gap: var(--sp-3); padding: var(--sp-3) 0; border-bottom: 1px solid var(--b-dark); font-size: 13.5px; }
+    .amenity-row:last-child { border-bottom: none; }
+    .amenity-name { color: var(--cream); font-weight: 300; }
+    .amenity-dist { font-size: 10.5px; color: var(--cream-faint); white-space: nowrap; }
+
+    /* ── AGENT ─── */
+    .agent-section { background: var(--bg-card); padding: var(--sp-10) var(--sp-8); }
+
+    .agent-inner { display: grid; grid-template-columns: 200px 1fr; gap: var(--sp-9); align-items: start; max-width: 920px; }
+    .agent-photo { width: 200px; height: 248px; border-radius: 12px; overflow: hidden; border: 1px solid var(--b); }
+    .agent-name    { font-family: var(--ff-d); font-size: clamp(32px, 3.8vw, 48px); font-weight: 300; line-height: 1.04; letter-spacing: -0.01em; color: var(--ink); margin: var(--sp-3) 0 var(--sp-2); }
+    .agent-agency  { font-size: 13.5px; color: var(--ink-mid); margin-bottom: var(--sp-5); }
+    .agent-tagline { font-family: var(--ff-d); font-size: 17px; font-style: italic; font-weight: 300; color: var(--ink-soft); line-height: 1.45; margin-bottom: var(--sp-6); }
+    /* ── TRANSACTIONS ─── */
+    .tx-section { padding: 100px 0; background: var(--bg); }
+    .tx-inner { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-10); }
+    @media (max-width: 480px) { .tx-inner { padding: 0 var(--sp-7); } .tx-section { padding: 100px 0; } }
+    .tx-header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-6); margin-bottom: var(--sp-9); flex-wrap: wrap; }
+    .tx-hl { font-family: var(--ff-d); font-size: clamp(28px, 3.2vw, 40px); font-weight: 300; line-height: 1.1; letter-spacing: -0.01em; color: var(--ink); }
+    .tx-hl em { font-style: italic; color: var(--blue); }
+    .tx-subtitle { font-size: 12px; color: var(--ink-soft); letter-spacing: 0.04em; text-align: right; }
+    .tx-table { width: 100%; border-collapse: collapse; }
+    .tx-table thead th { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding: 0 var(--sp-5) var(--sp-4); text-align: left; border-bottom: 1px solid var(--b); }
+    .tx-table thead th:last-child { text-align: right; }
+    .tx-table tbody tr { border-bottom: 1px solid var(--b); transition: background 0.2s; }
+    .tx-table tbody tr:last-child { border-bottom: none; }
+    .tx-table tbody tr:hover { background: var(--bg-card); }
+    .tx-table td { padding: var(--sp-5) var(--sp-5); font-size: 13px; color: var(--ink-mid); vertical-align: middle; }
+    .tx-table td:last-child { text-align: right; font-weight: 600; color: var(--ink); font-size: 14px; }
+    .tx-block { font-weight: 600; color: var(--ink); font-size: 13px; }
+    .tx-tag { display: inline-block; font-size: 9.5px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; padding: 2px 8px; border-radius: 100px; background: oklch(94% 0.02 252); color: var(--blue); }
+    .tx-tag.same { background: oklch(92% 0.03 152); color: oklch(38% 0.09 152); }
+    .tx-source { margin-top: var(--sp-6); font-size: 10.5px; color: var(--ink-soft); }
+    .tx-source a { color: var(--blue); text-decoration: underline; }
+    @media (max-width: 640px) {
+      .tx-table { display: block; }
+      .tx-table thead { display: none; }
+      .tx-table tbody { display: block; }
+      .tx-table tbody tr { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 2px var(--sp-4); padding: var(--sp-5) 0; border-bottom: 1px solid var(--b); }
+      .tx-table tbody tr:last-child { border-bottom: none; }
+      .tx-table tbody tr:hover { background: none; }
+      .tx-table td { padding: 0; font-size: 13px; border: none; vertical-align: top; }
+      /* col 1 (block/street) — top-left, spans full height */
+      .tx-table td:nth-child(1) { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+      /* col 2 (floor) — top-right meta line */
+      .tx-table td:nth-child(2)::before { content: "Floor "; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
+      .tx-table td:nth-child(2) { grid-column: 2; grid-row: 1; text-align: right; font-size: 12px; }
+      /* col 3 (size) — hidden */
+      .tx-table td:nth-child(3) { display: none; }
+      /* col 4 (lease) — hidden */
+      .tx-table td:nth-child(4) { display: none; }
+      /* col 5 (price) — bottom-right, prominent */
+      .tx-table td:nth-child(5) { grid-column: 2; grid-row: 2; text-align: right; font-size: 15px; font-weight: 700; color: var(--ink); }
+    }
+
+    .agent-meta    { display: flex; flex-direction: column; gap: var(--sp-2); margin-bottom: var(--sp-7); }
+    .agent-meta-row { font-size: 12px; color: var(--ink-mid); }
+    .agent-meta-row strong { font-weight: 600; color: var(--ink); margin-right: var(--sp-2); }
+    .agent-ctas    { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+
+    .btn-wa { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-4) var(--sp-6); background: var(--blue); color: #fff; border-radius: 100px; font-size: 12.5px; font-weight: 500; letter-spacing: 0.03em; transition: background 0.2s; }
+    .btn-wa:hover { background: var(--blue-hover); }
+
+    .btn-call { display: inline-flex; align-items: center; padding: var(--sp-4) var(--sp-6); border: 1px solid var(--b); color: var(--ink-mid); border-radius: 100px; font-size: 12.5px; font-weight: 500; letter-spacing: 0.03em; transition: all 0.2s; }
+    .btn-call:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+
+    .agent-fine { margin-top: var(--sp-8); font-size: 11px; line-height: 1.65; color: var(--ink-faint); max-width: 56ch; }
+
+    /* ── FOOTER ─── */
+    .footer { background: var(--navy); border-top: 1px solid var(--b-dark); padding: var(--sp-6) var(--sp-8); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-5); }
+    .footer-copy  { font-size: 11px; color: var(--cream-faint); letter-spacing: 0.05em; }
+    .footer-brand { font-size: 11px; color: var(--cream-faint); letter-spacing: 0.05em; }
+    .footer-brand a { color: var(--cream-dim); transition: color 0.2s; }
+    .footer-brand a:hover { color: var(--cream); }
+
+    /* ── REVEALS ─── */
+    .rv { opacity: 0; transform: translateY(20px); transition: opacity 0.85s var(--ease), transform 0.85s var(--ease); }
+    .rv.in { opacity: 1; transform: none; }
+    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s} .d4{transition-delay:.32s}
+
+    /* ── RESPONSIVE ─── */
+    @media (max-width: 1100px) {
+      .bento { grid-template-columns: repeat(6, 1fr); }
+      .bc-price   { grid-column: 1 / 4; }
+      .bc-lease   { grid-column: 4 / 7; }
+      .bc-commute { grid-column: 1 / 7; grid-row: 2; }
+      .bc-monthly { grid-column: 1 / 4; grid-row: 3; }
+      .bc-schools { grid-column: 4 / 7; grid-row: 3; }
+      .bc-psf     { grid-column: 1 / 7; grid-row: 4; }
+    }
+
+    @media (max-width: 900px) {
+      .nav { padding: 0 var(--sp-5); }
+      .nav-links { display: none; }
+      .nav-agent { display: none; }
+      .hero-content, .stats-section, .dash-section, .case-section,
+      .calc-section, .yield-section, .features-section, .location-section, .agent-section,
+      .floorplan-section, .video-section, .map-section { padding-left: var(--sp-5); padding-right: var(--sp-5); }
+      /* Section vertical padding: bring 128px down to 80px, 96px down to 64px */
+      .case-section    { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .floorplan-section { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .video-section   { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .calc-section    { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .yield-section   { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .features-section { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .location-section { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .agent-section   { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .map-section     { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .dash-section    { padding-top: var(--sp-8); padding-bottom: var(--sp-8); }
+      .stats-section   { padding: var(--sp-6) var(--sp-5) var(--sp-7); }
+      .split, .split.r { grid-template-columns: 1fr; direction: ltr; }
+      .split-img { min-height: 380px; }
+      .split-body { padding: var(--sp-7) var(--sp-5); }
+      .stats-row { grid-template-columns: 1fr 1fr; border-radius: 3px; }
+      .stat { padding: var(--sp-5) var(--sp-5) var(--sp-4); border-bottom: 1px solid oklch(100% 0 0 / 0.10); }
+      .stat:nth-child(3), .stat:nth-child(4) { border-bottom: none; }
+      .stat:nth-child(2), .stat:nth-child(4) { border-right: none; }
+      .stats-row:has(.stat:hover) .stat:not(:hover) { opacity: 0.5; }
+      .case-header, .calc-header, .features-head, .loc-head { grid-template-columns: 1fr; gap: var(--sp-5); }
+      .case-pillars { grid-template-columns: 1fr; }
+      .pillar { border-right: none; padding-left: 0; padding-right: 0; padding-top: var(--sp-6); padding-bottom: var(--sp-6); border-bottom: 1px solid var(--b-dark); }
+      .pillar:last-child { border-bottom: none; }
+      .calc-body { grid-template-columns: 1fr; }
+      .calc-output { position: static; }
+      .yield-grid { grid-template-columns: 1fr; }
+      .feat-list { grid-template-columns: 1fr; }
+      .feat { border-right: none; padding-left: 0; padding-right: 0; border-bottom: 1px solid var(--b); padding-top: var(--sp-5); padding-bottom: var(--sp-5); }
+      .feat:nth-child(n+4) { border-top: none; }
+      .feat:last-child { border-bottom: none; }
+      .amenity-grid { grid-template-columns: 1fr; }
+      .amenity-col { border-right: none; padding-left: 0; padding-right: 0; padding-top: var(--sp-6); padding-bottom: var(--sp-6); border-bottom: 1px solid var(--b-dark); }
+      .amenity-col:last-child { border-bottom: none; }
+      .agent-inner { grid-template-columns: 1fr; }
+      .floorplan-inner { grid-template-columns: 1fr; gap: var(--sp-8); }
+      .video-header { grid-template-columns: 1fr; }
+      .gallery { grid-template-columns: 1fr; grid-template-rows: repeat(4, 260px); height: auto; }
+      .bento { grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+      .bc-price, .bc-lease, .bc-commute, .bc-monthly, .bc-schools, .bc-psf { grid-column: auto; grid-row: auto; }
+      .bc-commute, .bc-psf { grid-column: 1 / 3; }
+      .footer { flex-direction: column; align-items: flex-start; padding: var(--sp-5); }
+      /* Hero: fix indent + bottom padding for sticky bar */
+      .hero-hl .indent { padding-left: clamp(32px, 6.5vw, 64px); }
+      .hero-content { padding-bottom: var(--sp-8); padding-left: var(--sp-5); padding-right: var(--sp-5); }
+      .scroll-mark { right: var(--sp-5); bottom: var(--sp-8); }
+    }
+
+    /* ── MOBILE ≤ 600px ─── */
+    @media (max-width: 600px) {
+      /* Nav */
+      .nav { padding: 0 var(--sp-4); height: 56px; }
+      .nav-cta { padding: var(--sp-2) var(--sp-4); font-size: 12px; }
+
+      /* Hero: font fits without overflow, extra bottom pad to clear sticky bar */
+      .hero-hl { font-size: clamp(40px, 11.5vw, 68px); margin-bottom: var(--sp-5); }
+      .hero-hl .indent { padding-left: clamp(16px, 4.5vw, 32px); }
+      .hero-over { font-size: 9px; letter-spacing: 0.12em; margin-bottom: var(--sp-4); }
+      .hero-content { padding-left: var(--sp-4); padding-right: var(--sp-4); padding-bottom: calc(var(--sp-6) + 80px + env(safe-area-inset-bottom, 0px)); }
+      /* Stack hero row: caption above, price pill full-width below */
+      .hero-row { flex-direction: column; align-items: flex-start; gap: var(--sp-3); }
+      .price-pill { width: 100%; justify-content: center; font-size: 22px; padding: var(--sp-4) var(--sp-5); }
+      .scroll-mark { display: none; }
+
+      /* Section padding: tighter on small screens */
+      .case-section, .floorplan-section, .video-section, .calc-section,
+      .yield-section, .features-section, .location-section, .agent-section,
+      .map-section, .dash-section { padding-top: var(--sp-7); padding-bottom: var(--sp-7); }
+      .stats-section { padding: var(--sp-5) var(--sp-4) var(--sp-6); }
+      .hero-content, .dash-section, .case-section, .calc-section,
+      .yield-section, .features-section, .location-section, .agent-section,
+      .floorplan-section, .video-section, .map-section { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+      .split-body { padding: var(--sp-6) var(--sp-4); }
+
+      /* Stats: single row, compact cards */
+      .stats-section { padding-left: var(--sp-4); padding-right: var(--sp-4); }
+      .stat { padding: var(--sp-4) var(--sp-4) var(--sp-3); border-radius: 14px; }
+      .stat-icon { width: 30px; height: 30px; border-radius: 8px; margin-bottom: var(--sp-4); }
+      .stat-n { font-size: clamp(34px, 9vw, 48px); }
+      .stat-l { font-size: 10px; }
+
+      /* Bento: single column */
+      .bento { grid-template-columns: 1fr; gap: var(--sp-3); }
+      .bc-commute, .bc-psf { grid-column: auto; }
+      .bcard { padding: var(--sp-4); }
+
+      /* Commute: compact labels */
+      .c-label { width: 56px; }
+      .c-name { font-size: 10px; font-weight: 600; }
+      .c-time { font-size: 9px; }
+      .c-badge { font-size: 8.5px; padding: 1px 4px; }
+
+      /* Gallery: shorter on mobile */
+      .gallery { grid-template-rows: repeat(4, 56vw); }
+
+      /* Agent: photo full bleed */
+      .agent-photo { width: 100%; height: auto; aspect-ratio: 4/3; }
+      .agent-photo img { object-position: top; }
+      .agent-name { font-size: clamp(28px, 7.5vw, 40px); }
+
+      /* Typography: scale all section headlines */
+      .split-hl     { font-size: clamp(30px, 8vw, 44px); }
+      .floorplan-hl { font-size: clamp(28px, 7.5vw, 42px); }
+      .video-hl     { font-size: clamp(28px, 7.5vw, 42px); }
+      .calc-hl      { font-size: clamp(28px, 7.5vw, 42px); }
+      .features-hl  { font-size: clamp(28px, 7.5vw, 42px); }
+      .yield-hl     { font-size: clamp(26px, 7vw, 38px); }
+      .loc-hl       { font-size: clamp(28px, 7.5vw, 42px); }
+      .case-hl      { font-size: clamp(30px, 8.5vw, 48px); }
+      .dash-hl      { font-size: clamp(24px, 6.5vw, 36px); }
+      .pillar-stat  { font-size: clamp(44px, 11vw, 70px); }
+      .map-hl       { font-size: clamp(26px, 7vw, 38px); }
+      .tx-hl        { font-size: clamp(24px, 6.5vw, 36px); }
+
+      /* Dash header */
+      .dash-header { margin-bottom: var(--sp-5); }
+
+      /* Pillar */
+      .pillar-claim { font-size: 18px; }
+      .pillar-body  { font-size: 13px; }
+
+      /* Features */
+      .feat { padding: var(--sp-5) 0; }
+      .feat-title { font-size: 19px; }
+
+      /* Case lead */
+      .case-header { gap: var(--sp-4); }
+      .case-lead   { font-size: 14px; }
+
+      /* Calc output */
+      .calc-output { padding: var(--sp-5); border-radius: 14px; }
+      .out-monthly { font-size: clamp(38px, 10vw, 56px); }
+
+      /* Loan tabs */
+      .loan-tabs  { width: 100%; }
+      .loan-tab   { flex: 1; text-align: center; }
+
+      /* Yield */
+      .yield-card-n { font-size: 30px; }
+
+      /* Map */
+      .map-frame { height: 300px; }
+      .map-head  { gap: var(--sp-4); }
+      .map-filters { gap: var(--sp-2); }
+      .mf-btn { font-size: 11px; padding: var(--sp-2) var(--sp-3); }
+
+      /* Floorplan specs */
+      .fp-spec-label { font-size: 11px; }
+      .fp-spec-val   { font-size: 13px; }
+
+      /* Footer */
+      .footer { padding: var(--sp-4); gap: var(--sp-3); }
+      .footer-copy, .footer-brand { font-size: 11px; }
+
+    }
+
+    /* ── VERY SMALL ≤ 390px ─── */
+    @media (max-width: 390px) {
+      .hero-hl { font-size: clamp(36px, 10.5vw, 52px); }
+      .hero-hl .indent { padding-left: 12px; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .stat { padding: var(--sp-4) var(--sp-4) var(--sp-3); }
+      .stat-n { font-size: 30px; }
+      .price-pill { font-size: 20px; }
+    }
+
+    /* ── MAP ─── */
+    .map-section { background: var(--bg-card); padding: var(--sp-10) var(--sp-8); }
+
+    .map-head { display: grid; grid-template-columns: 1fr auto; gap: var(--sp-7); align-items: end; margin-bottom: var(--sp-7); }
+    .map-hl { font-family: var(--ff-d); font-size: clamp(36px, 4vw, 52px); font-weight: 300; line-height: 1.06; letter-spacing: -0.01em; color: var(--ink); }
+    .map-hl em { font-style: italic; }
+    .map-addr { font-size: 13px; color: var(--ink-soft); margin-top: var(--sp-2); }
+
+    .map-filters { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+    .mf-btn {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: var(--sp-2) var(--sp-4);
+      background: var(--bg); border: 1.5px solid var(--b);
+      border-radius: 100px; font-size: 11.5px; font-weight: 500; color: var(--ink-mid);
+      cursor: pointer; transition: all 0.18s; white-space: nowrap;
+    }
+
+    .mf-btn .mf-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .mf-btn:hover { border-color: var(--blue); color: var(--blue); background: var(--blue-pale); }
+    .mf-btn.active { background: var(--navy); border-color: var(--navy); color: #fff; }
+    .mf-btn.active .mf-dot.blue   { background: #60a5fa; }
+    .mf-btn.active .mf-dot.green  { background: #4ade80; }
+    .mf-btn.active .mf-dot.amber  { background: #fbbf24; }
+    .mf-btn.active .mf-dot.purple { background: #c084fc; }
+    .mf-dot.blue   { background: var(--blue); }
+    .mf-dot.green  { background: var(--green); }
+    .mf-dot.amber  { background: var(--amber); }
+    .mf-dot.purple { background: oklch(65% 0.19 295); }
+
+    .map-frame { width: 100%; height: 480px; border-radius: var(--r); overflow: hidden; border: 1px solid var(--b); position: relative; }
+
+    /* Override leaflet popup styles */
+    .leaflet-popup-content-wrapper { border-radius: 10px !important; box-shadow: 0 4px 24px oklch(14% 0.042 264 / 0.18) !important; border: 1px solid var(--b) !important; }
+    .leaflet-popup-tip { background: #fff !important; }
+    .leaflet-popup-content { margin: 14px 16px !important; font-family: 'Inter', sans-serif !important; font-size: 13px !important; color: oklch(18% 0.035 264) !important; }
+    .lp-name { font-weight: 600; margin-bottom: 2px; }
+    .lp-meta { color: oklch(64% 0.022 258); font-size: 11.5px; }
+
+    @media (max-width: 900px) {
+      .map-head { grid-template-columns: 1fr; gap: var(--sp-5); }
+      .map-frame { height: 360px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+    }
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon-180.png">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav" id="siteNav">
+    <ul class="nav-links">
+      <li><a href="#overview">Overview</a></li>
+      <li><a href="#unit">The Unit</a></li>
+      <li><a href="#floorplan">Floor Plan</a></li>
+      <li><a href="#location">Location</a></li>
+      <li><a href="#budget">Budget</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <span class="nav-agent">Marcus Tan · PropNex</span>
+      <a href="#contact" class="nav-cta">Enquire Now</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="overview" aria-label="Hero">
+    <div class="hero-bg">
+      <img id="heroImg"
+        src="1. HDB Punggol 638a/_DSC0346.jpg"
+        alt="638A Punggol Drive" loading="eager">
+    </div>
+    <div class="hero-content">
+      <p class="hero-over">The Meadows &nbsp;·&nbsp; Punggol &nbsp;·&nbsp; Singapore 821638</p>
+      <h1 class="hero-hl">
+        638A<br>
+        <span class="indent">Punggol <em>Drive</em> <span class="mark">✦</span></span>
+      </h1>
+      <div class="hero-row">
+        <div class="hero-caption">
+          <span class="hero-estate">4-Room Premium Apartment &nbsp;·&nbsp; Level 7 &nbsp;·&nbsp; 990 sqft</span>
+          <span class="hero-type">Asking from</span>
+        </div>
+        <a href="#contact" class="price-pill">S$588,000</a>
+      </div>
+    </div>
+    <div class="scroll-mark" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="scroll-mark-line"></div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-section" aria-label="Key figures">
+    <p class="stats-label rv">At a glance</p>
+    <div class="stats-row">
+
+      <!-- Bedrooms -->
+      <div class="stat stat-bed rv d1">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <div class="stat-n" data-count="3" data-suffix="">3</div>
+        <div class="stat-l">Bedrooms</div>
+      </div>
+
+      <!-- Bathrooms -->
+      <div class="stat stat-bath rv d2">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h3v2.25"/>
+          </svg>
+        </div>
+        <div class="stat-n" data-count="2" data-suffix="">2</div>
+        <div class="stat-l">Bathrooms</div>
+      </div>
+
+      <!-- Floor Area -->
+      <div class="stat stat-sqft rv d3">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+        </div>
+        <div class="stat-n" data-count="990" data-suffix=" sqft"><span class="stat-count-val">990</span><small>sqft</small></div>
+        <div class="stat-l">Floor Area</div>
+      </div>
+
+      <!-- Floor Level -->
+      <div class="stat stat-floor rv d4">
+        <div class="stat-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 21h18M3 10h18M5 6l7-3 7 3M4 10v11M20 10v11M8 14v3M12 14v3M16 14v3"/>
+          </svg>
+        </div>
+        <div class="stat-n" data-count="7" data-suffix="th"><span class="stat-count-val">7</span><sup>th</sup></div>
+        <div class="stat-l">Floor Level</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- THE UNIT -->
+  <section class="split" id="unit" aria-label="The unit">
+    <div class="split-img">
+      <img src="1. HDB Punggol 638a/_DSC0312.jpg" alt="Living area" loading="lazy">
+    </div>
+    <div class="split-body">
+      <p class="split-eye rv">The Unit</p>
+      <div class="split-rule rv d1"></div>
+      <h2 class="split-hl rv d1">Quiet.<br><em>Bright.</em><br>Make it<br>yours.</h2>
+      <p class="split-text rv d2">Level 7 sits in the sweet spot — high enough for airflow and a degree of privacy, practical enough for daily life. Sold unfurnished. No outdated finishes to rip out, no old owner's choices to work around.</p>
+      <div class="mini-row rv d3">
+        <div class="mini"><div class="mini-n">2003</div><div class="mini-l">Built</div></div>
+        <div class="mini"><div class="mini-n">86yr</div><div class="mini-l">Lease left</div></div>
+        <div class="mini"><div class="mini-n">$594</div><div class="mini-l">per sqft</div></div>
+      </div>
+      <a href="#contact" class="btn-pill rv d3">Schedule a Viewing</a>
+    </div>
+  </section>
+
+  <!-- GALLERY -->
+  <section class="gallery" aria-label="Photo gallery" id="gallerySection">
+    <div class="gcell" data-index="0"><img src="1. HDB Punggol 638a/_DSC0231.jpg" alt="Kitchen" loading="lazy"><span class="gcap">Kitchen</span></div>
+    <div class="gcell" data-index="1"><img src="1. HDB Punggol 638a/_DSC0249.jpg" alt="Master Bathroom" loading="lazy"><span class="gcap">Master Bathroom</span></div>
+    <div class="gcell" data-index="2"><img src="1. HDB Punggol 638a/_DSC0326.jpg" alt="Dining Area" loading="lazy"><span class="gcap">Dining Area</span></div>
+    <div class="gcell" data-index="3"><img src="1. HDB Punggol 638a/_DSC0258.jpg" alt="Common Bathroom" loading="lazy"><span class="gcap">Common Bathroom</span></div>
+  </section>
+
+  <!-- GALLERY LIGHTBOX -->
+  <div class="glb" id="glb" role="dialog" aria-modal="true" aria-label="Gallery viewer">
+    <button class="glb-close" id="glbClose">Close ✕</button>
+    <span class="glb-counter" id="glbCounter"></span>
+    <button class="glb-arrow glb-prev" id="glbPrev" aria-label="Previous">&#8592;</button>
+    <div class="glb-img-wrap">
+      <img id="glbImg" src="" alt="">
+    </div>
+    <button class="glb-arrow glb-next" id="glbNext" aria-label="Next">&#8594;</button>
+    <span class="glb-caption" id="glbCaption"></span>
+  </div>
+
+  <!-- VIDEO WALKTHROUGH -->
+  <section class="video-section" id="video" aria-label="Video walkthrough">
+    <div class="video-header">
+      <div>
+        <div class="section-tag rv" style="background:oklch(100% 0 0 / 0.08);color:var(--cream);">Video Walkthrough</div>
+        <h2 class="video-hl rv d1">See it before<br><em>you visit.</em></h2>
+      </div>
+      <p class="video-lead rv d2">A full walkthrough of every room, shot in natural light. Get a real feel for the space, the flow, and the finishes — before committing to a viewing.</p>
+    </div>
+
+    <a class="video-frame-wrap video-thumb-link rv" href="https://www.youtube.com/watch?v=FInusM15S4c" target="_blank" rel="noopener" aria-label="Watch video walkthrough on YouTube">
+      <img
+        src="https://img.youtube.com/vi/FInusM15S4c/maxresdefault.jpg"
+        alt="638A Punggol Drive video walkthrough"
+        loading="lazy"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"
+      >
+      <div style="position:absolute;inset:0;background:oklch(7% 0.02 264 / 0.45);transition:background 0.3s;" class="video-overlay"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+        <div class="video-play-circle">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <p style="font-size:13px;font-weight:500;letter-spacing:0.06em;color:rgba(255,255,255,0.75);text-transform:uppercase;">Watch on YouTube</p>
+      </div>
+    </a>
+  </section>
+
+  <!-- FLOOR PLAN -->
+  <section class="floorplan-section" id="floorplan" aria-label="Floor plan">
+    <div class="floorplan-inner">
+
+      <div class="floorplan-text">
+        <div class="section-tag rv" style="background:var(--blue-pale);color:var(--blue);">Floor Plan</div>
+        <h2 class="floorplan-hl rv d1">Know every<br><em>square foot.</em></h2>
+        <p class="floorplan-body rv d2">990 sqft laid out across three bedrooms, two bathrooms, a living and dining area, and a utility room. The layout is efficient — no wasted corridors, no awkward corners.</p>
+        <div class="floorplan-specs rv d3">
+          <div class="fp-spec-row">
+            <span class="fp-spec-label">Type</span>
+            <span class="fp-spec-val">4-Room Premium (HDB)</span>
+          </div>
+          <div class="fp-spec-row">
+            <span class="fp-spec-label">Floor Area</span>
+            <span class="fp-spec-val">990 sqft / 92 sqm</span>
+          </div>
+          <div class="fp-spec-row">
+            <span class="fp-spec-label">Bedrooms</span>
+            <span class="fp-spec-val">3 Bedrooms</span>
+          </div>
+          <div class="fp-spec-row">
+            <span class="fp-spec-label">Bathrooms</span>
+            <span class="fp-spec-val">2 Bathrooms</span>
+          </div>
+          <div class="fp-spec-row">
+            <span class="fp-spec-label">Layout</span>
+            <span class="fp-spec-val">Living · Dining · Kitchen · Utility</span>
+          </div>
+          <div class="fp-spec-row">
+            <span class="fp-spec-label">Orientation</span>
+            <span class="fp-spec-val">North-facing (no west sun)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="floorplan-img-wrap rv d1" id="fpImgWrap">
+        <!-- Replace with actual floor plan image when available -->
+        <img
+          src="1. HDB Punggol 638a/Floor Plan.jpg"
+          alt="Floor plan of 638A Punggol Drive, 4-Room Premium HDB"
+          id="fpImg"
+          loading="lazy"
+        >
+        <span class="fp-zoom-hint">Click to enlarge</span>
+      </div>
+
+    </div>
+
+    <!-- Lightbox -->
+    <div class="fp-lightbox" id="fpLightbox" role="dialog" aria-modal="true" aria-label="Floor plan enlarged">
+      <button class="fp-close" id="fpClose">Close ✕</button>
+      <img
+        src="1. HDB Punggol 638a/Floor Plan.jpg"
+        alt="Floor plan enlarged"
+      >
+    </div>
+  </section>
+
+  <!-- FEATURES -->
+  <section class="features-section" id="features" aria-label="Key features">
+    <div class="features-head">
+      <h2 class="features-hl rv">What you're<br><em>actually</em><br>getting.</h2>
+      <p class="features-intro rv d1">Six reasons this unit stands up to scrutiny — from LRT access to lease math.</p>
+    </div>
+    <div class="feat-list">
+      <div class="feat rv"><div class="feat-num">01</div><h3 class="feat-title">High Floor, No Wait</h3><p class="feat-desc">Level 7. No ballot, no 5-year queue. Seller can contra with no extension required.</p></div>
+      <div class="feat rv d1"><div class="feat-num">02</div><h3 class="feat-title">3 Min to Kadaloor LRT</h3><p class="feat-desc">PE5 Kadaloor is 280m away. Three stops to Punggol MRT and the North East Line.</p></div>
+      <div class="feat rv d2"><div class="feat-num">03</div><h3 class="feat-title">Blank Canvas Interior</h3><p class="feat-desc">Sold unfurnished. Design it exactly to your taste from day one — no old choices to undo.</p></div>
+      <div class="feat rv"><div class="feat-num">04</div><h3 class="feat-title">5 Schools Within 1 km</h3><p class="feat-desc">Horizon Primary, Waterway Primary, Greendale Primary, E-bridge Pre-School, and more.</p></div>
+      <div class="feat rv d1"><div class="feat-num">05</div><h3 class="feat-title">Daily Needs, All Within Walk</h3><p class="feat-desc">FairPrice at 0.9 km. Oasis Terraces at 1.2 km. Coffeeshop and clinic in the estate.</p></div>
+      <div class="feat rv d2"><div class="feat-num">06</div><h3 class="feat-title">Nature at Your Door</h3><p class="feat-desc">4.2 km waterway cycling trail. Coney Island — 133 ha nature reserve — a short ride away.</p></div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="map-section" id="map" aria-label="Interactive map">
+    <div class="map-head">
+      <div class="rv">
+        <div class="section-tag" style="background:var(--blue-pale);color:var(--blue);">Location Map</div>
+        <h2 class="map-hl">See what's<br><em>around you.</em></h2>
+        <p class="map-addr">638A Punggol Drive, Singapore 821638</p>
+      </div>
+      <div class="map-filters rv d1" role="group" aria-label="Filter amenities">
+        <button class="mf-btn active" data-cat="all"><span class="mf-dot blue"></span>All</button>
+        <button class="mf-btn" data-cat="transport"><span class="mf-dot blue"></span>Transport</button>
+        <button class="mf-btn" data-cat="schools"><span class="mf-dot amber"></span>Schools</button>
+        <button class="mf-btn" data-cat="shopping"><span class="mf-dot green"></span>Shopping</button>
+        <button class="mf-btn" data-cat="parks"><span class="mf-dot purple"></span>Parks</button>
+      </div>
+    </div>
+    <div class="map-frame" id="leaflet-map"></div>
+  </section>
+
+  <!-- LOCATION -->
+  <section class="location-section" id="location" aria-label="Location">
+    <div class="loc-head">
+      <h2 class="loc-hl rv">Live where<br><em>Punggol</em><br>is at its best.</h2>
+      <p class="loc-lead rv d1">The Meadows connects you to everything that makes Punggol worth choosing — the LRT, the waterway, and the schools.</p>
+    </div>
+    <div class="amenity-grid">
+      <div class="amenity-col rv">
+        <p class="amenity-col-title">Transport</p>
+        <div class="amenity-row"><span class="amenity-name">PE5 Kadaloor LRT</span><span class="amenity-dist">280m · 3 min</span></div>
+        <div class="amenity-row"><span class="amenity-name">PE6 Oasis LRT</span><span class="amenity-dist">~400m</span></div>
+        <div class="amenity-row"><span class="amenity-name">Punggol MRT (NEL)</span><span class="amenity-dist">3 stops via LRT</span></div>
+        <div class="amenity-row"><span class="amenity-name">Bus services</span><span class="amenity-dist">Punggol Drive</span></div>
+      </div>
+      <div class="amenity-col rv d1">
+        <p class="amenity-col-title">Education</p>
+        <div class="amenity-row"><span class="amenity-name">Horizon Primary</span><span class="amenity-dist">within 1 km</span></div>
+        <div class="amenity-row"><span class="amenity-name">Waterway Primary</span><span class="amenity-dist">within 1 km</span></div>
+        <div class="amenity-row"><span class="amenity-name">Greendale Primary</span><span class="amenity-dist">within 1 km</span></div>
+        <div class="amenity-row"><span class="amenity-name">Greendale Secondary</span><span class="amenity-dist">1.5 km</span></div>
+        <div class="amenity-row"><span class="amenity-name">E-bridge Pre School</span><span class="amenity-dist">nearby</span></div>
+      </div>
+      <div class="amenity-col rv d2">
+        <p class="amenity-col-title">Lifestyle</p>
+        <div class="amenity-row"><span class="amenity-name">Waterway Point</span><span class="amenity-dist">short drive</span></div>
+        <div class="amenity-row"><span class="amenity-name">Oasis Terraces</span><span class="amenity-dist">1.2 km</span></div>
+        <div class="amenity-row"><span class="amenity-name">FairPrice Punggol Dr</span><span class="amenity-dist">0.9 km</span></div>
+        <div class="amenity-row"><span class="amenity-name">Punggol Waterway Park</span><span class="amenity-dist">4.2 km trail</span></div>
+        <div class="amenity-row"><span class="amenity-name">Coney Island</span><span class="amenity-dist">133 ha reserve</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NATURE SPLIT -->
+  <section class="split" aria-label="Neighbourhood">
+    <div class="split-body warm">
+      <p class="split-eye rv">The Neighbourhood</p>
+      <div class="split-rule rv d1"></div>
+      <h2 class="split-hl rv d1" style="color:var(--ink);">A town built<br><em>around water,</em><br>parks and<br>commonsense.</h2>
+      <p class="split-text rv d2" style="color:var(--ink-mid);">Punggol was designed with movement in mind. The waterway runs through it, cycling paths connect every precinct, and Coney Island sits just a short ride away — real liveability, not just an estate name.</p>
+    </div>
+    <div class="split-img">
+      <img src="https://dollarsandsense.sg/wp-content/uploads/2025/08/Punggol_DigitalDistrict.jpg" alt="Punggol Digital District" loading="lazy">
+    </div>
+  </section>
+
+  <!-- DASHBOARD SNAPSHOT -->
+  <section class="dash-section" id="snapshot" aria-label="Property snapshot dashboard">
+    <div class="dash-header rv">
+      <div class="dash-tag">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Property Snapshot
+      </div>
+      <h2 class="dash-hl">Everything you need<br>to know, <em>at a glance.</em></h2>
+    </div>
+
+    <div class="bento">
+
+      <!-- Price Card -->
+      <div class="bcard bc-price rv">
+        <p class="bcard-label"><span class="dot"></span>Asking Price</p>
+        <div class="bc-price-main">S$588,000</div>
+        <span class="psf-badge">S$594 / sqft</span>
+        <p class="bc-price-meta" style="margin-top:var(--sp-4);">4-Room Premium · Level 7 · 990 sqft<br>HDB Resale · 99-Year Lease · Unfurnished</p>
+      </div>
+
+      <!-- Lease Donut -->
+      <div class="bcard bc-lease rv d1">
+        <p class="bcard-label"><span class="dot green"></span>Lease Remaining</p>
+        <div class="donut-wrap">
+          <svg class="donut-svg" viewBox="0 0 120 120" aria-label="86 years remaining out of 99" role="img">
+            <circle class="donut-bg"   cx="60" cy="60" r="52"/>
+            <circle class="donut-ring" id="leaseRing" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="donut-center">
+            <span class="donut-num" id="leaseCount">0</span>
+            <span class="donut-unit">years left</span>
+          </div>
+        </div>
+        <p class="lease-note">Out of 99 years &nbsp;·&nbsp; <strong>CPF Eligible ✓</strong></p>
+      </div>
+
+      <!-- Commute Timeline -->
+      <div class="bcard bc-commute rv d2">
+        <p class="bcard-label"><span class="dot"></span>Commute to City</p>
+        <div class="commute-track">
+          <div class="commute-line-bg">
+            <div class="commute-progress" id="commuteProgress"></div>
+            <div class="commute-stops">
+              <div class="commute-stop"><div class="c-dot blue"></div></div>
+              <div class="commute-stop"><div class="c-dot blue" id="dot-kadaloor"></div></div>
+              <div class="commute-stop"><div class="c-dot blue" id="dot-oasis"></div></div>
+              <div class="commute-stop"><div class="c-dot mrt"  id="dot-punggol"></div></div>
+              <div class="commute-stop"><div class="c-dot city"></div></div>
+            </div>
+          </div>
+          <div class="commute-labels">
+            <div class="c-label">
+              <span class="c-name">638A Punggol Dr</span>
+              <span class="c-time">Your door</span>
+            </div>
+            <div class="c-label">
+              <span class="c-badge">LRT</span>
+              <span class="c-name">Kadaloor</span>
+              <span class="c-time">280m · 3 min</span>
+            </div>
+            <div class="c-label">
+              <span class="c-badge">LRT</span>
+              <span class="c-name">Oasis</span>
+              <span class="c-time">+2 min</span>
+            </div>
+            <div class="c-label">
+              <span class="c-badge mrt">MRT</span>
+              <span class="c-name">Punggol</span>
+              <span class="c-time">NEL · +5 min</span>
+            </div>
+            <div class="c-label">
+              <span class="c-badge city">CBD</span>
+              <span class="c-name">City</span>
+              <span class="c-time">~30 min</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Monthly from -->
+      <div class="bcard bc-monthly rv">
+        <p class="bcard-label"><span class="dot"></span>Monthly from</p>
+        <div class="monthly-amt">S$2,135<span>/mo</span></div>
+        <p class="monthly-sub">HDB Loan · 25 yrs · 2.60% p.a.</p>
+        <div class="monthly-row"><span>Loan Amount</span><span>S$470,400</span></div>
+        <div class="monthly-row"><span>Down Payment</span><span>S$117,600 (20%)</span></div>
+        <div class="monthly-row"><span>Total Interest</span><span>S$170,108</span></div>
+        <a href="#budget" class="monthly-link">
+          Customise your numbers
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Schools -->
+      <div class="bcard bc-schools rv d1">
+        <p class="bcard-label"><span class="dot amber"></span>Schools Nearby</p>
+        <div class="schools-count">5</div>
+        <p class="schools-sub">Primary schools within 1 km</p>
+        <div class="school-pills">
+          <div class="school-pill"><span class="school-pill-name">Horizon Primary</span><span class="school-pill-dist">within 1 km</span></div>
+          <div class="school-pill"><span class="school-pill-name">Waterway Primary</span><span class="school-pill-dist">within 1 km</span></div>
+          <div class="school-pill"><span class="school-pill-name">Greendale Primary</span><span class="school-pill-dist">within 1 km</span></div>
+        </div>
+      </div>
+
+      <!-- PSF Comparison -->
+      <div class="bcard bc-psf rv d2">
+        <p class="bcard-label"><span class="dot"></span>Price Per Sqft vs Market</p>
+        <div class="psf-bars">
+          <div class="psf-bar-item">
+            <div class="psf-bar-top">
+              <span class="psf-bar-label">This unit</span>
+              <span class="psf-bar-val highlight">S$594 psf</span>
+            </div>
+            <div class="psf-bar-track"><div class="psf-bar-fill" data-width="72" style="width:0%"></div></div>
+          </div>
+          <div class="psf-bar-item">
+            <div class="psf-bar-top">
+              <span class="psf-bar-label">Punggol 4-rm average</span>
+              <span class="psf-bar-val">S$620 psf</span>
+            </div>
+            <div class="psf-bar-track"><div class="psf-bar-fill mid" data-width="75" style="width:0%"></div></div>
+          </div>
+          <div class="psf-bar-item">
+            <div class="psf-bar-top">
+              <span class="psf-bar-label">New BTO launches</span>
+              <span class="psf-bar-val">S$650+ psf</span>
+            </div>
+            <div class="psf-bar-track"><div class="psf-bar-fill grey" data-width="80" style="width:0%"></div></div>
+          </div>
+          <div class="psf-bar-item">
+            <div class="psf-bar-top">
+              <span class="psf-bar-label">NE district median</span>
+              <span class="psf-bar-val">S$680 psf</span>
+            </div>
+            <div class="psf-bar-track"><div class="psf-bar-fill grey" data-width="83" style="width:0%"></div></div>
+          </div>
+        </div>
+        <div class="psf-note"><strong>S$26 below</strong> the Punggol 4-room resale average — immediate market discount on purchase.</div>
+      </div>
+
+    </div><!-- /bento -->
+  </section>
+
+  <!-- CALCULATOR -->
+  <section class="calc-section" id="budget" aria-label="Mortgage calculator">
+    <div class="calc-header">
+      <div>
+        <div class="section-tag rv">Budget Planner</div>
+        <h2 class="calc-hl rv d1">Run your<br><em>own numbers.</em></h2>
+      </div>
+      <p class="calc-lead rv d2">Toggle between HDB and bank loan to see your real monthly commitment. Everything updates live as you move the sliders.</p>
+    </div>
+
+    <div class="loan-tabs rv" role="tablist">
+      <button class="loan-tab active" id="tab-hdb"  role="tab" aria-selected="true"  data-type="hdb">HDB Loan</button>
+      <button class="loan-tab"        id="tab-bank" role="tab" aria-selected="false" data-type="bank">Bank Loan</button>
+    </div>
+
+    <div class="calc-body" id="calc-panel" role="tabpanel">
+      <div class="calc-inputs">
+        <div class="field rv">
+          <div class="field-top">
+            <label class="field-label" for="r-price">Purchase Price</label>
+            <span class="field-value" id="v-price">S$588,000</span>
+          </div>
+          <input type="range" id="r-price" min="488000" max="688000" step="1000" value="588000">
+          <span class="field-hint">Range: S$488k – S$688k</span>
+        </div>
+        <div class="field rv d1">
+          <div class="field-top">
+            <label class="field-label" for="r-down">Down Payment</label>
+            <span class="field-value" id="v-down">S$117,600 (20%)</span>
+          </div>
+          <input type="range" id="r-down" min="10" max="50" step="1" value="20">
+          <span class="field-hint" id="down-hint">HDB minimum: 20% in cash or CPF</span>
+        </div>
+        <div class="field rv d2">
+          <div class="field-top">
+            <label class="field-label" for="r-tenure">Loan Tenure</label>
+            <span class="field-value" id="v-tenure">25 years</span>
+          </div>
+          <input type="range" id="r-tenure" min="5" max="25" step="1" value="25">
+          <span class="field-hint" id="tenure-hint">HDB maximum: 25 years</span>
+        </div>
+        <div class="field rv d3">
+          <div class="field-top">
+            <label class="field-label" for="r-rate">Interest Rate</label>
+            <span class="field-value" id="v-rate">2.60% p.a.</span>
+          </div>
+          <input type="range" id="r-rate" min="100" max="550" step="5" value="260">
+          <span class="field-hint" id="rate-hint">HDB concessionary rate: 2.60%</span>
+        </div>
+      </div>
+
+      <div class="calc-output rv d1" aria-live="polite" aria-atomic="true">
+        <div>
+          <p class="out-label">Estimated monthly payment</p>
+          <p class="out-monthly" id="out-monthly">S$2,135/mo</p>
+          <p class="out-subtext" id="out-subtext">Based on S$470,400 loan over 25 years at 2.60%</p>
+        </div>
+        <div class="out-divider"></div>
+        <div class="out-breakdown">
+          <div class="out-row"><span class="out-row-label">Loan Amount</span><span class="out-row-val" id="out-loan">S$470,400</span></div>
+          <div class="out-row"><span class="out-row-label">Down Payment</span><span class="out-row-val" id="out-downpay">S$117,600</span></div>
+          <div class="out-row"><span class="out-row-label">Total Interest Paid</span><span class="out-row-val" id="out-interest">S$170,108</span></div>
+          <div class="out-row"><span class="out-row-label">Total Loan Cost</span><span class="out-row-val" id="out-total">S$640,508</span></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;margin-bottom:6px;">
+            <span style="font-size:10.5px;color:var(--cream-faint);">Principal</span>
+            <span style="font-size:10.5px;color:var(--cream-faint);">Interest</span>
+          </div>
+          <div class="bar-track"><div class="bar-fill" id="bar-fill" style="width:73%"></div></div>
+          <div style="display:flex;justify-content:space-between;margin-top:6px;">
+            <span style="font-size:10.5px;color:var(--cream-dim);" id="bar-p-pct">73%</span>
+            <span style="font-size:10.5px;color:var(--blue);" id="bar-i-pct">27%</span>
+          </div>
+        </div>
+        <div class="cpf-note">
+          <p><strong>CPF tip:</strong> Singapore citizens buying their first home with an HDB loan can use CPF OA savings to cover part or all of the down payment and monthly instalments.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YIELD -->
+  <section class="yield-section" aria-label="Rental yield estimator">
+    <div class="yield-grid">
+      <div class="rv">
+        <div class="section-tag" style="background:var(--green-pale);color:var(--green);">Rental Yield</div>
+        <h2 class="yield-hl">What does this<br>unit <em>earn for you?</em></h2>
+        <p class="yield-text">4-room HDB flats in Punggol are fetching S$2,000 to S$2,800 per month. Adjust the slider below to model your rental scenario.</p>
+        <p class="yield-disc">Estimates are illustrative only. Actual income depends on market conditions and flat condition. Not investment advice.</p>
+      </div>
+      <div class="yield-tool rv d1">
+        <div class="field">
+          <div class="field-top">
+            <label class="field-label" for="r-rent">Expected Monthly Rent</label>
+            <span class="field-value" id="v-rent">S$2,400</span>
+          </div>
+          <input type="range" id="r-rent" min="1800" max="3200" step="50" value="2400">
+          <span class="field-hint">Punggol 4-room range: S$1,800 – S$3,200</span>
+        </div>
+        <div class="yield-results">
+          <div class="yield-card">
+            <div class="yield-card-n" id="y-gross"><span class="u">~</span>4.9<span class="u">%</span></div>
+            <div class="yield-card-l">Gross Rental Yield</div>
+          </div>
+          <div class="yield-card">
+            <div class="yield-card-n" id="y-annual">S$28,800</div>
+            <div class="yield-card-l">Annual Income</div>
+          </div>
+        </div>
+        <div class="yield-context">
+          <div class="yield-row"><span>Gross Rental Yield</span><span id="y-ctx">~4.9%</span></div>
+          <div class="yield-row"><span>CPF OA Interest</span><span>2.50% p.a.</span></div>
+          <div class="yield-row"><span>SGS 10-Year Bond</span><span>~3.3% p.a.</span></div>
+          <div class="yield-row good"><span>Premium over CPF-OA</span><span id="y-prem">+2.4%</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRANSACTIONS -->
+  <section class="tx-section" aria-label="Recent transactions">
+    <div class="tx-inner">
+      <div class="tx-header rv">
+        <div>
+          <div class="section-tag" style="background:var(--bg-card);margin-bottom:var(--sp-4);">Market Context</div>
+          <h2 class="tx-hl">What similar units<br><em>have sold for.</em></h2>
+        </div>
+        <p class="tx-subtitle">5-room transactions in Punggol<br>Source: data.gov.sg · Jun 2026</p>
+      </div>
+      <table class="tx-table rv d1" aria-label="Recent HDB transactions">
+        <thead>
+          <tr>
+            <th>Block / Street</th>
+            <th>Floor</th>
+            <th>Size</th>
+            <th>Lease Left</th>
+            <th>Transacted Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tx-block">617B Punggol Dr</span><br><span class="tx-tag same">Same Street</span></td>
+            <td>10 – 12</td>
+            <td>118 sqm · 1,270 sqft</td>
+            <td>~86 yrs</td>
+            <td>$960,000</td>
+          </tr>
+          <tr>
+            <td><span class="tx-block">679B Punggol Dr</span><br><span class="tx-tag same">Same Street</span></td>
+            <td>07 – 09</td>
+            <td>113 sqm · 1,216 sqft</td>
+            <td>~89 yrs</td>
+            <td>$928,000</td>
+          </tr>
+          <tr>
+            <td><span class="tx-block">677D Punggol Dr</span><br><span class="tx-tag same">Same Street</span></td>
+            <td>01 – 03</td>
+            <td>113 sqm · 1,216 sqft</td>
+            <td>~89 yrs</td>
+            <td>$845,000</td>
+          </tr>
+          <tr>
+            <td><span class="tx-block">274B Punggol Pl</span><br><span class="tx-tag">Nearby</span></td>
+            <td>13 – 15</td>
+            <td>117 sqm · 1,259 sqft</td>
+            <td>~86 yrs</td>
+            <td>$994,000</td>
+          </tr>
+          <tr>
+            <td><span class="tx-block">267B Punggol Field</span><br><span class="tx-tag">Nearby</span></td>
+            <td>04 – 06</td>
+            <td>115 sqm · 1,238 sqft</td>
+            <td>~86 yrs</td>
+            <td>$830,000</td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="tx-source rv">Data from <a href="https://data.gov.sg/" target="_blank" rel="noopener">data.gov.sg</a> via HDB Resale Flat Prices. Transactions registered Jun 2026. Past prices are not a guarantee of future value.</p>
+    </div>
+  </section>
+
+  <!-- INVESTMENT CASE -->
+  <section class="case-section" aria-label="Investment case">
+    <div class="case-header">
+      <h2 class="case-hl rv">The case<br>for <em>this</em><br>unit.</h2>
+      <p class="case-lead rv d1">The numbers make sense. Here is why — broken down plainly so you can walk into a negotiation or a bank conversation knowing exactly what you are buying.</p>
+    </div>
+    <div class="case-pillars">
+      <div class="pillar rv">
+        <div class="pillar-stat">$594<small>psf</small></div>
+        <div class="pillar-rule"></div>
+        <p class="pillar-claim">Priced below the<br><em>new build benchmark.</em></p>
+        <p class="pillar-body">New BTO launches in Punggol now close above S$650 psf — with a 3 to 5 year wait. This resale gives you immediate occupancy and a built-in discount to replacement cost.</p>
+      </div>
+      <div class="pillar rv d1">
+        <div class="pillar-stat"><em>86</em><small>years left</small></div>
+        <div class="pillar-rule"></div>
+        <p class="pillar-claim">Your CPF works<br><em>for the full loan.</em></p>
+        <p class="pillar-body">HDB requires at least 30 years of remaining lease for full CPF usage. 86 years left means maximum CPF coverage, maximum loan tenure, and strong resale value down the line.</p>
+      </div>
+      <div class="pillar rv d2">
+        <div class="pillar-stat">3<small>min walk</small></div>
+        <div class="pillar-rule"></div>
+        <p class="pillar-claim">The LRT does your<br><em>commute planning.</em></p>
+        <p class="pillar-body">PE5 Kadaloor LRT is 280 metres away. Three stops to Punggol MRT (North East Line), then direct to the city. No bus, no weather factor. The commute is predictable.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- AGENT -->
+  <section class="agent-section" id="contact" aria-label="Agent contact">
+    <div class="agent-inner">
+      <div class="agent-photo rv">
+        <img src="../Asset/Marcus Tan Wei Jie - Profile.jpg" alt="Marcus Tan Wei Jie" loading="lazy">
+      </div>
+      <div>
+        <div class="section-tag rv" style="background:var(--bg-alt);">Your Agent</div>
+        <h2 class="agent-name rv d1">Marcus<br>Tan Wei Jie</h2>
+        <p class="agent-agency rv d1">Senior Associate · PropNex Realty Pte Ltd</p>
+        <p class="agent-tagline rv d2">"Punggol specialist. Your neighbourhood, my expertise."</p>
+        <div class="agent-meta rv d2">
+          <p class="agent-meta-row"><strong>CEA Reg. No.</strong>R059876H</p>
+          <p class="agent-meta-row"><strong>Agency Licence</strong>L3008022J</p>
+          <p class="agent-meta-row"><strong>Languages</strong>English · Mandarin</p>
+          <p class="agent-meta-row"><strong>Experience</strong>9 years · North-East Singapore specialist</p>
+        </div>
+        <div class="agent-ctas rv d3">
+          <a href="https://wa.me/6591238765?text=Hi%20Marcus%2C%20I%20saw%20the%20microsite%20for%20638A%20Punggol%20Drive.%20Can%20we%20arrange%20a%20viewing%3F" target="_blank" rel="noopener" class="btn-wa">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            WhatsApp Marcus Tan
+          </a>
+          <a href="tel:+6591238765" class="btn-call">Call +65 9123 8765</a>
+        </div>
+        <p class="agent-fine rv">Figures are estimates only. Loan calculations subject to bank/HDB approval and prevailing rates. Yield estimates are not investment advice. Microsite powered by mypropfolio.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p class="footer-copy">© 2026 · 638A Punggol Drive · Singapore 821638</p>
+    <p class="footer-brand">Microsite by <a href="https://mypropfolio.co" target="_blank" rel="noopener">mypropfolio</a></p>
+  </footer>
+
+  <script>
+  function initPropMap() {
+    var mapEl = document.getElementById('leaflet-map');
+    if (!mapEl || typeof L === 'undefined') return;
+
+    var PROP_LAT = 1.4022, PROP_LNG = 103.9042;
+
+    var map = L.map(mapEl, { center:[PROP_LAT,PROP_LNG], zoom:15, zoomControl:true, scrollWheelZoom:false });
+
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution:'&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+      subdomains:'abcd', maxZoom:19
+    }).addTo(map);
+
+    setTimeout(function(){ map.invalidateSize(); }, 300);
+    if ('IntersectionObserver' in window) {
+      var obs = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ map.invalidateSize(); obs.disconnect(); } }, {threshold:0.05});
+      obs.observe(mapEl);
+    }
+
+    function makeIcon(color, sz) {
+      sz = sz || 26;
+      return L.divIcon({ className:'', html:'<div style="width:'+sz+'px;height:'+sz+'px;border-radius:50%;background:'+color+';border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.28);"></div>', iconAnchor:[sz/2,sz/2], popupAnchor:[0,-(sz/2+5)] });
+    }
+
+    L.marker([PROP_LAT, PROP_LNG], { icon: L.divIcon({
+      className:'',
+      html:'<div style="width:42px;height:42px;border-radius:50%;background:#3B5BDB;border:4px solid #fff;box-shadow:0 3px 14px rgba(0,0,0,0.32);display:flex;align-items:center;justify-content:center;"><svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/></svg></div>',
+      iconAnchor:[21,21], popupAnchor:[0,-25]
+    })}).addTo(map).bindPopup('<div class="lp-name">638A Punggol Drive</div><div class="lp-meta">S$588,000 &middot; 4-Room &middot; Level 7</div>').openPopup();
+
+    var amenities = [
+      {cat:'transport',lat:1.4030,lng:103.9005,name:'PE5 Kadaloor LRT',   meta:'280m · 3 min walk',     color:'#3B5BDB'},
+      {cat:'transport',lat:1.4007,lng:103.9060,name:'PE6 Oasis LRT',      meta:'~400m',                 color:'#3B5BDB'},
+      {cat:'transport',lat:1.4043,lng:103.9022,name:'Punggol Bus Stop',   meta:'Punggol Drive',          color:'#3B5BDB'},
+      {cat:'transport',lat:1.4052,lng:103.9023,name:'Punggol MRT (NEL)',  meta:'3 stops via LRT',        color:'#3B5BDB'},
+      {cat:'schools',  lat:1.4001,lng:103.9012,name:'Horizon Primary',    meta:'within 1 km',            color:'#F59E0B'},
+      {cat:'schools',  lat:1.3990,lng:103.9055,name:'Waterway Primary',   meta:'within 1 km',            color:'#F59E0B'},
+      {cat:'schools',  lat:1.4060,lng:103.9080,name:'Greendale Primary',  meta:'within 1 km',            color:'#F59E0B'},
+      {cat:'schools',  lat:1.4070,lng:103.9075,name:'Greendale Secondary',meta:'~1.5 km',                color:'#F59E0B'},
+      {cat:'schools',  lat:1.4010,lng:103.9035,name:'E-bridge Pre School',meta:'nearby',                 color:'#F59E0B'},
+      {cat:'shopping', lat:1.4000,lng:103.9065,name:'Oasis Terraces',     meta:'1.2 km',                 color:'#22C55E'},
+      {cat:'shopping', lat:1.4028,lng:103.9015,name:'FairPrice Punggol Dr',meta:'0.9 km',                color:'#22C55E'},
+      {cat:'shopping', lat:1.4063,lng:103.9024,name:'Waterway Point',     meta:'short drive',            color:'#22C55E'},
+      {cat:'parks',    lat:1.3985,lng:103.9090,name:'Punggol Waterway Park',meta:'4.2 km trail',         color:'#A855F7'},
+      {cat:'parks',    lat:1.4020,lng:103.9150,name:'Coney Island',       meta:'133 ha nature reserve',  color:'#A855F7'}
+    ];
+
+    var markers = [];
+    amenities.forEach(function(a) {
+      var m = L.marker([a.lat,a.lng],{icon:makeIcon(a.color)}).bindPopup('<div class="lp-name">'+a.name+'</div><div class="lp-meta">'+a.meta+'</div>');
+      m._cat = a.cat; m.addTo(map); markers.push(m);
+    });
+
+    document.querySelectorAll('.mf-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.mf-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        var cat = btn.dataset.cat;
+        markers.forEach(function(m){ if(cat==='all'||m._cat===cat){ map.addLayer(m); } else { map.removeLayer(m); } });
+      });
+    });
+  }
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="" onload="initPropMap()"></script>
+  <script>
+  (function () {
+    'use strict';
+
+    /* ── Gallery lightbox ── */
+    (function () {
+      var cells = Array.from(document.querySelectorAll('#gallerySection .gcell'));
+      var glb = document.getElementById('glb');
+      var glbImg = document.getElementById('glbImg');
+      var glbCaption = document.getElementById('glbCaption');
+      var glbCounter = document.getElementById('glbCounter');
+      var glbClose = document.getElementById('glbClose');
+      var glbPrev = document.getElementById('glbPrev');
+      var glbNext = document.getElementById('glbNext');
+      var current = 0;
+
+      function open(idx) {
+        current = idx;
+        show();
+        glb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function close() {
+        glb.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      function show() {
+        var cell = cells[current];
+        var img = cell.querySelector('img');
+        var cap = cell.querySelector('.gcap');
+        glbImg.src = img.src;
+        glbImg.alt = img.alt;
+        glbCaption.textContent = cap ? cap.textContent : '';
+        glbCounter.textContent = (current + 1) + ' / ' + cells.length;
+      }
+      function prev() { current = (current - 1 + cells.length) % cells.length; show(); }
+      function next() { current = (current + 1) % cells.length; show(); }
+
+      cells.forEach(function (cell) {
+        cell.addEventListener('click', function () { open(parseInt(cell.dataset.index)); });
+      });
+      glbClose.addEventListener('click', close);
+      glbPrev.addEventListener('click', function (e) { e.stopPropagation(); prev(); });
+      glbNext.addEventListener('click', function (e) { e.stopPropagation(); next(); });
+      glb.addEventListener('click', function (e) { if (e.target === glb) close(); });
+      document.addEventListener('keydown', function (e) {
+        if (!glb.classList.contains('open')) return;
+        if (e.key === 'Escape') close();
+        if (e.key === 'ArrowLeft') prev();
+        if (e.key === 'ArrowRight') next();
+      });
+
+      /* Touch swipe */
+      var touchX = null;
+      glb.addEventListener('touchstart', function (e) { touchX = e.touches[0].clientX; }, { passive: true });
+      glb.addEventListener('touchend', function (e) {
+        if (touchX === null) return;
+        var diff = e.changedTouches[0].clientX - touchX;
+        if (Math.abs(diff) > 40) { diff < 0 ? next() : prev(); }
+        touchX = null;
+      });
+    })();
+
+    /* ── Floor plan lightbox ── */
+    var fpWrap = document.getElementById('fpImgWrap');
+    var fpLightbox = document.getElementById('fpLightbox');
+    var fpClose = document.getElementById('fpClose');
+    if (fpWrap && fpLightbox) {
+      fpWrap.addEventListener('click', function () { fpLightbox.classList.add('open'); document.body.style.overflow = 'hidden'; });
+      function closeLightbox() { fpLightbox.classList.remove('open'); document.body.style.overflow = ''; }
+      fpClose.addEventListener('click', closeLightbox);
+      fpLightbox.addEventListener('click', function (e) { if (e.target === fpLightbox) closeLightbox(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLightbox(); });
+    }
+
+    /* ── Nav ── */
+    var nav = document.getElementById('siteNav');
+    function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 72); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    /* ── Hero zoom ── */
+    var heroImg = document.getElementById('heroImg');
+    if (heroImg) {
+      function hi() { heroImg.classList.add('loaded'); }
+      heroImg.complete ? hi() : heroImg.addEventListener('load', hi);
+    }
+
+    /* ── Scroll reveals ── */
+    if ('IntersectionObserver' in window) {
+      var revObs = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('in'); revObs.unobserve(e.target); }
+        });
+      }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
+      document.querySelectorAll('.rv').forEach(function (el) { revObs.observe(el); });
+    } else {
+      document.querySelectorAll('.rv').forEach(function (el) { el.classList.add('in'); });
+    }
+
+    /* ── Stat count-up animation ── */
+    (function () {
+      function easeOutExpo(t) { return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+      function countUp(el, target, duration) {
+        var start = null;
+        var isFloor = el.closest('.stat-floor') !== null;
+        var isSqft  = el.closest('.stat-sqft')  !== null;
+        function step(ts) {
+          if (!start) start = ts;
+          var prog = Math.min((ts - start) / duration, 1);
+          var val  = Math.round(easeOutExpo(prog) * target);
+          if (isFloor || isSqft) {
+            var span = el.querySelector('.stat-count-val');
+            if (span) span.textContent = val;
+          } else {
+            el.textContent = val;
+          }
+          if (prog < 1) requestAnimationFrame(step);
+          else {
+            if (isFloor || isSqft) {
+              var span2 = el.querySelector('.stat-count-val');
+              if (span2) span2.textContent = target;
+            } else {
+              el.textContent = target;
+            }
+          }
+        }
+        requestAnimationFrame(step);
+      }
+      var statsDone = false;
+      if ('IntersectionObserver' in window) {
+        var statsObs = new IntersectionObserver(function (entries) {
+          if (entries[0].isIntersecting && !statsDone) {
+            statsDone = true;
+            document.querySelectorAll('.stat-n[data-count]').forEach(function (el) {
+              var target = parseInt(el.getAttribute('data-count'), 10);
+              var dur = target > 100 ? 1200 : 700;
+              countUp(el, target, dur);
+            });
+            statsObs.disconnect();
+          }
+        }, { threshold: 0.3 });
+        var statsSection = document.querySelector('.stats-section');
+        if (statsSection) statsObs.observe(statsSection);
+      }
+    })();
+
+    /* ── Dashboard animations (trigger once on first view) ── */
+    var dashAnimated = false;
+
+    function animateDash() {
+      if (dashAnimated) return;
+      dashAnimated = true;
+
+      /* Lease donut */
+      var ring = document.getElementById('leaseRing');
+      if (ring) {
+        setTimeout(function () {
+          ring.classList.add('animated');
+        }, 200);
+      }
+
+      /* Lease counter */
+      var leaseCount = document.getElementById('leaseCount');
+      if (leaseCount) {
+        var target = 86, current = 0, dur = 1400;
+        var step = dur / target;
+        var timer = setInterval(function () {
+          current = Math.min(current + 1, target);
+          leaseCount.textContent = current;
+          if (current >= target) clearInterval(timer);
+        }, step);
+      }
+
+      /* Commute progress line */
+      var cp = document.getElementById('commuteProgress');
+      if (cp) {
+        setTimeout(function () { cp.classList.add('animated'); }, 300);
+      }
+
+      /* PSF bars */
+      document.querySelectorAll('.psf-bar-fill').forEach(function (bar) {
+        var w = bar.dataset.width;
+        setTimeout(function () { bar.style.width = w + '%'; }, 400);
+      });
+    }
+
+    var dashSection = document.getElementById('snapshot');
+    if (dashSection && 'IntersectionObserver' in window) {
+      var dashObs = new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          animateDash();
+          dashObs.disconnect();
+        }
+      }, { threshold: 0.15 });
+      dashObs.observe(dashSection);
+    }
+
+    /* ── Mortgage Calculator ── */
+    var loanType = 'hdb';
+    var rPrice  = document.getElementById('r-price');
+    var rDown   = document.getElementById('r-down');
+    var rTenure = document.getElementById('r-tenure');
+    var rRate   = document.getElementById('r-rate');
+
+    function fmt(n) { return 'S$' + Math.round(n).toLocaleString('en-SG'); }
+
+    function calcM(P, ar, yrs) {
+      if (P <= 0 || yrs <= 0) return 0;
+      var r = ar / 100 / 12, n = yrs * 12;
+      return r === 0 ? P / n : P * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n)-1);
+    }
+
+    function updateCalc() {
+      var price  = +rPrice.value;
+      var downPct = +rDown.value;
+      var tenure = +rTenure.value;
+      var rate   = +rRate.value / 100;
+      var down   = price * downPct / 100;
+      var loan   = price - down;
+      var monthly = calcM(loan, rate, tenure);
+      var total  = monthly * tenure * 12;
+      var interest = total - loan;
+      var pPct = Math.round((loan / total) * 100);
+
+      document.getElementById('v-price').textContent  = fmt(price);
+      document.getElementById('v-down').textContent   = fmt(down) + ' (' + downPct + '%)';
+      document.getElementById('v-tenure').textContent = tenure + (tenure===1?' year':' years');
+      document.getElementById('v-rate').textContent   = rate.toFixed(2) + '% p.a.';
+
+      document.getElementById('out-monthly').textContent  = fmt(monthly) + '/mo';
+      document.getElementById('out-subtext').textContent  = 'Based on ' + fmt(loan) + ' loan over ' + tenure + ' years at ' + rate.toFixed(2) + '%';
+      document.getElementById('out-loan').textContent     = fmt(loan);
+      document.getElementById('out-downpay').textContent  = fmt(down);
+      document.getElementById('out-interest').textContent = fmt(interest);
+      document.getElementById('out-total').textContent    = fmt(total);
+      document.getElementById('bar-fill').style.width     = pPct + '%';
+      document.getElementById('bar-p-pct').textContent   = pPct + '%';
+      document.getElementById('bar-i-pct').textContent   = (100 - pPct) + '%';
+
+      updateYield();
+    }
+
+    function setLoanType(type) {
+      loanType = type;
+      if (type === 'hdb') {
+        rDown.min = 10; rDown.value = Math.max(20, +rDown.value);
+        rTenure.max = 25; rTenure.value = Math.min(25, +rTenure.value);
+        rRate.value = 260; rRate.min = 200; rRate.max = 400;
+        document.getElementById('down-hint').textContent   = 'HDB minimum: 20% in cash or CPF';
+        document.getElementById('tenure-hint').textContent = 'HDB maximum: 25 years';
+        document.getElementById('rate-hint').textContent   = 'HDB concessionary rate: 2.60% (fixed)';
+      } else {
+        rDown.min = 15; rDown.value = Math.max(25, +rDown.value);
+        rTenure.max = 30; rTenure.value = Math.min(30, +rTenure.value);
+        rRate.value = 350; rRate.min = 250; rRate.max = 550;
+        document.getElementById('down-hint').textContent   = 'Bank loan minimum: 25%';
+        document.getElementById('tenure-hint').textContent = 'Bank loan maximum: 30 years';
+        document.getElementById('rate-hint').textContent   = 'Indicative ~3.50% — varies by bank';
+      }
+      updateCalc();
+    }
+
+    document.querySelectorAll('.loan-tab').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.loan-tab').forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+        setLoanType(btn.dataset.type);
+      });
+    });
+
+    [rPrice, rDown, rTenure, rRate].forEach(function (el) { el.addEventListener('input', updateCalc); });
+    updateCalc();
+
+    /* ── Yield Calculator ── */
+    var rRent = document.getElementById('r-rent');
+
+    function updateYield() {
+      var rent  = +rRent.value;
+      var price = +rPrice.value;
+      var ann   = rent * 12;
+      var gross = (ann / price) * 100;
+      var prem  = gross - 2.50;
+
+      document.getElementById('v-rent').textContent  = fmt(rent);
+      document.getElementById('y-gross').innerHTML   = '<span class="u">~</span>' + gross.toFixed(1) + '<span class="u">%</span>';
+      document.getElementById('y-annual').textContent = fmt(ann);
+      document.getElementById('y-ctx').textContent   = '~' + gross.toFixed(1) + '%';
+      document.getElementById('y-prem').textContent  = (prem>=0?'+':'') + prem.toFixed(1) + '%';
+    }
+
+    rRent.addEventListener('input', updateYield);
+    updateYield();
+
+  })();
+  </script>
+
+</body>
+</html>

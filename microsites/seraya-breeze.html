@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seraya Breeze · 3 Seraya Road · S$2,500,000</title>
+<meta name="description" content="Freehold 3+Study apartment at Seraya Breeze, 3 Seraya Road, District 15 Katong. 1,281 sqft · S$2,500,000 · Peranakan renovation · 17 units only.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="">
+<style>
+/* ── TOKENS ─────────────────────────────────────────────── */
+:root {
+  /* Warm charcoal palette — distinct from HDB navy */
+  --bg:          oklch(97.5% 0.008 70);
+  --bg-card:     oklch(100%  0.000 0);
+  --bg-alt:      oklch(95%   0.012 65);
+  --dark:        oklch(15%   0.018 55);   /* warm charcoal */
+  --dark-mid:    oklch(22%   0.016 55);
+  --dark-light:  oklch(30%   0.014 55);
+  --gold:        oklch(68%   0.13  75);   /* warm gold accent */
+  --gold-pale:   oklch(96%   0.030 75);
+  --gold-mid:    oklch(88%   0.055 75);
+  --teal:        oklch(58%   0.12  195);  /* secondary accent */
+  --teal-pale:   oklch(95%   0.030 195);
+  --ink:         oklch(18%   0.018 55);
+  --ink-mid:     oklch(44%   0.014 60);
+  --ink-soft:    oklch(62%   0.010 58);
+  --ink-faint:   oklch(76%   0.008 56);
+  --cream:       oklch(96%   0.012 65);
+  --cream-dim:   oklch(80%   0.016 65);
+  --cream-faint: oklch(68%   0.012 62);
+  --b:           oklch(18%   0.018 55 / 0.09);
+  --b-dark:      oklch(100%  0.000 0  / 0.12);
+
+  --ff-d: 'Cormorant Garamond', Georgia, serif;
+  --ff-b: 'Inter', -apple-system, system-ui, sans-serif;
+
+  --sp-1:4px;  --sp-2:8px;   --sp-3:12px;  --sp-4:16px;
+  --sp-5:24px; --sp-6:32px;  --sp-7:48px;  --sp-8:64px;
+  --sp-9:96px; --sp-10:128px; --sp-11:160px; --sp-12:192px;
+  --sp-13:224px; --sp-14:256px;
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --r: 16px;
+}
+
+/* ── RESET ───────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; overflow-x: hidden; }
+body { font-family: var(--ff-b); background: var(--bg); color: var(--ink); line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { display: block; width: 100%; height: 100%; object-fit: cover; }
+a { color: inherit; text-decoration: none; }
+button { cursor: pointer; border: none; background: none; font: inherit; }
+
+/* ── SCROLL REVEAL ───────────────────────────────────────── */
+.rv { opacity:0; transform:translateY(22px); transition:opacity 0.65s var(--ease), transform 0.65s var(--ease); }
+.rv.in { opacity:1; transform:none; }
+.rv.d1 { transition-delay:0.08s; }
+.rv.d2 { transition-delay:0.16s; }
+.rv.d3 { transition-delay:0.24s; }
+@media (prefers-reduced-motion:reduce) { .rv { opacity:1; transform:none; transition:none; } }
+
+/* ── LABELS ──────────────────────────────────────────────── */
+.label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); }
+.label-gold { color: var(--gold); }
+.section-tag { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); background: var(--bg-alt); border-radius: 100px; padding: 6px 14px; margin-bottom: var(--sp-5); }
+.section-tag-light { color: var(--cream-dim); background: oklch(100% 0 0 / 0.08); }
+
+/* ── NAV ─────────────────────────────────────────────────── */
+.nav { position: fixed; top: 0; left: 0; right: 0; z-index: 900; padding: 0 var(--sp-7); display: flex; align-items: center; justify-content: space-between; height: 64px; transition: background 0.3s, backdrop-filter 0.3s, box-shadow 0.3s; }
+.nav.scrolled { background: oklch(15% 0.018 55 / 0.92); backdrop-filter: blur(20px); box-shadow: 0 1px 0 var(--b-dark); }
+.nav-logo { font-family: var(--ff-d); font-size: 22px; font-weight: 400; color: #fff; letter-spacing: 0.01em; }
+.nav-logo span { font-style: italic; color: var(--gold); }
+.nav-links { display: flex; gap: var(--sp-6); list-style: none; }
+.nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.06em; color: var(--cream-dim); transition: color 0.2s; }
+.nav-links a:hover { color: #fff; }
+.nav-cta { font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--dark); background: var(--gold); border-radius: 100px; padding: 8px 20px; transition: background 0.2s; }
+.nav-cta:hover { background: oklch(62% 0.13 75); }
+@media (max-width: 768px) { .nav-links { display: none; } .nav { padding: 0 var(--sp-5); } }
+
+/* ── HERO ────────────────────────────────────────────────── */
+.hero { position: relative; height: 100svh; min-height: 600px; overflow: hidden; background: var(--dark); display: flex; align-items: flex-end; }
+.hero-img { position: absolute; inset: 0; }
+.hero-img img { object-position: center; animation: heroZoom 12s ease-out forwards; }
+@keyframes heroZoom { from { transform: scale(1.06); } to { transform: scale(1.00); } }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to top, oklch(15% 0.018 55 / 0.85) 0%, oklch(15% 0.018 55 / 0.3) 50%, transparent 100%); }
+.hero-content { position: relative; z-index: 2; padding: var(--sp-9) var(--sp-7); max-width: 800px; }
+.hero-tag { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold); border: 1px solid oklch(68% 0.13 75 / 0.4); border-radius: 100px; padding: 5px 14px; margin-bottom: var(--sp-5); }
+.hero-hl { font-family: var(--ff-d); font-size: clamp(40px, 6vw, 80px); font-weight: 300; line-height: 1.0; letter-spacing: -0.01em; color: #fff; margin-bottom: var(--sp-4); text-wrap: balance; }
+.hero-hl em { font-style: italic; color: var(--gold); }
+.hero-address { font-size: 14px; color: var(--cream-dim); margin-bottom: var(--sp-7); letter-spacing: 0.02em; }
+.hero-bottom { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-6); flex-wrap: wrap; }
+.hero-price-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--cream-faint); margin-bottom: var(--sp-2); }
+.hero-price { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 52px); font-weight: 300; color: #fff; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
+.hero-price span { font-size: 0.55em; color: var(--gold); font-style: italic; }
+.hero-badges { display: flex; gap: var(--sp-3); flex-wrap: wrap; }
+.hero-badge { font-size: 11px; font-weight: 500; color: var(--cream-dim); background: oklch(100% 0 0 / 0.1); border: 1px solid var(--b-dark); border-radius: 100px; padding: 6px 14px; }
+.hero-badge.gold { color: var(--dark); background: var(--gold); border-color: transparent; }
+@media (max-width: 640px) { .hero-content { padding: var(--sp-8) var(--sp-5); } }
+
+/* ── STATS ───────────────────────────────────────────────── */
+/* ── STATS ───────────────────────────────────────────────── */
+.stats-section { background: var(--dark); padding: var(--sp-8) var(--sp-7); }
+.stats-inner {
+  max-width: 1080px; margin: 0 auto;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border: 1px solid oklch(100% 0 0 / 0.10);
+  border-radius: 4px; overflow: hidden;
+}
+.stat-item {
+  position: relative;
+  padding: var(--sp-6) var(--sp-6) var(--sp-5);
+  cursor: default;
+  border-right: 1px solid oklch(100% 0 0 / 0.10);
+  transition: opacity 0.35s var(--ease), background 0.4s var(--ease);
+}
+.stat-item:last-child { border-right: none; }
+/* Gold accent bar slides in from left on hover */
+.stat-item::after {
+  content: ''; position: absolute;
+  top: 0; left: 0; width: 0; height: 2px;
+  background: var(--gold);
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.stat-item:hover::after { width: 100%; }
+/* Spotlight: dim siblings */
+.stats-inner:has(.stat-item:hover) .stat-item:not(:hover) { opacity: 0.38; }
+.stat-item:hover { background: oklch(100% 0 0 / 0.04); }
+/* Icon — bare, no chip */
+.stat-icon {
+  display: flex; align-items: center; justify-content: center;
+  width: 20px; height: 20px;
+  color: oklch(100% 0 0 / 0.28);
+  margin-bottom: var(--sp-5);
+  transition: color 0.35s var(--ease);
+}
+.stat-item:hover .stat-icon { color: var(--gold); }
+.stat-label {
+  font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
+  text-transform: uppercase; color: oklch(100% 0 0 / 0.35);
+  margin-bottom: var(--sp-2);
+}
+.stat-value {
+  font-family: var(--ff-b);
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 200; line-height: 1;
+  color: oklch(100% 0 0 / 0.92);
+  letter-spacing: -0.03em;
+  font-variant-numeric: tabular-nums;
+}
+.count-static { font-weight: 300; letter-spacing: -0.01em; }
+.stat-sub {
+  font-size: 10.5px; color: oklch(100% 0 0 / 0.28);
+  margin-top: var(--sp-3); line-height: 1.5;
+  letter-spacing: 0.02em;
+}
+/* ── STATS MOBILE ────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .stats-section { padding: var(--sp-6) var(--sp-5); }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); border-radius: 3px; }
+  .stat-item { padding: var(--sp-5) var(--sp-5) var(--sp-4); border-bottom: 1px solid oklch(100% 0 0 / 0.10); }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+  .stat-item:nth-child(2), .stat-item:nth-child(4) { border-right: none; }
+  .stats-inner:has(.stat-item:hover) .stat-item:not(:hover) { opacity: 0.5; }
+  .stat-value { font-size: 28px; }
+}
+
+/* ── FREEHOLD HERO ───────────────────────────────────────── */
+.freehold-section { background: var(--dark); padding: var(--sp-11) 0; overflow: hidden; position: relative; }
+.freehold-section::before { content: 'FREEHOLD'; position: absolute; font-family: var(--ff-d); font-size: clamp(120px, 20vw, 220px); font-weight: 300; font-style: italic; color: oklch(100% 0 0 / 0.03); white-space: nowrap; top: 50%; left: 50%; transform: translate(-50%,-50%); pointer-events: none; letter-spacing: -0.02em; }
+.freehold-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-9); align-items: center; }
+.freehold-text .section-tag-light { margin-bottom: var(--sp-5); }
+.freehold-hl { font-family: var(--ff-d); font-size: clamp(36px, 4.5vw, 58px); font-weight: 300; line-height: 1.1; color: #fff; margin-bottom: var(--sp-5); text-wrap: balance; }
+.freehold-hl em { font-style: italic; color: var(--gold); }
+.freehold-body { font-size: 15px; line-height: 1.75; color: var(--cream-dim); max-width: 46ch; }
+.freehold-stats { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+.fh-stat { background: oklch(100% 0 0 / 0.06); border: 1px solid var(--b-dark); border-radius: var(--r); padding: var(--sp-5); }
+.fh-stat-num { font-family: var(--ff-d); font-size: 36px; font-weight: 300; color: var(--gold); font-variant-numeric: tabular-nums; line-height: 1; margin-bottom: 4px; }
+.fh-stat-label { font-size: 11px; color: var(--cream-faint); letter-spacing: 0.04em; }
+@media (max-width: 768px) {
+  .freehold-inner { grid-template-columns: 1fr; gap: var(--sp-7); }
+}
+
+/* ── THE UNIT ────────────────────────────────────────────── */
+.unit-section { background: var(--bg); padding: 100px 0; }
+.unit-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: center; }
+.unit-img { aspect-ratio: 4/3; border-radius: var(--r); overflow: hidden; }
+.unit-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 50px); font-weight: 300; line-height: 1.1; color: var(--ink); margin-bottom: var(--sp-5); text-wrap: balance; }
+.unit-hl em { font-style: italic; color: var(--gold); }
+.unit-body { font-size: 15px; line-height: 1.75; color: var(--ink-mid); margin-bottom: var(--sp-6); }
+.unit-specs { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-3); }
+.unit-spec { display: flex; flex-direction: column; gap: 3px; }
+.unit-spec-label { font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); }
+.unit-spec-value { font-size: 14px; font-weight: 500; color: var(--ink); }
+@media (max-width: 768px) {
+  .unit-inner { grid-template-columns: 1fr; gap: var(--sp-6); }
+  .unit-img { aspect-ratio: 16/10; }
+}
+
+/* ── RENOVATION ──────────────────────────────────────────── */
+.reno-section { background: var(--dark); padding: 100px 0; }
+.reno-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.reno-header { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: end; margin-bottom: var(--sp-8); }
+.reno-hl { font-family: var(--ff-d); font-size: clamp(36px, 4.5vw, 56px); font-weight: 300; line-height: 1.1; color: #fff; text-wrap: balance; }
+.reno-hl em { font-style: italic; color: var(--gold); }
+.reno-lead { font-size: 15px; line-height: 1.75; color: var(--cream-dim); }
+.reno-quote { border-left: 2px solid var(--gold); padding-left: var(--sp-5); margin: var(--sp-6) 0; }
+.reno-quote p { font-family: var(--ff-d); font-size: 22px; font-style: italic; font-weight: 300; color: #fff; line-height: 1.5; }
+.reno-pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); margin-top: var(--sp-6); }
+.reno-pillar { background: oklch(100% 0 0 / 0.05); border: 1px solid var(--b-dark); border-radius: var(--r); padding: var(--sp-6); }
+.reno-pillar-icon { font-size: 24px; margin-bottom: var(--sp-4); }
+.reno-pillar-title { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: var(--sp-2); }
+.reno-pillar-body { font-size: 13px; color: var(--cream-faint); line-height: 1.6; }
+@media (max-width: 768px) {
+  .reno-header { grid-template-columns: 1fr; gap: var(--sp-5); }
+  .reno-pillars { grid-template-columns: 1fr; }
+}
+
+/* ── GALLERY ─────────────────────────────────────────────── */
+.gallery-section { background: var(--bg-alt); padding: 100px 0; }
+.gallery-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.gallery-header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-5); margin-bottom: var(--sp-7); flex-wrap: wrap; }
+.gallery-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.1; color: var(--ink); }
+.gallery-hl em { font-style: italic; color: var(--gold); }
+.gallery-hint { font-size: 12px; color: var(--ink-soft); }
+.gcell { cursor: zoom-in; overflow: hidden; border-radius: var(--r); position: relative; background: var(--bg); }
+.gcell img { transition: transform 0.5s var(--ease); }
+.gcell:hover img { transform: scale(1.04); }
+.gcap { position: absolute; bottom: 0; left: 0; right: 0; background: linear-gradient(transparent, oklch(15% 0.018 55 / 0.7)); color: #fff; font-size: 11px; font-weight: 500; letter-spacing: 0.05em; padding: var(--sp-4) var(--sp-4) var(--sp-3); opacity: 0; transition: opacity 0.3s; }
+.gcell:hover .gcap { opacity: 1; }
+.gallery-grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 320px 260px; gap: var(--sp-3); }
+.gcell:nth-child(1) { grid-column: 1; grid-row: 1; }
+.gcell:nth-child(2) { grid-column: 2; grid-row: 1; }
+.gcell:nth-child(3) { grid-column: 1; grid-row: 2; }
+.gcell:nth-child(4) { grid-column: 2; grid-row: 2; }
+@media (max-width: 640px) {
+  .gallery-grid { grid-template-columns: 1fr; grid-template-rows: repeat(4, 220px); }
+  .gcell:nth-child(n) { grid-column: 1; grid-row: auto; }
+}
+
+/* ── GALLERY LIGHTBOX ────────────────────────────────────── */
+.glb { position: fixed; inset: 0; z-index: 9999; background: oklch(10% 0.010 55 / 0.97); display: none; align-items: center; justify-content: center; flex-direction: column; }
+.glb.open { display: flex; }
+.glb-img-wrap { max-width: min(1000px, 90vw); max-height: 75vh; display: flex; align-items: center; justify-content: center; }
+.glb-img-wrap img { max-width: 100%; max-height: 75vh; object-fit: contain; border-radius: 8px; }
+.glb-close { position: absolute; top: var(--sp-5); right: var(--sp-6); font-size: 13px; font-weight: 600; color: var(--cream-dim); letter-spacing: 0.06em; background: oklch(100% 0 0 / 0.08); border: 1px solid var(--b-dark); border-radius: 100px; padding: 8px 16px; transition: background 0.2s; }
+.glb-close:hover { background: oklch(100% 0 0 / 0.15); }
+.glb-counter { position: absolute; top: var(--sp-5); left: 50%; transform: translateX(-50%); font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--cream-faint); }
+.glb-arrow { position: absolute; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--cream-dim); background: oklch(100% 0 0 / 0.08); border: 1px solid var(--b-dark); border-radius: 50%; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; transition: background 0.2s; }
+.glb-arrow:hover { background: oklch(100% 0 0 / 0.18); }
+.glb-prev { left: var(--sp-5); }
+.glb-next { right: var(--sp-5); }
+.glb-caption { margin-top: var(--sp-4); font-size: 12px; color: var(--cream-faint); letter-spacing: 0.05em; }
+
+/* ── VIDEO ───────────────────────────────────────────────── */
+.video-section { background: var(--dark); padding: 100px 0; }
+.video-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.video-header { max-width: 560px; margin-bottom: var(--sp-7); }
+.video-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.1; color: #fff; }
+.video-hl em { font-style: italic; color: var(--gold); }
+.video-thumb { position: relative; border-radius: var(--r); overflow: hidden; aspect-ratio: 16/9; cursor: pointer; display: block; background: var(--dark-mid); }
+.video-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s var(--ease); }
+.video-thumb:hover img { transform: scale(1.03); }
+.video-thumb::after { content: ''; position: absolute; inset: 0; background: oklch(15% 0.018 55 / 0.35); transition: background 0.3s; }
+.video-thumb:hover::after { background: oklch(15% 0.018 55 / 0.20); }
+.video-play { position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); z-index: 2; width: 72px; height: 72px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center; transition: transform 0.3s var(--ease), background 0.2s; }
+.video-thumb:hover .video-play { transform: translate(-50%,-50%) scale(1.1); background: oklch(62% 0.13 75); }
+.video-play svg { width: 24px; height: 24px; fill: var(--dark); margin-left: 3px; }
+.video-note { margin-top: var(--sp-4); font-size: 12px; color: var(--cream-faint); }
+
+/* ── FLOOR PLAN ──────────────────────────────────────────── */
+.fp-section { background: var(--bg-card); padding: 100px 0; }
+.fp-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-8); align-items: center; }
+.fp-img { aspect-ratio: 4/3; border-radius: var(--r); overflow: hidden; background: var(--bg-alt); cursor: zoom-in; border: 1px solid var(--b); }
+.fp-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.1; color: var(--ink); margin-bottom: var(--sp-5); }
+.fp-hl em { font-style: italic; color: var(--gold); }
+.fp-body { font-size: 14px; line-height: 1.75; color: var(--ink-mid); margin-bottom: var(--sp-6); }
+.fp-features { display: flex; flex-direction: column; gap: var(--sp-3); }
+.fp-feat { display: flex; align-items: flex-start; gap: var(--sp-3); }
+.fp-feat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); flex-shrink: 0; margin-top: 6px; }
+.fp-feat-text { font-size: 13.5px; color: var(--ink-mid); line-height: 1.55; }
+@media (max-width: 768px) { .fp-inner { grid-template-columns: 1fr; } }
+
+/* ── FLOOR PLAN LIGHTBOX ─────────────────────────────────── */
+.fplb { position: fixed; inset: 0; z-index: 9999; background: oklch(10% 0.010 55 / 0.96); display: none; align-items: center; justify-content: center; }
+.fplb.open { display: flex; }
+.fplb img { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+.fplb-close { position: absolute; top: var(--sp-5); right: var(--sp-6); font-size: 13px; font-weight: 600; color: var(--cream-dim); background: oklch(100% 0 0 / 0.1); border: 1px solid var(--b-dark); border-radius: 100px; padding: 8px 16px; }
+
+/* ── D15 LIFESTYLE ───────────────────────────────────────── */
+.lifestyle-section { background: var(--dark); padding: 100px 0; }
+.lifestyle-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.lifestyle-header { max-width: 620px; margin-bottom: var(--sp-8); }
+.lifestyle-hl { font-family: var(--ff-d); font-size: clamp(36px, 4.5vw, 56px); font-weight: 300; line-height: 1.1; color: #fff; text-wrap: balance; }
+.lifestyle-hl em { font-style: italic; color: var(--gold); }
+.lifestyle-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-4); }
+.ls-card { background: oklch(100% 0 0 / 0.05); border: 1px solid var(--b-dark); border-radius: var(--r); padding: var(--sp-6); }
+.ls-dist { font-size: 22px; font-family: var(--ff-d); font-weight: 300; color: var(--gold); margin-bottom: 2px; }
+.ls-name { font-size: 13px; font-weight: 600; color: #fff; margin-bottom: var(--sp-2); }
+.ls-desc { font-size: 12px; color: var(--cream-faint); line-height: 1.55; }
+@media (max-width: 640px) { .lifestyle-grid { grid-template-columns: 1fr; } }
+
+/* ── MAP ─────────────────────────────────────────────────── */
+.map-section { background: var(--bg-alt); padding: 100px 0; }
+.map-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.map-header { margin-bottom: var(--sp-6); display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-5); flex-wrap: wrap; }
+.map-hl { font-family: var(--ff-d); font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; line-height: 1.1; color: var(--ink); }
+.map-hl em { font-style: italic; color: var(--gold); }
+.map-filters { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+.mf-btn { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; border-radius: 100px; padding: 6px 14px; border: 1px solid var(--b); background: var(--bg-card); color: var(--ink-mid); cursor: pointer; transition: all 0.2s; }
+.mf-btn.active, .mf-btn:hover { background: var(--ink); color: #fff; border-color: transparent; }
+#leaflet-map { width: 100%; height: 420px; border-radius: var(--r); overflow: hidden; border: 1px solid var(--b); }
+
+/* ── DASHBOARD ───────────────────────────────────────────── */
+.dash-section { background: var(--bg); padding: 100px 0; }
+.dash-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.dash-header { margin-bottom: var(--sp-7); }
+.dash-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.1; color: var(--ink); text-wrap: balance; }
+.dash-hl em { font-style: italic; color: var(--gold); }
+.bento { display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--sp-3); }
+.bc { border-radius: var(--r); padding: var(--sp-6); overflow: hidden; }
+.bc-price   { grid-column: 1 / 5; background: var(--bg-card); border: 1px solid var(--b); }
+.bc-units   { grid-column: 5 / 8; background: var(--bg-card); border: 1px solid var(--b); }
+.bc-commute { grid-column: 8 / 13; background: var(--bg-card); border: 1px solid var(--b); }
+.bc-monthly { grid-column: 1 / 5; background: var(--bg-card); border: 1px solid var(--b); }
+.bc-yield   { grid-column: 5 / 8; background: var(--bg-card); border: 1px solid var(--b); }
+.bc-psf     { grid-column: 8 / 13; background: var(--bg-card); border: 1px solid var(--b); }
+.bc-label { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.65; margin-bottom: var(--sp-4); }
+.bc-num { font-family: var(--ff-d); font-size: 36px; font-weight: 300; line-height: 1; font-variant-numeric: tabular-nums; margin-bottom: 4px; }
+.bc-sub { font-size: 11px; opacity: 0.65; }
+.bc-price .bc-num { color: var(--gold); font-size: 30px; }
+.bc-monthly .bc-label { opacity: 0.65; }
+.bc-monthly .bc-num { font-size: 30px; color: var(--gold); }
+.bc-monthly .bc-sub { color: var(--ink-soft); }
+/* commute timeline */
+.commute-list { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-3); }
+.commute-row { display: flex; align-items: center; gap: var(--sp-3); }
+.commute-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+.commute-place { font-size: 12px; color: var(--ink-mid); flex: 1; }
+.commute-time { font-size: 11px; font-weight: 600; color: var(--ink); }
+/* psf bars */
+.psf-list { display: flex; flex-direction: column; gap: var(--sp-3); margin-top: var(--sp-3); }
+.psf-row { display: flex; flex-direction: column; gap: 4px; }
+.psf-row-top { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-mid); }
+.psf-bar-bg { height: 4px; background: var(--b); border-radius: 2px; overflow: hidden; }
+.psf-bar-fill { height: 100%; background: var(--gold); border-radius: 2px; width: 0; transition: width 0.8s var(--ease); }
+/* units card */
+.bc-units .bc-num { color: var(--dark); }
+/* yield card */
+.bc-yield .bc-num { color: var(--gold); }
+@media (max-width: 768px) {
+  .bento { grid-template-columns: 1fr 1fr; }
+  .bc-price, .bc-units, .bc-commute, .bc-monthly, .bc-yield, .bc-psf { grid-column: auto; }
+}
+@media (max-width: 640px) {
+  .bento { grid-template-columns: 1fr; gap: var(--sp-2); }
+  .bc-price, .bc-units, .bc-commute, .bc-monthly, .bc-yield, .bc-psf { grid-column: 1 / -1; }
+  .bc { padding: var(--sp-5); }
+  .bc-num { font-size: 28px; }
+  .bc-price .bc-num, .bc-monthly .bc-num { font-size: 26px; }
+}
+
+/* ── CALCULATORS ─────────────────────────────────────────── */
+.calc-section { background: var(--bg-alt); padding: 100px 0; }
+.calc-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.calc-header { margin-bottom: var(--sp-7); }
+.calc-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: var(--ink); line-height: 1.1; }
+.calc-hl em { font-style: italic; color: var(--gold); }
+.calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+.calc-card { background: var(--bg-card); border: 1px solid var(--b); border-radius: var(--r); padding: var(--sp-6); }
+.calc-card-title { font-size: 13px; font-weight: 600; color: var(--ink); margin-bottom: var(--sp-5); letter-spacing: 0.02em; }
+.calc-field { margin-bottom: var(--sp-4); }
+.calc-field label { font-size: 10.5px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--ink-soft); display: block; margin-bottom: var(--sp-2); }
+.calc-field input[type=range] { width: 100%; accent-color: var(--gold); }
+.calc-field-row { display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-soft); margin-top: 4px; }
+.calc-result { background: var(--dark); border-radius: 12px; padding: var(--sp-5); margin-top: var(--sp-4); }
+.calc-result-row { display: flex; justify-content: space-between; align-items: baseline; padding: var(--sp-2) 0; border-bottom: 1px solid var(--b-dark); }
+.calc-result-row:last-child { border-bottom: none; }
+.calc-result-label { font-size: 11px; color: var(--cream-faint); }
+.calc-result-val { font-size: 14px; font-weight: 600; color: #fff; font-variant-numeric: tabular-nums; }
+.calc-result-val.accent { color: var(--gold); font-family: var(--ff-d); font-size: 20px; font-weight: 300; }
+/* ABSD tabs */
+.absd-tabs { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-5); }
+.absd-tab { font-size: 11px; font-weight: 600; letter-spacing: 0.05em; border-radius: 100px; padding: 6px 14px; border: 1px solid var(--b); color: var(--ink-soft); cursor: pointer; transition: all 0.2s; }
+.absd-tab.active { background: var(--dark); color: #fff; border-color: transparent; }
+@media (max-width: 768px) { .calc-grid { grid-template-columns: 1fr; } }
+
+/* ── TRANSACTIONS ────────────────────────────────────────── */
+.tx-section { background: var(--bg-card); padding: 100px 0; }
+.tx-inner { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-7); }
+.tx-header { display: flex; align-items: flex-end; justify-content: space-between; gap: var(--sp-5); margin-bottom: var(--sp-8); flex-wrap: wrap; }
+.tx-hl { font-family: var(--ff-d); font-size: clamp(28px, 3.5vw, 44px); font-weight: 300; line-height: 1.1; color: var(--ink); }
+.tx-hl em { font-style: italic; color: var(--gold); }
+.tx-subtitle { font-size: 11px; color: var(--ink-soft); letter-spacing: 0.04em; text-align: right; line-height: 1.6; }
+.tx-table { width: 100%; border-collapse: collapse; }
+.tx-table thead th { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); padding: 0 var(--sp-5) var(--sp-4); text-align: left; border-bottom: 1px solid var(--b); }
+.tx-table thead th:last-child { text-align: right; }
+.tx-table tbody tr { border-bottom: 1px solid var(--b); transition: background 0.2s; }
+.tx-table tbody tr:last-child { border-bottom: none; }
+.tx-table tbody tr:hover { background: var(--bg-alt); }
+.tx-table td { padding: var(--sp-5); font-size: 13px; color: var(--ink-mid); vertical-align: middle; }
+.tx-table td:last-child { text-align: right; font-weight: 600; color: var(--ink); font-size: 14px; }
+.tx-addr { font-weight: 600; color: var(--ink); font-size: 13px; }
+.tx-note { font-size: 10.5px; color: var(--ink-soft); margin-top: 2px; }
+.tx-source { margin-top: var(--sp-6); font-size: 10.5px; color: var(--ink-soft); }
+.tx-source a { color: var(--gold); text-decoration: underline; }
+/* mobile */
+@media (max-width: 640px) {
+  .tx-inner { padding: 0 var(--sp-7); }
+  .tx-section { padding: 100px 0; }
+  .tx-table { display: block; }
+  .tx-table thead { display: none; }
+  .tx-table tbody { display: block; }
+  .tx-table tbody tr { display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; gap: 2px var(--sp-4); padding: var(--sp-5) 0; border-bottom: 1px solid var(--b); }
+  .tx-table tbody tr:last-child { border-bottom: none; }
+  .tx-table td { padding: 0; border: none; }
+  .tx-table td:nth-child(1) { grid-column: 1; grid-row: 1 / 3; align-self: center; }
+  .tx-table td:nth-child(2)::before { content: "Sold "; font-size: 10px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-soft); }
+  .tx-table td:nth-child(2) { grid-column: 2; grid-row: 1; text-align: right; font-size: 12px; }
+  .tx-table td:nth-child(3) { display: none; }
+  .tx-table td:nth-child(4) { display: none; }
+  .tx-table td:nth-child(5) { grid-column: 2; grid-row: 2; text-align: right; font-size: 15px; font-weight: 700; }
+}
+
+/* ── COMPETING PSF ───────────────────────────────────────── */
+.psf-section { background: var(--dark); padding: 100px 0; }
+.psf-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); }
+.psf-header { margin-bottom: var(--sp-8); max-width: 600px; }
+.psf-hl { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; line-height: 1.1; color: #fff; }
+.psf-hl em { font-style: italic; color: var(--gold); }
+.psf-sub { font-size: 14px; color: var(--cream-dim); margin-top: var(--sp-4); }
+.psf-compare { display: flex; flex-direction: column; gap: var(--sp-4); }
+.psf-item { display: grid; grid-template-columns: 200px 1fr auto; gap: var(--sp-5); align-items: center; }
+.psf-item-name { font-size: 13px; color: var(--cream-dim); }
+.psf-item-name strong { display: block; color: #fff; font-size: 13px; margin-bottom: 2px; }
+.psf-item-bar-bg { height: 6px; background: oklch(100% 0 0 / 0.08); border-radius: 3px; overflow: hidden; }
+.psf-item-bar-fill { height: 100%; border-radius: 3px; width: 0; transition: width 1s var(--ease); }
+.psf-item-bar-fill.highlight { background: var(--gold); }
+.psf-item-bar-fill.other { background: oklch(100% 0 0 / 0.25); }
+.psf-item-val { font-size: 13px; font-weight: 600; color: #fff; white-space: nowrap; text-align: right; font-variant-numeric: tabular-nums; min-width: 80px; }
+.psf-item-val.highlight { color: var(--gold); }
+@media (max-width: 640px) {
+  .psf-item { grid-template-columns: 1fr auto; }
+  .psf-item-bar-bg { display: none; }
+}
+
+/* ── AGENT ───────────────────────────────────────────────── */
+.agent-section { background: var(--bg-card); padding: 100px 0; }
+.agent-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--sp-7); display: grid; grid-template-columns: 360px 1fr; gap: var(--sp-9); align-items: center; }
+.agent-photo { aspect-ratio: 3/4; border-radius: var(--r); overflow: hidden; background: var(--bg-alt); }
+.agent-tag { margin-bottom: var(--sp-5); }
+.agent-name { font-family: var(--ff-d); font-size: clamp(32px, 4vw, 48px); font-weight: 300; color: var(--ink); line-height: 1.1; margin-bottom: var(--sp-3); }
+.agent-title { font-size: 13px; color: var(--ink-soft); margin-bottom: var(--sp-6); }
+.agent-tagline { font-family: var(--ff-d); font-size: 18px; font-style: italic; font-weight: 300; color: var(--ink-mid); line-height: 1.5; margin-bottom: var(--sp-7); max-width: 44ch; border-left: 2px solid var(--gold); padding-left: var(--sp-5); }
+.agent-meta { display: flex; flex-direction: column; gap: var(--sp-2); margin-bottom: var(--sp-7); }
+.agent-meta-item { font-size: 12px; color: var(--ink-soft); }
+.agent-meta-item strong { color: var(--ink); }
+.agent-ctas { display: flex; gap: var(--sp-4); flex-wrap: wrap; }
+.btn-primary { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: 13px; font-weight: 600; color: var(--dark); background: var(--gold); border-radius: 100px; padding: 14px 28px; transition: background 0.2s; }
+.btn-primary:hover { background: oklch(62% 0.13 75); }
+.btn-outline { display: inline-flex; align-items: center; gap: var(--sp-2); font-size: 13px; font-weight: 600; color: var(--ink); background: transparent; border: 1.5px solid var(--b); border-radius: 100px; padding: 13px 28px; transition: all 0.2s; }
+.btn-outline:hover { border-color: var(--ink); }
+@media (max-width: 768px) {
+  .agent-inner { grid-template-columns: 1fr; gap: var(--sp-7); }
+  .agent-photo { aspect-ratio: 16/9; }
+}
+
+/* ── FOOTER ──────────────────────────────────────────────── */
+.footer { background: var(--dark); border-top: 1px solid var(--b-dark); padding: var(--sp-7) var(--sp-7); display: flex; align-items: center; justify-content: space-between; gap: var(--sp-5); flex-wrap: wrap; }
+.footer-logo { font-family: var(--ff-d); font-size: 20px; font-weight: 400; color: var(--cream-dim); }
+.footer-logo span { font-style: italic; color: var(--gold); }
+.footer-disclaimer { font-size: 10.5px; color: var(--cream-faint); max-width: 500px; line-height: 1.6; }
+</style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon-180.png">
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">my<span>propfolio</span></div>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#unit">The Unit</a></li>
+    <li><a href="#floorplan">Floor Plan</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#budget">Budget</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Enquire</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="overview">
+  <div class="hero-img">
+    <img src="2. Seraya Breeze/Luxury Condo Design.jpg" alt="Seraya Breeze interior">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Condo · Freehold · D15 Katong</div>
+    <h1 class="hero-hl">Seraya <em>Breeze</em></h1>
+    <p class="hero-address">3 Seraya Road, Singapore 437235</p>
+    <div class="hero-bottom">
+      <div>
+        <div class="hero-price-label">Asking Price</div>
+        <div class="hero-price">S$2,500,000 <span>negotiable</span></div>
+      </div>
+      <div class="hero-badges">
+        <div class="hero-badge gold">Freehold Forever</div>
+        <div class="hero-badge">3+Study · 1,281 sqft</div>
+        <div class="hero-badge">17 Units Only</div>
+        <div class="hero-badge">$250k Reno</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section">
+  <div class="stats-inner">
+
+    <!-- Bedrooms -->
+    <div class="stat-item rv">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+      </div>
+      <div class="stat-label">Bedrooms</div>
+      <div class="stat-value"><span class="count-num" data-to="3">3</span><span class="count-static">+Study</span></div>
+      <div class="stat-sub">Convertible to 4 or 5 BR</div>
+    </div>
+
+    <!-- Bathrooms -->
+    <div class="stat-item rv d1">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 12h16a1 1 0 011 1v3a4 4 0 01-4 4H7a4 4 0 01-4-4v-3a1 1 0 011-1z"/><path d="M6 12V5a2 2 0 012-2h3v2.25"/>
+        </svg>
+      </div>
+      <div class="stat-label">Bathrooms</div>
+      <div class="stat-value"><span class="count-num" data-to="3">3</span></div>
+      <div class="stat-sub">All en-suite capable</div>
+    </div>
+
+    <!-- Floor Area -->
+    <div class="stat-item rv d2">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div class="stat-label">Floor Area</div>
+      <div class="stat-value"><span class="count-num" data-to="1281" data-comma="true">1,281</span></div>
+      <div class="stat-sub">sqft · 100% usable, no wasted space</div>
+    </div>
+
+    <!-- PSF -->
+    <div class="stat-item rv d3">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+        </svg>
+      </div>
+      <div class="stat-label">PSF</div>
+      <div class="stat-value"><span class="count-static">S$</span><span class="count-num" data-to="1952" data-comma="true">1,952</span></div>
+      <div class="stat-sub">Floor 10 · TOP 2001</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FREEHOLD HERO -->
+<section class="freehold-section" id="unit">
+  <div class="freehold-inner">
+    <div class="freehold-text rv">
+      <div class="section-tag section-tag-light">Why Freehold Matters</div>
+      <h2 class="freehold-hl">Your children<br>inherit the <em>land.</em></h2>
+      <p class="freehold-body">Freehold means the tenure never expires. Unlike 99-year leasehold properties where value declines as the clock runs down, Seraya Breeze is yours in perpetuity — a generational asset in one of Singapore's most established districts.</p>
+    </div>
+    <div class="freehold-stats rv d1">
+      <div class="fh-stat">
+        <div class="fh-stat-num">∞</div>
+        <div class="fh-stat-label">Years remaining on tenure</div>
+      </div>
+      <div class="fh-stat">
+        <div class="fh-stat-num">17</div>
+        <div class="fh-stat-label">Exclusive units in the development</div>
+      </div>
+      <div class="fh-stat">
+        <div class="fh-stat-num">2001</div>
+        <div class="fh-stat-label">Year completed · established address</div>
+      </div>
+      <div class="fh-stat">
+        <div class="fh-stat-num">D15</div>
+        <div class="fh-stat-label">Prime Katong, East Coast lifestyle</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE UNIT -->
+<section class="unit-section">
+  <div class="unit-inner">
+    <div class="unit-img rv">
+      <img src="2. Seraya Breeze/Luxury Interior Design.jpg" alt="Seraya Breeze living room">
+    </div>
+    <div class="rv d1">
+      <div class="section-tag">The Unit</div>
+      <h2 class="unit-hl">Efficient layout.<br><em>Nothing wasted.</em></h2>
+      <p class="unit-body">Originally a 4-bedroom unit, it has been thoughtfully converted into a spacious 3+Study configuration — giving you a dedicated home office without sacrificing living space. No aircon ledge. No balcony. Every square foot is liveable. And if your needs change, it can be reverted to 4 or even 5 bedrooms.</p>
+      <div class="unit-specs">
+        <div class="unit-spec">
+          <span class="unit-spec-label">Floor</span>
+          <span class="unit-spec-value">Level 10</span>
+        </div>
+        <div class="unit-spec">
+          <span class="unit-spec-label">Configuration</span>
+          <span class="unit-spec-value">3 BR + Study</span>
+        </div>
+        <div class="unit-spec">
+          <span class="unit-spec-label">Size</span>
+          <span class="unit-spec-value">1,281 sqft</span>
+        </div>
+        <div class="unit-spec">
+          <span class="unit-spec-label">Furnishing</span>
+          <span class="unit-spec-value">Fully furnished</span>
+        </div>
+        <div class="unit-spec">
+          <span class="unit-spec-label">Aircon Ledge</span>
+          <span class="unit-spec-value">None</span>
+        </div>
+        <div class="unit-spec">
+          <span class="unit-spec-label">Condition</span>
+          <span class="unit-spec-value">Move-in ready</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RENOVATION SHOWCASE -->
+<section class="reno-section">
+  <div class="reno-inner">
+    <div class="reno-header">
+      <div class="rv">
+        <div class="section-tag section-tag-light">Renovation Story</div>
+        <h2 class="reno-hl">S$250,000<br>of <em>Peranakan</em><br>craftsmanship.</h2>
+      </div>
+      <div class="rv d1">
+        <p class="reno-lead">Two years ago, this unit underwent a full remodel blending Peranakan heritage with modern living. Every room was redesigned from scratch — joinery, tiles, lighting, fixtures. The result is a home that photographs beautifully and lives even better.</p>
+        <div class="reno-quote">
+          <p>"The mix of modern and heritage creates something you simply cannot replicate with a basic renovation."</p>
+        </div>
+      </div>
+    </div>
+    <div class="reno-pillars">
+      <div class="reno-pillar rv">
+        <div class="reno-pillar-icon">🎨</div>
+        <div class="reno-pillar-title">Peranakan Concept</div>
+        <div class="reno-pillar-body">Heritage motifs integrated into modern cabinetry, tiles, and soft furnishings. Unique character you won't find in a new launch.</div>
+      </div>
+      <div class="reno-pillar rv d1">
+        <div class="reno-pillar-icon">🔑</div>
+        <div class="reno-pillar-title">Move-In Ready</div>
+        <div class="reno-pillar-body">Fully furnished and maintained. No renovation headaches, no waiting. Walk in on completion day and start living.</div>
+      </div>
+      <div class="reno-pillar rv d2">
+        <div class="reno-pillar-icon">📐</div>
+        <div class="reno-pillar-title">Full Remodel</div>
+        <div class="reno-pillar-body">Kitchen, bathrooms, all rooms and common areas were fully replaced — not a patch job. The bones are solid; the finishes are premium.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery-section" id="gallery">
+  <div class="gallery-inner">
+    <div class="gallery-header">
+      <div class="rv">
+        <div class="section-tag">Gallery</div>
+        <h2 class="gallery-hl">Inside <em>every room.</em></h2>
+      </div>
+      <p class="gallery-hint rv">Click any photo to view full screen</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="gcell" data-index="0"><img src="2. Seraya Breeze/Luxury Interior Design (1).jpg" alt="Living Room" loading="lazy"><span class="gcap">Living Room</span></div>
+      <div class="gcell" data-index="1"><img src="2. Seraya Breeze/Luxurious Bedroom Design.jpg" alt="Master Bedroom" loading="lazy"><span class="gcap">Master Bedroom</span></div>
+      <div class="gcell" data-index="2"><img src="2. Seraya Breeze/Luxury Dining Design.jpg" alt="Dining Area" loading="lazy"><span class="gcap">Dining Area</span></div>
+      <div class="gcell" data-index="3"><img src="2. Seraya Breeze/Luxury Kitchen Design.jpg" alt="Kitchen" loading="lazy"><span class="gcap">Kitchen</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY LIGHTBOX -->
+<div class="glb" id="glb" role="dialog" aria-modal="true" aria-label="Gallery viewer">
+  <button class="glb-close" id="glbClose">Close ✕</button>
+  <span class="glb-counter" id="glbCounter"></span>
+  <button class="glb-arrow glb-prev" id="glbPrev" aria-label="Previous">&#8592;</button>
+  <div class="glb-img-wrap"><img id="glbImg" src="" alt=""></div>
+  <button class="glb-arrow glb-next" id="glbNext" aria-label="Next">&#8594;</button>
+  <span class="glb-caption" id="glbCaption"></span>
+</div>
+
+<!-- FLOOR PLAN -->
+<section class="fp-section" id="floorplan">
+  <div class="fp-inner">
+    <div class="fp-img rv" id="fpThumb">
+      <img src="2. Seraya Breeze/Floorplan Design Project 2.jpg" alt="Seraya Breeze floor plan" loading="lazy">
+    </div>
+    <div class="rv d1">
+      <div class="section-tag">Floor Plan</div>
+      <h2 class="fp-hl">Every room<br><em>earns its place.</em></h2>
+      <p class="fp-body">The 1,281 sqft layout is exceptionally efficient — no aircon ledge, no balcony cutting into usable area. The current 3+Study configuration makes the most of the original 4-bedroom footprint. Flexible enough to revert to 4 or expand to 5 bedrooms depending on your family's needs.</p>
+      <div class="fp-features">
+        <div class="fp-feat"><div class="fp-feat-dot"></div><div class="fp-feat-text">Separated living and dining — great for hosting</div></div>
+        <div class="fp-feat"><div class="fp-feat-dot"></div><div class="fp-feat-text">All bedrooms fit queen bed + study table</div></div>
+        <div class="fp-feat"><div class="fp-feat-dot"></div><div class="fp-feat-text">Walk-in wardrobe in master + one other bedroom</div></div>
+        <div class="fp-feat"><div class="fp-feat-dot"></div><div class="fp-feat-text">Can revert to 4BR or convert to 5BR layout</div></div>
+        <div class="fp-feat"><div class="fp-feat-dot"></div><div class="fp-feat-text">Zero wasted space — no ledges or unusable balcony</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIDEO TOUR -->
+<section class="video-section">
+  <div class="video-inner">
+    <div class="video-header rv">
+      <div class="section-tag section-tag-light">Video Tour</div>
+      <h2 class="video-hl">Walk through it<br><em>before you visit.</em></h2>
+    </div>
+    <a class="video-thumb rv d1" href="https://www.youtube.com/watch?v=ovmGmbVBL1I" target="_blank" rel="noopener" aria-label="Watch video tour on YouTube">
+      <img src="https://img.youtube.com/vi/ovmGmbVBL1I/maxresdefault.jpg" alt="Seraya Breeze video tour" loading="lazy">
+      <div class="video-play">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+    </a>
+    <p class="video-note rv">Opens on YouTube · Full walkthrough of all rooms, renovation details, and layout</p>
+  </div>
+</section>
+
+<!-- FLOOR PLAN LIGHTBOX -->
+<div class="fplb" id="fplb">
+  <button class="fplb-close" id="fplbClose">Close ✕</button>
+  <img src="2. Seraya Breeze/Floorplan Design Project 2.jpg" alt="Floor Plan Full">
+</div>
+
+<!-- D15 LIFESTYLE -->
+<section class="lifestyle-section" id="location">
+  <div class="lifestyle-inner">
+    <div class="lifestyle-header rv">
+      <div class="section-tag section-tag-light">District 15</div>
+      <h2 class="lifestyle-hl">The neighbourhood<br>is your <em>amenity.</em></h2>
+    </div>
+    <div class="lifestyle-grid">
+      <div class="ls-card rv">
+        <div class="ls-dist">84m</div>
+        <div class="ls-name">Tanjong Katong Primary School</div>
+        <div class="ls-desc">One of Singapore's most sought-after primary schools — virtually at your doorstep. Priority registration for residents.</div>
+      </div>
+      <div class="ls-card rv d1">
+        <div class="ls-dist">~11 min</div>
+        <div class="ls-name">Tanjong Katong MRT (TE25)</div>
+        <div class="ls-desc">Thomson-East Coast Line connects you to the CBD in under 30 minutes. Marine Parade MRT also at 854m.</div>
+      </div>
+      <div class="ls-card rv d2">
+        <div class="ls-dist">~12 min</div>
+        <div class="ls-name">East Coast Park</div>
+        <div class="ls-desc">5km of beachfront cycling, running, and dining. Your weekend playground — no car needed.</div>
+      </div>
+      <div class="ls-card rv">
+        <div class="ls-dist">414m</div>
+        <div class="ls-name">FairPrice Finest Katong Village</div>
+        <div class="ls-desc">Premium supermarket 5 minutes on foot. Daily essentials without the drive.</div>
+      </div>
+      <div class="ls-card rv d1">
+        <div class="ls-dist">~5 min</div>
+        <div class="ls-name">Katong Dining Strip</div>
+        <div class="ls-desc">Joo Chiat Road, East Coast Road, i12 Katong — some of Singapore's best hawker food and cafes, within walking distance.</div>
+      </div>
+      <div class="ls-card rv d2">
+        <div class="ls-dist">~10 min</div>
+        <div class="ls-name">CBD / Marina Bay</div>
+        <div class="ls-desc">By car or MRT. ECP expressway access means you're at Raffles Place before most residents even leave Orchard.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAP -->
+<section class="map-section">
+  <div class="map-inner">
+    <div class="map-header">
+      <div class="rv">
+        <div class="section-tag">Map</div>
+        <h2 class="map-hl"><em>Everything</em> within reach.</h2>
+      </div>
+      <div class="map-filters rv d1">
+        <button class="mf-btn active" data-cat="all">All</button>
+        <button class="mf-btn" data-cat="transport">MRT</button>
+        <button class="mf-btn" data-cat="schools">Schools</button>
+        <button class="mf-btn" data-cat="shopping">Shopping</button>
+        <button class="mf-btn" data-cat="parks">Parks</button>
+      </div>
+    </div>
+    <div id="leaflet-map"></div>
+  </div>
+</section>
+
+<!-- DASHBOARD -->
+<section class="dash-section" id="budget">
+  <div class="dash-inner">
+    <div class="dash-header rv">
+      <div class="section-tag">Numbers at a Glance</div>
+      <h2 class="dash-hl">The data<br>behind the <em>decision.</em></h2>
+    </div>
+    <div class="bento" id="bentoGrid">
+      <div class="bc bc-price rv">
+        <div class="bc-label">Asking Price</div>
+        <div class="bc-num" id="bcPrice">S$2,500,000</div>
+        <div class="bc-sub">Negotiable · Floor 10 · 1,281 sqft</div>
+      </div>
+      <div class="bc bc-units rv d1">
+        <div class="bc-label">Exclusivity</div>
+        <div class="bc-num" style="color:var(--dark)">17</div>
+        <div class="bc-sub" style="color:var(--ink-mid)">Total units in development</div>
+      </div>
+      <div class="bc bc-commute rv d2">
+        <div class="bc-label">Commute Times</div>
+        <div class="commute-list">
+          <div class="commute-row"><div class="commute-dot"></div><span class="commute-place">Tanjong Katong MRT</span><span class="commute-time">11 min walk</span></div>
+          <div class="commute-row"><div class="commute-dot"></div><span class="commute-place">CBD / Raffles Place</span><span class="commute-time">~28 min MRT</span></div>
+          <div class="commute-row"><div class="commute-dot"></div><span class="commute-place">East Coast Park</span><span class="commute-time">~12 min walk</span></div>
+          <div class="commute-row"><div class="commute-dot"></div><span class="commute-place">Changi Airport</span><span class="commute-time">~20 min drive</span></div>
+        </div>
+      </div>
+      <div class="bc bc-monthly rv">
+        <div class="bc-label">Est. Monthly Payment</div>
+        <div class="bc-num" id="bcMonthly">S$6,890</div>
+        <div class="bc-sub">75% LTV · 3.5% · 30 yrs</div>
+      </div>
+      <div class="bc bc-yield rv d1">
+        <div class="bc-label">Gross Rental Yield</div>
+        <div class="bc-num" style="color:var(--gold)" id="bcYield">~3.0%</div>
+        <div class="bc-sub" style="color:var(--ink-mid)">Based on ~S$4,200/mo (3BR, May 2025)</div>
+      </div>
+      <div class="bc bc-psf rv d2">
+        <div class="bc-label">PSF vs Nearby</div>
+        <div class="psf-list" id="bentoBarList">
+          <div class="psf-row">
+            <div class="psf-row-top"><span>Seraya Breeze</span><span>$1,952</span></div>
+            <div class="psf-bar-bg"><div class="psf-bar-fill highlight" data-w="77"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-top"><span>Haig 162</span><span>$1,902</span></div>
+            <div class="psf-bar-bg"><div class="psf-bar-fill other" data-w="75"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-top"><span>Ardor Residence</span><span>$2,514</span></div>
+            <div class="psf-bar-bg"><div class="psf-bar-fill other" data-w="100"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALCULATORS -->
+<section class="calc-section">
+  <div class="calc-inner">
+    <div class="calc-header rv">
+      <div class="section-tag">Financial Tools</div>
+      <h2 class="calc-hl">Run the <em>numbers.</em></h2>
+    </div>
+    <div class="calc-grid">
+      <!-- Mortgage Calculator -->
+      <div class="calc-card rv">
+        <div class="calc-card-title">Mortgage Calculator</div>
+        <div class="calc-field">
+          <label>Purchase Price: <strong id="mcPriceLabel">S$2,500,000</strong></label>
+          <input type="range" id="mcPrice" min="2000000" max="3000000" step="50000" value="2500000">
+          <div class="calc-field-row"><span>S$2.0M</span><span>S$3.0M</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Down Payment (25% min): <strong id="mcDpLabel">25%</strong></label>
+          <input type="range" id="mcDp" min="25" max="50" step="5" value="25">
+          <div class="calc-field-row"><span>25%</span><span>50%</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Interest Rate: <strong id="mcRateLabel">3.5%</strong></label>
+          <input type="range" id="mcRate" min="250" max="550" step="10" value="350">
+          <div class="calc-field-row"><span>2.5%</span><span>5.5%</span></div>
+        </div>
+        <div class="calc-field">
+          <label>Loan Tenure: <strong id="mcTenureLabel">30 yrs</strong></label>
+          <input type="range" id="mcTenure" min="5" max="30" step="5" value="30">
+          <div class="calc-field-row"><span>5 yrs</span><span>30 yrs</span></div>
+        </div>
+        <div class="calc-result" id="mcResult">
+          <div class="calc-result-row"><span class="calc-result-label">Monthly Payment</span><span class="calc-result-val accent" id="mcMonthly">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-label">Loan Amount</span><span class="calc-result-val" id="mcLoan">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-label">Down Payment</span><span class="calc-result-val" id="mcDown">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-label">Total Interest</span><span class="calc-result-val" id="mcInterest">—</span></div>
+        </div>
+      </div>
+      <!-- ABSD Calculator -->
+      <div class="calc-card rv d1">
+        <div class="calc-card-title">ABSD Calculator</div>
+        <p style="font-size:12px;color:var(--ink-soft);margin-bottom:var(--sp-5);line-height:1.6;">Additional Buyer's Stamp Duty applies to private property purchases. Know your real upfront cost before you negotiate.</p>
+        <div class="calc-field">
+          <label>Buyer Profile</label>
+          <div class="absd-tabs">
+            <button class="absd-tab active" data-profile="sc1">SC 1st</button>
+            <button class="absd-tab" data-profile="sc2">SC 2nd</button>
+            <button class="absd-tab" data-profile="pr1">PR 1st</button>
+            <button class="absd-tab" data-profile="pr2">PR 2nd</button>
+            <button class="absd-tab" data-profile="fg">Foreigner</button>
+          </div>
+        </div>
+        <div class="calc-field">
+          <label>Purchase Price: <strong id="absdPriceLabel">S$2,500,000</strong></label>
+          <input type="range" id="absdPrice" min="2000000" max="3000000" step="50000" value="2500000">
+          <div class="calc-field-row"><span>S$2.0M</span><span>S$3.0M</span></div>
+        </div>
+        <div class="calc-result" id="absdResult">
+          <div class="calc-result-row"><span class="calc-result-label">ABSD Rate</span><span class="calc-result-val" id="absdRate">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-label">ABSD Amount</span><span class="calc-result-val accent" id="absdAmt">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-label">BSD (est.)</span><span class="calc-result-val" id="absdBsd">—</span></div>
+          <div class="calc-result-row"><span class="calc-result-label">Total Stamp Duty</span><span class="calc-result-val" id="absdTotal">—</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRANSACTIONS -->
+<section class="tx-section">
+  <div class="tx-inner">
+    <div class="tx-header rv">
+      <div>
+        <div class="section-tag" style="background:var(--bg-alt);margin-bottom:var(--sp-4)">Market Context</div>
+        <h2 class="tx-hl">What similar units<br>have <em>sold for.</em></h2>
+      </div>
+      <p class="tx-subtitle">Private condo transactions · D15 Katong<br>Source: URA REALIS · 2021–2025</p>
+    </div>
+    <table class="tx-table rv d1" aria-label="URA transaction history">
+      <thead>
+        <tr>
+          <th>Property</th>
+          <th>Date Sold</th>
+          <th>Size</th>
+          <th>PSF</th>
+          <th>Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="tx-addr">Seraya Breeze</div><div class="tx-note">3 Seraya Road · Same development</div></td>
+          <td>Jul 2025</td>
+          <td>1,001 sqft</td>
+          <td>$1,898 psf</td>
+          <td>$1,900,000</td>
+        </tr>
+        <tr>
+          <td><div class="tx-addr">Seraya Breeze</div><div class="tx-note">3 Seraya Road · Same development</div></td>
+          <td>Feb 2022</td>
+          <td>1,055 sqft</td>
+          <td>$1,469 psf</td>
+          <td>$1,550,000</td>
+        </tr>
+        <tr>
+          <td><div class="tx-addr">Seraya Breeze</div><div class="tx-note">3 Seraya Road · Same development</div></td>
+          <td>Sep 2021</td>
+          <td>1,001 sqft</td>
+          <td>$1,399 psf</td>
+          <td>$1,400,000</td>
+        </tr>
+        <tr>
+          <td><div class="tx-addr">Haig 162</div><div class="tx-note">Haig Road · D15 nearby</div></td>
+          <td>2024</td>
+          <td>~1,000 sqft</td>
+          <td>$1,902 psf</td>
+          <td>~$1,900,000</td>
+        </tr>
+        <tr>
+          <td><div class="tx-addr">Seraya Residences</div><div class="tx-note">Seraya Lane · Same street</div></td>
+          <td>2023</td>
+          <td>~1,100 sqft</td>
+          <td>$2,030 psf</td>
+          <td>~$2,230,000</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="tx-source rv">Source: <a href="https://www.ura.gov.sg/reis/index" target="_blank" rel="noopener">URA REALIS</a>. Past transactions are not a guarantee of future value. This unit at 1,281 sqft commands a premium for size, floor, and renovation standard.</p>
+  </div>
+</section>
+
+<!-- COMPETING PSF COMPARISON -->
+<section class="psf-section">
+  <div class="psf-inner">
+    <div class="psf-header rv">
+      <div class="section-tag section-tag-light">PSF Comparison</div>
+      <h2 class="psf-hl">How it stacks up<br>against <em>nearby condos.</em></h2>
+      <p class="psf-sub">Freehold developments only · Within 1km of 3 Seraya Road · Based on URA data</p>
+    </div>
+    <div class="psf-compare" id="psfCompare">
+      <div class="psf-item">
+        <div class="psf-item-name"><strong>Seraya Breeze</strong><span>Freehold · 2001 · 17 units</span></div>
+        <div class="psf-item-bar-bg"><div class="psf-item-bar-fill highlight" data-w="77"></div></div>
+        <div class="psf-item-val highlight">$1,952 psf</div>
+      </div>
+      <div class="psf-item">
+        <div class="psf-item-name"><strong>Haig Apartments</strong><span>Freehold · 1991</span></div>
+        <div class="psf-item-bar-bg"><div class="psf-item-bar-fill other" data-w="70"></div></div>
+        <div class="psf-item-val">$1,774 psf</div>
+      </div>
+      <div class="psf-item">
+        <div class="psf-item-name"><strong>Haig 162</strong><span>Freehold · 2013</span></div>
+        <div class="psf-item-bar-bg"><div class="psf-item-bar-fill other" data-w="75"></div></div>
+        <div class="psf-item-val">$1,902 psf</div>
+      </div>
+      <div class="psf-item">
+        <div class="psf-item-name"><strong>Seraya Residences</strong><span>Freehold · 2022</span></div>
+        <div class="psf-item-bar-bg"><div class="psf-item-bar-fill other" data-w="80"></div></div>
+        <div class="psf-item-val">$2,030 psf</div>
+      </div>
+      <div class="psf-item">
+        <div class="psf-item-name"><strong>Ardor Residence</strong><span>Freehold · 2026 · New launch</span></div>
+        <div class="psf-item-bar-bg"><div class="psf-item-bar-fill other" data-w="100"></div></div>
+        <div class="psf-item-val">$2,514 psf</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT -->
+<section class="agent-section" id="contact">
+  <div class="agent-inner">
+    <div class="agent-photo rv">
+      <img src="2. Seraya Breeze/Clara Lim.jpg" alt="Clara Lim" loading="lazy">
+    </div>
+    <div class="rv d1">
+      <div class="agent-tag"><div class="section-tag">Your Agent</div></div>
+      <h2 class="agent-name">Clara Lim<br>Mei Xuan</h2>
+      <p class="agent-title">Senior Associate Director · PropNex Realty Pte Ltd</p>
+      <p class="agent-tagline">"D15 is not just an address — it is a lifestyle. Let me show you why this unit in particular is one of the best-value freehold opportunities in Katong right now."</p>
+      <div class="agent-meta">
+        <div class="agent-meta-item"><strong>CEA Registration:</strong> R043891G</div>
+        <div class="agent-meta-item"><strong>Agency Licence:</strong> L3008022J (PropNex Realty)</div>
+        <div class="agent-meta-item"><strong>Specialisation:</strong> D15 East Coast · Freehold Private Properties</div>
+      </div>
+      <div class="agent-ctas">
+        <a href="https://wa.me/6587654321?text=Hi%20Clara%2C%20I%20saw%20the%20Seraya%20Breeze%20listing%20and%20would%20like%20to%20arrange%20a%20viewing." class="btn-primary">💬 WhatsApp Clara</a>
+        <a href="tel:+6587654321" class="btn-outline">📞 Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-logo">my<span>propfolio</span></div>
+  <p class="footer-disclaimer">Information is provided for general reference only and does not constitute financial or legal advice. Prices, yields, and transaction data are based on publicly available sources including URA REALIS and 99.co. Past transaction prices are not a guarantee of future value. Buyers should conduct their own due diligence and consult a licensed financial adviser before making any property purchase decision. © 2026 mypropfolio.</p>
+</footer>
+
+<!-- ── MAP INIT ─────────────────────────────────────────────── -->
+<script>
+function initPropMap() {
+  var mapEl = document.getElementById('leaflet-map');
+  if (!mapEl || typeof L === 'undefined') return;
+  var LAT = 1.3072, LNG = 103.9009;
+  var map = L.map(mapEl, { center: [LAT, LNG], zoom: 15, scrollWheelZoom: false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/copyright">OSM</a>',
+    subdomains: 'abcd', maxZoom: 19
+  }).addTo(map);
+  setTimeout(function(){ map.invalidateSize(); }, 300);
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ map.invalidateSize(); obs.disconnect(); } }, { threshold: 0.05 });
+    obs.observe(mapEl);
+  }
+  var COLORS = { transport:'#B8860B', schools:'#2E7D32', shopping:'#1565C0', parks:'#558B2F' };
+  function mk(lat, lng, cat, label) {
+    var ic = L.divIcon({ className:'', html:'<div style="width:10px;height:10px;border-radius:50%;background:'+COLORS[cat]+';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>', iconSize:[10,10], iconAnchor:[5,5] });
+    var m = L.marker([lat, lng], { icon: ic }).addTo(map);
+    m.bindPopup('<strong>'+label+'</strong>');
+    m._cat = cat;
+    return m;
+  }
+  // Property marker
+  L.marker([LAT, LNG]).addTo(map).bindPopup('<strong>Seraya Breeze</strong><br>3 Seraya Road · S$2,500,000').openPopup();
+  var markers = [
+    mk(1.3081, 103.9016,'transport','Tanjong Katong MRT (TE25)'),
+    mk(1.3065, 103.9022,'transport','Marine Parade MRT (TE26)'),
+    mk(1.3075, 103.9003,'schools','Tanjong Katong Primary School'),
+    mk(1.3078, 103.9008,'schools','MOE Kindergarten @ Tanjong Katong'),
+    mk(1.3055, 103.9030,'shopping','i12 Katong'),
+    mk(1.3082, 103.8998,'shopping','FairPrice Finest Katong Village'),
+    mk(1.3060, 103.9035,'shopping','Katong Shopping Centre'),
+    mk(1.3085, 103.9045,'parks','Haig Walk'),
+    mk(1.2998, 103.9050,'parks','East Coast Park'),
+  ];
+  document.querySelectorAll('.mf-btn').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      document.querySelectorAll('.mf-btn').forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      var cat = btn.dataset.cat;
+      markers.forEach(function(m){ cat === 'all' || m._cat === cat ? map.addLayer(m) : map.removeLayer(m); });
+    });
+  });
+}
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="" onload="initPropMap()"></script>
+
+<!-- ── MAIN JS ──────────────────────────────────────────────── -->
+<script>
+(function(){ 'use strict';
+
+/* NAV */
+var nav = document.getElementById('nav');
+window.addEventListener('scroll', function(){ nav.classList.toggle('scrolled', window.scrollY >= 72); }, { passive: true });
+
+/* SCROLL REVEAL */
+var io = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.10 });
+document.querySelectorAll('.rv').forEach(function(el){ io.observe(el); });
+
+/* STAT COUNT-UP */
+(function(){
+  function easeOutExpo(t){ return t === 1 ? 1 : 1 - Math.pow(2, -10 * t); }
+  function fmt(n, comma){ return comma ? n.toLocaleString('en-SG') : String(n); }
+  function runCountUp(){
+    document.querySelectorAll('.count-num[data-to]').forEach(function(el){
+      var target = parseInt(el.getAttribute('data-to'), 10);
+      var comma  = el.hasAttribute('data-comma');
+      var dur    = target > 500 ? 1200 : 700;
+      var start  = null;
+      function step(ts){
+        if(!start) start = ts;
+        var prog = Math.min((ts - start) / dur, 1);
+        el.textContent = fmt(Math.round(easeOutExpo(prog) * target), comma);
+        if(prog < 1) requestAnimationFrame(step);
+        else el.textContent = fmt(target, comma);
+      }
+      requestAnimationFrame(step);
+    });
+  }
+  var statsDone = false;
+  var statsSection = document.querySelector('.stats-section');
+  if(statsSection && 'IntersectionObserver' in window){
+    var sObs = new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting && !statsDone){
+        statsDone = true;
+        runCountUp();
+        sObs.disconnect();
+      }
+    }, { threshold: 0.3 });
+    sObs.observe(statsSection);
+  }
+})();
+
+/* PSF BARS (bento + comparison) */
+var barObs = new IntersectionObserver(function(entries){
+  entries.forEach(function(e){
+    if(e.isIntersecting){
+      e.target.querySelectorAll('[data-w]').forEach(function(bar){
+        bar.style.width = bar.dataset.w + '%';
+      });
+      barObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2 });
+var bentoGrid = document.getElementById('bentoGrid');
+var psfCompare = document.getElementById('psfCompare');
+if(bentoGrid) barObs.observe(bentoGrid);
+if(psfCompare) barObs.observe(psfCompare);
+
+/* GALLERY LIGHTBOX */
+var glbData = [
+  { src:'2. Seraya Breeze/Luxury Interior Design (1).jpg', cap:'Living Room' },
+  { src:'2. Seraya Breeze/Luxurious Bedroom Design.jpg',   cap:'Master Bedroom' },
+  { src:'2. Seraya Breeze/Luxury Dining Design.jpg',       cap:'Dining Area' },
+  { src:'2. Seraya Breeze/Luxury Kitchen Design.jpg',      cap:'Kitchen' },
+];
+var glb=document.getElementById('glb'), glbImg=document.getElementById('glbImg'),
+    glbCap=document.getElementById('glbCaption'), glbCtr=document.getElementById('glbCounter'),
+    glbIdx=0;
+function openGlb(i){ glbIdx=i; glb.classList.add('open'); document.body.style.overflow='hidden'; showGlb(); }
+function closeGlb(){ glb.classList.remove('open'); document.body.style.overflow=''; }
+function showGlb(){ var d=glbData[glbIdx]; glbImg.src=d.src; glbImg.alt=d.cap; glbCap.textContent=d.cap; glbCtr.textContent=(glbIdx+1)+' / '+glbData.length; }
+document.querySelectorAll('.gcell').forEach(function(c){ c.addEventListener('click',function(){ openGlb(+c.dataset.index); }); });
+document.getElementById('glbClose').addEventListener('click', closeGlb);
+document.getElementById('glbPrev').addEventListener('click',function(){ glbIdx=(glbIdx-1+glbData.length)%glbData.length; showGlb(); });
+document.getElementById('glbNext').addEventListener('click',function(){ glbIdx=(glbIdx+1)%glbData.length; showGlb(); });
+document.addEventListener('keydown',function(e){ if(!glb.classList.contains('open')) return; if(e.key==='ArrowLeft'){ glbIdx=(glbIdx-1+glbData.length)%glbData.length; showGlb(); } if(e.key==='ArrowRight'){ glbIdx=(glbIdx+1)%glbData.length; showGlb(); } if(e.key==='Escape') closeGlb(); });
+// swipe
+var ts=0, tx=0;
+glb.addEventListener('touchstart',function(e){ ts=e.changedTouches[0].clientX; }, { passive:true });
+glb.addEventListener('touchend',function(e){ tx=e.changedTouches[0].clientX; var d=ts-tx; if(Math.abs(d)>40){ if(d>0){ glbIdx=(glbIdx+1)%glbData.length; } else { glbIdx=(glbIdx-1+glbData.length)%glbData.length; } showGlb(); } });
+
+/* FLOOR PLAN LIGHTBOX */
+var fplb=document.getElementById('fplb');
+document.getElementById('fpThumb').addEventListener('click',function(){ fplb.classList.add('open'); document.body.style.overflow='hidden'; });
+document.getElementById('fplbClose').addEventListener('click',function(){ fplb.classList.remove('open'); document.body.style.overflow=''; });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape' && fplb.classList.contains('open')){ fplb.classList.remove('open'); document.body.style.overflow=''; } });
+
+/* MORTGAGE CALCULATOR */
+function fmtS(n){ return 'S$'+Math.round(n).toLocaleString(); }
+function calcM(P,ar,yrs){ if(P<=0||yrs<=0) return 0; var r=ar/100/12,n=yrs*12; return r===0?P/n:P*(r*Math.pow(1+r,n))/(Math.pow(1+r,n)-1); }
+function updateMC(){
+  var price=+document.getElementById('mcPrice').value;
+  var dp=+document.getElementById('mcDp').value/100;
+  var rate=+document.getElementById('mcRate').value/100;
+  var yrs=+document.getElementById('mcTenure').value;
+  document.getElementById('mcPriceLabel').textContent=fmtS(price);
+  document.getElementById('mcDpLabel').textContent=(dp*100)+'%';
+  document.getElementById('mcRateLabel').textContent=rate.toFixed(1)+'%';
+  document.getElementById('mcTenureLabel').textContent=yrs+' yrs';
+  var loan=price*(1-dp), down=price*dp;
+  var monthly=calcM(loan,rate,yrs);
+  var totalInt=monthly*yrs*12-loan;
+  document.getElementById('mcMonthly').textContent=fmtS(monthly)+'/mo';
+  document.getElementById('mcLoan').textContent=fmtS(loan);
+  document.getElementById('mcDown').textContent=fmtS(down);
+  document.getElementById('mcInterest').textContent=fmtS(totalInt);
+}
+['mcPrice','mcDp','mcRate','mcTenure'].forEach(function(id){ document.getElementById(id).addEventListener('input',updateMC); });
+updateMC();
+
+/* ABSD CALCULATOR */
+var ABSD_RATES = { sc1:0, sc2:0.20, pr1:0.05, pr2:0.30, fg:0.60 };
+var absdProfile='sc1';
+document.querySelectorAll('.absd-tab').forEach(function(t){
+  t.addEventListener('click',function(){
+    document.querySelectorAll('.absd-tab').forEach(function(x){ x.classList.remove('active'); });
+    t.classList.add('active');
+    absdProfile=t.dataset.profile;
+    updateABSD();
+  });
+});
+function calcBSD(p){ var bsd=0; if(p>3000000) bsd+=( p-3000000)*0.06; if(p>1500000) bsd+=Math.min(p-1500000,1500000)*0.05; if(p>1000000) bsd+=Math.min(p-1000000,500000)*0.04; if(p>360000) bsd+=Math.min(p-360000,640000)*0.03; if(p>180000) bsd+=Math.min(p-180000,180000)*0.02; bsd+=Math.min(p,180000)*0.01; return bsd; }
+function updateABSD(){
+  var price=+document.getElementById('absdPrice').value;
+  document.getElementById('absdPriceLabel').textContent=fmtS(price);
+  var rate=ABSD_RATES[absdProfile];
+  var absd=price*rate;
+  var bsd=calcBSD(price);
+  document.getElementById('absdRate').textContent=(rate*100)+'%';
+  document.getElementById('absdAmt').textContent=rate===0?'Nil':fmtS(absd);
+  document.getElementById('absdBsd').textContent=fmtS(bsd);
+  document.getElementById('absdTotal').textContent=fmtS(absd+bsd);
+}
+document.getElementById('absdPrice').addEventListener('input', updateABSD);
+updateABSD();
+
+})();
+</script>
+</body>
+</html>

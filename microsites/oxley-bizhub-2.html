@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Oxley BizHub 2 — B1 Industrial For Sale | 62 Ubi Road 1</title>
+<meta name="description" content="TOP-floor B1 Light Industrial unit at Oxley BizHub 2, 62 Ubi Road 1. 1,970 sqft · S$1,138,000 (nego) · 6m+ ceilings · Pool access · MacPherson MRT 670m.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;font-weight:300;background:var(--stone);color:var(--ink);overflow-x:hidden;cursor:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+a{color:inherit;text-decoration:none}
+button{cursor:none;font-family:inherit;border:none;background:none}
+
+/* ── TOKENS ── */
+:root{
+  --stone:       oklch(98.5% 0.008 65);
+  --stone-alt:   oklch(95% 0.014 63);
+  --stone-card:  oklch(100% 0 0);
+  --concrete:    oklch(20% 0.012 62);
+  --concrete-mid:oklch(28% 0.010 60);
+  --concrete-lt: oklch(40% 0.009 58);
+  --amber:       oklch(65% 0.138 48);
+  --amber-light: oklch(75% 0.115 52);
+  --amber-pale:  oklch(96% 0.024 58);
+  --ink:         oklch(16% 0.012 62);
+  --ink-mid:     oklch(42% 0.012 60);
+  --ink-soft:    oklch(60% 0.010 58);
+  --ink-faint:   oklch(76% 0.008 60);
+  --b:           oklch(16% 0.012 62 / 0.09);
+  --b-dark:      oklch(100% 0 0 / 0.12);
+  --ff-d:'Cormorant Garamond',Georgia,serif;
+  --ff-b:'Inter',-apple-system,sans-serif;
+  --sp-1:4px;--sp-2:8px;--sp-3:12px;--sp-4:16px;
+  --sp-5:24px;--sp-6:32px;--sp-7:48px;--sp-8:64px;--sp-9:96px;
+  --ease:cubic-bezier(0.16,1,0.3,1);
+  --r:16px;
+}
+
+/* ── CURSOR ── */
+#c-dot{position:fixed;width:7px;height:7px;border-radius:50%;background:var(--amber);pointer-events:none;z-index:9999;transform:translate(-50%,-50%)}
+#c-ring{position:fixed;width:32px;height:32px;border-radius:50%;border:1.5px solid var(--amber);pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:0.55;transition:width 0.3s,height 0.3s}
+
+/* ── SCROLL PROGRESS ── */
+#sp{position:fixed;top:0;left:0;height:2px;width:0;background:var(--amber);z-index:9997}
+
+/* ── STICKY BAR ── */
+#stick-bar{
+  position:fixed;bottom:0;left:0;right:0;z-index:800;
+  background:var(--concrete);border-top:1px solid var(--b-dark);
+  padding:14px var(--sp-7);
+  display:flex;align-items:center;justify-content:space-between;gap:var(--sp-4);
+  transform:translateY(100%);transition:transform 0.5s var(--ease);
+}
+#stick-bar.visible{transform:translateY(0)}
+.stick-text{font-size:13px;color:oklch(100% 0 0 / 0.55)}
+.stick-text strong{color:#fff;font-weight:600}
+.stick-actions{display:flex;gap:var(--sp-3);flex-shrink:0}
+.stick-pri{font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;background:var(--amber);color:var(--concrete);padding:10px 22px;border-radius:40px;transition:background 0.2s}
+.stick-pri:hover{background:var(--amber-light)}
+.stick-out{font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;border:1.5px solid var(--b-dark);color:oklch(100% 0 0 / 0.55);padding:10px 22px;border-radius:40px;transition:border-color 0.2s,color 0.2s}
+.stick-out:hover{border-color:#fff;color:#fff}
+
+/* ── NAV ── */
+.nav{position:fixed;top:0;left:0;right:0;z-index:900;padding:var(--sp-5) var(--sp-7);display:flex;align-items:center;justify-content:space-between;transition:background 0.4s,backdrop-filter 0.4s,box-shadow 0.4s}
+.nav.scrolled{background:oklch(20% 0.012 62 / 0.94);backdrop-filter:blur(16px);box-shadow:0 1px 0 var(--b-dark)}
+.nav-logo{font-family:var(--ff-d);font-size:20px;font-weight:400;color:#fff;letter-spacing:0.04em}
+.nav-logo span{color:var(--amber);font-style:italic}
+.nav-links{display:flex;gap:var(--sp-6);list-style:none}
+.nav-links a{font-size:12px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.55);transition:color 0.2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--concrete);background:var(--amber);padding:10px 20px;border-radius:40px;transition:background 0.2s}
+.nav-cta:hover{background:var(--amber-light)}
+
+/* ── HERO ── */
+.hero{position:relative;height:100svh;min-height:640px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-img{position:absolute;inset:0;transform:scale(1.06);animation:hZoom 12s var(--ease) forwards}
+@keyframes hZoom{to{transform:scale(1)}}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,oklch(20% 0.012 62 / 0.15) 0%,oklch(20% 0.012 62 / 0.05) 30%,oklch(20% 0.012 62 / 0.65) 70%,oklch(20% 0.012 62 / 0.92) 100%)}
+.hero-content{position:relative;z-index:2;max-width:1080px;width:100%;margin:0 auto;padding:0 var(--sp-7) 100px}
+.hero-badges{display:flex;gap:var(--sp-3);flex-wrap:wrap;margin-bottom:var(--sp-5);opacity:0;animation:fUp 0.8s 0.4s var(--ease) forwards}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;padding:6px 14px;border-radius:40px;border:1px solid}
+.badge-top{background:var(--amber);color:var(--concrete);border-color:transparent}
+.badge-b1{background:oklch(100% 0 0 / 0.1);color:#fff;border-color:var(--b-dark)}
+.badge-nego{background:oklch(65% 0.138 48 / 0.15);color:var(--amber-light);border-color:oklch(65% 0.138 48 / 0.3)}
+.hero-hl{font-family:var(--ff-d);font-size:clamp(44px,6vw,82px);font-weight:300;line-height:1.0;color:#fff;margin-bottom:var(--sp-5)}
+.hero-hl .w{display:inline-block;overflow:hidden;margin-right:0.18em}
+.hero-hl .w span{display:inline-block;transform:translateY(110%);opacity:0;animation:wUp 0.9s var(--ease) forwards}
+.hero-hl .w:nth-child(1) span{animation-delay:0.3s}
+.hero-hl .w:nth-child(2) span{animation-delay:0.45s}
+.hero-hl .w:nth-child(3) span{animation-delay:0.6s}
+.hero-hl em{font-style:italic;color:var(--amber)}
+@keyframes wUp{to{transform:none;opacity:1}}
+@keyframes fUp{to{opacity:1}}
+.hero-sub{font-size:clamp(14px,1.6vw,17px);color:oklch(100% 0 0 / 0.6);line-height:1.75;max-width:500px;margin-bottom:var(--sp-6);opacity:0;animation:fUp 0.8s 1.0s var(--ease) forwards}
+.hero-meta{display:flex;align-items:center;gap:var(--sp-5);flex-wrap:wrap;opacity:0;animation:fUp 0.8s 1.3s var(--ease) forwards}
+.hero-stat-val{font-family:var(--ff-d);font-size:26px;font-weight:300;color:#fff}
+.hero-stat-lbl{font-size:10px;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.4);margin-top:2px}
+.hero-div{width:1px;height:32px;background:oklch(100% 0 0 / 0.18)}
+
+/* ── MARQUEE ── */
+.mq-wrap{background:var(--concrete);padding:15px 0;overflow:hidden;border-top:1px solid var(--b-dark)}
+.mq-track{display:flex;white-space:nowrap;animation:mq 32s linear infinite}
+.mq-item{display:inline-flex;align-items:center;gap:var(--sp-5);padding:0 var(--sp-6);font-size:11px;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:oklch(100% 0 0 / 0.45)}
+.mq-item strong{color:#fff;font-weight:700}
+.mq-dot{width:3px;height:3px;border-radius:50%;background:var(--amber);flex-shrink:0}
+@keyframes mq{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* ── SECTION COMMONS ── */
+.section{padding:96px 0}
+.inner{max-width:1080px;margin:0 auto;padding:0 var(--sp-7)}
+.stag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.14em;text-transform:uppercase;color:var(--amber);margin-bottom:var(--sp-4)}
+.stag-lt{color:oklch(100% 0 0 / 0.4)}
+.shl{font-family:var(--ff-d);font-size:clamp(34px,4vw,52px);font-weight:300;line-height:1.1;color:var(--ink)}
+.shl em{font-style:italic;color:var(--amber)}
+.shl-lt{color:#fff}.shl-lt em{color:var(--amber-light)}
+
+/* ── OVERVIEW BENTO ── */
+.ov-section{background:var(--concrete)}
+.ov-bento{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;margin-top:var(--sp-7)}
+.ov-card{background:var(--concrete-mid);border-radius:var(--r);padding:var(--sp-5) var(--sp-5);border:1px solid var(--b-dark);transition:background 0.25s}
+.ov-card:hover{background:var(--concrete-lt)}
+.ov-lbl{font-size:10px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:oklch(100% 0 0 / 0.38);margin-bottom:8px}
+.ov-val{font-family:var(--ff-d);font-size:clamp(22px,2.2vw,30px);font-weight:300;color:#fff;font-variant-numeric:tabular-nums;line-height:1.1}
+.ov-sub{font-size:11px;color:oklch(100% 0 0 / 0.4);margin-top:4px;line-height:1.4}
+.ov-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.06em;background:var(--amber);color:var(--concrete);border-radius:20px;padding:3px 10px;margin-top:6px}
+.ov-price{grid-column:span 2}
+.ov-wide{grid-column:span 2}
+.lease-bar-track{height:5px;background:oklch(100% 0 0 / 0.1);border-radius:3px;overflow:hidden;margin-top:var(--sp-3)}
+.lease-bar-fill{height:100%;border-radius:3px;background:var(--amber);width:0;transition:width 1.4s var(--ease)}
+
+/* ── THE SPACE ── */
+.space-section{background:var(--stone-card)}
+.space-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);align-items:center;margin-top:var(--sp-7)}
+.space-img{height:560px;border-radius:var(--r);overflow:hidden;clip-path:inset(100% 0 0 0 round var(--r));transition:clip-path 1.2s var(--ease)}
+.space-img.in{clip-path:inset(0% 0 0 0 round var(--r))}
+.space-body{font-size:15px;color:var(--ink-mid);line-height:1.85;margin:var(--sp-5) 0}
+.spec-list{display:flex;flex-direction:column;gap:var(--sp-3);margin-top:var(--sp-5)}
+.spec-row{display:flex;align-items:center;gap:var(--sp-4);padding:var(--sp-4) 0;border-bottom:1px solid var(--b)}
+.spec-row:last-child{border:none}
+.spec-icon{flex-shrink:0;width:36px;height:36px;border-radius:8px;background:var(--amber-pale);display:flex;align-items:center;justify-content:center;font-size:16px}
+.spec-name{font-size:13px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.spec-sub{font-size:11px;color:var(--ink-soft)}
+
+/* ── CEILING VISUALISER ── */
+.ceil-section{background:var(--stone-alt)}
+.ceil-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);align-items:end;margin-top:var(--sp-7)}
+.ceil-visual{display:flex;gap:var(--sp-7);align-items:flex-end;justify-content:center;height:340px}
+.ceil-col{display:flex;flex-direction:column;align-items:center;gap:var(--sp-4)}
+.ceil-building{width:120px;border-radius:8px 8px 0 0;position:relative;overflow:hidden;transition:height 1.2s var(--ease)}
+.ceil-building-std{background:linear-gradient(180deg,var(--ink-faint) 0%,oklch(80% 0.008 62) 100%);height:0}
+.ceil-building-hi{background:linear-gradient(180deg,var(--amber) 0%,var(--amber-light) 100%);height:0}
+.ceil-label{font-family:var(--ff-d);font-size:22px;font-weight:300;color:var(--ink);text-align:center}
+.ceil-label em{font-style:italic;color:var(--amber);font-size:26px}
+.ceil-sublabel{font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-soft);text-align:center}
+.ceil-tick{position:absolute;right:-32px;top:0;width:28px;height:1px;background:var(--amber)}
+.ceil-tick-lbl{position:absolute;right:-70px;top:-7px;font-size:10px;font-weight:600;color:var(--amber)}
+.ceil-body{font-size:15px;color:var(--ink-mid);line-height:1.8}
+.ceil-uses{display:flex;flex-wrap:wrap;gap:var(--sp-2);margin-top:var(--sp-5)}
+.ceil-use-tag{font-size:11px;font-weight:600;letter-spacing:0.05em;background:var(--amber-pale);color:var(--amber);border-radius:20px;padding:5px 14px}
+
+/* ── FIT-OUT GRID ── */
+.fitout-section{background:var(--concrete)}
+.fitout-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--sp-4);margin-top:var(--sp-7)}
+.fo-card{background:var(--concrete-mid);border-radius:var(--r);padding:var(--sp-6);border:1px solid var(--b-dark);transition:background 0.25s,transform 0.3s var(--ease)}
+.fo-card:hover{background:var(--concrete-lt);transform:translateY(-4px)}
+.fo-icon{font-size:32px;margin-bottom:var(--sp-4)}
+.fo-title{font-family:var(--ff-d);font-size:20px;font-weight:300;color:#fff;margin-bottom:var(--sp-3)}
+.fo-desc{font-size:13px;color:oklch(100% 0 0 / 0.5);line-height:1.65}
+.fo-tag{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.06em;background:oklch(65% 0.138 48 / 0.15);color:var(--amber-light);border-radius:20px;padding:3px 10px;margin-top:var(--sp-3)}
+
+/* ── B1 PERMITTED USES ── */
+.b1-section{background:var(--stone-alt)}
+.b1-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);margin-top:var(--sp-7)}
+.b1-list{display:flex;flex-direction:column;gap:var(--sp-3)}
+.b1-item{display:flex;align-items:flex-start;gap:var(--sp-4);padding:var(--sp-4) 0;border-bottom:1px solid var(--b)}
+.b1-item:last-child{border:none}
+.b1-check{flex-shrink:0;width:22px;height:22px;border-radius:50%;background:var(--amber-pale);display:flex;align-items:center;justify-content:center;margin-top:1px}
+.b1-check svg{width:12px;height:12px;stroke:var(--amber);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.b1-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.b1-desc{font-size:12px;color:var(--ink-soft);line-height:1.5}
+.b1-note{background:var(--amber-pale);border-radius:var(--r);padding:var(--sp-5) var(--sp-6);border-left:3px solid var(--amber)}
+.b1-note p{font-size:13px;color:var(--ink-mid);line-height:1.7;margin-top:var(--sp-3)}
+
+/* ── GALLERY ── */
+.gallery-section{background:var(--stone-card)}
+.gal-grid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:260px 260px;gap:8px;margin-top:var(--sp-6);border-radius:var(--r);overflow:hidden}
+.gi{overflow:hidden;position:relative;cursor:none}
+.gi:first-child{grid-column:1/3}
+.gi img{transition:transform 0.7s var(--ease)}
+.gi:hover img{transform:scale(1.06)}
+.gi::after{content:'';position:absolute;inset:0;background:oklch(20% 0.012 62 / 0);transition:background 0.3s}
+.gi:hover::after{background:oklch(20% 0.012 62 / 0.15)}
+.lb{position:fixed;inset:0;z-index:1000;background:oklch(0% 0 0 / 0.96);display:none;align-items:center;justify-content:center}
+.lb.open{display:flex}
+.lb img{max-width:92vw;max-height:92vh;object-fit:contain;border-radius:8px}
+.lb-x{position:fixed;top:22px;right:26px;font-size:34px;color:#fff;opacity:0.7;cursor:none;line-height:1}
+.lb-x:hover{opacity:1}
+.lb-p,.lb-n{position:fixed;top:50%;transform:translateY(-50%);font-size:40px;color:#fff;padding:16px;opacity:0.55;cursor:none}
+.lb-p{left:12px}.lb-n{right:12px}
+.lb-p:hover,.lb-n:hover{opacity:1}
+
+/* ── FLOOR PLAN ── */
+.fp-section{background:var(--stone-alt)}
+.fp-wrap{margin-top:var(--sp-6);border-radius:var(--r);overflow:hidden;border:1px solid var(--b);background:var(--stone-card);max-height:600px;cursor:zoom-in}
+.fp-wrap img{object-fit:contain;max-height:600px}
+
+/* ── PSF BENCHMARK ── */
+.psf-section{background:var(--stone-card)}
+.psf-bars{display:flex;flex-direction:column;gap:var(--sp-4);margin-top:var(--sp-6)}
+.psf-row{display:flex;flex-direction:column;gap:6px}
+.psf-row-head{display:flex;justify-content:space-between;align-items:center}
+.psf-row-label{font-size:13px;font-weight:500;color:var(--ink)}
+.psf-row-val{font-family:var(--ff-d);font-size:20px;font-weight:300;color:var(--ink);font-variant-numeric:tabular-nums}
+.psf-row-val.hi{color:var(--amber)}
+.psf-track{height:8px;background:var(--b);border-radius:4px;overflow:hidden}
+.psf-fill{height:100%;border-radius:4px;background:var(--ink-faint);width:0;transition:width 1.2s var(--ease)}
+.psf-fill.hi{background:var(--amber)}
+.psf-note{font-size:11px;color:var(--ink-soft);margin-top:var(--sp-4);line-height:1.6}
+
+/* ── INVESTMENT CALC ── */
+.calc-section{background:var(--concrete)}
+.calc-tabs{display:flex;gap:4px;background:oklch(100% 0 0 / 0.07);border-radius:12px;padding:4px;margin:var(--sp-7) 0}
+.calc-tab{flex:1;text-align:center;font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:oklch(100% 0 0 / 0.4);padding:12px 10px;border-radius:9px;transition:all 0.2s}
+.calc-tab.active{background:var(--amber);color:var(--concrete)}
+.calc-panel{display:none}
+.calc-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-6);align-items:start}
+.c-label{font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:oklch(100% 0 0 / 0.4);margin-bottom:8px}
+.c-val{font-family:var(--ff-d);font-size:28px;font-weight:300;color:#fff;margin-bottom:8px;font-variant-numeric:tabular-nums}
+input[type=range]{width:100%;height:4px;border-radius:2px;appearance:none;background:oklch(100% 0 0 / 0.15);outline:none}
+input[type=range]::-webkit-slider-thumb{appearance:none;width:18px;height:18px;border-radius:50%;background:var(--amber);cursor:none;border:2px solid var(--concrete-mid);box-shadow:0 2px 8px oklch(0% 0 0 / 0.3)}
+.c-range-labels{display:flex;justify-content:space-between;margin-top:5px;font-size:10px;color:oklch(100% 0 0 / 0.28)}
+.c-fields{display:flex;flex-direction:column;gap:var(--sp-5)}
+.c-results{background:oklch(100% 0 0 / 0.06);border-radius:var(--r);padding:var(--sp-6);border:1px solid var(--b-dark)}
+.c-row{display:flex;justify-content:space-between;align-items:center;padding:var(--sp-4) 0;border-bottom:1px solid var(--b-dark)}
+.c-row:last-child{border:none}
+.c-row-lbl{font-size:13px;color:oklch(100% 0 0 / 0.5)}
+.c-row-val{font-family:var(--ff-d);font-size:20px;font-weight:300;color:#fff;font-variant-numeric:tabular-nums}
+.c-row-val.hi{color:var(--amber);font-size:26px}
+.calc-note{font-size:11px;color:oklch(100% 0 0 / 0.3);line-height:1.6;margin-top:var(--sp-4)}
+
+/* ── LEASE TIMELINE ── */
+.lease-section{background:var(--stone-alt)}
+.lease-vis{margin-top:var(--sp-7);position:relative}
+.lease-bar-main-track{height:20px;background:var(--b);border-radius:10px;overflow:hidden;position:relative}
+.lease-bar-main-used{height:100%;background:var(--ink-faint);width:0;border-radius:10px 0 0 10px;transition:width 1.2s var(--ease)}
+.lease-bar-main-rem{position:absolute;top:0;left:0;height:100%;background:var(--amber);width:0;opacity:0;transition:width 1.2s 0.2s var(--ease),opacity 0.3s 0.2s}
+.lease-milestones{display:flex;justify-content:space-between;margin-top:var(--sp-3)}
+.lease-m{text-align:center;font-size:11px;color:var(--ink-soft)}
+.lease-m strong{display:block;font-size:13px;font-weight:600;color:var(--ink)}
+.lease-m.now strong{color:var(--amber)}
+.lease-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--sp-5);margin-top:var(--sp-7)}
+.lease-stat{text-align:center;padding:var(--sp-5);background:var(--stone-card);border-radius:var(--r);border:1px solid var(--b)}
+.lease-stat-val{font-family:var(--ff-d);font-size:36px;font-weight:300;color:var(--ink);font-variant-numeric:tabular-nums}
+.lease-stat-val em{font-style:italic;color:var(--amber)}
+.lease-stat-lbl{font-size:11px;font-weight:500;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink-soft);margin-top:4px}
+
+/* ── CONNECTIVITY ── */
+.conn-section{background:var(--stone-card)}
+.conn-grid{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-7);margin-top:var(--sp-7)}
+.conn-items{display:flex;flex-direction:column;gap:var(--sp-4)}
+.conn-card{background:var(--stone-alt);border-radius:12px;padding:var(--sp-5);border:1px solid var(--b);display:flex;gap:var(--sp-4);align-items:center;transition:border-color 0.2s}
+.conn-card:hover{border-color:var(--amber)}
+.conn-icon{flex-shrink:0;width:44px;height:44px;border-radius:10px;background:var(--amber-pale);display:flex;align-items:center;justify-content:center;font-size:18px}
+.conn-name{font-size:14px;font-weight:500;color:var(--ink);margin-bottom:2px}
+.conn-dist{font-size:12px;color:var(--ink-soft)}
+.conn-badge{display:inline-block;font-size:10px;font-weight:600;letter-spacing:0.05em;background:var(--amber-pale);color:var(--amber);border-radius:8px;padding:2px 8px;margin-top:3px}
+#leaflet-map{height:380px;border-radius:var(--r);overflow:hidden;border:1px solid var(--b)}
+
+/* ── AGENT ── */
+.agent-section{background:var(--stone-alt)}
+.agent-intro{max-width:520px;font-size:15px;color:var(--ink-mid);line-height:1.7;margin:var(--sp-5) 0 var(--sp-7)}
+.agent-card{background:var(--stone-card);border-radius:var(--r);padding:var(--sp-7);border:1px solid var(--b);max-width:560px;transition:border-color 0.3s,box-shadow 0.3s}
+.agent-card:hover{border-color:var(--amber);box-shadow:0 12px 40px oklch(65% 0.138 48 / 0.1)}
+.agent-photo{width:76px;height:76px;border-radius:50%;overflow:hidden;border:3px solid var(--amber-pale);margin-bottom:var(--sp-5)}
+.agent-name{font-family:var(--ff-d);font-size:28px;font-weight:400;color:var(--ink);margin-bottom:4px}
+.agent-meta{font-size:12px;color:var(--ink-soft);margin-bottom:var(--sp-4)}
+.agent-cea{display:inline-block;font-size:11px;font-weight:600;letter-spacing:0.05em;background:var(--amber-pale);color:var(--amber);border-radius:20px;padding:3px 12px}
+.agent-actions{display:flex;gap:var(--sp-3);margin-top:var(--sp-5);flex-wrap:wrap}
+.btn-p{display:inline-flex;align-items:center;gap:7px;background:var(--concrete);color:#fff;font-size:13px;font-weight:600;letter-spacing:0.04em;padding:13px 24px;border-radius:40px;transition:background 0.2s,transform 0.2s}
+.btn-p:hover{background:var(--concrete-lt);transform:translateY(-2px)}
+.btn-o{display:inline-flex;align-items:center;gap:7px;border:1.5px solid var(--b);color:var(--ink-mid);font-size:13px;font-weight:600;letter-spacing:0.04em;padding:13px 24px;border-radius:40px;transition:border-color 0.2s,color 0.2s}
+.btn-o:hover{border-color:var(--concrete);color:var(--concrete)}
+.btn-amber{background:var(--amber);color:var(--concrete)}
+.btn-amber:hover{background:var(--amber-light)}
+
+/* ── FOOTER ── */
+footer{background:var(--concrete);padding:var(--sp-8) var(--sp-7);text-align:center}
+.foot-logo{font-family:var(--ff-d);font-size:22px;font-weight:300;color:#fff;margin-bottom:var(--sp-4)}
+.foot-logo span{font-style:italic;color:var(--amber)}
+footer p{font-size:12px;color:oklch(100% 0 0 / 0.3);line-height:1.7;max-width:640px;margin:0 auto}
+
+/* ── REVEALS ── */
+.rv{opacity:0;transform:translateY(18px);transition:opacity 0.7s var(--ease),transform 0.7s var(--ease)}
+.rv.in{opacity:1;transform:none}
+.d1{transition-delay:0.1s}.d2{transition-delay:0.2s}.d3{transition-delay:0.3s}.d4{transition-delay:0.4s}
+
+/* ── STATS STRIP ── */
+.stats-strip{background:var(--concrete);border-top:1px solid oklch(100% 0 0 / 0.08);padding:var(--sp-8) var(--sp-7)}
+.stats-inner{max-width:1080px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid oklch(100% 0 0 / 0.10);border-radius:4px;overflow:hidden}
+.stat-item{position:relative;padding:var(--sp-6) var(--sp-6) var(--sp-5);cursor:default;border-right:1px solid oklch(100% 0 0 / 0.10);transition:opacity 0.35s var(--ease),background 0.4s var(--ease)}
+.stat-item:last-child{border-right:none}
+.stat-item::after{content:'';position:absolute;top:0;left:0;width:0;height:2px;background:var(--amber);transition:width 0.5s cubic-bezier(0.22,1,0.36,1)}
+.stat-item:hover::after{width:100%}
+.stats-inner:has(.stat-item:hover) .stat-item:not(:hover){opacity:0.38}
+.stat-item:hover{background:oklch(100% 0 0 / 0.04)}
+.stat-icon{display:flex;align-items:center;justify-content:center;width:20px;height:20px;color:oklch(100% 0 0 / 0.28);margin-bottom:var(--sp-5);transition:color 0.35s var(--ease)}
+.stat-item:hover .stat-icon{color:var(--amber)}
+.stat-lbl{font-size:10px;font-weight:500;letter-spacing:0.18em;text-transform:uppercase;color:oklch(100% 0 0 / 0.35);margin-bottom:var(--sp-2)}
+.stat-val{font-family:var(--ff-b);font-size:clamp(28px,3.2vw,44px);font-weight:200;line-height:1;color:oklch(100% 0 0 / 0.92);letter-spacing:-0.03em;font-variant-numeric:tabular-nums}
+.stat-val .count-static{font-weight:300;letter-spacing:-0.01em}
+.stat-sub{font-size:10.5px;color:oklch(100% 0 0 / 0.28);margin-top:var(--sp-3);line-height:1.5;letter-spacing:0.02em}
+
+/* ── PSF BENCHMARK LAYOUT ── */
+.psf-layout{display:grid;grid-template-columns:1fr 1fr;gap:var(--sp-9);align-items:start}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  .psf-layout{grid-template-columns:1fr}
+  .space-grid,.ceil-grid,.b1-grid,.conn-grid,.calc-panel.active{grid-template-columns:1fr}
+  .fitout-grid{grid-template-columns:1fr 1fr}
+  .ov-bento{grid-template-columns:1fr 1fr}
+  .ov-wide{grid-column:span 1}
+  .gal-grid{grid-template-columns:1fr;grid-template-rows:auto}
+  .gi:first-child{grid-column:1}
+}
+@media(max-width:640px){
+  /* Stats strip — strict 2×2 */
+  .stats-strip{padding:var(--sp-6) var(--sp-5)}
+  .stats-inner{grid-template-columns:repeat(2,1fr);border-radius:3px}
+  .stat-item{padding:var(--sp-5) var(--sp-5) var(--sp-4);border-bottom:1px solid oklch(100% 0 0 / 0.10)}
+  .stat-item:nth-child(3),.stat-item:nth-child(4){border-bottom:none}
+  .stat-item:nth-child(2),.stat-item:nth-child(4){border-right:none}
+  .stats-inner:has(.stat-item:hover) .stat-item:not(:hover){opacity:0.5}
+  .stat-val{font-size:28px}
+  .nav-links{display:none}
+  body{cursor:auto}
+  #c-dot,#c-ring{display:none}
+  .fitout-grid{grid-template-columns:1fr}
+  .lease-stats{grid-template-columns:1fr 1fr}
+  .stick-text{display:none}
+}
+</style>
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon-180.png">
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="c-dot"></div>
+<div id="c-ring"></div>
+<div id="sp"></div>
+
+<!-- STICKY BAR -->
+<div id="stick-bar">
+  <div class="stick-text"><strong>Oxley BizHub 2</strong> · Unit #XX-XX · S$1,138,000 (Nego) · B1 Industrial</div>
+  <div class="stick-actions">
+    <a href="tel:+6587654321" class="stick-out">Call Clara</a>
+    <a href="https://wa.me/6587654321?text=Hi%20Clara%2C%20I%27m%20interested%20in%20the%20Oxley%20BizHub%202%20unit%20at%2062%20Ubi%20Road%201.%20Please%20share%20more%20details." class="stick-pri">Schedule Viewing</a>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav" id="nav">
+  <a href="../index.html" class="nav-logo">my<span>prop</span>folio</a>
+  <ul class="nav-links">
+    <li><a href="#overview">Overview</a></li>
+    <li><a href="#investment">Investment</a></li>
+    <li><a href="#location">Location</a></li>
+    <li><a href="#agent">Enquire</a></li>
+  </ul>
+  <a href="#agent" class="nav-cta">Schedule Viewing</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="overview">
+  <div class="hero-img"><img src="5. Oxley Bizhub 2/Business Space Design.jpg" alt="Oxley BizHub 2 — 62 Ubi Road 1"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-badges">
+      <span class="hero-badge badge-top">&#9733; TOP Floor · Pool Access</span>
+      <span class="hero-badge badge-b1">B1 Light Industrial</span>
+      <span class="hero-badge badge-nego">Price Negotiable</span>
+    </div>
+    <h1 class="hero-hl">
+      <span class="w"><span>Your own</span></span>
+      <span class="w"><span><em>space,</em></span></span>
+      <span class="w"><span>forever.</span></span>
+    </h1>
+    <p class="hero-sub">A TOP-floor B1 unit with 6-metre ceilings, pool access, and bare condition ready for your vision. Stop paying rent — own your business premises at Oxley BizHub 2.</p>
+    <div class="hero-meta">
+      <div><div class="hero-stat-val">S$1.138M</div><div class="hero-stat-lbl">Asking (Nego)</div></div>
+      <div class="hero-div"></div>
+      <div><div class="hero-stat-val">1,970</div><div class="hero-stat-lbl">sqft</div></div>
+      <div class="hero-div"></div>
+      <div><div class="hero-stat-val">6m+</div><div class="hero-stat-lbl">Ceiling Height</div></div>
+      <div class="hero-div"></div>
+      <div><div class="hero-stat-val">670m</div><div class="hero-stat-lbl">MacPherson MRT</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="mq-wrap">
+  <div class="mq-track">
+    <div class="mq-item"><strong>OXLEY BIZHUB 2</strong><span class="mq-dot"></span></div>
+    <div class="mq-item">62 Ubi Road 1 · D14<span class="mq-dot"></span></div>
+    <div class="mq-item"><strong>S$1,138,000</strong> · Negotiable<span class="mq-dot"></span></div>
+    <div class="mq-item">1,970 sqft · S$577.66 psf<span class="mq-dot"></span></div>
+    <div class="mq-item">TOP Floor · Pool Access<span class="mq-dot"></span></div>
+    <div class="mq-item"><strong>6m+</strong> Ceiling Height<span class="mq-dot"></span></div>
+    <div class="mq-item">B1 Light Industrial · Bare<span class="mq-dot"></span></div>
+    <div class="mq-item">60-Year Lease · 49 Yrs Remaining<span class="mq-dot"></span></div>
+    <div class="mq-item">MacPherson MRT · <strong>670m</strong><span class="mq-dot"></span></div>
+    <div class="mq-item"><strong>OXLEY BIZHUB 2</strong><span class="mq-dot"></span></div>
+    <div class="mq-item">62 Ubi Road 1 · D14<span class="mq-dot"></span></div>
+    <div class="mq-item"><strong>S$1,138,000</strong> · Negotiable<span class="mq-dot"></span></div>
+    <div class="mq-item">1,970 sqft · S$577.66 psf<span class="mq-dot"></span></div>
+    <div class="mq-item">TOP Floor · Pool Access<span class="mq-dot"></span></div>
+    <div class="mq-item"><strong>6m+</strong> Ceiling Height<span class="mq-dot"></span></div>
+    <div class="mq-item">B1 Light Industrial · Bare<span class="mq-dot"></span></div>
+    <div class="mq-item">60-Year Lease · 49 Yrs Remaining<span class="mq-dot"></span></div>
+    <div class="mq-item">MacPherson MRT · <strong>670m</strong><span class="mq-dot"></span></div>
+  </div>
+</div>
+
+<!-- STATS STRIP -->
+<div class="stats-strip">
+  <div class="stats-inner">
+
+    <!-- Floor Area -->
+    <div class="stat-item rv">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Floor Area</div>
+      <div class="stat-val"><span class="count-num" data-to="1970" data-comma="true">1,970</span><span class="count-static"> sqft</span></div>
+      <div class="stat-sub">Bare condition · ready for fit-out</div>
+    </div>
+
+    <!-- Ceiling Height -->
+    <div class="stat-item rv d1">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v18M5 10l7-7 7 7"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Ceiling Height</div>
+      <div class="stat-val"><span class="count-num" data-to="6">6</span><span class="count-static">m+</span></div>
+      <div class="stat-sub">Mezzanine or loft fit-out feasible</div>
+    </div>
+
+    <!-- Lease Remaining -->
+    <div class="stat-item rv d2">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">Lease Remaining</div>
+      <div class="stat-val"><span class="count-num" data-to="49">49</span><span class="count-static"> yrs</span></div>
+      <div class="stat-sub">60-yr lease · expires ~2075</div>
+    </div>
+
+    <!-- MRT Distance -->
+    <div class="stat-item rv d3">
+      <div class="stat-icon" aria-hidden="true">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="4" y="4" width="16" height="14" rx="2"/><path d="M4 10h16M8 10v8M16 10v8M9 18l-2 3M15 18l2 3"/>
+        </svg>
+      </div>
+      <div class="stat-lbl">MacPherson MRT</div>
+      <div class="stat-val"><span class="count-num" data-to="670">670</span><span class="count-static">m</span></div>
+      <div class="stat-sub">8 min walk · Circle &amp; Downtown Lines</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- OVERVIEW BENTO -->
+<section class="section ov-section">
+  <div class="inner">
+    <span class="stag stag-lt rv">Unit at a Glance</span>
+    <h2 class="shl shl-lt rv d1">Every number<br><em>you need.</em></h2>
+    <div class="ov-bento" id="ovBento">
+      <div class="ov-card rv d1 ov-price">
+        <div class="ov-lbl">Asking Price</div>
+        <div class="ov-val">S$1,138,000</div>
+        <div class="ov-sub">S$577.66 psf · Negotiable</div>
+        <span class="ov-badge">Below Freehold Comps</span>
+      </div>
+      <div class="ov-card rv d2">
+        <div class="ov-lbl">Floor Area</div>
+        <div class="ov-val">1,970</div>
+        <div class="ov-sub">sqft · Bare condition</div>
+      </div>
+      <div class="ov-card rv d3">
+        <div class="ov-lbl">Ceiling Height</div>
+        <div class="ov-val">6m+</div>
+        <div class="ov-sub">Mezzanine potential</div>
+      </div>
+      <div class="ov-card rv d4">
+        <div class="ov-lbl">Floor</div>
+        <div class="ov-val">TOP</div>
+        <div class="ov-sub">Pool access included</div>
+      </div>
+      <div class="ov-card rv d1 ov-wide">
+        <div class="ov-lbl">Lease Remaining</div>
+        <div class="ov-val">49 yrs</div>
+        <div class="ov-sub">60-yr lease · TOP Dec 2015 · Expires ~2075</div>
+        <div class="lease-bar-track" style="margin-top:12px"><div class="lease-bar-fill" id="ovLease" data-pct="82"></div></div>
+      </div>
+      <div class="ov-card rv d2">
+        <div class="ov-lbl">MRT Distance</div>
+        <div class="ov-val">670m</div>
+        <div class="ov-sub">MacPherson · 8 min walk</div>
+      </div>
+      <div class="ov-card rv d3">
+        <div class="ov-lbl">Tenancy</div>
+        <div class="ov-val" style="font-size:clamp(16px,1.6vw,22px)">Vacant</div>
+        <div class="ov-sub">Move in or lease out immediately</div>
+        <span class="ov-badge">Ready Now</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- THE SPACE -->
+<section class="section space-section">
+  <div class="inner">
+    <div class="space-grid">
+      <div class="space-img" id="spaceImg">
+        <img src="5. Oxley Bizhub 2/Interior Industrial Space.jpg" alt="Interior of Oxley BizHub 2">
+      </div>
+      <div>
+        <span class="stag rv">The Space</span>
+        <h2 class="shl rv d1">A blank canvas<br><em>with a view.</em></h2>
+        <p class="space-body rv d2">
+          Rare in Singapore's industrial market: a TOP-floor B1 unit where your business neighbours the sky. Bare condition means zero renovation constraints — the 6-metre ceiling height and generous 1,970 sqft footprint are yours to interpret however you need.
+        </p>
+        <p class="space-body rv d3">
+          The pool access on this floor adds a dimension you simply don't find in typical B1 inventory. For businesses looking to attract and retain talent, this is the kind of space that sets you apart.
+        </p>
+        <div class="spec-list rv d4">
+          <div class="spec-row">
+            <div class="spec-icon">📐</div>
+            <div><div class="spec-name">1,970 sqft bare unit</div><div class="spec-sub">Full creative freedom — no existing fit-out to demolish</div></div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-icon">🏗️</div>
+            <div><div class="spec-name">6 metres and above ceiling</div><div class="spec-sub">Mezzanine, double-volume, or loft fit-out all feasible</div></div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-icon">🏊</div>
+            <div><div class="spec-name">TOP floor with pool access</div><div class="spec-sub">Exceptional for a B1 — an amenity for your team</div></div>
+          </div>
+          <div class="spec-row">
+            <div class="spec-icon">🚛</div>
+            <div><div class="spec-name">2 cargo lifts · 1 passenger lift</div><div class="spec-sub">Efficient goods movement; no ramp required for most uses</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CEILING VISUALISER -->
+<section class="section ceil-section">
+  <div class="inner">
+    <span class="stag rv">Ceiling Advantage</span>
+    <h2 class="shl rv d1">Why 6 metres<br><em>changes everything.</em></h2>
+    <div class="ceil-grid">
+      <div class="ceil-visual rv d1" id="ceilVis">
+        <div class="ceil-col">
+          <div class="ceil-building ceil-building-std" id="ceilStd" style="height:0"></div>
+          <div class="ceil-label">3.5m</div>
+          <div class="ceil-sublabel">Standard B1</div>
+        </div>
+        <div class="ceil-col">
+          <div class="ceil-building ceil-building-hi" id="ceilHi" style="height:0"></div>
+          <div class="ceil-label"><em>6m+</em></div>
+          <div class="ceil-sublabel">This Unit</div>
+        </div>
+      </div>
+      <div>
+        <p class="ceil-body rv d2">Most B1 units have ceilings at 3.5–4.5 metres. At 6 metres and above, this unit opens up fit-out possibilities that simply aren't available elsewhere.</p>
+        <p class="ceil-body rv d3" style="margin-top:var(--sp-5)">A mezzanine level — common in café or studio fit-outs — effectively doubles your usable floor area without increasing your footprint or rent. The vertical space also works for double-volume showrooms, production rigs, or dramatic interior retail concepts.</p>
+        <div class="ceil-uses rv d4">
+          <span class="ceil-use-tag">Mezzanine Office</span>
+          <span class="ceil-use-tag">Café / F&B</span>
+          <span class="ceil-use-tag">Photo / Film Studio</span>
+          <span class="ceil-use-tag">Showroom</span>
+          <span class="ceil-use-tag">Light Production</span>
+          <span class="ceil-use-tag">Co-working</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FIT-OUT POSSIBILITIES -->
+<section class="section fitout-section" id="fitout">
+  <div class="inner">
+    <span class="stag stag-lt rv">Fit-Out Possibilities</span>
+    <h2 class="shl shl-lt rv d1">Four directions<br><em>this space can take.</em></h2>
+    <div class="fitout-grid">
+      <div class="fo-card rv d1">
+        <div class="fo-icon">☕</div>
+        <div class="fo-title">F&B Commissary</div>
+        <div class="fo-desc">Central kitchen, dark kitchen, or café concept. B1 permits F&B production and preparation. The high ceiling accommodates extraction hoods and cold storage.</div>
+        <span class="fo-tag">B1 Permitted</span>
+      </div>
+      <div class="fo-card rv d2">
+        <div class="fo-icon">📸</div>
+        <div class="fo-title">Creative Studio</div>
+        <div class="fo-desc">Photography, film, content production, or design house. The 6m ceiling, top-floor natural light, and blank canvas make this a rare studio opportunity in D14.</div>
+        <span class="fo-tag">High Demand Use</span>
+      </div>
+      <div class="fo-card rv d3">
+        <div class="fo-icon">🏪</div>
+        <div class="fo-title">Showroom / Retail</div>
+        <div class="fo-desc">Product showroom, trade-only retail, or brand experience space. The high ceiling creates a dramatic double-volume environment that impresses clients on arrival.</div>
+        <span class="fo-tag">B1 Permitted</span>
+      </div>
+      <div class="fo-card rv d4">
+        <div class="fo-icon">💼</div>
+        <div class="fo-title">Office + Workshop</div>
+        <div class="fo-desc">Split-level office over a workshop floor. Keep your team and production under one roof — particularly effective for trades, fabrication, or e-commerce fulfilment.</div>
+        <span class="fo-tag">Most Popular</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section gallery-section">
+  <div class="inner">
+    <span class="stag rv">Gallery</span>
+    <h2 class="shl rv d1">See the<br><em>space itself.</em></h2>
+  </div>
+  <div style="max-width:1080px;margin:var(--sp-6) auto;padding:0 var(--sp-7)">
+    <div class="gal-grid">
+      <div class="gi" onclick="openLb(0)"><img src="5. Oxley Bizhub 2/Oxley BizHub Interior.jpg" alt="Oxley BizHub 2 interior" loading="lazy"></div>
+      <div class="gi" onclick="openLb(1)"><img src="5. Oxley Bizhub 2/Client Lounge Design.jpg" alt="Client lounge" loading="lazy"></div>
+      <div class="gi" onclick="openLb(2)"><img src="5. Oxley Bizhub 2/Oxley BizHub 2.jpg" alt="Oxley BizHub 2 exterior" loading="lazy"></div>
+      <div class="gi" onclick="openLb(3)"><img src="5. Oxley Bizhub 2/Oxley BizHub 2 (1).jpg" alt="Building view" loading="lazy"></div>
+      <div class="gi" onclick="openLb(4)"><img src="5. Oxley Bizhub 2/Business Space Design.jpg" alt="Business space" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lb" id="lb">
+  <button class="lb-x" onclick="closeLb()">&#215;</button>
+  <button class="lb-p" onclick="lbNav(-1)">&#8249;</button>
+  <img id="lb-img" src="" alt="">
+  <button class="lb-n" onclick="lbNav(1)">&#8250;</button>
+</div>
+
+<!-- VIDEO TOUR -->
+<section class="section" style="background:var(--concrete);padding:96px 0">
+  <div class="inner">
+    <span class="stag stag-lt rv">Video Tour</span>
+    <h2 class="shl shl-lt rv d1">Walk the space<br><em>before you visit.</em></h2>
+    <p style="font-size:15px;color:oklch(100% 0 0 / 0.5);margin:var(--sp-4) 0 var(--sp-7);max-width:480px;line-height:1.7" class="rv d2">A full walkthrough of Oxley BizHub 2 — see the unit, common areas, and the building before arranging a viewing.</p>
+    <a href="https://www.youtube.com/watch?v=HjMEUqfVo0s" target="_blank" rel="noopener" class="rv d3"
+      style="display:block;position:relative;padding-bottom:56.25%;border-radius:var(--r);overflow:hidden;background:var(--concrete-mid);border:1px solid var(--b-dark);text-decoration:none">
+      <img
+        src="https://img.youtube.com/vi/HjMEUqfVo0s/maxresdefault.jpg"
+        alt="Oxley BizHub 2 — Video Tour"
+        style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform 0.6s var(--ease)"
+        onerror="this.src='https://img.youtube.com/vi/HjMEUqfVo0s/hqdefault.jpg'"
+        onmouseover="this.style.transform='scale(1.03)'"
+        onmouseout="this.style.transform='scale(1)'">
+      <div style="position:absolute;inset:0;background:oklch(0% 0 0 / 0.35)"></div>
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px">
+        <div style="width:72px;height:72px;border-radius:50%;background:oklch(100% 0 0 / 0.92);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px oklch(0% 0 0 / 0.4);transition:transform 0.2s"
+          onmouseover="this.style.transform='scale(1.1)'"
+          onmouseout="this.style.transform='scale(1)'">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="var(--concrete)" style="margin-left:3px"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <span style="font-size:13px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#fff;opacity:0.8">Watch on YouTube</span>
+      </div>
+    </a>
+  </div>
+</section>
+
+<!-- FLOOR PLAN -->
+<section class="section fp-section">
+  <div class="inner">
+    <span class="stag rv">Floor Plan</span>
+    <h2 class="shl rv d1">Study the<br><em>layout.</em></h2>
+    <div class="fp-wrap rv d2" onclick="openLb(5)">
+      <img src="5. Oxley Bizhub 2/Industrial Floor Plan.jpg" alt="Floor plan — Oxley BizHub 2" loading="lazy">
+    </div>
+    <p style="font-size:12px;color:var(--ink-soft);margin-top:var(--sp-4)" class="rv">Floor plan is indicative. Click to enlarge. Contact agent for the latest unit-specific layout.</p>
+  </div>
+</section>
+
+<!-- PSF BENCHMARK -->
+<section class="section psf-section" id="investment">
+  <div class="inner">
+    <div class="psf-layout">
+      <div>
+        <span class="stag rv">Market Context</span>
+        <h2 class="shl rv d1">How the price<br><em>stacks up.</em></h2>
+        <p style="font-size:15px;color:var(--ink-mid);line-height:1.8;margin-top:var(--sp-5)" class="rv d2">At S$577.66 psf, this unit is priced competitively against comparable leasehold B1 in the Ubi–MacPherson corridor, and significantly below freehold industrial alternatives in the same district.</p>
+        <p style="font-size:12px;color:var(--ink-soft);line-height:1.6;margin-top:var(--sp-4)" class="rv d3">Indicative market data based on recent URA and PropertyGuru transactions. Contact agent for the latest comps.</p>
+      </div>
+      <div>
+        <div class="psf-bars rv d2" id="psfBars">
+          <div class="psf-row">
+            <div class="psf-row-head"><span class="psf-row-label">This Unit · Oxley BizHub 2</span><span class="psf-row-val hi">S$577 psf</span></div>
+            <div class="psf-track"><div class="psf-fill hi" data-pct="62"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-head"><span class="psf-row-label">Avg Leasehold B1 · Ubi area</span><span class="psf-row-val">~S$620 psf</span></div>
+            <div class="psf-track"><div class="psf-fill" data-pct="67"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-head"><span class="psf-row-label">Leasehold B1 · MacPherson</span><span class="psf-row-val">~S$680 psf</span></div>
+            <div class="psf-track"><div class="psf-fill" data-pct="73"></div></div>
+          </div>
+          <div class="psf-row">
+            <div class="psf-row-head"><span class="psf-row-label">Freehold B1 · D14 area</span><span class="psf-row-val">~S$920 psf</span></div>
+            <div class="psf-track"><div class="psf-fill" data-pct="100"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INVESTMENT CALCULATOR -->
+<section class="section calc-section">
+  <div class="inner">
+    <span class="stag stag-lt rv">Investment Calculator</span>
+    <h2 class="shl shl-lt rv d1">Run the<br><em>numbers.</em></h2>
+    <div class="calc-tabs rv d2">
+      <button class="calc-tab active" onclick="swCal('save',this)">Own &amp; Save</button>
+      <button class="calc-tab" onclick="swCal('let',this)">Buy to Let</button>
+    </div>
+
+    <!-- OWN & SAVE -->
+    <div class="calc-panel active" id="calc-save">
+      <div class="c-fields">
+        <div>
+          <div class="c-label">Purchase Price</div>
+          <div class="c-val" id="os-price-d">S$1,138,000</div>
+          <input type="range" id="os-price" min="900000" max="1400000" step="10000" value="1138000" oninput="updateOS()">
+          <div class="c-range-labels"><span>S$900K</span><span>S$1.4M</span></div>
+        </div>
+        <div>
+          <div class="c-label">Down Payment: <span id="os-dp-pct-d">30%</span></div>
+          <input type="range" id="os-dp-pct" min="20" max="50" step="5" value="30" oninput="updateOS()">
+          <div class="c-range-labels"><span>20%</span><span>50%</span></div>
+        </div>
+        <div>
+          <div class="c-label">Loan Rate (% p.a.): <span id="os-rate-d">3.5%</span></div>
+          <input type="range" id="os-rate" min="250" max="500" step="25" value="350" oninput="updateOS()">
+          <div class="c-range-labels"><span>2.5%</span><span>5.0%</span></div>
+        </div>
+        <div>
+          <div class="c-label">Market Rent (psf/month)</div>
+          <div class="c-val" id="os-rent-d">S$2.80 psf</div>
+          <input type="range" id="os-rent-psf" min="200" max="400" step="10" value="280" oninput="updateOS()">
+          <div class="c-range-labels"><span>S$2.00</span><span>S$4.00</span></div>
+        </div>
+        <p class="calc-note">If you were renting a comparable 1,970 sqft B1 space at market rate, your monthly rent would be higher than your mortgage repayment — this shows the saving.</p>
+      </div>
+      <div class="c-results">
+        <div class="c-row"><span class="c-row-lbl">Down payment required</span><span class="c-row-val" id="os-dp">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">Loan amount</span><span class="c-row-val" id="os-loan">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">Est. monthly mortgage</span><span class="c-row-val" id="os-mort">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">Market rent (equivalent)</span><span class="c-row-val" id="os-mkt">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">Monthly saving vs renting</span><span class="c-row-val hi" id="os-save">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">5-year cumulative saving</span><span class="c-row-val" id="os-5yr">—</span></div>
+      </div>
+    </div>
+
+    <!-- BUY TO LET -->
+    <div class="calc-panel" id="calc-let">
+      <div class="c-fields">
+        <div>
+          <div class="c-label">Purchase Price</div>
+          <div class="c-val" id="bl-price-d">S$1,138,000</div>
+          <input type="range" id="bl-price" min="900000" max="1400000" step="10000" value="1138000" oninput="updateBL()">
+          <div class="c-range-labels"><span>S$900K</span><span>S$1.4M</span></div>
+        </div>
+        <div>
+          <div class="c-label">Expected Monthly Rental</div>
+          <div class="c-val" id="bl-rent-d">S$4,800</div>
+          <input type="range" id="bl-rent" min="3000" max="8000" step="100" value="4800" oninput="updateBL()">
+          <div class="c-range-labels"><span>S$3,000</span><span>S$8,000</span></div>
+        </div>
+        <p class="calc-note">B1 industrial rental demand is driven by SMEs. At ~S$2.40–S$2.80 psf/month, 1,970 sqft typically commands S$4,700–S$5,500/month. Vacancy in this submarket is low.</p>
+      </div>
+      <div class="c-results">
+        <div class="c-row"><span class="c-row-lbl">Annual rental income</span><span class="c-row-val" id="bl-annual">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">Gross rental yield</span><span class="c-row-val hi" id="bl-yield">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">vs CPF OA rate (2.5%)</span><span class="c-row-val" id="bl-cpf">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">vs Fixed deposit (~3.5%)</span><span class="c-row-val" id="bl-fd">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">Implied rent psf/month</span><span class="c-row-val" id="bl-psf">—</span></div>
+        <div class="c-row"><span class="c-row-lbl">5-year gross return</span><span class="c-row-val" id="bl-5yr">—</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LEASE TIMELINE -->
+<section class="section lease-section" id="lease">
+  <div class="inner">
+    <span class="stag rv">Lease Status</span>
+    <h2 class="shl rv d1">49 years of<br><em>runway remaining.</em></h2>
+    <p style="font-size:15px;color:var(--ink-mid);line-height:1.8;margin:var(--sp-4) 0 var(--sp-7);max-width:560px" class="rv d2">A 60-year lease from 2015 means you have approximately 49 years remaining — well above the 30-year minimum required for most commercial mortgage financing.</p>
+    <div class="lease-vis" id="leaseVis">
+      <div class="lease-bar-main-track">
+        <div class="lease-bar-main-used" id="leaseUsed"></div>
+        <div class="lease-bar-main-rem" id="leaseRem"></div>
+      </div>
+      <div class="lease-milestones" style="margin-top:var(--sp-3)">
+        <div class="lease-m"><strong>2015</strong>TOP · Lease Start</div>
+        <div class="lease-m now"><strong>2026</strong>You are here</div>
+        <div class="lease-m"><strong>2040</strong>30 yrs left</div>
+        <div class="lease-m"><strong>2055</strong>20 yrs left</div>
+        <div class="lease-m"><strong>2075</strong>Lease Expiry</div>
+      </div>
+    </div>
+    <div class="lease-stats rv d2">
+      <div class="lease-stat">
+        <div class="lease-stat-val"><em>49</em></div>
+        <div class="lease-stat-lbl">Years Remaining</div>
+      </div>
+      <div class="lease-stat">
+        <div class="lease-stat-val">2015</div>
+        <div class="lease-stat-lbl">Year of TOP</div>
+      </div>
+      <div class="lease-stat">
+        <div class="lease-stat-val">2075</div>
+        <div class="lease-stat-lbl">Lease Expiry</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- B1 EXPLAINED -->
+<section class="section" style="background:var(--stone-alt)">
+  <div class="inner b1-section">
+    <span class="stag rv">Know Before You Buy</span>
+    <h2 class="shl rv d1">What B1 Light<br><em>Industrial allows.</em></h2>
+    <div class="b1-grid">
+      <div>
+        <div class="b1-list rv d1">
+          <div class="b1-item">
+            <div class="b1-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 5,9.5 10.5,2.5"/></svg></div>
+            <div><div class="b1-name">Food &amp; Beverage Production</div><div class="b1-desc">Commissary kitchens, central kitchens, dark kitchens, snack/confectionery production</div></div>
+          </div>
+          <div class="b1-item">
+            <div class="b1-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 5,9.5 10.5,2.5"/></svg></div>
+            <div><div class="b1-name">Light Assembly &amp; Fabrication</div><div class="b1-desc">Electronics, furniture, garments, crafts, prototyping, 3D printing, repair workshops</div></div>
+          </div>
+          <div class="b1-item">
+            <div class="b1-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 5,9.5 10.5,2.5"/></svg></div>
+            <div><div class="b1-name">Office &amp; Business Use</div><div class="b1-desc">Up to 40% of the unit may be used as ancillary office space — ideal for hybrid office-workshop setups</div></div>
+          </div>
+          <div class="b1-item">
+            <div class="b1-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 5,9.5 10.5,2.5"/></svg></div>
+            <div><div class="b1-name">Showroom &amp; Trade Sales</div><div class="b1-desc">Trade-only or industry-facing showrooms; product demonstrations; e-commerce fulfilment</div></div>
+          </div>
+          <div class="b1-item">
+            <div class="b1-check"><svg viewBox="0 0 12 12"><polyline points="1.5,6 5,9.5 10.5,2.5"/></svg></div>
+            <div><div class="b1-name">Creative &amp; Media Production</div><div class="b1-desc">Photography studios, film production, recording studios, design houses, content creation</div></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="b1-note rv d2">
+          <strong style="font-size:14px;color:var(--ink);font-weight:600">What is B1 Light Industrial?</strong>
+          <p>B1 is a zoning classification by URA (Urban Redevelopment Authority) for clean, light industrial uses. It sits between commercial (B2 heavy industrial) and pure office — ideal for businesses that need both workspace and production capacity.</p>
+          <p style="margin-top:var(--sp-3)">B1 units are popular with <strong style="color:var(--ink);font-weight:600">SMEs, F&B operators, creative agencies, e-commerce businesses, and traders</strong> who want the practicality of industrial space with the accessibility of a commercial address.</p>
+          <p style="margin-top:var(--sp-3)">Psf pricing is consistently lower than commercial shophouses or office space for a similar floor area — making B1 one of the most cost-effective ways to own your business premises in Singapore.</p>
+        </div>
+        <div class="rv d3" style="margin-top:var(--sp-5);padding:var(--sp-5) var(--sp-6);background:var(--stone-alt);border-radius:var(--r);border:1px solid var(--b)">
+          <strong style="font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:var(--ink-soft);font-weight:600">Not sure if your business qualifies?</strong>
+          <p style="font-size:13px;color:var(--ink-mid);line-height:1.7;margin-top:8px">Clara can help you assess permitted use before you commit. A quick WhatsApp is all it takes.</p>
+          <a href="https://wa.me/6587654321?text=Hi%20Clara%2C%20I%27d%20like%20to%20check%20if%20my%20business%20qualifies%20for%20the%20Oxley%20BizHub%202%20unit." style="display:inline-flex;align-items:center;gap:6px;margin-top:var(--sp-4);font-size:12px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--amber)">Ask Clara → </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONNECTIVITY -->
+<section class="section conn-section" id="location">
+  <div class="inner">
+    <span class="stag rv">Connectivity</span>
+    <h2 class="shl rv d1">Easy for your<br><em>team to reach.</em></h2>
+    <div class="conn-grid">
+      <div class="conn-items">
+        <div class="conn-card rv d1">
+          <div class="conn-icon">🚇</div>
+          <div>
+            <div class="conn-name">MacPherson MRT (CC10 / DT26)</div>
+            <div class="conn-dist">670m · 8 min walk · Cross Island + Downtown Line</div>
+            <span class="conn-badge">Dual Line</span>
+          </div>
+        </div>
+        <div class="conn-card rv d2">
+          <div class="conn-icon">🚇</div>
+          <div>
+            <div class="conn-name">Tai Seng MRT (CC11)</div>
+            <div class="conn-dist">~900m · 11 min walk · Circle Line</div>
+          </div>
+        </div>
+        <div class="conn-card rv d3">
+          <div class="conn-icon">🚌</div>
+          <div>
+            <div class="conn-name">PIE / KPE Access</div>
+            <div class="conn-dist">Ubi Avenue interchange nearby · 10 min to CBD by car</div>
+          </div>
+        </div>
+        <div class="conn-card rv d4">
+          <div class="conn-icon">🅿️</div>
+          <div>
+            <div class="conn-name">On-site Carparking</div>
+            <div class="conn-dist">Season and hourly parking available within Oxley BizHub 2</div>
+          </div>
+        </div>
+      </div>
+      <div class="rv d2" id="leaflet-map"></div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENT -->
+<section class="section agent-section" id="agent">
+  <div class="inner">
+    <span class="stag rv">Exclusively Listed By</span>
+    <h2 class="shl rv d1">Talk to <em>Clara.</em></h2>
+    <p class="agent-intro rv d2">Get the full information pack — floor plan, title details, and building management information. Clara will also help you assess if your intended use is B1-compliant before you spend any money on lawyers.</p>
+    <div class="agent-card rv d3">
+      <div class="agent-photo"><img src="2. Seraya Breeze/Clara Lim.jpg" alt="Clara Lim Mei Xuan" onerror="this.style.background='var(--stone-alt)'"></div>
+      <h3 class="agent-name">Clara Lim Mei Xuan</h3>
+      <p class="agent-meta">PropNex Realty · Industrial &amp; Commercial</p>
+      <span class="agent-cea">CEA R043891G</span>
+      <div class="agent-actions">
+        <a href="https://wa.me/6587654321?text=Hi%20Clara%2C%20I%27m%20interested%20in%20the%20Oxley%20BizHub%202%20unit%20at%2062%20Ubi%20Road%201.%20Can%20we%20arrange%20a%20viewing%3F" class="btn-p btn-amber">Schedule a Viewing</a>
+        <a href="https://wa.me/6587654321?text=Hi%20Clara%2C%20I%27d%20like%20the%20full%20info%20pack%20for%20Oxley%20BizHub%202." class="btn-o">Info Pack</a>
+        <a href="tel:+6587654321" class="btn-o">Call</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-logo">my<span>prop</span>folio</div>
+  <p>This microsite is prepared for marketing purposes by the listed agent. All information including price, area, lease term, and permitted use is indicative and subject to verification. PSF benchmarks are based on publicly available market data and are not guaranteed. Buyers are advised to conduct their own due diligence and consult a qualified solicitor and financial adviser before making any property decision.</p>
+  <p style="margin-top:12px;font-size:11px">© 2026 mypropfolio · Powered by GradePixel</p>
+</footer>
+
+<!-- STEP 1: initPropMap BEFORE Leaflet -->
+<script>
+var PROP_LAT = 1.3267, PROP_LNG = 103.8862;
+var allMarkers = [];
+var COLORS = { transport:'#3B5BDB', amenity:'#c45e00', highway:'#22C55E' };
+
+function initPropMap() {
+  var el = document.getElementById('leaflet-map');
+  if (!el || typeof L === 'undefined') return;
+  var map = L.map(el, { center:[PROP_LAT, PROP_LNG], zoom:15, scrollWheelZoom:false });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', { attribution:'&copy; CARTO &copy; OSM', subdomains:'abcd', maxZoom:19 }).addTo(map);
+  setTimeout(function(){ map.invalidateSize(); }, 300);
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function(e){ if(e[0].isIntersecting){ map.invalidateSize(); obs.disconnect(); } }, { threshold:0.05 });
+    obs.observe(el);
+  }
+  var propIcon = L.divIcon({ html:'<div style="width:14px;height:14px;border-radius:50%;background:oklch(65% 0.138 48);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,0.4)"></div>', iconSize:[14,14], iconAnchor:[7,7], className:'' });
+  L.marker([PROP_LAT, PROP_LNG], { icon:propIcon }).addTo(map).bindPopup('<strong>Oxley BizHub 2</strong><br>62 Ubi Road 1').openPopup();
+
+  function mk(lat, lng, cat, label) {
+    var icon = L.divIcon({ html:'<div style="width:9px;height:9px;border-radius:50%;background:'+COLORS[cat]+';border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,0.3)"></div>', iconSize:[9,9], iconAnchor:[4,4], className:'' });
+    var m = L.marker([lat,lng],{icon:icon}).addTo(map).bindPopup(label);
+    allMarkers.push({marker:m,cat:cat});
+  }
+  mk(1.3264, 103.8896, 'transport', 'MacPherson MRT (CC10/DT26) · 670m');
+  mk(1.3356, 103.8897, 'transport', 'Tai Seng MRT (CC11)');
+  mk(1.3199, 103.8990, 'transport', 'Ubi MRT (EW10)');
+  mk(1.3280, 103.8840, 'amenity', 'Ubi Techpark');
+  mk(1.3210, 103.8850, 'amenity', 'Breadtalk IHQ');
+  mk(1.3290, 103.8910, 'amenity', 'Oxley BizHub');
+}
+</script>
+
+<!-- STEP 2: Leaflet -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin="" onload="initPropMap()"></script>
+
+<!-- STEP 3: Main IIFE -->
+<script>
+(function(){
+'use strict';
+
+/* ── CURSOR ── */
+var dot=document.getElementById('c-dot'), ring=document.getElementById('c-ring');
+var mx=0, my=0, rx=0, ry=0;
+document.addEventListener('mousemove',function(e){mx=e.clientX;my=e.clientY;});
+(function tick(){
+  if(dot){dot.style.left=mx+'px';dot.style.top=my+'px';}
+  if(ring){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=rx+'px';ring.style.top=ry+'px';}
+  requestAnimationFrame(tick);
+})();
+
+/* ── SCROLL + NAV + STICK ── */
+var sp=document.getElementById('sp'), nav=document.getElementById('nav'), sb=document.getElementById('stick-bar');
+window.addEventListener('scroll',function(){
+  var pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+  if(sp)sp.style.width=pct+'%';
+  nav.classList.toggle('scrolled',window.scrollY>=72);
+  sb.classList.toggle('visible',window.scrollY>400);
+},{passive:true});
+
+/* ── REVEALS ── */
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}});},{threshold:0.1});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el);});
+
+/* ── STATS COUNT-UP ── */
+(function(){
+  function easeOutExpo(t){return t===1?1:1-Math.pow(2,-10*t);}
+  function fmt(n,comma){return comma?n.toLocaleString('en-SG'):String(n);}
+  var statsDone=false;
+  var strip=document.querySelector('.stats-strip');
+  if(strip&&'IntersectionObserver' in window){
+    var sObs=new IntersectionObserver(function(entries){
+      if(entries[0].isIntersecting&&!statsDone){
+        statsDone=true;
+        document.querySelectorAll('.count-num[data-to]').forEach(function(el){
+          var target=parseInt(el.getAttribute('data-to'),10);
+          var comma=el.hasAttribute('data-comma');
+          var dur=target>500?1200:700;
+          var t0=null;
+          function step(ts){
+            if(!t0)t0=ts;
+            var prog=Math.min((ts-t0)/dur,1);
+            el.textContent=fmt(Math.round(easeOutExpo(prog)*target),comma);
+            if(prog<1)requestAnimationFrame(step);
+            else el.textContent=fmt(target,comma);
+          }
+          requestAnimationFrame(step);
+        });
+        sObs.disconnect();
+      }
+    },{threshold:0.3});
+    sObs.observe(strip);
+  }
+})();
+
+/* ── SPACE IMAGE REVEAL ── */
+var ioImg=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');ioImg.unobserve(x.target);}});},{threshold:0.05});
+var si=document.getElementById('spaceImg');
+if(si){ioImg.observe(si); setTimeout(function(){var r=si.getBoundingClientRect();if(r.top<window.innerHeight&&r.bottom>0)si.classList.add('in');},200);}
+
+/* ── OVERVIEW BENTO BARS ── */
+var ioBento=new IntersectionObserver(function(e){
+  if(e[0].isIntersecting){
+    var b=document.getElementById('ovLease');
+    if(b){setTimeout(function(){b.style.width=b.dataset.pct+'%';},300);}
+    ioBento.disconnect();
+  }
+},{threshold:0.3});
+var ob=document.getElementById('ovBento');
+if(ob)ioBento.observe(ob);
+
+/* ── CEILING VISUALISER ── */
+var ioCeil=new IntersectionObserver(function(e){
+  if(e[0].isIntersecting){
+    var std=document.getElementById('ceilStd'), hi=document.getElementById('ceilHi');
+    setTimeout(function(){if(std)std.style.height='140px';if(hi)hi.style.height='240px';},200);
+    ioCeil.disconnect();
+  }
+},{threshold:0.3});
+var cv=document.getElementById('ceilVis');
+if(cv)ioCeil.observe(cv);
+
+/* ── PSF BARS ── */
+var ioPsf=new IntersectionObserver(function(e){
+  if(e[0].isIntersecting){
+    document.querySelectorAll('.psf-fill').forEach(function(bar){
+      setTimeout(function(){bar.style.width=bar.dataset.pct+'%';},200);
+    });
+    ioPsf.disconnect();
+  }
+},{threshold:0.3});
+var pb=document.getElementById('psfBars');
+if(pb)ioPsf.observe(pb);
+
+/* ── LEASE TIMELINE ── */
+var ioLease=new IntersectionObserver(function(e){
+  if(e[0].isIntersecting){
+    var used=document.getElementById('leaseUsed'), rem=document.getElementById('leaseRem');
+    setTimeout(function(){
+      if(used){used.style.width='18.3%';}  /* 11/60 years used */
+      if(rem){rem.style.opacity='1';rem.style.width='81.7%';}
+    },300);
+    ioLease.disconnect();
+  }
+},{threshold:0.3});
+var lv=document.getElementById('leaseVis');
+if(lv)ioLease.observe(lv);
+
+/* ── GALLERY LIGHTBOX ── */
+var lbImgs=[
+  '5. Oxley Bizhub 2/Oxley BizHub Interior.jpg',
+  '5. Oxley Bizhub 2/Client Lounge Design.jpg',
+  '5. Oxley Bizhub 2/Oxley BizHub 2.jpg',
+  '5. Oxley Bizhub 2/Oxley BizHub 2 (1).jpg',
+  '5. Oxley Bizhub 2/Business Space Design.jpg',
+  '5. Oxley Bizhub 2/Industrial Floor Plan.jpg'
+];
+var lbIdx=0;
+window.openLb=function(i){lbIdx=i;document.getElementById('lb-img').src=lbImgs[i];document.getElementById('lb').classList.add('open');};
+window.closeLb=function(){document.getElementById('lb').classList.remove('open');};
+window.lbNav=function(d){lbIdx=(lbIdx+d+lbImgs.length)%lbImgs.length;document.getElementById('lb-img').src=lbImgs[lbIdx];};
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb();if(e.key==='ArrowLeft')lbNav(-1);if(e.key==='ArrowRight')lbNav(1);});
+
+/* ── CALC SWITCHER ── */
+window.swCal=function(id,btn){
+  document.querySelectorAll('.calc-tab').forEach(function(t){t.classList.remove('active');});
+  document.querySelectorAll('.calc-panel').forEach(function(p){p.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('calc-'+id).classList.add('active');
+};
+
+/* ── HELPERS ── */
+function fmtS(n){return 'S$'+Math.round(n).toLocaleString();}
+function calcM(loan,rate,yrs){
+  if(rate===0)return loan/(yrs*12);
+  var mr=rate/12;var n=yrs*12;
+  return loan*mr*Math.pow(1+mr,n)/(Math.pow(1+mr,n)-1);
+}
+
+/* ── OWN & SAVE CALC ── */
+function updateOS(){
+  var price=+document.getElementById('os-price').value;
+  var dpPct=+document.getElementById('os-dp-pct').value;
+  var rate=+document.getElementById('os-rate').value/100;
+  var rentPsf=+document.getElementById('os-rent-psf').value/100;
+  document.getElementById('os-price-d').textContent=fmtS(price);
+  document.getElementById('os-dp-pct-d').textContent=dpPct+'%';
+  document.getElementById('os-rate-d').textContent=(rate*100).toFixed(1)+'%';
+  document.getElementById('os-rent-d').textContent='S$'+rentPsf.toFixed(2)+' psf';
+  var dp=price*dpPct/100;
+  var loan=price-dp;
+  var monthly=calcM(loan,rate,25);
+  var mktRent=1970*rentPsf;
+  var saving=mktRent-monthly;
+  document.getElementById('os-dp').textContent=fmtS(dp);
+  document.getElementById('os-loan').textContent=fmtS(loan);
+  document.getElementById('os-mort').textContent=fmtS(monthly)+'/mo';
+  document.getElementById('os-mkt').textContent=fmtS(mktRent)+'/mo';
+  document.getElementById('os-save').textContent=(saving>0?'+':'')+fmtS(saving)+'/mo';
+  document.getElementById('os-5yr').textContent=(saving>0?'+':'')+fmtS(saving*60)+' over 5 yrs';
+}
+window.updateOS=updateOS; updateOS();
+
+/* ── BUY TO LET CALC ── */
+function updateBL(){
+  var price=+document.getElementById('bl-price').value;
+  var rent=+document.getElementById('bl-rent').value;
+  document.getElementById('bl-price-d').textContent=fmtS(price);
+  document.getElementById('bl-rent-d').textContent=fmtS(rent);
+  var annual=rent*12;
+  var yld=annual/price*100;
+  var diff=(yld-2.5).toFixed(2);
+  var diffFD=(yld-3.5).toFixed(2);
+  var psf=(rent/1970).toFixed(2);
+  document.getElementById('bl-annual').textContent=fmtS(annual)+'/yr';
+  document.getElementById('bl-yield').textContent=yld.toFixed(2)+'%';
+  document.getElementById('bl-cpf').textContent=(diff>0?'+':'')+diff+'% above CPF OA';
+  document.getElementById('bl-fd').textContent=(diffFD>0?'+':'')+diffFD+'% vs fixed deposit';
+  document.getElementById('bl-psf').textContent='S$'+psf+' psf/month';
+  document.getElementById('bl-5yr').textContent=fmtS(annual*5)+' gross over 5 yrs';
+}
+window.updateBL=updateBL; updateBL();
+
+/* ── MAGNETIC BUTTONS ── */
+document.querySelectorAll('.btn-p,.nav-cta,.stick-pri').forEach(function(btn){
+  btn.addEventListener('mousemove',function(e){
+    var r=btn.getBoundingClientRect();
+    var x=(e.clientX-r.left-r.width/2)*0.22;
+    var y=(e.clientY-r.top-r.height/2)*0.22;
+    btn.style.transform='translate('+x+'px,'+y+'px)';
+  });
+  btn.addEventListener('mouseleave',function(){btn.style.transform='';});
+});
+
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add-On Services - mypropfolio</title>
+  <meta name="description" content="Enhance your listing with AI virtual staging, furniture layout recommendations, and professional property video. Available as add-ons to any mypropfolio plan.">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* ── Add-Ons Page Styles ────────────────────────────────── */
+
+    /* Before/After Slider */
+    .ba-section {
+      padding: 120px 0 80px;
+    }
+
+    .ba-intro {
+      max-width: 640px;
+      margin-bottom: 64px;
+    }
+
+    .ba-intro p {
+      font-size: 18px;
+      color: var(--color-text-muted);
+      margin-top: 20px;
+      line-height: 1.7;
+    }
+
+    .ba-slider-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 900px;
+      aspect-ratio: 16 / 9;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: col-resize;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow: 0 24px 64px rgba(0,0,0,0.12);
+    }
+
+    .ba-after,
+    .ba-before {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ba-after img,
+    .ba-before img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      pointer-events: none;
+    }
+
+    /* Floor plan: contain so nothing gets cropped */
+    #slider-floorplan {
+      aspect-ratio: 4 / 3;
+      background: #f8f7f5;
+    }
+    #slider-floorplan .ba-after img,
+    #slider-floorplan .ba-before img {
+      object-fit: contain;
+      padding: 16px;
+    }
+
+    .ba-before {
+      clip-path: inset(0 50% 0 0);
+    }
+
+    .ba-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 2px;
+      height: 100%;
+      background: #fff;
+      z-index: 10;
+    }
+
+    .ba-handle-knob {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 44px;
+      height: 44px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .ba-handle-knob svg {
+      width: 20px;
+      height: 20px;
+      color: var(--color-text);
+    }
+
+    .ba-label {
+      position: absolute;
+      bottom: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 12px;
+      border-radius: 2px;
+    }
+
+    .ba-label-before {
+      left: 20px;
+      background: rgba(0,0,0,0.55);
+      color: #fff;
+    }
+
+    .ba-label-after {
+      right: 20px;
+      background: rgba(255,255,255,0.9);
+      color: var(--color-text);
+    }
+
+    .ba-caption {
+      margin-top: 16px;
+      font-size: 13px;
+      color: var(--color-text-muted);
+    }
+
+    /* Second slider */
+    .ba-pair {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .ba-pair .ba-slider-wrap {
+      max-width: 100%;
+      aspect-ratio: 4 / 3;
+    }
+
+    /* Add-On service cards */
+    .addons-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .addon-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding: 56px 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .addon-number {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      padding-top: 4px;
+    }
+
+    .addon-title {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3vw, 34px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .addon-body {
+      font-size: 16px;
+      color: var(--color-text-muted);
+      line-height: 1.75;
+      max-width: 480px;
+    }
+
+    .addon-body + .addon-body {
+      margin-top: 12px;
+    }
+
+    .addon-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid var(--color-border);
+      border-radius: 2px;
+      padding: 4px 10px;
+      margin-top: 20px;
+      color: var(--color-text-muted);
+    }
+
+    .addon-price-block {
+      text-align: right;
+    }
+
+    .addon-price {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      display: block;
+    }
+
+    .addon-price-note {
+      font-size: 13px;
+      color: var(--color-text-muted);
+      margin-top: 6px;
+      display: block;
+    }
+
+    .addon-cta {
+      margin-top: 20px;
+      display: inline-flex;
+    }
+
+    /* Furniture layout visualiser block */
+    .layout-preview {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .layout-card {
+      background: var(--color-bg-grey);
+      border-radius: 4px;
+      padding: 24px;
+      font-size: 14px;
+    }
+
+    .layout-card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 12px;
+    }
+
+    .layout-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .layout-card-desc {
+      font-size: 14px;
+      color: var(--color-text-muted);
+      line-height: 1.6;
+    }
+
+    /* FAQ strip */
+    .addons-note {
+      padding: 40px 0;
+    }
+
+    .addons-note-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+
+    .addons-note p {
+      font-size: 15px;
+      color: var(--color-text-muted);
+      max-width: 520px;
+    }
+
+    /* Bundle packages section tint */
+    .bundle-section-wrap {
+      background: oklch(97% 0.012 250);
+      border-radius: 28px;
+      padding: 56px 48px 64px;
+      margin-bottom: 0;
+    }
+
+    /* Bundle packages grid */
+    .bundle-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      align-items: stretch;
+    }
+
+    .bundle-card {
+      background: #fff;
+      border: 1px solid oklch(88% 0.012 250);
+      border-top: 3px solid oklch(75% 0.06 250);
+      border-radius: 20px;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 12px oklch(50% 0.07 250 / 0.06);
+      position: relative;
+    }
+
+    .bundle-card-featured {
+      background: #fff;
+      border-top: 3px solid oklch(48% 0.15 250);
+      border-color: oklch(52% 0.14 250);
+      box-shadow:
+        0 0 0 1px oklch(52% 0.14 250),
+        0 16px 48px oklch(42% 0.16 250 / 0.14),
+        0 4px 16px oklch(42% 0.16 250 / 0.07);
+    }
+
+    .bundle-label {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+      align-self: flex-start;
+      color: oklch(48% 0.01 250);
+      background: oklch(93% 0.008 250);
+    }
+
+    .bundle-card-featured .bundle-label {
+      color: oklch(99% 0.005 250);
+      background: oklch(48% 0.15 250);
+    }
+
+    .bundle-name {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+      color: oklch(12% 0.008 250);
+    }
+
+    .bundle-tagline {
+      font-size: 14px;
+      color: oklch(55% 0.008 250);
+      line-height: 1.5;
+      padding-bottom: 20px;
+      border-bottom: 1px solid oklch(91% 0.005 250);
+      margin-bottom: 20px;
+    }
+
+    .bundle-features {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .bundle-features li {
+      font-size: 14px;
+      color: oklch(35% 0.008 250);
+      line-height: 1.5;
+      padding: 10px 0 10px 20px;
+      border-bottom: 1px solid oklch(92% 0.005 250);
+      position: relative;
+    }
+
+    .bundle-features li:last-child { border-bottom: none; }
+
+    .bundle-features li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-size: 11px;
+      color: oklch(48% 0.14 250);
+      top: 11px;
+    }
+
+    .bundle-card .bundle-features {
+      flex: 1;
+    }
+
+    .bundle-photo-note {
+      font-size: 12px;
+      color: oklch(52% 0.008 250);
+      line-height: 1.55;
+      display: flex;
+      gap: 6px;
+      align-items: flex-start;
+      margin-bottom: 20px;
+      padding: 12px;
+      background: oklch(96% 0.005 250);
+      border-radius: 8px;
+    }
+
+    .bundle-photo-note svg {
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: oklch(58% 0.01 250);
+    }
+
+    .bundle-add-price, .bundle-price-note + a, .bundle-add-price + a {
+      margin-top: auto;
+    }
+
+    .bundle-add-price {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      padding-top: 20px;
+      border-top: 1px solid oklch(91% 0.005 250);
+      margin-bottom: 16px;
+      line-height: 1.4;
+      color: oklch(10% 0.008 250);
+    }
+
+    .bundle-price-note {
+      font-size: 13px;
+      color: oklch(55% 0.008 250);
+      margin-top: auto;
+      margin-bottom: 16px;
+      padding-top: 20px;
+      border-top: 1px solid oklch(91% 0.005 250);
+      font-style: italic;
+    }
+
+    /* Bundle CTA buttons */
+    .bundle-card .btn-outline,
+    .bundle-card .btn-primary,
+    .bundle-card .btn-white {
+      display: block;
+      width: 100%;
+      text-align: center;
+      padding: 13px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.18s, border-color 0.18s, color 0.18s;
+      cursor: pointer;
+      border: 1.5px solid oklch(82% 0.008 250);
+      color: oklch(20% 0.01 250);
+      background: transparent;
+    }
+    .bundle-card .btn-outline:hover,
+    .bundle-card .btn-primary:hover,
+    .bundle-card .btn-white:hover {
+      background: oklch(95% 0.005 250);
+      border-color: oklch(70% 0.01 250);
+    }
+    .bundle-card-featured .btn-white,
+    .bundle-card-featured .btn-primary {
+      background: oklch(42% 0.18 258);
+      color: #fff;
+      border-color: oklch(42% 0.18 258);
+    }
+    .bundle-card-featured .btn-white:hover,
+    .bundle-card-featured .btn-primary:hover {
+      background: oklch(38% 0.18 258);
+      border-color: oklch(38% 0.18 258);
+    }
+
+    /* Mobile */
+    @media (max-width: 1024px) {
+      .bundle-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .addon-item {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .addon-price-block {
+        text-align: left;
+      }
+
+      .ba-pair {
+        grid-template-columns: 1fr;
+      }
+
+      .layout-preview {
+        grid-template-columns: 1fr;
+      }
+
+      .bundle-grid {
+        grid-template-columns: 1fr;
+      }
+      .bundle-section-wrap { padding: 28px 20px 36px; border-radius: 16px; }
+    }
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="favicon-180.png">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="index.html" class="nav-logo" aria-label="mypropfolio home">
+        <img src="Asset/MyPropFolio Logo.png" alt="mypropfolio" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="how-it-works.html">How It Works</a>
+        <a href="add-ons.html" class="active">Add-Ons</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <a href="contact.html" class="nav-cta">Get Started</a>
+      <button class="nav-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-mobile-overlay">
+    <a href="how-it-works.html">How It Works</a>
+    <a href="add-ons.html">Add-Ons</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="contact.html">Contact</a>
+    <a href="contact.html" class="nav-cta-mobile">Get Started</a>
+  </div>
+
+  <main id="content">
+
+    <!-- PAGE HERO -->
+    <header class="page-hero hero-with-bg" data-bg="#FAFAFA">
+      <div class="hero-bg-image" aria-hidden="true">
+        <img src="Asset/Add Ons Page Banner.jpg" alt="" loading="eager">
+        <div class="hero-bg-blur"></div>
+      </div>
+      <div class="container">
+        <div class="line-reveal">
+          <h1 class="display-lg">
+            <div class="line-clip"><span class="line">Make your listing</span></div>
+            <div class="line-clip"><span class="line">work harder.</span></div>
+          </h1>
+        </div>
+        <p class="reveal reveal-delay-1">Choose how much support you need. From a clean microsite with your own photos, to a full shoot and AI polish — we have a package for every listing.</p>
+      </div>
+    </header>
+
+    <!-- BEFORE / AFTER - AI VIRTUAL STAGING -->
+    <section class="ba-section" data-bg="#F5F3F0" aria-label="AI virtual staging demo">
+      <div class="container">
+
+        <div class="ba-intro reveal">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:12px;">AI Virtual Staging</p>
+          <h2 class="display-lg">Buyers see the space.<br>Not the clutter.</h2>
+          <p>We use AI to digitally empty or stage your listing photos. Cluttered rooms become clean, buyers focus on the space itself. Drag the handle to compare.</p>
+        </div>
+
+        <!-- Primary slider: Living Room -->
+        <p style="font-size:13px; font-weight:600; margin-bottom:12px; color:var(--color-text-muted);" class="reveal">Living Room</p>
+        <div class="ba-slider-wrap reveal reveal-delay-1" id="slider-main" aria-label="Living room before and after AI staging">
+          <div class="ba-after">
+            <img src="Asset/3. Add Ons/Living Room After.jpg" alt="After: living room digitally emptied and staged">
+          </div>
+          <div class="ba-before" id="before-main">
+            <img src="Asset/3. Add Ons/Living Room Before.jpeg" alt="Before: living room with furniture and clutter">
+          </div>
+          <div class="ba-handle" id="handle-main">
+            <div class="ba-handle-knob" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+                <polyline points="9 18 3 12 9 6" style="transform:translateX(12px)"></polyline>
+              </svg>
+            </div>
+          </div>
+          <span class="ba-label ba-label-before">Before</span>
+          <span class="ba-label ba-label-after">After</span>
+        </div>
+
+        <p class="ba-caption reveal">Drag the handle to compare. Results from actual listings.</p>
+
+        <!-- Second slider: Bedroom -->
+        <div style="margin-top: 56px;">
+          <p style="font-size:13px; font-weight:600; margin-bottom:12px; color:var(--color-text-muted);" class="reveal">Bedroom</p>
+          <div class="ba-slider-wrap reveal reveal-delay-1" id="slider-bedroom" aria-label="Bedroom before and after AI staging">
+            <div class="ba-after">
+              <img src="Asset/3. Add Ons/Bedroom After.jpg" alt="After: bedroom digitally staged">
+            </div>
+            <div class="ba-before" id="before-bedroom">
+              <img src="Asset/3. Add Ons/Bedroom Before.jpeg" alt="Before: bedroom with furniture and clutter">
+            </div>
+            <div class="ba-handle" id="handle-bedroom">
+              <div class="ba-handle-knob" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                  <polyline points="9 18 3 12 9 6" style="transform:translateX(12px)"></polyline>
+                </svg>
+              </div>
+            </div>
+            <span class="ba-label ba-label-before">Before</span>
+            <span class="ba-label ba-label-after">After</span>
+          </div>
+        </div>
+
+        <!-- Third slider: Floor Plan -->
+        <div style="margin-top: 56px;">
+          <p style="font-size:12px; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; color:var(--color-text-muted); margin-bottom:8px;" class="reveal">Floor Plan Enhancement</p>
+          <p style="font-size:15px; color:var(--color-text-muted); margin-bottom:16px; max-width:560px;" class="reveal">We sharpen, redraw, or upgrade your existing floor plan into a clean 2D or full 3D version. Even a blurry photo from your listing agent will do.</p>
+          <div class="ba-slider-wrap reveal reveal-delay-1" id="slider-floorplan" aria-label="Floor plan before and after enhancement">
+            <div class="ba-after">
+              <img src="Asset/3. Add Ons/Floorplan After.jpg" alt="After: enhanced floor plan">
+            </div>
+            <div class="ba-before" id="before-floorplan">
+              <img src="Asset/3. Add Ons/Floorplan Before.jpg" alt="Before: original floor plan">
+            </div>
+            <div class="ba-handle" id="handle-floorplan">
+              <div class="ba-handle-knob" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="15 18 9 12 15 6"></polyline>
+                  <polyline points="9 18 3 12 9 6" style="transform:translateX(12px)"></polyline>
+                </svg>
+              </div>
+            </div>
+            <span class="ba-label ba-label-before">Before</span>
+            <span class="ba-label ba-label-after">After</span>
+          </div>
+          <p class="ba-caption reveal">Any quality accepted — photo, screenshot, or scan.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- BUNDLE PACKAGES -->
+    <section class="section" aria-label="Listing packages" data-bg="#f0f4ff">
+      <div class="container">
+        <div class="bundle-section-wrap">
+
+        <div class="line-reveal" style="max-width:600px; margin-bottom:16px;">
+          <h2 class="display-lg">
+            <div class="line-clip"><span class="line">Pick your package.</span></div>
+          </h2>
+        </div>
+        <p class="reveal" style="font-size:16px; color:var(--color-text-muted); margin-bottom:56px; max-width:520px;">Every listing starts with a microsite. Choose how much support you want on top of that.</p>
+
+        <div class="bundle-grid reveal">
+
+          <!-- Standard -->
+          <div class="bundle-card">
+            <div class="bundle-card-header">
+              <p class="bundle-label">Standard</p>
+              <h3 class="bundle-name">Microsite Only</h3>
+              <p class="bundle-tagline">You send photos. We build.</p>
+            </div>
+            <ul class="bundle-features">
+              <li>Dedicated property microsite</li>
+              <li>AI-researched location writeup</li>
+              <li>Up to 10 photos displayed</li>
+              <li>Floor plan (if provided)</li>
+              <li>Video tour link (if provided)</li>
+              <li>Mobile-optimised, shareable link</li>
+              <li>2 months hosting included</li>
+            </ul>
+            <p class="bundle-price-note">Included in base listing price</p>
+            <a href="pricing.html" class="btn-outline">View Pricing</a>
+          </div>
+
+          <!-- Enhanced -->
+          <div class="bundle-card bundle-card-featured">
+            <div class="bundle-card-header">
+              <p class="bundle-label">Enhanced</p>
+              <h3 class="bundle-name">AI Photo Polish</h3>
+              <p class="bundle-tagline">We clean, relight, and stage your shots.</p>
+            </div>
+            <ul class="bundle-features">
+              <li>Everything in Standard</li>
+              <li>AI enhancement of up to 10 photos</li>
+              <li>Clutter removal and colour correction</li>
+              <li>Digital empty or digital furnish, per room</li>
+              <li>Floor plan AI polish — 1 level included</li>
+              <li>Additional floor plan levels: +$40 each</li>
+              <li>24-hour enhancement turnaround</li>
+            </ul>
+            <p class="bundle-photo-note">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              Results depend on photo quality. We will advise if photos need an upgrade before we start. Additional images beyond 10: +$12/image. Additional generations: +$12 each.
+            </p>
+            <p class="bundle-add-price">+$120 per listing</p>
+            <a href="https://wa.me/6596273238?text=I%20would%20like%20to%20add%20AI%20photo%20enhancement%20to%20my%20listing" target="_blank" rel="noopener" class="btn-white">WhatsApp Us</a>
+          </div>
+
+          <!-- On-Site -->
+          <div class="bundle-card">
+            <div class="bundle-card-header">
+              <p class="bundle-label">On-Site</p>
+              <h3 class="bundle-name">We Shoot For You</h3>
+              <p class="bundle-tagline">We come to the unit. No photographer needed.</p>
+            </div>
+            <ul class="bundle-features">
+              <li>Everything in Enhanced</li>
+              <li>mypropfolio team visits the unit</li>
+              <li>Professional mobile camera setup</li>
+              <li>Up to 10 AI-polished photos delivered</li>
+              <li>Agent or representative must be present</li>
+              <li>Available within Singapore</li>
+            </ul>
+            <p class="bundle-add-price">+$350 per listing</p>
+            <a href="https://wa.me/6596273238?text=I%20would%20like%20to%20enquire%20about%20the%20On-Site%20Shoot%20package" target="_blank" rel="noopener" class="btn-primary">WhatsApp Us</a>
+          </div>
+
+          <!-- Pro -->
+          <div class="bundle-card">
+            <div class="bundle-card-header">
+              <p class="bundle-label">Pro</p>
+              <h3 class="bundle-name">GradePixel Shoot</h3>
+              <p class="bundle-tagline">Full commercial photography via our studio partner.</p>
+            </div>
+            <ul class="bundle-features">
+              <li>Everything in Standard</li>
+              <li>Professional shoot by GradePixel</li>
+              <li>Studio-grade lighting and composition</li>
+              <li>Full-resolution edited images</li>
+              <li>Ideal for landed, bungalow, and premium condo</li>
+              <li>Optional video walkthrough available</li>
+            </ul>
+            <p class="bundle-add-price">+$680 (HDB/Condo)<br>+$980 (Landed/Commercial)</p>
+            <a href="https://wa.me/6596273238?text=I%20would%20like%20to%20enquire%20about%20the%20GradePixel%20Pro%20shoot%20package" target="_blank" rel="noopener" class="btn-primary">WhatsApp Us</a>
+          </div>
+
+        </div>
+
+        <!-- Photo limit note -->
+        <div class="reveal" style="margin-top:40px; padding:20px 24px; background:oklch(94% 0.015 250); border:1px solid oklch(85% 0.02 250); border-radius:12px; display:flex; align-items:flex-start; gap:14px;">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="oklch(48% 0.14 250)" stroke-width="2" style="flex-shrink:0; margin-top:2px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          <p style="font-size:14px; color:var(--color-text-muted); line-height:1.65; margin:0;"><strong style="color:var(--color-text);">Photo limit: 10 photos per listing across all packages.</strong> Minimum 5 photos required to proceed. Accepted formats: JPEG or PNG, minimum 1MB per file. Floor plan and video tour link are optional but recommended. <a href="pricing.html#terms" style="color:oklch(42% 0.16 250); text-decoration:underline;">View full service terms →</a></p>
+        </div>
+
+        </div><!-- /bundle-section-wrap -->
+      </div>
+    </section>
+
+    <!-- STANDALONE ADD-ONS -->
+    <section class="section section-warm" aria-label="Standalone add-ons" data-bg="#F5F3F0">
+      <div class="container">
+
+        <div class="line-reveal" style="max-width:600px; margin-bottom:16px;">
+          <h2 class="display-lg">
+            <div class="line-clip"><span class="line">Already listed?</span></div>
+          </h2>
+        </div>
+        <p class="reveal" style="font-size:16px; color:var(--color-text-muted); margin-bottom:56px; max-width:520px;">These can be bolted onto any active microsite during your hosting period.</p>
+
+        <div class="addons-grid">
+
+          <!-- Floor Plan Enhancement -->
+          <div class="addon-item reveal">
+            <div class="addon-number">01</div>
+            <div>
+              <h3 class="addon-title">Floor Plan Enhancement</h3>
+              <p class="addon-body">We take your existing floor plan — blurry scan, phone photo, or PDF — and produce a clean 2D layout ($40) or full 3D redraw ($55). Added as a dedicated section in your microsite.</p>
+              <div class="addon-tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                Turnaround: 48 hrs
+              </div>
+            </div>
+            <div class="addon-price-block">
+              <span class="addon-price">$40</span>
+              <span class="addon-price-note">2D floor plan clean</span>
+              <span class="addon-price" style="font-size:20px; margin-top:12px;">$55</span>
+              <span class="addon-price-note">3D floor plan redraw</span>
+              <a href="https://wa.me/6596273238?text=I%20would%20like%20to%20enquire%20about%20floor%20plan%20enhancement" target="_blank" rel="noopener" class="btn-primary addon-cta">WhatsApp Us</a>
+            </div>
+          </div>
+
+          <!-- Property Video -->
+          <div class="addon-item reveal">
+            <div class="addon-number">02</div>
+            <div>
+              <h3 class="addon-title">Property Video</h3>
+              <p class="addon-body">A short walkthrough video sets your listing apart from every static page on PropertyGuru. Choose edit-only if you already have raw footage, or book a full production shoot via GradePixel.</p>
+              <p class="addon-body">Delivered as a 60–90 second edited video, embedded directly into your microsite.</p>
+              <div class="addon-tag">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.62 3.38 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.69a16 16 0 0 0 6.29 6.29l.97-.97a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                Via GradePixel partnership
+              </div>
+            </div>
+            <div class="addon-price-block">
+              <span class="addon-price">$280</span>
+              <span class="addon-price-note">Edit only (you provide footage)</span>
+              <span class="addon-price" style="font-size:20px; margin-top:12px;">$680</span>
+              <span class="addon-price-note">Full shoot + edit (HDB/Condo)</span>
+              <span class="addon-price" style="font-size:20px; margin-top:8px;">$980</span>
+              <span class="addon-price-note">Full shoot + edit (Landed/Comm.)</span>
+              <a href="https://wa.me/6596273238?text=I%20would%20like%20to%20enquire%20about%20property%20video" target="_blank" rel="noopener" class="btn-primary addon-cta">WhatsApp Us</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="section cta-section" data-bg="#0A0A0A" aria-label="Get started">
+      <div class="container">
+        <div class="line-reveal">
+          <h2 class="display-lg">
+            <div class="line-clip"><span class="line">Ready to upgrade</span></div>
+            <div class="line-clip"><span class="line">your listing?</span></div>
+          </h2>
+        </div>
+        <p class="reveal reveal-delay-1">WhatsApp us with your property details and which add-ons you are interested in.</p>
+        <div class="cta-buttons reveal reveal-delay-2">
+          <a href="https://wa.me/6596273238" target="_blank" rel="noopener" class="btn-white">WhatsApp Us</a>
+          <a href="pricing.html" class="btn-outline-white">View Pricing</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" data-bg="#FAFAFA" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">
+            <img src="Asset/MyPropFolio Logo.png" alt="mypropfolio" class="nav-logo-img">
+          </a>
+          <p class="tagline">Your listing. Your brand.</p>
+        </div>
+        <div class="footer-links-group">
+          <a href="how-it-works.html">How It Works</a>
+          <a href="add-ons.html">Add-Ons</a>
+          <a href="pricing.html">Pricing</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <a href="https://wa.me/6596273238" target="_blank" rel="noopener">WhatsApp Us</a>
+
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 mypropfolio &nbsp;·&nbsp; <a href="pricing.html#terms" style="color:var(--color-text-muted); text-decoration:none; font-size:inherit;">Terms</a></p>
+        <p class="footer-partner">Photography partner: <a href="https://www.gradepixel.com" target="_blank" rel="noopener">GradePixel</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script>
+    /* ── Before/After Slider ──────────────────────────────── */
+    (function () {
+      function initSlider(sliderWrapId, beforeId, handleId) {
+        const wrap = document.getElementById(sliderWrapId);
+        const before = document.getElementById(beforeId);
+        const handle = document.getElementById(handleId);
+        if (!wrap || !before || !handle) return;
+
+        let isDragging = false;
+        let currentPct = 0.5;
+
+        function setPosition(pct) {
+          currentPct = Math.max(0.02, Math.min(0.98, pct));
+          before.style.clipPath = 'inset(0 ' + (100 - currentPct * 100).toFixed(2) + '% 0 0)';
+          handle.style.left = (currentPct * 100).toFixed(2) + '%';
+        }
+
+        function getPct(x) {
+          const rect = wrap.getBoundingClientRect();
+          return (x - rect.left) / rect.width;
+        }
+
+        // Set initial position at 50%
+        setPosition(0.5);
+
+        // Show drag cursor when hovering
+        wrap.style.cursor = 'ew-resize';
+
+        // Mouse — click and drag only
+        wrap.addEventListener('mousedown', (e) => {
+          isDragging = true;
+          setPosition(getPct(e.clientX));
+          e.preventDefault();
+        });
+
+        window.addEventListener('mousemove', (e) => {
+          if (!isDragging) return;
+          setPosition(getPct(e.clientX));
+        });
+
+        window.addEventListener('mouseup', () => { isDragging = false; });
+
+        // Touch — drag to move, stays where you leave it
+        wrap.addEventListener('touchstart', (e) => {
+          isDragging = true;
+          setPosition(getPct(e.touches[0].clientX));
+        }, { passive: false });
+
+        wrap.addEventListener('touchmove', (e) => {
+          if (!isDragging) return;
+          e.preventDefault();
+          setPosition(getPct(e.touches[0].clientX));
+        }, { passive: false });
+
+        wrap.addEventListener('touchend', () => {
+          isDragging = false;
+        });
+      }
+
+      // Respect prefers-reduced-motion: slider still works but no animation
+      initSlider('slider-main', 'before-main', 'handle-main');
+      initSlider('slider-bedroom', 'before-bedroom', 'handle-bedroom');
+      initSlider('slider-floorplan', 'before-floorplan', 'handle-floorplan');
+    })();
+  </script>
+</body>
+</html>
