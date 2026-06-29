@@ -6,14 +6,135 @@ media_folder: "Asset/uploads"
 public_folder: "/Asset/uploads"
 
 collections:
+  # ============ BLOG ============
   - name: "blog"
-    label: "Blog"
+    label: "📝 Blog"
     folder: "blog"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
       - { label: "Title", name: "title", widget: "string" }
-      - { label: "Date", name: "date", widget: "datetime" }
-      - { label: "Meta Description", name: "description", widget: "text" }
-      - { label: "Thumbnail", name: "thumbnail", widget: "image", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - label: "Thumbnail"
+        name: "thumbnail"
+        widget: "image"
+        required: false
+        media_library:
+          config:
+            multiple: false
+      - { label: "Author", name: "author", widget: "string", required: false }
+      - { label: "Category", name: "category", widget: "string", required: false }
+      - label: "SEO"
+        name: "seo"
+        widget: "object"
+        fields:
+          - { label: "Meta Title", name: "meta_title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "meta_description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", required: false }
+          - label: "OG Image (Social Share)"
+            name: "og_image"
+            widget: "image"
+            required: false
       - { label: "Body", name: "body", widget: "markdown" }
+
+  # ============ SEO - HOMEPAGE ============
+  - name: "seo_homepage"
+    label: "🏠 SEO - Homepage"
+    files:
+      - label: "Homepage"
+        name: "homepage"
+        file: "seo/homepage.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Secondary Keywords", name: "secondary_keywords", widget: "string", hint: "Phân cách bằng dấu phẩy" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", default: "https://mypropfolio.co/" }
+          - label: "OG Image"
+            name: "og_image"
+            widget: "image"
+            required: false
+          - { label: "OG Title", name: "og_title", widget: "string", required: false }
+          - { label: "OG Description", name: "og_description", widget: "text", required: false }
+
+  # ============ SEO - OTHER PAGES ============
+  - name: "seo_pages"
+    label: "📄 SEO - Pages"
+    files:
+      - label: "Pricing"
+        name: "pricing"
+        file: "seo/pricing.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Secondary Keywords", name: "secondary_keywords", widget: "string" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", default: "https://mypropfolio.co/pricing.html" }
+          - label: "OG Image"
+            name: "og_image"
+            widget: "image"
+            required: false
+          - { label: "OG Title", name: "og_title", widget: "string", required: false }
+          - { label: "OG Description", name: "og_description", widget: "text", required: false }
+
+      - label: "Add-Ons"
+        name: "addons"
+        file: "seo/addons.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Secondary Keywords", name: "secondary_keywords", widget: "string" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", default: "https://mypropfolio.co/add-ons.html" }
+          - label: "OG Image"
+            name: "og_image"
+            widget: "image"
+            required: false
+          - { label: "OG Title", name: "og_title", widget: "string", required: false }
+          - { label: "OG Description", name: "og_description", widget: "text", required: false }
+
+      - label: "How It Works"
+        name: "howitworks"
+        file: "seo/howitworks.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Secondary Keywords", name: "secondary_keywords", widget: "string" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", default: "https://mypropfolio.co/how-it-works.html" }
+          - label: "OG Image"
+            name: "og_image"
+            widget: "image"
+            required: false
+          - { label: "OG Title", name: "og_title", widget: "string", required: false }
+          - { label: "OG Description", name: "og_description", widget: "text", required: false }
+
+      - label: "Templates"
+        name: "templates"
+        file: "seo/templates.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Secondary Keywords", name: "secondary_keywords", widget: "string" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", default: "https://mypropfolio.co/templates.html" }
+          - label: "OG Image"
+            name: "og_image"
+            widget: "image"
+            required: false
+          - { label: "OG Title", name: "og_title", widget: "string", required: false }
+          - { label: "OG Description", name: "og_description", widget: "text", required: false }
+
+      - label: "Contact"
+        name: "contact"
+        file: "seo/contact.json"
+        fields:
+          - { label: "Page Title", name: "title", widget: "string", hint: "Tối đa 60 ký tự" }
+          - { label: "Meta Description", name: "description", widget: "text", hint: "Tối đa 160 ký tự" }
+          - { label: "Focus Keyword", name: "focus_keyword", widget: "string" }
+          - { label: "Canonical URL", name: "canonical", widget: "string", default: "https://mypropfolio.co/contact.html" }
+          - label: "OG Image"
+            name: "og_image"
+            widget: "image"
+            required: false
