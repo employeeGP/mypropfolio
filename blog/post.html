@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- SEO meta tags are injected by JS from post frontmatter -->
+  <title id="pageTitle">Blog – mypropfolio</title>
+  <meta name="description" id="pageDesc" content="">
+  <link rel="canonical" id="pageCanonical" href="https://mypropfolio.co/blog/">
+  <meta property="og:title" id="ogTitle" content="">
+  <meta property="og:description" id="ogDesc" content="">
+  <meta property="og:type" content="article">
+  <meta property="og:image" id="ogImage" content="">
+  <meta property="og:url" id="ogUrl" content="">
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+  <link rel="icon" type="image/png" href="../favicon.png">
+  <link rel="apple-touch-icon" href="../favicon-180.png">
+
+  <!-- marked.js for markdown rendering -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" defer></script>
+
+  <style>
+    /* ── Blog post page styles ──────────────────────────────────── */
+
+    /* Back bar */
+    .back-bar {
+      padding: calc(var(--nav-height) + 24px) 0 0;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--color-text);
+      opacity: 0.55;
+      text-decoration: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .back-link:hover { opacity: 1; }
+
+    /* Post header */
+    .post-header {
+      padding: 40px 0 56px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .post-category {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #CC1F28;
+      margin-bottom: 16px;
+      font-family: var(--font-body);
+    }
+
+    .post-title {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+      max-width: 720px;
+      margin-bottom: 20px;
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 14px;
+      color: var(--color-text-muted);
+    }
+
+    .post-meta-divider {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--color-text-muted);
+      opacity: 0.4;
+    }
+
+    /* Hero image */
+    .post-hero-img {
+      width: 100%;
+      max-height: 480px;
+      object-fit: cover;
+      object-position: center;
+      margin: 56px 0;
+      display: block;
+    }
+
+    /* Post body — constrained width for readability */
+    .post-body-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 56px 0 96px;
+    }
+
+    .post-body {
+      font-size: 17px;
+      line-height: 1.75;
+      color: var(--color-text);
+    }
+
+    /* Markdown rendered content styles */
+    .post-body h1,
+    .post-body h2,
+    .post-body h3,
+    .post-body h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      letter-spacing: -0.025em;
+      line-height: 1.2;
+      margin-top: 2em;
+      margin-bottom: 0.6em;
+      color: var(--color-text);
+    }
+
+    .post-body h2 { font-size: clamp(22px, 2.2vw, 32px); }
+    .post-body h3 { font-size: clamp(18px, 1.8vw, 24px); }
+    .post-body h4 { font-size: 18px; }
+
+    .post-body p {
+      margin-bottom: 1.4em;
+    }
+
+    .post-body ul,
+    .post-body ol {
+      padding-left: 1.5em;
+      margin-bottom: 1.4em;
+    }
+
+    .post-body ul { list-style: disc; }
+    .post-body ol { list-style: decimal; }
+
+    .post-body li {
+      margin-bottom: 0.5em;
+    }
+
+    .post-body a {
+      color: var(--color-text);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      opacity: 0.7;
+      transition: opacity 0.2s ease;
+    }
+
+    .post-body a:hover { opacity: 1; }
+
+    .post-body blockquote {
+      border-left: 3px solid #CC1F28;
+      padding: 12px 20px;
+      margin: 2em 0;
+      color: var(--color-text-muted);
+      font-size: 18px;
+      font-style: italic;
+    }
+
+    .post-body img {
+      width: 100%;
+      height: auto;
+      margin: 2em 0;
+    }
+
+    .post-body code {
+      font-size: 14px;
+      background: var(--color-bg-grey);
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    .post-body pre {
+      background: var(--color-bg-grey);
+      padding: 20px;
+      overflow-x: auto;
+      margin-bottom: 1.4em;
+    }
+
+    .post-body pre code {
+      background: none;
+      padding: 0;
+    }
+
+    .post-body hr {
+      border: none;
+      border-top: 1px solid var(--color-border);
+      margin: 2.5em 0;
+    }
+
+    .post-body strong { font-weight: 600; }
+
+    /* Error / loading states */
+    .post-error,
+    .post-loading {
+      text-align: center;
+      padding: 80px 0;
+    }
+
+    .post-error h2 {
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+
+    .post-error p {
+      font-size: 15px;
+      color: var(--color-text-muted);
+      margin-bottom: 24px;
+    }
+
+    .post-loading-spinner {
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--color-border);
+      border-top-color: var(--color-text);
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    @media (max-width: 768px) {
+      .post-body-wrap { padding: 40px 0 64px; }
+      .post-body { font-size: 16px; }
+      .post-hero-img { margin: 32px 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="container">
+      <a href="../index.html" class="nav-logo" aria-label="mypropfolio home">
+        <img src="../Asset/MyPropFolio Logo.png" alt="mypropfolio" class="nav-logo-img">
+      </a>
+      <div class="nav-links">
+        <a href="../how-it-works.html">How It Works</a>
+        <a href="../add-ons.html">Add-Ons</a>
+        <a href="../pricing.html">Pricing</a>
+        <a href="../contact.html">Contact</a>
+      </div>
+      <a href="../contact.html" class="nav-cta">Get Started</a>
+      <button class="nav-hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- MOBILE OVERLAY -->
+  <div class="nav-mobile-overlay" aria-hidden="true">
+    <a href="../how-it-works.html">How It Works</a>
+    <a href="../add-ons.html">Add-Ons</a>
+    <a href="../pricing.html">Pricing</a>
+    <a href="../contact.html">Contact</a>
+    <a href="../contact.html" class="nav-cta-mobile">Get Started</a>
+  </div>
+
+  <main id="content">
+
+    <!-- BACK BAR -->
+    <div class="back-bar" data-bg="#FFFFFF">
+      <div class="container">
+        <a href="index.html" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          Back to Blog
+        </a>
+      </div>
+    </div>
+
+    <!-- POST CONTENT (populated by JS) -->
+    <div id="postContent" data-bg="#FFFFFF">
+      <div class="container">
+        <div class="post-loading">
+          <div class="post-loading-spinner"></div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer" data-bg="#FAFAFA" aria-label="Site footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a href="../index.html" class="nav-logo">
+            <img src="../Asset/MyPropFolio Logo.png" alt="mypropfolio" class="nav-logo-img">
+          </a>
+          <p class="tagline">Your listing. Your brand.</p>
+        </div>
+        <div class="footer-links-group">
+          <a href="../how-it-works.html">How It Works</a>
+          <a href="../add-ons.html">Add-Ons</a>
+          <a href="../pricing.html">Pricing</a>
+          <a href="../contact.html">Contact</a>
+        </div>
+        <div class="footer-contact">
+          <a href="https://wa.me/6596273238" target="_blank" rel="noopener">WhatsApp Us</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 mypropfolio &nbsp;·&nbsp; <a href="../pricing.html#terms" style="color:var(--color-text-muted); text-decoration:none; font-size:inherit;">Terms</a></p>
+        <p class="footer-partner">Photography partner: <a href="https://www.gradepixel.com" target="_blank" rel="noopener">GradePixel</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+  <script>
+    /* ── Blog post: fetch markdown, parse frontmatter, render ─── */
+    (function () {
+      'use strict';
+
+      const postContent = document.getElementById('postContent');
+
+      /* Get ?slug= from URL */
+      const params = new URLSearchParams(window.location.search);
+      const slug = params.get('slug');
+
+      if (!slug) {
+        showError('Post not found', 'No article was specified.');
+        return;
+      }
+
+      /* Parse YAML-ish frontmatter from markdown string */
+      function parseFrontmatter(raw) {
+        const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+        if (!match) return { meta: {}, body: raw };
+        const yamlStr = match[1];
+        const body = match[2];
+        const meta = {};
+
+        yamlStr.split('\n').forEach(line => {
+          const colonIdx = line.indexOf(':');
+          if (colonIdx === -1) return;
+          const key = line.slice(0, colonIdx).trim();
+          let val = line.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
+          if (key) meta[key] = val;
+        });
+
+        /* Handle nested seo block */
+        const seoMatch = yamlStr.match(/seo:\s*\n((?:\s{2,}.+\n?)*)/);
+        if (seoMatch) {
+          meta.seo = {};
+          seoMatch[1].split('\n').forEach(line => {
+            const m = line.match(/^\s{2,}(\w+):\s*(.*)/);
+            if (m) meta.seo[m[1].trim()] = m[2].trim().replace(/^["']|["']$/g, '');
+          });
+        }
+
+        return { meta, body };
+      }
+
+      /* Format date */
+      function formatDate(dateStr) {
+        if (!dateStr) return '';
+        const d = new Date(dateStr);
+        if (isNaN(d)) return dateStr;
+        return d.toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
+      }
+
+      /* Set SEO meta tags */
+      function applyMeta(meta) {
+        const seo = meta.seo || {};
+        const title = seo.meta_title || meta.title || 'Blog – mypropfolio';
+        const desc = seo.meta_description || meta.description || '';
+        const canonical = seo.canonical || ('https://mypropfolio.co/blog/post.html?slug=' + encodeURIComponent(slug));
+        const ogImg = seo.og_image || meta.thumbnail || '';
+        const ogTitle = seo.meta_title || meta.title || title;
+
+        document.title = title;
+        document.getElementById('pageTitle').textContent = title;
+        document.getElementById('pageDesc').setAttribute('content', desc);
+        document.getElementById('pageCanonical').setAttribute('href', canonical);
+        document.getElementById('ogTitle').setAttribute('content', ogTitle);
+        document.getElementById('ogDesc').setAttribute('content', desc);
+        document.getElementById('ogUrl').setAttribute('content', canonical);
+        if (ogImg) document.getElementById('ogImage').setAttribute('content', ogImg);
+      }
+
+      /* Render the post */
+      function renderPost(meta, bodyMarkdown) {
+        applyMeta(meta);
+
+        const category = meta.category || '';
+        const dateStr = formatDate(meta.date);
+        const author = meta.author || 'mypropfolio';
+        const thumb = meta.thumbnail || '';
+
+        const thumbResolve = (src) => {
+          if (!src) return '';
+          if (src.startsWith('http')) return src;
+          if (src.startsWith('/Asset/')) return '..' + src;
+          return src;
+        };
+
+        /* Wait for marked.js to load, then render markdown */
+        function doRender() {
+          if (typeof marked === 'undefined') {
+            setTimeout(doRender, 50);
+            return;
+          }
+
+          const html = marked.parse(bodyMarkdown);
+
+          postContent.innerHTML = `
+            <div class="container">
+              <header class="post-header">
+                ${category ? `<p class="post-category">${category}</p>` : ''}
+                <h1 class="post-title">${meta.title || 'Untitled'}</h1>
+                <div class="post-meta">
+                  ${dateStr ? `<time datetime="${meta.date || ''}">${dateStr}</time>` : ''}
+                  ${dateStr && author ? `<span class="post-meta-divider" aria-hidden="true"></span>` : ''}
+                  ${author ? `<span>By ${author}</span>` : ''}
+                </div>
+              </header>
+
+              ${thumb ? `<img src="${thumbResolve(thumb)}" alt="${meta.title || ''}" class="post-hero-img" loading="eager">` : ''}
+
+              <div class="post-body-wrap">
+                <article class="post-body">
+                  ${html}
+                </article>
+              </div>
+            </div>`;
+        }
+
+        doRender();
+      }
+
+      function showError(heading, message) {
+        postContent.innerHTML = `
+          <div class="container">
+            <div class="post-error">
+              <h2>${heading}</h2>
+              <p>${message}</p>
+              <a href="index.html" class="btn-primary">Back to Blog</a>
+            </div>
+          </div>`;
+      }
+
+      /* Fetch the markdown file */
+      fetch(encodeURIComponent(slug) + '.md')
+        .then(res => {
+          if (!res.ok) throw new Error('Post not found');
+          return res.text();
+        })
+        .then(raw => {
+          const { meta, body } = parseFrontmatter(raw);
+          renderPost(meta, body);
+        })
+        .catch(() => {
+          showError('Article not found', 'This article may have moved or been removed.');
+        });
+
+    }());
+  </script>
+
+</body>
+</html>
