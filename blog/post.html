@@ -17,570 +17,430 @@
   <link rel="apple-touch-icon" href="../favicon-180.png">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.6/marked.min.js" defer></script>
   <style>
-    /* ── Blog post ───────────────────────────────────────────── */
+    /* ── Post page ─────────────────────────────────────────────── */
+    html { overflow-x: hidden; }
+    body  { overflow-x: hidden; }
 
     /* Breadcrumb */
-    .breadcrumb {
-      padding: calc(var(--nav-height) + 24px) 0 0;
+    .post-breadcrumb {
+      padding: calc(var(--nav-height) + 20px) 0 0;
       background: #FFFFFF;
     }
-
     .breadcrumb-list {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-      font-size: 13px;
-      color: var(--color-text-muted);
+      display: flex; align-items: center; gap: 6px;
+      flex-wrap: wrap; font-size: 13px; color: var(--color-text-muted);
       list-style: none;
     }
-
-    .breadcrumb-list li { display: flex; align-items: center; gap: 6px; }
-    .breadcrumb-list a { color: var(--color-text-muted); transition: color 0.2s; }
+    .breadcrumb-list a { color: var(--color-text-muted); transition: color .2s; }
     .breadcrumb-list a:hover { color: var(--color-text); }
-    .breadcrumb-sep { opacity: 0.4; }
+    .breadcrumb-sep { opacity: .35; }
 
-    /* Post header */
+    /* ── HEADER SECTION: two-column ──────────────────────────── */
     .post-header {
-      padding: 32px 0 48px;
       background: #FFFFFF;
+      padding: 32px 0 0;
     }
-
-    .post-header-inner {
-      max-width: 760px;
-    }
-
-    .post-header-meta {
-      display: flex;
+    .post-header-grid {
+      display: grid;
+      grid-template-columns: 1fr 42%;
+      gap: 48px;
       align-items: center;
-      gap: 12px;
-      margin-bottom: 20px;
-      font-size: 13px;
-      color: var(--color-text-muted);
+    }
+    @media (max-width: 900px) {
+      .post-header-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .post-header-img { order: -1; }
     }
 
-    .post-category-pill {
-      padding: 4px 12px;
-      background: rgba(204, 31, 40, 0.08);
-      color: #CC1F28;
+    /* Left: meta */
+    .post-header-left {}
+    .post-header-pills {
+      display: flex; align-items: center; gap: 10px;
+      margin-bottom: 20px; flex-wrap: wrap;
+    }
+    .post-cat-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px;
       border-radius: 100px;
+      background: rgba(204,31,40,.09);
+      color: #CC1F28;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.04em;
+      letter-spacing: .05em;
       font-family: var(--font-body);
     }
-
-    .post-read-time {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .post-read-pill {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      border: 1px solid var(--color-border);
+      font-size: 12px;
+      color: var(--color-text-muted);
+      font-family: var(--font-body);
     }
-
     .post-title {
       font-family: var(--font-display);
-      font-size: clamp(30px, 4.5vw, 52px);
+      font-size: clamp(28px, 4vw, 52px);
       font-weight: 700;
-      letter-spacing: -0.035em;
-      line-height: 1.08;
+      letter-spacing: -.035em;
+      line-height: 1.07;
       color: var(--color-text);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
-
     .post-description {
-      font-size: 18px;
+      font-size: 17px;
       line-height: 1.6;
       color: var(--color-text-muted);
       margin-bottom: 28px;
-      max-width: 640px;
+      max-width: 560px;
     }
-
     .post-author-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
+      display: flex; align-items: center; gap: 14px;
       padding-top: 24px;
       border-top: 1px solid var(--color-border);
     }
-
     .post-author-avatar {
-      width: 44px;
-      height: 44px;
+      width: 44px; height: 44px;
       border-radius: 50%;
       background: var(--color-bg-grey);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
     }
-
-    .post-author-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .post-author-avatar-initials {
+    .post-author-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .post-author-initial {
       font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--color-text);
+      font-size: 17px; font-weight: 700; color: var(--color-text);
     }
-
     .post-author-info { display: flex; flex-direction: column; gap: 2px; }
-
     .post-author-name {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--color-text);
-      font-family: var(--font-display);
+      font-size: 14px; font-weight: 600;
+      font-family: var(--font-display); color: var(--color-text);
     }
-
     .post-author-sub {
-      font-size: 12px;
-      color: var(--color-text-muted);
+      font-size: 12px; color: var(--color-text-muted);
+      display: flex; align-items: center; gap: 8px;
     }
+    .post-author-dot { opacity: .35; }
 
-    .post-author-divider {
-      margin: 0 8px;
-      color: var(--color-text-muted);
-      opacity: 0.4;
-    }
-
-    /* Hero image */
-    .post-hero-img-wrap {
-      background: #FFFFFF;
-      padding-bottom: 48px;
-    }
-
-    .post-hero-img {
+    /* Right: hero image */
+    .post-header-img {
+      position: relative;
       width: 100%;
-      max-height: 500px;
-      object-fit: cover;
-      object-position: center;
-      display: block;
-      border-radius: 4px;
-    }
-
-    /* Two-column layout */
-    .post-layout {
-      display: grid;
-      grid-template-columns: 1fr 280px;
-      gap: 0 60px;
-      align-items: start;
-      padding: 48px 0 96px;
-      background: #FFFFFF;
-    }
-
-    @media (max-width: 1024px) {
-      .post-layout {
-        grid-template-columns: 1fr;
-        gap: 0;
-      }
-      .post-sidebar { display: none; }
-    }
-
-    /* Article body */
-    .post-body {
-      font-size: 17px;
-      line-height: 1.78;
-      color: var(--color-text);
-      min-width: 0;
-    }
-
-    /* Numbered h2 sections */
-    .post-body .section-block {
-      margin-bottom: 64px;
-    }
-
-    .post-body .section-num {
-      font-family: var(--font-display);
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      color: #CC1F28;
-      margin-bottom: 8px;
-      display: block;
-    }
-
-    .post-body h2 {
-      font-family: var(--font-display);
-      font-size: clamp(20px, 2.2vw, 28px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      color: var(--color-text);
-      margin-bottom: 20px;
-      margin-top: 0;
-      scroll-margin-top: calc(var(--nav-height) + 24px);
-    }
-
-    .post-body h3 {
-      font-family: var(--font-display);
-      font-size: clamp(17px, 1.6vw, 21px);
-      font-weight: 600;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      color: var(--color-text);
-      margin-top: 2em;
-      margin-bottom: 0.6em;
-    }
-
-    .post-body h4 {
-      font-size: 16px;
-      font-weight: 600;
-      font-family: var(--font-display);
-      margin-top: 1.5em;
-      margin-bottom: 0.5em;
-    }
-
-    .post-body p { margin-bottom: 1.4em; }
-
-    .post-body ul, .post-body ol {
-      padding-left: 1.6em;
-      margin-bottom: 1.4em;
-    }
-
-    .post-body ul { list-style: disc; }
-    .post-body ol { list-style: decimal; }
-    .post-body li { margin-bottom: 0.45em; }
-
-    .post-body a {
-      color: var(--color-text);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      opacity: 0.75;
-      transition: opacity 0.2s;
-    }
-
-    .post-body a:hover { opacity: 1; }
-
-    .post-body blockquote {
-      border-left: 3px solid #CC1F28;
-      padding: 14px 20px;
-      margin: 2em 0;
-      color: var(--color-text-muted);
-      font-size: 18px;
-      font-style: italic;
-      background: #FAFAFA;
-    }
-
-    .post-body img { width: 100%; height: auto; margin: 2em 0; border-radius: 4px; }
-
-    .post-body code {
-      font-size: 14px;
-      background: var(--color-bg-grey);
-      padding: 2px 6px;
-      border-radius: 3px;
-    }
-
-    .post-body pre {
-      background: var(--color-bg-grey);
-      padding: 20px;
-      overflow-x: auto;
-      margin-bottom: 1.4em;
-      border-radius: 4px;
-    }
-
-    .post-body pre code { background: none; padding: 0; }
-    .post-body hr { border: none; border-top: 1px solid var(--color-border); margin: 2.5em 0; }
-    .post-body strong { font-weight: 600; }
-
-    /* Key takeaways box */
-    .post-body .takeaway-box {
-      background: var(--color-bg-warm);
-      border-left: 3px solid var(--color-text);
-      padding: 20px 24px;
-      margin: 2em 0;
-    }
-
-    /* Tags */
-    .post-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid var(--color-border);
-    }
-
-    .post-tag {
-      padding: 5px 12px;
-      border: 1px solid var(--color-border);
-      font-size: 12px;
-      color: var(--color-text-muted);
-      border-radius: 100px;
-      font-family: var(--font-body);
-    }
-
-    /* Author box */
-    .post-author-box {
-      margin-top: 48px;
-      padding: 28px 32px;
-      background: var(--color-bg-warm);
-      display: flex;
-      gap: 20px;
-      align-items: flex-start;
-    }
-
-    .post-author-box-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      background: var(--color-bg-grey);
-      flex-shrink: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      padding-bottom: 66%;
       overflow: hidden;
+      border-radius: 6px;
+      background: var(--color-bg-grey);
+    }
+    .post-header-img img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; object-position: center;
+    }
+    .post-header-img-placeholder {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
     }
 
-    .post-author-box-avatar img { width: 100%; height: 100%; object-fit: cover; }
-
-    .post-author-box-initials {
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 700;
+    /* Divider */
+    .post-header-divider {
+      height: 1px;
+      background: var(--color-border);
+      margin-top: 48px;
     }
 
-    .post-author-box h3 {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      margin: 0 0 4px;
+    /* ── THREE-COLUMN BODY ────────────────────────────────────── */
+    .post-body-wrap {
+      background: #FFFFFF;
+      padding: 56px 0 96px;
+    }
+    .post-body-grid {
+      display: grid;
+      grid-template-columns: 220px 1fr 260px;
+      gap: 0 48px;
+      align-items: start;
+    }
+    @media (max-width: 1200px) {
+      .post-body-grid {
+        grid-template-columns: 200px 1fr;
+        gap: 0 40px;
+      }
+      .post-right-col { display: none; }
+    }
+    @media (max-width: 900px) {
+      .post-body-grid { grid-template-columns: 1fr; }
+      .post-left-col  { display: none; }
     }
 
-    .post-author-box .role {
-      font-size: 13px;
-      color: var(--color-text-muted);
-      margin-bottom: 10px;
-    }
-
-    .post-author-box p {
-      font-size: 14px;
-      line-height: 1.6;
-      color: var(--color-text-muted);
-      margin: 0;
-    }
-
-    @media (max-width: 640px) {
-      .post-author-box { flex-direction: column; padding: 24px; }
-    }
-
-    /* Sidebar */
-    .post-sidebar {
+    /* Left: ToC */
+    .post-left-col {
       position: sticky;
       top: calc(var(--nav-height) + 32px);
     }
+    .toc-label {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 16px; display: block;
+      font-family: var(--font-body);
+    }
+    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 2px; }
+    .toc-list li { display: flex; gap: 10px; align-items: flex-start; }
+    .toc-num {
+      font-size: 11px; font-weight: 700; color: var(--color-text-muted);
+      min-width: 18px; padding-top: 3px; flex-shrink: 0;
+      font-family: var(--font-body);
+    }
+    .toc-link {
+      font-size: 13px; line-height: 1.5;
+      color: var(--color-text); opacity: .5;
+      transition: opacity .2s;
+      text-decoration: none;
+      padding: 4px 0;
+    }
+    .toc-link:hover { opacity: .85; }
+    .toc-link.active { opacity: 1; font-weight: 500; }
 
-    .toc-box {
+    /* Center: article */
+    .post-article {
+      font-size: 17px; line-height: 1.78; color: var(--color-text);
+      min-width: 0;
+    }
+    .post-article .section-block { margin-bottom: 56px; }
+    .post-article .section-num {
+      font-family: var(--font-body);
+      font-size: 11px; font-weight: 700;
+      letter-spacing: .1em; color: #CC1F28;
+      margin-bottom: 8px; display: block;
+      text-transform: uppercase;
+    }
+    .post-article h2 {
+      font-family: var(--font-display);
+      font-size: clamp(20px, 2vw, 26px);
+      font-weight: 700; letter-spacing: -.025em;
+      line-height: 1.2; color: var(--color-text);
+      margin: 0 0 18px;
+      scroll-margin-top: calc(var(--nav-height) + 24px);
+    }
+    .post-article h3 {
+      font-family: var(--font-display);
+      font-size: 19px; font-weight: 600;
+      letter-spacing: -.02em; line-height: 1.3;
+      color: var(--color-text);
+      margin: 1.8em 0 .6em;
+    }
+    .post-article h4 {
+      font-family: var(--font-display);
+      font-size: 16px; font-weight: 600;
+      margin: 1.4em 0 .5em;
+    }
+    .post-article p { margin-bottom: 1.4em; }
+    .post-article ul, .post-article ol {
+      padding-left: 1.5em; margin-bottom: 1.4em;
+    }
+    .post-article ul { list-style: disc; }
+    .post-article ol { list-style: decimal; }
+    .post-article li { margin-bottom: .45em; }
+    .post-article a {
+      color: var(--color-text); text-decoration: underline;
+      text-underline-offset: 3px; opacity: .75;
+      transition: opacity .2s;
+    }
+    .post-article a:hover { opacity: 1; }
+    .post-article blockquote {
+      border-left: 3px solid #CC1F28;
+      padding: 14px 20px; margin: 2em 0;
+      color: var(--color-text-muted);
+      font-size: 18px; font-style: italic;
+      background: #FAFAFA;
+    }
+    .post-article img {
+      width: 100%; height: auto;
+      margin: 2em 0; border-radius: 4px;
+    }
+    .post-article code {
+      font-size: 13px; background: var(--color-bg-grey);
+      padding: 2px 6px; border-radius: 3px;
+    }
+    .post-article pre {
+      background: var(--color-bg-grey);
+      padding: 20px; overflow-x: auto;
+      margin-bottom: 1.4em; border-radius: 4px;
+    }
+    .post-article pre code { background: none; padding: 0; }
+    .post-article hr { border: none; border-top: 1px solid var(--color-border); margin: 2.5em 0; }
+    .post-article strong { font-weight: 600; }
+
+    /* Tags */
+    .post-tags {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 48px; padding-top: 32px;
+      border-top: 1px solid var(--color-border);
+    }
+    .post-tag {
+      padding: 5px 12px;
+      border: 1px solid var(--color-border);
+      font-size: 12px; color: var(--color-text-muted);
+      border-radius: 100px; font-family: var(--font-body);
+    }
+
+    /* Right: author card + related */
+    .post-right-col {
+      position: sticky;
+      top: calc(var(--nav-height) + 32px);
+      display: flex; flex-direction: column; gap: 28px;
+    }
+
+    /* Author card */
+    .author-card {
       border: 1px solid var(--color-border);
       padding: 24px;
     }
-
-    .toc-label {
+    .author-card-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--color-text-muted);
+      margin-bottom: 14px; display: block;
       font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    }
+    .author-card-top {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px;
+    }
+    .author-card-avatar {
+      width: 44px; height: 44px; border-radius: 50%;
+      background: var(--color-bg-grey);
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; flex-shrink: 0;
+    }
+    .author-card-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .author-card-initial {
+      font-family: var(--font-display);
+      font-size: 18px; font-weight: 700; color: var(--color-text);
+    }
+    .author-card-name {
+      font-family: var(--font-display);
+      font-size: 15px; font-weight: 700; color: var(--color-text);
+      margin-bottom: 2px;
+    }
+    .author-card-role {
+      font-size: 12px; color: var(--color-text-muted);
+    }
+    .author-card-bio {
+      font-size: 13px; line-height: 1.6;
       color: var(--color-text-muted);
       margin-bottom: 16px;
-      display: block;
     }
-
-    .toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
-
-    .toc-list a {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 13px;
-      line-height: 1.4;
-      color: var(--color-text);
-      opacity: 0.55;
-      transition: opacity 0.2s;
-      padding: 5px 0;
+    .author-card-stat {
+      display: flex; align-items: center; gap: 6px;
+      font-size: 12px; color: var(--color-text-muted);
+      margin-bottom: 16px;
+    }
+    .author-card-stat svg { flex-shrink: 0; color: #CC1F28; }
+    .author-card-cta {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      padding: 12px 16px;
+      background: var(--color-text); color: #fff;
+      font-size: 13px; font-weight: 600;
       text-decoration: none;
-      border-bottom: none;
+      font-family: var(--font-body);
+      transition: opacity .2s;
+      width: 100%; box-sizing: border-box;
     }
+    .author-card-cta:hover { opacity: .8; }
 
-    .toc-list a:hover { opacity: 1; }
-    .toc-list a.active { opacity: 1; font-weight: 500; }
-
-    .toc-num {
-      font-size: 11px;
-      font-weight: 600;
-      color: #CC1F28;
-      min-width: 20px;
-      padding-top: 1px;
-      flex-shrink: 0;
-    }
-
-    /* Share buttons in sidebar */
-    .share-box {
-      margin-top: 24px;
-      padding: 20px 24px;
+    /* More in category */
+    .related-mini {
       border: 1px solid var(--color-border);
+      padding: 24px;
     }
-
-    .share-label {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+    .related-mini-label {
+      font-size: 10px; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
       color: var(--color-text-muted);
-      margin-bottom: 14px;
-      display: block;
+      margin-bottom: 16px; display: block;
+      font-family: var(--font-body);
+    }
+    .related-mini-list {
+      display: flex; flex-direction: column; gap: 16px;
+      list-style: none;
+    }
+    .related-mini-item a {
+      display: flex; gap: 12px;
+      text-decoration: none; color: inherit;
+    }
+    .related-mini-img {
+      width: 60px; height: 44px;
+      flex-shrink: 0; overflow: hidden;
+      background: var(--color-bg-grey); border-radius: 3px;
+    }
+    .related-mini-img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform .4s var(--ease-out);
+    }
+    .related-mini-item a:hover .related-mini-img img { transform: scale(1.06); }
+    .related-mini-title {
+      font-family: var(--font-display);
+      font-size: 13px; font-weight: 600;
+      letter-spacing: -.01em; line-height: 1.35;
+      color: var(--color-text); margin-bottom: 4px;
+      transition: opacity .2s;
+    }
+    .related-mini-item a:hover .related-mini-title { opacity: .65; }
+    .related-mini-meta {
+      font-size: 11px; color: var(--color-text-muted);
     }
 
-    .share-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+    /* Share strip at bottom of article */
+    .post-share-strip {
+      display: flex; align-items: center; gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 40px; padding-top: 32px;
+      border-top: 1px solid var(--color-border);
     }
-
-    .share-btn {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 9px 14px;
+    .post-share-label {
+      font-size: 13px; color: var(--color-text-muted);
+      font-family: var(--font-body);
+    }
+    .post-share-btn {
+      display: inline-flex; align-items: center; gap: 7px;
+      padding: 8px 16px;
       border: 1px solid var(--color-border);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--color-text);
-      opacity: 0.7;
-      transition: opacity 0.2s, border-color 0.2s;
+      font-size: 13px; font-weight: 500;
+      color: var(--color-text); opacity: .7;
+      transition: opacity .2s, border-color .2s;
       text-decoration: none;
       font-family: var(--font-body);
+      border-radius: 100px;
     }
+    .post-share-btn:hover { opacity: 1; border-color: rgba(10,10,10,.4); }
 
-    .share-btn:hover { opacity: 1; border-color: var(--color-text); }
-
-    /* Related posts */
-    .related-section {
-      background: var(--color-bg-warm);
-      padding: 64px 0;
-    }
-
-    .related-label {
-      font-family: var(--font-body);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--color-text-muted);
-      margin-bottom: 8px;
-    }
-
-    .related-heading {
-      font-family: var(--font-display);
-      font-size: clamp(20px, 2vw, 28px);
-      font-weight: 700;
-      letter-spacing: -0.025em;
-      margin-bottom: 32px;
-    }
-
-    .related-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-    }
-
-    @media (max-width: 1024px) { .related-grid { grid-template-columns: repeat(2, 1fr); } }
-    @media (max-width: 640px)  { .related-grid { grid-template-columns: 1fr; } }
-
-    .related-card {
-      display: flex;
-      flex-direction: column;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .related-card-img {
-      width: 100%;
-      padding-bottom: 58%;
-      position: relative;
-      overflow: hidden;
-      background: var(--color-bg-grey);
-      margin-bottom: 14px;
-      border-radius: 4px;
-    }
-
-    .related-card-img img {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s var(--ease-out);
-    }
-
-    .related-card:hover .related-card-img img { transform: scale(1.04); }
-
-    .related-card-cat {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: #CC1F28;
-      margin-bottom: 6px;
-      font-family: var(--font-body);
-    }
-
-    .related-card-title {
-      font-family: var(--font-display);
-      font-size: 16px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      line-height: 1.3;
-      margin-bottom: 8px;
-      transition: opacity 0.2s;
-    }
-
-    .related-card:hover .related-card-title { opacity: 0.65; }
-
-    .related-card-meta {
-      font-size: 12px;
-      color: var(--color-text-muted);
-    }
-
-    /* Error / loading */
+    /* Loading / error */
     .post-loading, .post-error {
       padding: calc(var(--nav-height) + 80px) 0 120px;
       text-align: center;
     }
-
     .post-error h2 {
       font-family: var(--font-display);
-      font-size: 26px;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
+      font-size: 26px; font-weight: 700;
+      letter-spacing: -.02em; margin-bottom: 12px;
     }
-
     .post-error p { font-size: 15px; color: var(--color-text-muted); margin-bottom: 24px; }
-
     .post-loading-spinner {
-      width: 28px;
-      height: 28px;
+      width: 28px; height: 28px;
       border: 2px solid var(--color-border);
       border-top-color: var(--color-text);
       border-radius: 50%;
-      animation: spin 0.7s linear infinite;
+      animation: spin .7s linear infinite;
       margin: 0 auto;
     }
-
     @keyframes spin { to { transform: rotate(360deg); } }
 
     @media (max-width: 768px) {
-      .post-layout { padding: 40px 0 64px; }
-      .post-body { font-size: 16px; }
+      .post-body-wrap { padding: 40px 0 64px; }
+      .post-article { font-size: 16px; }
       .post-description { font-size: 16px; }
-      .post-author-box { padding: 20px; }
-      .toc-box { display: none; }
     }
   </style>
 </head>
@@ -612,8 +472,9 @@
     <a href="../contact.html" class="nav-cta-mobile">Get Started</a>
   </div>
 
-  <!-- All post content injected here by JS -->
-  <div id="postRoot"></div>
+  <div id="postRoot">
+    <div class="container"><div class="post-loading"><div class="post-loading-spinner"></div></div></div>
+  </div>
 
   <footer class="site-footer" data-bg="#FAFAFA" aria-label="Site footer">
     <div class="container">
@@ -647,18 +508,26 @@
   (function () {
     'use strict';
 
-    const root = document.getElementById('postRoot');
-    const params = new URLSearchParams(window.location.search);
-    const slug = params.get('slug');
+    /* ── Author profile ───────────────────────────────────────── */
+    const AUTHOR = {
+      name:  'Jared Lim',
+      role:  'Co-founder, mypropfolio',
+      bio:   'Jared spent 7 years as a property agent in Singapore before co-founding mypropfolio. He writes about what actually works for agents who want to stand out in a crowded market.',
+      stat:  '500+ microsites delivered',
+      wa:    'https://wa.me/6596273238'
+    };
+
+    const root    = document.getElementById('postRoot');
+    const params  = new URLSearchParams(window.location.search);
+    const slug    = params.get('slug');
 
     if (!slug) { showError('Post not found', 'No article was specified.'); return; }
 
-    /* ── Helpers ─────────────────────────────────────── */
-    function formatDate(dateStr) {
+    /* ── Helpers ─────────────────────────────────────────────── */
+    function fmt(dateStr) {
       if (!dateStr) return '';
       const d = new Date(dateStr);
-      if (isNaN(d)) return dateStr;
-      return d.toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
+      return isNaN(d) ? dateStr : d.toLocaleDateString('en-SG', { day: 'numeric', month: 'long', year: 'numeric' });
     }
 
     function resolveImg(src) {
@@ -668,260 +537,291 @@
       return src;
     }
 
-    /* ── Parse frontmatter ───────────────────────────── */
-    function parseFrontmatter(raw) {
-      const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
-      if (!match) return { meta: {}, body: raw };
-      const lines = match[1].split('\n');
-      const meta = {};
+    /* ── Frontmatter parser ──────────────────────────────────── */
+    function parseFM(raw) {
+      const m = raw.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
+      if (!m) return { meta: {}, body: raw };
+      const lines = m[1].split('\n');
+      const meta = { seo: {} };
       let inSeo = false;
-      meta.seo = {};
 
       lines.forEach(line => {
         if (line.trim() === 'seo:') { inSeo = true; return; }
         if (inSeo && /^\s{2,}/.test(line)) {
-          const m = line.match(/^\s+(\w+):\s*(.*)/);
-          if (m) meta.seo[m[1].trim()] = m[2].trim().replace(/^["']|["']$/g, '');
+          const p = line.match(/^\s+(\w+):\s*(.*)/);
+          if (p) meta.seo[p[1].trim()] = p[2].trim().replace(/^["']|["']$/g, '');
           return;
         }
-        if (!/^\s/.test(line) && line.includes(':')) inSeo = false;
-        const colonIdx = line.indexOf(':');
-        if (colonIdx === -1 || /^\s/.test(line)) return;
-        const key = line.slice(0, colonIdx).trim();
-        const val = line.slice(colonIdx + 1).trim().replace(/^["']|["']$/g, '');
-        if (key && key !== 'seo') meta[key] = val;
+        if (!/^\s/.test(line)) inSeo = false;
+        const ci = line.indexOf(':');
+        if (ci === -1 || /^\s/.test(line)) return;
+        const k = line.slice(0, ci).trim();
+        const v = line.slice(ci + 1).trim().replace(/^["']|["']$/g, '');
+        if (k && k !== 'seo') meta[k] = v;
       });
-
-      return { meta, body: match[2] };
+      return { meta, body: m[2] };
     }
 
-    /* ── Apply SEO meta tags ─────────────────────────── */
+    /* ── SEO meta ────────────────────────────────────────────── */
     function applyMeta(meta) {
-      const seo = meta.seo || {};
-      const title = seo.meta_title || meta.title || 'Blog – mypropfolio';
-      const desc = seo.meta_description || '';
-      const canonical = seo.canonical || ('https://mypropfolio.co/blog/post.html?slug=' + encodeURIComponent(slug));
-      const ogImg = seo.og_image || meta.thumbnail || '';
+      const seo      = meta.seo || {};
+      const title    = seo.meta_title    || meta.title || 'Blog – mypropfolio';
+      const desc     = seo.meta_description || meta.description || '';
+      const canonical= seo.canonical || ('https://mypropfolio.co/blog/post.html?slug=' + encodeURIComponent(slug));
+      const ogImg    = resolveImg(seo.og_image || meta.thumbnail || '');
 
       document.title = title;
-      document.getElementById('pageTitle').textContent = title;
-      document.getElementById('pageDesc').setAttribute('content', desc);
-      document.getElementById('pageCanonical').setAttribute('href', canonical);
-      document.getElementById('ogTitle').setAttribute('content', seo.meta_title || meta.title || '');
-      document.getElementById('ogDesc').setAttribute('content', desc);
-      document.getElementById('ogUrl').setAttribute('content', canonical);
-      if (ogImg) document.getElementById('ogImage').setAttribute('content', resolveImg(ogImg));
+      document.getElementById('pageTitle').textContent     = title;
+      document.getElementById('pageDesc').content          = desc;
+      document.getElementById('pageCanonical').href        = canonical;
+      document.getElementById('ogTitle').content           = title;
+      document.getElementById('ogDesc').content            = desc;
+      document.getElementById('ogUrl').content             = canonical;
+      if (ogImg) document.getElementById('ogImage').content = ogImg;
     }
 
-    /* ── Build ToC from h2 elements ──────────────────── */
-    function buildToC(sections) {
-      if (!sections.length) return '';
-      const items = sections.map((s, i) => {
-        const num = String(i + 1).padStart(2, '0');
-        return `<li><a href="#section-${i + 1}" class="toc-link"><span class="toc-num">${num}</span>${s.text}</a></li>`;
-      }).join('');
-      return `
-        <div class="toc-box">
-          <span class="toc-label">In this article</span>
-          <ol class="toc-list">${items}</ol>
-        </div>`;
-    }
-
-    /* ── Share buttons ───────────────────────────────── */
-    function buildShareBox(title) {
-      const url = encodeURIComponent(window.location.href);
-      const text = encodeURIComponent(title);
-      return `
-        <div class="share-box">
-          <span class="share-label">Share</span>
-          <div class="share-buttons">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener" class="share-btn">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
-              Facebook
-            </a>
-            <a href="https://twitter.com/intent/tweet?text=${text}&url=${url}" target="_blank" rel="noopener" class="share-btn">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
-              Twitter / X
-            </a>
-            <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" rel="noopener" class="share-btn">
-              <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-              LinkedIn
-            </a>
-          </div>
-        </div>`;
-    }
-
-    /* ── Process rendered HTML: number h2 sections ───── */
-    function processArticleHTML(html) {
+    /* ── Process article HTML: number h2s ────────────────────── */
+    function processHTML(html) {
       const div = document.createElement('div');
       div.innerHTML = html;
       const sections = [];
-      let sectionIndex = 0;
+      let idx = 0;
 
-      div.querySelectorAll('h2').forEach(h2 => {
-        sectionIndex++;
-        const id = 'section-' + sectionIndex;
-        const text = h2.textContent;
+      Array.from(div.querySelectorAll('h2')).forEach(h2 => {
+        idx++;
+        const id   = 'section-' + idx;
+        const text = h2.textContent.trim();
         sections.push({ id, text });
+        h2.id = id;
 
-        h2.setAttribute('id', id);
-        const numSpan = document.createElement('span');
-        numSpan.className = 'section-num';
-        numSpan.textContent = String(sectionIndex).padStart(2, '0');
-
-        const block = document.createElement('div');
+        /* Wrap h2 + following siblings up to next h2 in .section-block */
+        const block    = document.createElement('div');
         block.className = 'section-block';
+        const numSpan  = document.createElement('span');
+        numSpan.className = 'section-num';
+        numSpan.textContent = String(idx).padStart(2, '0');
+
+        const siblings = [h2];
         let next = h2.nextSibling;
-        const children = [h2];
         while (next && !(next.nodeType === 1 && next.tagName === 'H2')) {
           const tmp = next.nextSibling;
-          children.push(next);
+          siblings.push(next);
           next = tmp;
         }
         h2.parentNode.insertBefore(block, h2);
         block.appendChild(numSpan);
-        children.forEach(c => block.appendChild(c));
+        siblings.forEach(s => block.appendChild(s));
       });
 
-      return { processedHTML: div.innerHTML, sections };
+      return { html: div.innerHTML, sections };
     }
 
-    /* ── Build related posts (other posts from manifest) */
-    function buildRelated(posts, currentSlug) {
+    /* ── Build ToC ────────────────────────────────────────────── */
+    function buildToC(sections) {
+      if (!sections.length) return '';
+      const items = sections.map((s, i) =>
+        `<li>
+          <span class="toc-num">${String(i+1).padStart(2,'0')}</span>
+          <a href="#${s.id}" class="toc-link" data-toc="${i}">${s.text}</a>
+        </li>`
+      ).join('');
+      return `<span class="toc-label">In this article</span><ol class="toc-list">${items}</ol>`;
+    }
+
+    /* ── Author card (right sidebar) ─────────────────────────── */
+    function buildAuthorCard() {
+      return `
+        <div class="author-card">
+          <span class="author-card-label">Written by</span>
+          <div class="author-card-top">
+            <div class="author-card-avatar">
+              <span class="author-card-initial">${AUTHOR.name.charAt(0)}</span>
+            </div>
+            <div>
+              <p class="author-card-name">${AUTHOR.name}</p>
+              <p class="author-card-role">${AUTHOR.role}</p>
+            </div>
+          </div>
+          <p class="author-card-bio">${AUTHOR.bio}</p>
+          <div class="author-card-stat">
+            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+            ${AUTHOR.stat}
+          </div>
+          <a href="${AUTHOR.wa}" target="_blank" rel="noopener" class="author-card-cta">
+            <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.107.551 4.084 1.514 5.793L0 24l6.416-1.49A11.942 11.942 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.851 0-3.588-.502-5.088-1.377l-.363-.216-3.808.885.924-3.7-.238-.381A9.941 9.941 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+            WhatsApp ${AUTHOR.name.split(' ')[0]}
+          </a>
+        </div>`;
+    }
+
+    /* ── Related mini list (right sidebar) ───────────────────── */
+    function buildRelatedMini(posts, currentSlug, category) {
       const others = posts.filter(p => p.slug !== currentSlug).slice(0, 3);
       if (!others.length) return '';
-
-      const cards = others.map(p => {
-        const href = 'post.html?slug=' + encodeURIComponent(p.slug || '');
+      const label = category ? `More in ${category}` : 'More articles';
+      const items = others.map(p => {
+        const href  = 'post.html?slug=' + encodeURIComponent(p.slug || '');
         const thumb = p.thumbnail ? resolveImg(p.thumbnail) : '';
-        const readTime = p.read_time ? p.read_time + ' min read' : '';
         return `
-          <a href="${href}" class="related-card">
-            <div class="related-card-img">
-              ${thumb ? `<img src="${thumb}" alt="${p.title || ''}" loading="lazy">` : ''}
-            </div>
-            ${p.category ? `<p class="related-card-cat">${p.category}</p>` : ''}
-            <h3 class="related-card-title">${p.title || 'Untitled'}</h3>
-            <p class="related-card-meta">${readTime}</p>
-          </a>`;
+          <li class="related-mini-item">
+            <a href="${href}">
+              <div class="related-mini-img">
+                ${thumb ? `<img src="${thumb}" alt="${p.title||''}" loading="lazy">` : ''}
+              </div>
+              <div>
+                <p class="related-mini-title">${p.title || 'Untitled'}</p>
+                <p class="related-mini-meta">${p.read_time ? p.read_time + ' min read' : ''}</p>
+              </div>
+            </a>
+          </li>`;
       }).join('');
-
       return `
-        <section class="related-section">
-          <div class="container">
-            <p class="related-label">Keep reading</p>
-            <h2 class="related-heading">More from the blog</h2>
-            <div class="related-grid">${cards}</div>
-          </div>
-        </section>`;
+        <div class="related-mini">
+          <span class="related-mini-label">${label}</span>
+          <ul class="related-mini-list">${items}</ul>
+        </div>`;
     }
 
-    /* ── Render post ─────────────────────────────────── */
-    function renderPost(meta, bodyMarkdown, allPosts) {
+    /* ── Share strip (below article) ─────────────────────────── */
+    function buildShareStrip(title) {
+      const url  = encodeURIComponent(window.location.href);
+      const text = encodeURIComponent(title);
+      return `
+        <div class="post-share-strip">
+          <span class="post-share-label">Share this article:</span>
+          <a href="https://www.facebook.com/sharer/sharer.php?u=${url}" target="_blank" rel="noopener" class="post-share-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+            Facebook
+          </a>
+          <a href="https://twitter.com/intent/tweet?text=${text}&url=${url}" target="_blank" rel="noopener" class="post-share-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+            Twitter / X
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=${url}" target="_blank" rel="noopener" class="post-share-btn">
+            <svg width="14" height="14" fill="currentColor" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+            LinkedIn
+          </a>
+        </div>`;
+    }
+
+    /* ── Render ──────────────────────────────────────────────── */
+    function renderPost(meta, bodyMd, allPosts) {
       applyMeta(meta);
 
       function doRender() {
         if (typeof marked === 'undefined') { setTimeout(doRender, 50); return; }
 
-        const rawHTML = marked.parse(bodyMarkdown);
-        const { processedHTML, sections } = processArticleHTML(rawHTML);
+        const rawHTML = marked.parse(bodyMd);
+        const { html: articleHTML, sections } = processHTML(rawHTML);
 
-        const category = meta.category || '';
-        const date = formatDate(meta.date);
-        const author = meta.author || 'mypropfolio';
-        const readTime = meta.read_time ? meta.read_time + ' min read' : '';
-        const thumb = meta.thumbnail ? resolveImg(meta.thumbnail) : '';
-        const desc = (meta.seo && meta.seo.meta_description) || meta.description || '';
-        const tags = meta.tags ? meta.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
-        const pageUrl = encodeURIComponent(window.location.href);
+        const category  = meta.category || '';
+        const date      = fmt(meta.date);
+        const readTime  = meta.read_time ? meta.read_time + ' min read' : '';
+        const thumb     = meta.thumbnail ? resolveImg(meta.thumbnail) : '';
+        const desc      = (meta.seo && meta.seo.meta_description) || meta.description || '';
+        const tags      = meta.tags ? meta.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
+        const pageUrl   = encodeURIComponent(window.location.href);
 
-        const breadcrumbs = `
-          <nav class="breadcrumb" aria-label="Breadcrumb">
+        /* Breadcrumb */
+        const breadcrumb = `
+          <nav class="post-breadcrumb" aria-label="Breadcrumb">
             <div class="container">
               <ol class="breadcrumb-list">
                 <li><a href="../index.html">Home</a></li>
                 <li aria-hidden="true"><span class="breadcrumb-sep">/</span></li>
                 <li><a href="index.html">Blog</a></li>
-                ${category ? `<li aria-hidden="true"><span class="breadcrumb-sep">/</span></li><li>${category}</li>` : ''}
+                ${category ? `<li aria-hidden="true"><span class="breadcrumb-sep">/</span></li><li><span>${category}</span></li>` : ''}
               </ol>
             </div>
           </nav>`;
 
-        const headerBlock = `
+        /* Hero image or placeholder for right column */
+        const heroImgContent = thumb
+          ? `<img src="${thumb}" alt="${meta.title || ''}" loading="eager">`
+          : `<div class="post-header-img-placeholder">
+               <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+                 <rect x="4" y="10" width="44" height="32" rx="3" stroke="#0A0A0A" stroke-width="1.5" opacity="0.15"/>
+                 <circle cx="19" cy="22" r="4" stroke="#0A0A0A" stroke-width="1.5" opacity="0.15"/>
+                 <path d="M4 38L18 24L26 32L34 22L48 38" stroke="#0A0A0A" stroke-width="1.5" stroke-linejoin="round" opacity="0.15"/>
+               </svg>
+             </div>`;
+
+        /* Header: two-column */
+        const header = `
           <section class="post-header">
             <div class="container">
-              <div class="post-header-inner">
-                <div class="post-header-meta">
-                  ${category ? `<span class="post-category-pill">${category}</span>` : ''}
-                  ${readTime ? `<span class="post-read-time">
-                    <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5L10 10"/></svg>
-                    ${readTime}
-                  </span>` : ''}
-                </div>
-                <h1 class="post-title">${meta.title || 'Untitled'}</h1>
-                ${desc ? `<p class="post-description">${desc}</p>` : ''}
-                <div class="post-author-row">
-                  <div class="post-author-avatar">
-                    <span class="post-author-avatar-initials">${author.charAt(0).toUpperCase()}</span>
-                  </div>
-                  <div class="post-author-info">
-                    <span class="post-author-name">${author}</span>
-                    <span class="post-author-sub">
-                      ${date}
-                      ${date && readTime ? '<span class="post-author-divider">·</span>' : ''}
+              <div class="post-header-grid">
+
+                <div class="post-header-left">
+                  <div class="post-header-pills">
+                    ${category ? `<span class="post-cat-pill">${category}</span>` : ''}
+                    ${readTime ? `<span class="post-read-pill">
+                      <svg width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="8" r="6"/><path d="M8 5v3.5L10 10"/></svg>
                       ${readTime}
-                    </span>
+                    </span>` : ''}
+                  </div>
+
+                  <h1 class="post-title">${meta.title || 'Untitled'}</h1>
+                  ${desc ? `<p class="post-description">${desc}</p>` : ''}
+
+                  <div class="post-author-row">
+                    <div class="post-author-avatar">
+                      <span class="post-author-initial">${AUTHOR.name.charAt(0)}</span>
+                    </div>
+                    <div class="post-author-info">
+                      <span class="post-author-name">${AUTHOR.name}</span>
+                      <span class="post-author-sub">
+                        <span>${AUTHOR.role}</span>
+                        ${date ? `<span class="post-author-dot">·</span><time datetime="${meta.date||''}">${date}</time>` : ''}
+                        ${readTime ? `<span class="post-author-dot">·</span><span>${readTime}</span>` : ''}
+                      </span>
+                    </div>
                   </div>
                 </div>
+
+                <div class="post-header-img">${heroImgContent}</div>
+
               </div>
+              <div class="post-header-divider"></div>
             </div>
           </section>`;
 
-        const heroImg = thumb ? `
-          <div class="post-hero-img-wrap">
-            <div class="container">
-              <img src="${thumb}" alt="${meta.title || ''}" class="post-hero-img" loading="eager">
-            </div>
-          </div>` : '';
-
+        /* Tags */
         const tagsHTML = tags.length
           ? `<div class="post-tags">${tags.map(t => `<span class="post-tag">${t}</span>`).join('')}</div>`
           : '';
 
-        const authorBox = `
-          <div class="post-author-box">
-            <div class="post-author-box-avatar">
-              <span class="post-author-box-initials">${author.charAt(0).toUpperCase()}</span>
-            </div>
-            <div>
-              <h3>${author}</h3>
-              <p class="role">mypropfolio</p>
-              <p>Tips and insights to help Singapore property agents stand out, win more viewings, and build a stronger personal brand online.</p>
+        /* Three-column body */
+        const body = `
+          <div class="post-body-wrap">
+            <div class="container">
+              <div class="post-body-grid">
+
+                <!-- Left: ToC -->
+                <div class="post-left-col" id="tocCol">
+                  ${buildToC(sections)}
+                </div>
+
+                <!-- Center: Article -->
+                <article class="post-article" id="postArticle">
+                  ${articleHTML}
+                  ${tagsHTML}
+                  ${buildShareStrip(meta.title || '')}
+                </article>
+
+                <!-- Right: Author + Related -->
+                <div class="post-right-col">
+                  ${buildAuthorCard()}
+                  ${buildRelatedMini(allPosts, slug, category)}
+                </div>
+
+              </div>
             </div>
           </div>`;
 
-        const articleLayout = `
-          <section class="post-layout" style="background:#FFFFFF;">
-            <div class="container" style="display:contents;">
-              <div style="display:grid;grid-template-columns:1fr 280px;gap:0 60px;align-items:start;max-width:var(--max-width);margin:0 auto;padding:48px 48px 96px;box-sizing:border-box;">
-                <article class="post-body" id="postBody">
-                  ${processedHTML}
-                  ${tagsHTML}
-                  ${authorBox}
-                </article>
-                <aside class="post-sidebar">
-                  ${buildToC(sections)}
-                  ${buildShareBox(meta.title || '')}
-                </aside>
-              </div>
-            </div>
-          </section>`;
+        root.innerHTML = breadcrumb + header + body;
 
-        const related = buildRelated(allPosts, slug);
-
-        root.innerHTML = breadcrumbs + headerBlock + heroImg + articleLayout + related;
-
-        /* ToC active section highlight on scroll */
+        /* ToC active link tracking */
         const tocLinks = root.querySelectorAll('.toc-link');
         const sectionEls = sections.map(s => document.getElementById(s.id)).filter(Boolean);
 
@@ -929,49 +829,30 @@
           const onScroll = () => {
             let active = 0;
             sectionEls.forEach((el, i) => {
-              if (el.getBoundingClientRect().top <= 120) active = i;
+              if (el.getBoundingClientRect().top <= 140) active = i;
             });
             tocLinks.forEach((l, i) => l.classList.toggle('active', i === active));
           };
           window.addEventListener('scroll', onScroll, { passive: true });
           onScroll();
         }
-
-        /* Mobile: hide sidebar via CSS (already handled), but adjust layout */
-        if (window.innerWidth <= 1024) {
-          const grid = root.querySelector('[style*="grid-template-columns"]');
-          if (grid) {
-            grid.style.gridTemplateColumns = '1fr';
-            grid.style.gap = '0';
-          }
-        }
       }
 
       doRender();
     }
 
-    function showError(heading, message) {
-      root.innerHTML = `
-        <div class="container">
-          <div class="post-error">
-            <h2>${heading}</h2>
-            <p>${message}</p>
-            <a href="index.html" class="btn-primary">Back to Blog</a>
-          </div>
-        </div>`;
+    function showError(h, p) {
+      root.innerHTML = `<div class="container"><div class="post-error"><h2>${h}</h2><p>${p}</p><a href="index.html" class="btn-primary">Back to Blog</a></div></div>`;
     }
 
-    /* Loading state */
-    root.innerHTML = `<div class="container"><div class="post-loading"><div class="post-loading-spinner"></div></div></div>`;
-
-    /* Fetch post + manifest in parallel */
+    /* Fetch post + manifest */
     Promise.all([
-      fetch(encodeURIComponent(slug) + '.md').then(r => { if (!r.ok) throw new Error(); return r.text(); }),
+      fetch(encodeURIComponent(slug) + '.md').then(r => { if (!r.ok) throw 0; return r.text(); }),
       fetch('posts.json').then(r => r.json()).catch(() => [])
     ])
-    .then(([raw, allPosts]) => {
-      const { meta, body } = parseFrontmatter(raw);
-      renderPost(meta, body, Array.isArray(allPosts) ? allPosts : []);
+    .then(([raw, all]) => {
+      const { meta, body } = parseFM(raw);
+      renderPost(meta, body, Array.isArray(all) ? all : []);
     })
     .catch(() => showError('Article not found', 'This article may have moved or been removed.'));
 
