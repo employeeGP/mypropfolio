@@ -15,19 +15,21 @@
   <link rel="icon" type="image/png" href="../favicon.png">
   <link rel="apple-touch-icon" href="../favicon-180.png">
   <style>
-    /* ── Blog listing page styles ─────────────────────────────── */
-
-    /* Filter tabs */
+    /* ── Blog listing ─────────────────────────────────────────── */
     .blog-filter-tabs {
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-bottom: 56px;
+      margin-bottom: 48px;
       flex-wrap: wrap;
     }
 
     .blog-filter-tab {
-      padding: 8px 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 7px 16px;
+      font-family: var(--font-body);
       font-size: 13px;
       font-weight: 500;
       letter-spacing: 0.01em;
@@ -37,10 +39,10 @@
       transition: all 0.2s ease;
       cursor: pointer;
       background: transparent;
-      font-family: var(--font-body);
+      border-radius: 100px;
     }
 
-    .blog-filter-tab:hover { opacity: 0.85; }
+    .blog-filter-tab:hover { opacity: 0.85; border-color: rgba(10,10,10,0.3); }
 
     .blog-filter-tab.active {
       background: var(--color-text);
@@ -49,51 +51,50 @@
       border-color: var(--color-text);
     }
 
-    /* Post grid */
+    .blog-filter-count {
+      font-size: 11px;
+      font-weight: 400;
+      opacity: 0.7;
+    }
+
+    /* Grid */
     .blog-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 40px 32px;
+      gap: 40px 28px;
     }
 
-    @media (max-width: 1024px) {
-      .blog-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+    @media (max-width: 1024px) { .blog-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 640px)  { .blog-grid { grid-template-columns: 1fr; gap: 32px; } }
 
-    @media (max-width: 640px) {
-      .blog-grid { grid-template-columns: 1fr; gap: 32px; }
-    }
-
-    /* Post card */
+    /* Card */
     .blog-card {
       display: flex;
       flex-direction: column;
-      gap: 0;
       opacity: 0;
-      transform: translateY(20px);
+      transform: translateY(24px);
       transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
     }
 
-    .blog-card.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .blog-card.visible { opacity: 1; transform: translateY(0); }
 
     .blog-card-link {
       display: flex;
       flex-direction: column;
-      gap: 0;
       text-decoration: none;
       color: inherit;
+      height: 100%;
     }
 
+    /* Image with category pill overlay */
     .blog-card-img-wrap {
       position: relative;
       width: 100%;
-      padding-bottom: 62%;
+      padding-bottom: 58%;
       overflow: hidden;
       background: var(--color-bg-grey);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
+      border-radius: 4px;
     }
 
     .blog-card-img-wrap img {
@@ -103,52 +104,45 @@
       height: 100%;
       object-fit: cover;
       object-position: center;
-      transition: transform 0.55s var(--ease-out);
+      transition: transform 0.6s var(--ease-out);
     }
 
-    .blog-card-link:hover .blog-card-img-wrap img {
-      transform: scale(1.04);
-    }
+    .blog-card-link:hover .blog-card-img-wrap img { transform: scale(1.05); }
 
-    /* Placeholder when no thumbnail */
     .blog-card-img-placeholder {
       position: absolute;
       inset: 0;
       display: flex;
       align-items: center;
       justify-content: center;
+      background: var(--color-bg-grey);
     }
 
-    .blog-card-img-placeholder svg {
-      opacity: 0.2;
-    }
-
-    .blog-card-meta {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-
-    .blog-card-category {
+    /* Category pill on image */
+    .blog-card-cat-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      z-index: 2;
+      padding: 4px 10px;
+      border-radius: 100px;
       font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #CC1F28;
+      font-weight: 600;
+      letter-spacing: 0.04em;
       font-family: var(--font-body);
+      background: rgba(255,255,255,0.92);
+      color: var(--color-text);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
     }
 
-    .blog-card-date {
-      font-size: 13px;
-      color: var(--color-text-muted);
-      font-family: var(--font-body);
-    }
+    /* Card body */
+    .blog-card-body { display: flex; flex-direction: column; flex: 1; }
 
     .blog-card-title {
       font-family: var(--font-display);
-      font-size: clamp(17px, 1.5vw, 21px);
-      font-weight: 600;
+      font-size: clamp(16px, 1.4vw, 20px);
+      font-weight: 700;
       letter-spacing: -0.02em;
       line-height: 1.25;
       color: var(--color-text);
@@ -156,52 +150,61 @@
       transition: opacity 0.2s ease;
     }
 
-    .blog-card-link:hover .blog-card-title { opacity: 0.7; }
+    .blog-card-link:hover .blog-card-title { opacity: 0.65; }
 
     .blog-card-excerpt {
       font-size: 14px;
-      line-height: 1.6;
+      line-height: 1.62;
       color: var(--color-text-muted);
       margin-bottom: 16px;
-      flex-grow: 1;
+      flex: 1;
     }
 
-    .blog-card-read-more {
+    .blog-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .blog-card-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: var(--color-text-muted);
+    }
+
+    .blog-card-meta-dot {
+      width: 3px; height: 3px;
+      border-radius: 50%;
+      background: var(--color-text-muted);
+      opacity: 0.4;
+    }
+
+    .blog-card-read {
       font-size: 13px;
       font-weight: 500;
       color: var(--color-text);
-      text-decoration: underline;
-      text-underline-offset: 3px;
-      opacity: 0.6;
+      opacity: 0.55;
       transition: opacity 0.2s ease;
-      display: inline-block;
+      white-space: nowrap;
     }
 
-    .blog-card-link:hover .blog-card-read-more { opacity: 1; }
+    .blog-card-link:hover .blog-card-read { opacity: 1; }
 
-    /* Empty state */
-    .blog-empty {
+    /* Empty / loading */
+    .blog-empty, .blog-loading {
       grid-column: 1 / -1;
-      padding: 80px 0;
+      padding: 96px 0;
       text-align: center;
     }
 
-    .blog-empty p {
-      font-size: 15px;
-      color: var(--color-text-muted);
-      margin-top: 12px;
-    }
-
-    /* Loading state */
-    .blog-loading {
-      grid-column: 1 / -1;
-      padding: 80px 0;
-      text-align: center;
-    }
+    .blog-empty p { font-size: 15px; color: var(--color-text-muted); margin-top: 10px; }
 
     .blog-loading-spinner {
-      width: 32px;
-      height: 32px;
+      width: 28px; height: 28px;
       border: 2px solid var(--color-border);
       border-top-color: var(--color-text);
       border-radius: 50%;
@@ -211,18 +214,17 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* Staggered card entrance */
+    /* Stagger */
     .blog-card:nth-child(1) { transition-delay: 0ms; }
-    .blog-card:nth-child(2) { transition-delay: 60ms; }
-    .blog-card:nth-child(3) { transition-delay: 120ms; }
-    .blog-card:nth-child(4) { transition-delay: 180ms; }
-    .blog-card:nth-child(5) { transition-delay: 240ms; }
-    .blog-card:nth-child(6) { transition-delay: 300ms; }
+    .blog-card:nth-child(2) { transition-delay: 70ms; }
+    .blog-card:nth-child(3) { transition-delay: 140ms; }
+    .blog-card:nth-child(4) { transition-delay: 210ms; }
+    .blog-card:nth-child(5) { transition-delay: 280ms; }
+    .blog-card:nth-child(6) { transition-delay: 350ms; }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
   <nav class="site-nav" role="navigation" aria-label="Main navigation">
     <div class="container">
       <a href="../index.html" class="nav-logo" aria-label="mypropfolio home">
@@ -241,7 +243,6 @@
     </div>
   </nav>
 
-  <!-- MOBILE OVERLAY -->
   <div class="nav-mobile-overlay" aria-hidden="true">
     <a href="../how-it-works.html">How It Works</a>
     <a href="../add-ons.html">Add-Ons</a>
@@ -252,44 +253,36 @@
 
   <main id="content">
 
-    <!-- PAGE HERO -->
     <header class="page-hero" data-bg="#FAFAFA">
       <div class="container">
-        <p class="text-label text-muted reveal" style="margin-bottom: 16px;">Blog</p>
+        <p class="text-label text-muted reveal" style="margin-bottom:16px;">Blog</p>
         <div class="line-reveal">
           <h1 class="display-lg">
             <div class="line-clip"><span class="line">Insights for</span></div>
             <div class="line-clip"><span class="line">Singapore agents.</span></div>
           </h1>
         </div>
-        <p class="reveal reveal-delay-1" style="margin-top: 20px; font-size: 17px; color: var(--color-text-muted); max-width: 460px;">
+        <p class="reveal reveal-delay-1" style="margin-top:20px;font-size:17px;color:var(--color-text-muted);max-width:460px;">
           Tips, market updates, and practical guides to help you stand out and win more listings.
         </p>
       </div>
     </header>
 
-    <!-- BLOG LISTING -->
     <section class="section" data-bg="#FFFFFF">
       <div class="container">
-
-        <!-- Category filter tabs (populated by JS) -->
         <div class="blog-filter-tabs" id="filterTabs" role="tablist" aria-label="Filter by category">
-          <button class="blog-filter-tab active" data-category="all" role="tab" aria-selected="true">All</button>
+          <button class="blog-filter-tab active" data-category="all" role="tab" aria-selected="true">
+            All <span class="blog-filter-count" id="allCount"></span>
+          </button>
         </div>
-
-        <!-- Post grid (populated by JS) -->
         <div class="blog-grid" id="blogGrid" role="list">
-          <div class="blog-loading">
-            <div class="blog-loading-spinner"></div>
-          </div>
+          <div class="blog-loading"><div class="blog-loading-spinner"></div></div>
         </div>
-
       </div>
     </section>
 
   </main>
 
-  <!-- FOOTER -->
   <footer class="site-footer" data-bg="#FAFAFA" aria-label="Site footer">
     <div class="container">
       <div class="footer-top">
@@ -304,13 +297,14 @@
           <a href="../add-ons.html">Add-Ons</a>
           <a href="../pricing.html">Pricing</a>
           <a href="../contact.html">Contact</a>
+          <a href="index.html">Blog</a>
         </div>
         <div class="footer-contact">
           <a href="https://wa.me/6596273238" target="_blank" rel="noopener">WhatsApp Us</a>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 mypropfolio &nbsp;·&nbsp; <a href="../pricing.html#terms" style="color:var(--color-text-muted); text-decoration:none; font-size:inherit;">Terms</a></p>
+        <p>&copy; 2026 mypropfolio &nbsp;·&nbsp; <a href="../pricing.html#terms" style="color:var(--color-text-muted);text-decoration:none;font-size:inherit;">Terms</a></p>
         <p class="footer-partner">Photography partner: <a href="https://www.gradepixel.com" target="_blank" rel="noopener">GradePixel</a></p>
       </div>
     </div>
@@ -318,140 +312,143 @@
 
   <script src="../js/main.js"></script>
   <script>
-    /* ── Blog listing: load posts from posts.json ─────────────── */
-    (function () {
-      'use strict';
+  (function () {
+    'use strict';
 
-      const grid = document.getElementById('blogGrid');
-      const filterTabs = document.getElementById('filterTabs');
-      let allPosts = [];
-      let activeCategory = 'all';
+    const grid = document.getElementById('blogGrid');
+    const filterTabs = document.getElementById('filterTabs');
+    const allCountEl = document.getElementById('allCount');
+    let allPosts = [];
+    let activeCategory = 'all';
 
-      /* Format a date string e.g. "2025-01-15T00:00:00.000Z" → "15 Jan 2025" */
-      function formatDate(dateStr) {
-        if (!dateStr) return '';
-        const d = new Date(dateStr);
-        if (isNaN(d)) return dateStr;
-        return d.toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
-      }
+    function formatDate(dateStr) {
+      if (!dateStr) return '';
+      const d = new Date(dateStr);
+      if (isNaN(d)) return dateStr;
+      return d.toLocaleDateString('en-SG', { day: 'numeric', month: 'short', year: 'numeric' });
+    }
 
-      /* Truncate text to ~150 chars at word boundary */
-      function truncate(text, maxLen) {
-        if (!text || text.length <= maxLen) return text || '';
-        const cut = text.lastIndexOf(' ', maxLen);
-        return text.slice(0, cut > 0 ? cut : maxLen) + '…';
-      }
+    function truncate(text, max) {
+      if (!text || text.length <= max) return text || '';
+      const cut = text.lastIndexOf(' ', max);
+      return text.slice(0, cut > 0 ? cut : max) + '…';
+    }
 
-      /* Render a single post card */
-      function buildCard(post) {
-        const slug = post.slug || '';
-        const href = 'post.html?slug=' + encodeURIComponent(slug);
-        const thumb = post.thumbnail ? post.thumbnail : null;
-        const category = post.category || '';
-        const date = formatDate(post.date);
-        const title = post.title || 'Untitled';
-        const excerpt = truncate(post.excerpt || post.description || '', 150);
+    function resolveImg(src) {
+      if (!src) return '';
+      if (src.startsWith('http')) return src;
+      if (src.startsWith('/Asset/')) return '..' + src;
+      return src;
+    }
 
-        const imgHtml = thumb
-          ? `<img src="${thumb.startsWith('/') ? '..' + thumb : thumb}" alt="${title}" loading="lazy">`
-          : `<div class="blog-card-img-placeholder">
-               <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                 <rect x="4" y="8" width="40" height="32" rx="2" stroke="#0A0A0A" stroke-width="2"/>
-                 <circle cx="17" cy="20" r="4" stroke="#0A0A0A" stroke-width="2"/>
-                 <path d="M4 36L16 24L24 32L32 22L44 36" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round"/>
-               </svg>
-             </div>`;
+    function buildCard(post) {
+      const slug = post.slug || '';
+      const href = 'post.html?slug=' + encodeURIComponent(slug);
+      const thumb = post.thumbnail ? resolveImg(post.thumbnail) : null;
+      const category = post.category || '';
+      const date = formatDate(post.date);
+      const readTime = post.read_time ? post.read_time + ' min read' : '';
+      const title = post.title || 'Untitled';
+      const excerpt = truncate(post.excerpt || '', 150);
 
-        return `
-          <article class="blog-card" role="listitem">
-            <a href="${href}" class="blog-card-link" aria-label="${title}">
-              <div class="blog-card-img-wrap">${imgHtml}</div>
-              <div class="blog-card-meta">
-                ${category ? `<span class="blog-card-category">${category}</span>` : ''}
-                ${date ? `<time class="blog-card-date" datetime="${post.date || ''}">${date}</time>` : ''}
-              </div>
+      const imgContent = thumb
+        ? `<img src="${thumb}" alt="${title}" loading="lazy">`
+        : `<div class="blog-card-img-placeholder">
+             <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+               <rect x="4" y="8" width="36" height="28" rx="2" stroke="#0A0A0A" stroke-width="1.5" opacity="0.2"/>
+               <circle cx="15" cy="18" r="3" stroke="#0A0A0A" stroke-width="1.5" opacity="0.2"/>
+               <path d="M4 32L14 22L20 28L28 20L40 32" stroke="#0A0A0A" stroke-width="1.5" stroke-linejoin="round" opacity="0.2"/>
+             </svg>
+           </div>`;
+
+      return `
+        <article class="blog-card" role="listitem">
+          <a href="${href}" class="blog-card-link" aria-label="${title}">
+            <div class="blog-card-img-wrap">
+              ${imgContent}
+              ${category ? `<span class="blog-card-cat-pill">${category}</span>` : ''}
+            </div>
+            <div class="blog-card-body">
               <h2 class="blog-card-title">${title}</h2>
               ${excerpt ? `<p class="blog-card-excerpt">${excerpt}</p>` : ''}
-              <span class="blog-card-read-more">Read article →</span>
-            </a>
-          </article>`;
+              <div class="blog-card-footer">
+                <div class="blog-card-meta-row">
+                  ${date ? `<time datetime="${post.date || ''}">${date}</time>` : ''}
+                  ${date && readTime ? `<span class="blog-card-meta-dot" aria-hidden="true"></span>` : ''}
+                  ${readTime ? `<span>${readTime}</span>` : ''}
+                </div>
+                <span class="blog-card-read" aria-hidden="true">Read →</span>
+              </div>
+            </div>
+          </a>
+        </article>`;
+    }
+
+    function renderGrid(category) {
+      const filtered = category === 'all'
+        ? allPosts
+        : allPosts.filter(p => (p.category || '').toLowerCase() === category.toLowerCase());
+
+      if (!filtered.length) {
+        grid.innerHTML = `<div class="blog-empty"><p class="text-label text-muted">No articles yet</p><p>Check back soon — new articles are on the way.</p></div>`;
+        return;
       }
 
-      /* Render the grid for the active category filter */
-      function renderGrid(category) {
-        const filtered = category === 'all'
-          ? allPosts
-          : allPosts.filter(p => (p.category || '').toLowerCase() === category.toLowerCase());
-
-        if (!filtered.length) {
-          grid.innerHTML = `
-            <div class="blog-empty">
-              <p class="text-label text-muted">No articles yet</p>
-              <p>Check back soon — new articles are on the way.</p>
-            </div>`;
-          return;
-        }
-
-        grid.innerHTML = filtered.map(buildCard).join('');
-
-        /* Trigger entrance animation */
-        requestAnimationFrame(() => {
-          grid.querySelectorAll('.blog-card').forEach((card, i) => {
-            setTimeout(() => card.classList.add('visible'), i * 60);
-          });
+      grid.innerHTML = filtered.map(buildCard).join('');
+      requestAnimationFrame(() => {
+        grid.querySelectorAll('.blog-card').forEach((card, i) => {
+          setTimeout(() => card.classList.add('visible'), i * 70);
         });
-      }
+      });
+    }
 
-      /* Build category filter tabs from unique categories */
-      function buildFilterTabs(posts) {
-        const cats = [...new Set(posts.map(p => p.category).filter(Boolean))];
-        if (!cats.length) return; /* Just "All" is fine */
+    function buildFilterTabs(posts) {
+      /* Count per category */
+      const counts = {};
+      posts.forEach(p => {
+        const c = p.category || '';
+        if (c) counts[c] = (counts[c] || 0) + 1;
+      });
 
-        cats.forEach(cat => {
-          const btn = document.createElement('button');
-          btn.className = 'blog-filter-tab';
-          btn.setAttribute('data-category', cat.toLowerCase());
-          btn.setAttribute('role', 'tab');
-          btn.setAttribute('aria-selected', 'false');
-          btn.textContent = cat;
-          filterTabs.appendChild(btn);
+      /* Update All count */
+      if (allCountEl) allCountEl.textContent = posts.length;
+
+      Object.entries(counts).forEach(([cat, count]) => {
+        const btn = document.createElement('button');
+        btn.className = 'blog-filter-tab';
+        btn.setAttribute('data-category', cat.toLowerCase());
+        btn.setAttribute('role', 'tab');
+        btn.setAttribute('aria-selected', 'false');
+        btn.innerHTML = cat + ` <span class="blog-filter-count">${count}</span>`;
+        filterTabs.appendChild(btn);
+      });
+
+      filterTabs.addEventListener('click', (e) => {
+        const tab = e.target.closest('.blog-filter-tab');
+        if (!tab) return;
+        filterTabs.querySelectorAll('.blog-filter-tab').forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
         });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        activeCategory = tab.dataset.category;
+        renderGrid(activeCategory);
+      });
+    }
 
-        /* Tab click handler */
-        filterTabs.addEventListener('click', (e) => {
-          const tab = e.target.closest('.blog-filter-tab');
-          if (!tab) return;
-          filterTabs.querySelectorAll('.blog-filter-tab').forEach(t => {
-            t.classList.remove('active');
-            t.setAttribute('aria-selected', 'false');
-          });
-          tab.classList.add('active');
-          tab.setAttribute('aria-selected', 'true');
-          activeCategory = tab.dataset.category;
-          renderGrid(activeCategory);
-        });
-      }
+    fetch('posts.json')
+      .then(r => { if (!r.ok) throw new Error(); return r.json(); })
+      .then(posts => {
+        allPosts = Array.isArray(posts) ? posts : [];
+        buildFilterTabs(allPosts);
+        renderGrid(activeCategory);
+      })
+      .catch(() => {
+        grid.innerHTML = `<div class="blog-empty"><p class="text-label text-muted">No articles yet</p><p>Check back soon — new articles are on the way.</p></div>`;
+      });
 
-      /* Fetch posts.json manifest */
-      fetch('posts.json')
-        .then(res => {
-          if (!res.ok) throw new Error('Could not load posts.json');
-          return res.json();
-        })
-        .then(posts => {
-          allPosts = Array.isArray(posts) ? posts : [];
-          buildFilterTabs(allPosts);
-          renderGrid(activeCategory);
-        })
-        .catch(() => {
-          grid.innerHTML = `
-            <div class="blog-empty">
-              <p class="text-label text-muted">No articles yet</p>
-              <p>Check back soon — new articles are on the way.</p>
-            </div>`;
-        });
-
-    }());
+  }());
   </script>
 
 </body>
