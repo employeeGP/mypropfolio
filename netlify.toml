@@ -1,11 +1,2 @@
 [[plugins]]
   package = "./netlify/plugins/generate-posts"
-
-[[plugins]]
-  package = "netlify-plugin-sitemap"
-
-  [plugins.inputs]
-    buildDir = "."
-    prettyURLs = true
-    trailingSlash = false
-    exclude = ["/admin/**"]
