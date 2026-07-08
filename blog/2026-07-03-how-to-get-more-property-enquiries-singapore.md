@@ -1,17 +1,21 @@
 ---
-title: "How to Get More Property Enquiries in Singapore (2026 Guide)"
-date: "2026-07-03T08:00:00.000Z"
-author: "mypropfolio"
-category: "Agent Tips"
-thumbnail: "/Asset/uploads/blog-more-enquiries-hero.jpg"
+title: How to Get More Property Enquiries in Singapore (2026 Guide)
+date: 2026-07-03T08:00:00.000Z
+thumbnail: /Asset/uploads/1.-how-to-get-more-property-enquiries-in-singapore-2026-guide-.jpg
+author: mypropfolio
 read_time: "8"
-description: "Most Singapore agents list on the same portals and wonder why enquiries are slow. Here is what actually moves buyers to reach out — and how to stand out before they scroll past."
-tags: "Agent Tips, Property Marketing, Singapore, Enquiries"
+tags: Agent Tips, Property Marketing, Singapore, Enquiries
+description: Most Singapore agents list on the same portals and wonder why
+  enquiries are slow. Here is what actually moves buyers to reach out — and how
+  to stand out before they scroll past.
+category: Agent Tips
 seo:
-  meta_title: "How to Get More Property Enquiries in Singapore (2026)"
-  meta_description: "Most agents list on the same portals and wonder why enquiries are slow. Here is what actually moves buyers to reach out — and how to stand out before they scroll past."
-  focus_keyword: "property enquiries Singapore"
-  canonical: "https://mypropfolio.co/blog/post.html?slug=2026-07-03-how-to-get-more-property-enquiries-singapore"
+  meta_title: How to Get More Property Enquiries in Singapore (2026)
+  meta_description: Most agents list on the same portals and wonder why enquiries
+    are slow. Here is what actually moves buyers to reach out — and how to stand
+    out before they scroll past.
+  focus_keyword: property enquiries Singapore
+  canonical: https://mypropfolio.co/blog/post.html?slug=2026-07-03-how-to-get-more-property-enquiries-singapore
 ---
 
 The average Singapore buyer spends less than eight seconds on a listing before deciding whether to enquire or scroll past. Eight seconds. That is not enough time to read your description, check the floor plan, or appreciate your carefully chosen photos.
