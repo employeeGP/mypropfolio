@@ -1,15 +1,31 @@
 ---
-title: "How to Share a Property Listing Professionally in Singapore (Beyond Portal Links)"
-date: 2026-07-06
-slug: how-to-share-property-listing-professionally-singapore
-focus_keyword: how to share property listing professionally
-secondary_keywords: property listing sharing tips singapore, property agent listing distribution, share listing whatsapp singapore
-meta_description: "Forwarding a PropertyGuru link is the default. Here is how Singapore property agents are sharing listings more professionally in 2026 — and getting more enquiries as a result."
-canonical_url: https://mypropfolio.co/blog/how-to-share-property-listing-professionally-singapore
-og_title: "How to Share a Property Listing Professionally in Singapore (Beyond Portal Links)"
-og_description: "A portal link is the minimum. Here is how top Singapore agents share listings in 2026 to get more enquiries, better buyer quality, and stronger seller confidence."
-category: Agent Tips
 reading_time: 6 min
+meta_description: Forwarding a PropertyGuru link is the default. Here is how
+  Singapore property agents are sharing listings more professionally in 2026 —
+  and getting more enquiries as a result.
+focus_keyword: how to share property listing professionally
+canonical_url: https://mypropfolio.co/blog/how-to-share-property-listing-professionally-singapore
+slug: how-to-share-property-listing-professionally-singapore
+title: How to Share a Property Listing Professionally in Singapore (Beyond
+  Portal Links)
+date: 2026-07-06
+thumbnail: /Asset/uploads/9-share-listing-professionally.jpg
+og_title: How to Share a Property Listing Professionally in Singapore (Beyond
+  Portal Links)
+og_description: A portal link is the minimum. Here is how top Singapore agents
+  share listings in 2026 to get more enquiries, better buyer quality, and
+  stronger seller confidence.
+secondary_keywords: property listing sharing tips singapore, property agent
+  listing distribution, share listing whatsapp singapore
+category: Agent Tips
+seo:
+  meta_title: How to Share a Property Listing Professionally in Singapore (Beyond
+    Portal Links)
+  meta_description: When a buyer asks "can you send me the listing?", most agents
+    forward a PropertyGuru or 99.co URL without thinking twice. It is the path
+    of least resistance — the link is right there in the browser, one tap to
+    share.
+  focus_keyword: How to Share a Property Listing
 ---
 
 # How to Share a Property Listing Professionally in Singapore (Beyond Portal Links)
