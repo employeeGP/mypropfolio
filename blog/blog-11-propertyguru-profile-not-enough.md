@@ -1,15 +1,27 @@
 ---
-title: "Why Your PropertyGuru Profile Is Not Enough in 2026 (And What to Do Instead)"
-date: 2026-07-07
-slug: propertyguru-profile-not-enough-singapore-agents
-focus_keyword: property agent online presence singapore
-secondary_keywords: personal website vs propertyguru profile, beyond propertyguru singapore agent, property agent digital presence
-meta_description: "A PropertyGuru profile alone is no longer enough to build a sustainable property business in Singapore. Here is what the top agents are doing differently in 2026."
-canonical_url: https://mypropfolio.co/blog/propertyguru-profile-not-enough-singapore-agents
-og_title: "Why Your PropertyGuru Profile Is Not Enough in 2026 (And What to Do Instead)"
-og_description: "Most Singapore agents rely entirely on PropertyGuru. Here is why that is a risk — and what the top agents are building instead to generate leads beyond the portal."
-category: Agent Tips
 reading_time: 7 min
+meta_description: A PropertyGuru profile alone is no longer enough to build a
+  sustainable property business in Singapore. Here is what the top agents are
+  doing differently in 2026.
+focus_keyword: property agent online presence singapore
+canonical_url: https://mypropfolio.co/blog/propertyguru-profile-not-enough-singapore-agents
+slug: propertyguru-profile-not-enough-singapore-agents
+title: Why Your PropertyGuru Profile Is Not Enough in 2026 (And What to Do Instead)
+date: 2026-07-07
+thumbnail: /Asset/uploads/11-propertyguru-profile-not-enough.jpg
+og_title: Why Your PropertyGuru Profile Is Not Enough in 2026 (And What to Do Instead)
+og_description: Most Singapore agents rely entirely on PropertyGuru. Here is why
+  that is a risk — and what the top agents are building instead to generate
+  leads beyond the portal.
+secondary_keywords: personal website vs propertyguru profile, beyond
+  propertyguru singapore agent, property agent digital presence
+category: Agent Tips
+seo:
+  meta_title: Why Your PropertyGuru Profile Is Not Enough in 2026 (And What to Do Instead)
+  focus_keyword: PropertyGuru Profile
+  meta_description: PropertyGuru dominates Singapore property search. With over
+    80% of buyers starting their property journey on the portal, it is an
+    essential channel — and no serious agent should ignore it.
 ---
 
 # Why Your PropertyGuru Profile Is Not Enough in 2026 (And What to Do Instead)
