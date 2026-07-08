@@ -1,8 +1,0 @@
-{
-  "name": "generate-posts",
-  "version": "1.0.0",
-  "description": "Generates posts.json and static HTML pages for each blog post",
-  "dependencies": {
-    "marked": "^9.1.6"
-  }
-}
