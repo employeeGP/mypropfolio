@@ -1,15 +1,29 @@
 ---
+reading_time: 6 min
+meta_description: HDB and condo listings require different photography
+  approaches in Singapore. Here is what property agents need to brief their
+  photographer on — and what buyers are actually looking for in each.
+focus_keyword: property photography singapore hdb condo
+canonical_url: https://mypropfolio.co/blog/hdb-vs-condo-photography-singapore-agents
+slug: hdb-vs-condo-photography-singapore-agents
 title: "HDB vs Condo Photography in Singapore: What Property Agents Need to Know"
 date: 2026-07-07
-slug: hdb-vs-condo-photography-singapore-agents
-focus_keyword: property photography singapore hdb condo
-secondary_keywords: hdb property photography singapore, condo listing photography singapore, real estate photography tips singapore
-meta_description: "HDB and condo listings require different photography approaches in Singapore. Here is what property agents need to brief their photographer on — and what buyers are actually looking for in each."
-canonical_url: https://mypropfolio.co/blog/hdb-vs-condo-photography-singapore-agents
+thumbnail: /Asset/uploads/13-hdb-vs-condo-photography.jpg
 og_title: "HDB vs Condo Photography in Singapore: What Property Agents Need to Know"
-og_description: "Photographing an HDB flat and photographing a condo are not the same job. Here is what every Singapore property agent needs to know before booking their next shoot."
+og_description: Photographing an HDB flat and photographing a condo are not the
+  same job. Here is what every Singapore property agent needs to know before
+  booking their next shoot.
+secondary_keywords: hdb property photography singapore, condo listing
+  photography singapore, real estate photography tips singapore
 category: Listing Tips
-reading_time: 6 min
+seo:
+  meta_title: "HDB vs Condo Photography in Singapore: What Property Agents Need to Know"
+  focus_keyword: HDB vs Condo Photography
+  meta_description: Professional property photography is not a one-size-fits-all
+    service. The approach that makes a 4-room HDB in Tampines look its best is
+    meaningfully different from what makes a freehold condo in District 15 stand
+    out — and understanding that difference helps you brief your photographer
+    more effectively and set the right expectations with your seller.
 ---
 
 # HDB vs Condo Photography in Singapore: What Property Agents Need to Know
