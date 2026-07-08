@@ -1,15 +1,28 @@
 ---
-title: "How to Create a Property Microsite in Singapore (And Why Agents Are Switching)"
-date: 2026-07-06
-slug: how-to-create-property-microsite-singapore
-focus_keyword: how to create a property microsite singapore
-secondary_keywords: property microsite singapore, single property website singapore, property listing page beyond propertyguru
-meta_description: "A property microsite gives each listing its own branded page — better than a portal link for sharing, converting, and winning seller trust. Here is how Singapore agents are using them in 2026."
-canonical_url: https://mypropfolio.co/blog/how-to-create-property-microsite-singapore
-og_title: "How to Create a Property Microsite in Singapore (And Why Agents Are Switching)"
-og_description: "A portal link blends in. A microsite stands out. Here is why Singapore property agents are creating dedicated listing pages — and how to get started."
-category: Agent Tips
 reading_time: 7 min
+meta_description: A property microsite gives each listing its own branded page —
+  better than a portal link for sharing, converting, and winning seller trust.
+  Here is how Singapore agents are using them in 2026.
+focus_keyword: how to create a property microsite singapore
+canonical_url: https://mypropfolio.co/blog/how-to-create-property-microsite-singapore
+slug: how-to-create-property-microsite-singapore
+title: How to Create a Property Microsite in Singapore (And Why Agents Are Switching)
+date: 2026-07-06
+thumbnail: /Asset/uploads/8-property-microsite-singapore.jpg
+og_title: How to Create a Property Microsite in Singapore (And Why Agents Are Switching)
+og_description: A portal link blends in. A microsite stands out. Here is why
+  Singapore property agents are creating dedicated listing pages — and how to
+  get started.
+secondary_keywords: property microsite singapore, single property website
+  singapore, property listing page beyond propertyguru
+category: Agent Tips
+seo:
+  meta_title: How to Create a Property Microsite in Singapore (And Why Agents Are
+    Switching)
+  meta_description: A property microsite is a dedicated web page — or small
+    website — built specifically for a single listing. Instead of sending a
+    buyer a PropertyGuru link that looks identical to hundreds of other listings
+  focus_keyword: How to Create a Property Microsite
 ---
 
 # How to Create a Property Microsite in Singapore (And Why Agents Are Switching)
