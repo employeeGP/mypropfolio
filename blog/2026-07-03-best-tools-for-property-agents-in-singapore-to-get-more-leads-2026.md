@@ -1,6 +1,7 @@
 ---
 title: Best Tools for Property Agents in Singapore to Get More Leads (2026)
 date: 2026-07-03T19:29:00.000+07:00
+thumbnail: /Asset/uploads/4.-best-tools-for-property-agents-in-singapore-to-get-more-leads-2026-.jpg
 category: Agent Tips
 seo:
   meta_title: Best Tools for Property Agents in Singapore to Get More Leads (2026)
