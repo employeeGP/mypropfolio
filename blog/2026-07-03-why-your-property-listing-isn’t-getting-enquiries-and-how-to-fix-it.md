@@ -1,6 +1,7 @@
 ---
 title: Why Your Property Listing Isn’t Getting Enquiries (And How to Fix It)
 date: 2026-07-03T19:28:00.000+07:00
+thumbnail: /Asset/uploads/3.-why-your-property-listing-isn’t-getting-enquiries-and-how-to-fix-it-.jpg
 category: Agent Tips
 seo:
   canonical: why-property-listing-not-getting-enquiries
