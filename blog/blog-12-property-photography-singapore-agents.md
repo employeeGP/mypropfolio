@@ -1,15 +1,28 @@
 ---
-title: "Why Professional Property Photography Matters for Singapore Agents (2026)"
-date: 2026-07-07
-slug: professional-property-photography-singapore-agents
-focus_keyword: professional property photography singapore
-secondary_keywords: real estate photography singapore, property photography benefits singapore agents, property listing photos singapore
-meta_description: "Professional property photography is the single highest-return investment for any Singapore listing. Here is the data — and exactly what to look for when booking a property photographer in 2026."
-canonical_url: https://mypropfolio.co/blog/professional-property-photography-singapore-agents
-og_title: "Why Professional Property Photography Matters for Singapore Agents (2026)"
-og_description: "In Singapore's scroll-first market, your listing photos are your first viewing. Here is why professional photography is the highest-ROI investment for any agent in 2026."
-category: Listing Tips
 reading_time: 7 min
+meta_description: Professional property photography is the single highest-return
+  investment for any Singapore listing. Here is the data — and exactly what to
+  look for when booking a property photographer in 2026.
+focus_keyword: professional property photography singapore
+canonical_url: https://mypropfolio.co/blog/professional-property-photography-singapore-agents
+slug: professional-property-photography-singapore-agents
+title: Why Professional Property Photography Matters for Singapore Agents (2026)
+date: 2026-07-07
+thumbnail: /Asset/uploads/12-property-photography-singapore-agents.jpg
+og_title: Why Professional Property Photography Matters for Singapore Agents (2026)
+og_description: In Singapore's scroll-first market, your listing photos are your
+  first viewing. Here is why professional photography is the highest-ROI
+  investment for any agent in 2026.
+secondary_keywords: real estate photography singapore, property photography
+  benefits singapore agents, property listing photos singapore
+category: Listing Tips
+seo:
+  meta_title: Why Professional Property Photography Matters for Singapore Agents (2026)
+  focus_keyword: Professional Property Photography
+  meta_description: In Singapore's property market, most buyers and tenants scroll
+    PropertyGuru or 99.co on their phones long before they step inside, and they
+    decide in seconds whether your property is worth a click. That decision is
+    made almost entirely based on the first photo they see.
 ---
 
 # Why Professional Property Photography Matters for Singapore Agents (2026)
