@@ -1,15 +1,29 @@
 ---
-title: "How to Brief Your Property Photographer for Maximum Results in Singapore"
-date: 2026-07-07
-slug: how-to-brief-property-photographer-singapore
-focus_keyword: how to brief property photographer singapore
-secondary_keywords: property photography tips singapore agents, prepare property for photography shoot, real estate photography brief singapore
-meta_description: "The best property photographer in Singapore can only work with what you give them. Here is exactly how to brief, prepare, and get the most out of every property shoot in 2026."
-canonical_url: https://mypropfolio.co/blog/how-to-brief-property-photographer-singapore
-og_title: "How to Brief Your Property Photographer for Maximum Results in Singapore"
-og_description: "Great property photos start before the photographer arrives. Here is how Singapore agents brief their photographer — and prepare the property — to get the best possible results."
-category: Listing Tips
 reading_time: 6 min
+meta_description: The best property photographer in Singapore can only work with
+  what you give them. Here is exactly how to brief, prepare, and get the most
+  out of every property shoot in 2026.
+focus_keyword: how to brief property photographer singapore
+canonical_url: https://mypropfolio.co/blog/how-to-brief-property-photographer-singapore
+slug: how-to-brief-property-photographer-singapore
+title: How to Brief Your Property Photographer for Maximum Results in Singapore
+date: 2026-07-07
+thumbnail: /Asset/uploads/14-brief-property-photographer.jpg
+og_title: How to Brief Your Property Photographer for Maximum Results in Singapore
+og_description: Great property photos start before the photographer arrives.
+  Here is how Singapore agents brief their photographer — and prepare the
+  property — to get the best possible results.
+secondary_keywords: property photography tips singapore agents, prepare property
+  for photography shoot, real estate photography brief singapore
+category: Listing Tips
+seo:
+  meta_title: How to Brief Your Property Photographer for Maximum Results in Singapore
+  focus_keyword: Brief Your Property Photographer
+  meta_description: Professional property photography is only as good as the brief
+    you give before the shoot and the preparation you do on the day. The most
+    experienced property photographer in Singapore cannot compensate for a
+    cluttered unit, poor timing, or unclear instructions about what the listing
+    needs to communicate.
 ---
 
 # How to Brief Your Property Photographer for Maximum Results in Singapore
