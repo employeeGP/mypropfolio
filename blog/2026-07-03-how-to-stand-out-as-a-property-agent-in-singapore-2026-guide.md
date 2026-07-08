@@ -1,6 +1,7 @@
 ---
 title: How to Stand Out as a Property Agent in Singapore (2026 Guide)
 date: 2026-07-03T17:02:00.000+07:00
+thumbnail: /Asset/uploads/2.-how-to-stand-out-as-a-property-agent-in-singapore-2026-guide-.jpg
 category: Agent Tips
 seo:
   canonical: how-to-stand-out-as-property-agent-singapore
