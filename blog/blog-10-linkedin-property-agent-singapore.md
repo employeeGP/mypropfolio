@@ -1,15 +1,28 @@
 ---
-title: "How to Build a Property Agent Personal Brand on LinkedIn Singapore (2026)"
-date: 2026-07-07
-slug: linkedin-personal-brand-property-agent-singapore
-focus_keyword: linkedin personal brand property agent singapore
-secondary_keywords: linkedin for property agents singapore, property agent linkedin tips, how to use linkedin as property agent singapore
-meta_description: "LinkedIn reaches 3.2 million Singapore professionals — including HNW buyers, investors, and corporate relocation clients. Here is exactly how property agents should use it in 2026."
-canonical_url: https://mypropfolio.co/blog/linkedin-personal-brand-property-agent-singapore
-og_title: "How to Build a Property Agent Personal Brand on LinkedIn Singapore (2026)"
-og_description: "Fewer than 5% of Singapore property agents post actively on LinkedIn. Here is why that is an opportunity — and exactly how to build your brand there in 2026."
-category: Agent Tips
 reading_time: 8 min
+meta_description: LinkedIn reaches 3.2 million Singapore professionals —
+  including HNW buyers, investors, and corporate relocation clients. Here is
+  exactly how property agents should use it in 2026.
+focus_keyword: linkedin personal brand property agent singapore
+canonical_url: https://mypropfolio.co/blog/linkedin-personal-brand-property-agent-singapore
+slug: linkedin-personal-brand-property-agent-singapore
+title: How to Build a Property Agent Personal Brand on LinkedIn Singapore (2026)
+date: 2026-07-07
+thumbnail: /Asset/uploads/10-linkedin-property-agent-singapore.jpg
+og_title: How to Build a Property Agent Personal Brand on LinkedIn Singapore (2026)
+og_description: Fewer than 5% of Singapore property agents post actively on
+  LinkedIn. Here is why that is an opportunity — and exactly how to build your
+  brand there in 2026.
+secondary_keywords: linkedin for property agents singapore, property agent
+  linkedin tips, how to use linkedin as property agent singapore
+category: Agent Tips
+seo:
+  meta_title: How to Build a Property Agent Personal Brand on LinkedIn Singapore (2026)
+  meta_description: Most Singapore property agents treat LinkedIn as an online
+    resume — they set up a profile, connect with colleagues, and never touch it
+    again. This is one of the most significant missed opportunities in the
+    market today.
+  focus_keyword: How to Build a Property Agent Personal Brand
 ---
 
 # How to Build a Property Agent Personal Brand on LinkedIn Singapore (2026)
