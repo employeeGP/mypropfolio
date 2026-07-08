@@ -1,2 +1,17 @@
 [[plugins]]
   package = "./netlify/plugins/generate-posts"
+
+# Redirect old ?slug= URLs to new clean URLs
+# Netlify evaluates redirects top-to-bottom; these run after static files are checked
+
+[[redirects]]
+  from = "/blog/post.html"
+  to   = "/blog/:slug/"
+  status = 301
+  query = {slug = ":slug"}
+
+# Fallback: any unmatched /blog/post.html hit → blog listing
+[[redirects]]
+  from   = "/blog/post.html"
+  to     = "/blog/"
+  status = 301

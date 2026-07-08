@@ -343,7 +343,7 @@
 
     function buildCard(post) {
       const slug = post.slug || '';
-      const href = 'post.html?slug=' + encodeURIComponent(slug);
+      const href = post.url || ('post.html?slug=' + encodeURIComponent(slug));
       const thumb = post.thumbnail ? resolveImg(post.thumbnail) : null;
       const category = post.category || '';
       const date = formatDate(post.date);
