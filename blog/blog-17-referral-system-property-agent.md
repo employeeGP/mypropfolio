@@ -1,15 +1,28 @@
 ---
-title: "How to Build a Referral System as a Singapore Property Agent (2026)"
-date: 2026-07-07
-slug: referral-system-property-agent-singapore
-focus_keyword: property agent referral system singapore
-secondary_keywords: how to get referrals as property agent singapore, real estate referral strategy singapore, property agent word of mouth marketing
-meta_description: "Referrals are the highest-quality leads a Singapore property agent can get — and the most cost-effective. Here is how to build a system that generates them consistently in 2026."
-canonical_url: https://mypropfolio.co/blog/referral-system-property-agent-singapore
-og_title: "How to Build a Referral System as a Singapore Property Agent (2026)"
-og_description: "The highest quality property leads in Singapore come from referrals. Here is how to build a system that generates them consistently — without relying on luck."
-category: Lead Generation
 reading_time: 7 min
+meta_description: Referrals are the highest-quality leads a Singapore property
+  agent can get — and the most cost-effective. Here is how to build a system
+  that generates them consistently in 2026.
+focus_keyword: property agent referral system singapore
+canonical_url: https://mypropfolio.co/blog/referral-system-property-agent-singapore
+slug: referral-system-property-agent-singapore
+title: How to Build a Referral System as a Singapore Property Agent (2026)
+date: 2026-07-07
+thumbnail: /Asset/uploads/17-referral-system-property-agent.jpg
+og_title: How to Build a Referral System as a Singapore Property Agent (2026)
+og_description: The highest quality property leads in Singapore come from
+  referrals. Here is how to build a system that generates them consistently —
+  without relying on luck.
+secondary_keywords: how to get referrals as property agent singapore, real
+  estate referral strategy singapore, property agent word of mouth marketing
+category: Lead Generation
+seo:
+  meta_title: How to Build a Referral System as a Singapore Property Agent (2026)
+  focus_keyword: Build a Referral System as a Singapore Property Agent
+  meta_description: The best property lead you will ever receive is a referral
+    from a past client. It arrives with pre-existing trust, a personal
+    recommendation, and a buyer or seller who has already been told you are
+    good.
 ---
 
 # How to Build a Referral System as a Singapore Property Agent (2026)
