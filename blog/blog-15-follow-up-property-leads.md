@@ -1,15 +1,28 @@
 ---
-title: "How to Follow Up Property Leads Without Being Pushy (Singapore 2026)"
-date: 2026-07-07
-slug: how-to-follow-up-property-leads-singapore
-focus_keyword: how to follow up property leads singapore
-secondary_keywords: property agent follow up strategy singapore, how to nurture property leads, real estate lead follow up tips singapore
-meta_description: "Most Singapore property leads go cold not because they lost interest — but because the follow-up was too slow, too generic, or too aggressive. Here is the system that works in 2026."
-canonical_url: https://mypropfolio.co/blog/how-to-follow-up-property-leads-singapore
-og_title: "How to Follow Up Property Leads Without Being Pushy (Singapore 2026)"
-og_description: "Most property leads go cold due to poor follow-up, not loss of interest. Here is the exact system Singapore's top agents use to stay in touch without being annoying."
-category: Lead Generation
 reading_time: 7 min
+meta_description: Most Singapore property leads go cold not because they lost
+  interest — but because the follow-up was too slow, too generic, or too
+  aggressive. Here is the system that works in 2026.
+focus_keyword: how to follow up property leads singapore
+canonical_url: https://mypropfolio.co/blog/how-to-follow-up-property-leads-singapore
+slug: how-to-follow-up-property-leads-singapore
+title: How to Follow Up Property Leads Without Being Pushy (Singapore 2026)
+date: 2026-07-07
+thumbnail: /Asset/uploads/15-follow-up-property-leads.jpg
+og_title: How to Follow Up Property Leads Without Being Pushy (Singapore 2026)
+og_description: Most property leads go cold due to poor follow-up, not loss of
+  interest. Here is the exact system Singapore's top agents use to stay in touch
+  without being annoying.
+secondary_keywords: property agent follow up strategy singapore, how to nurture
+  property leads, real estate lead follow up tips singapore
+category: Lead Generation
+seo:
+  meta_title: How to Follow Up Property Leads Without Being Pushy (Singapore 2026)
+  focus_keyword: Follow Up Property Leads
+  meta_description: Most Singapore property leads do not go cold because the buyer
+    or seller lost interest. They go cold because the agent followed up too
+    slowly, too generically, or too aggressively — and the lead quietly moved on
+    to someone else.
 ---
 
 # How to Follow Up Property Leads Without Being Pushy (Singapore 2026)
