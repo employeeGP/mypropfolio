@@ -1,15 +1,27 @@
 ---
-title: "How to Convert Property Enquiries Into Viewing Appointments (Singapore 2026)"
-date: 2026-07-07
-slug: convert-property-enquiries-viewing-appointments-singapore
-focus_keyword: how to convert property enquiries viewing appointments singapore
-secondary_keywords: property enquiry to viewing conversion singapore, how to get more property viewings, property agent convert leads singapore
-meta_description: "Getting enquiries is only half the job. Here is exactly how Singapore property agents convert more enquiries into confirmed viewing appointments in 2026."
-canonical_url: https://mypropfolio.co/blog/convert-property-enquiries-viewing-appointments-singapore
-og_title: "How to Convert Property Enquiries Into Viewing Appointments (Singapore 2026)"
-og_description: "An enquiry is not a lead until it becomes a viewing. Here is how Singapore agents convert more enquiries into confirmed appointments in 2026."
-category: Lead Generation
 reading_time: 7 min
+meta_description: Getting enquiries is only half the job. Here is exactly how
+  Singapore property agents convert more enquiries into confirmed viewing
+  appointments in 2026.
+focus_keyword: how to convert property enquiries viewing appointments singapore
+canonical_url: https://mypropfolio.co/blog/convert-property-enquiries-viewing-appointments-singapore
+slug: convert-property-enquiries-viewing-appointments-singapore
+title: How to Convert Property Enquiries Into Viewing Appointments (Singapore 2026)
+date: 2026-07-07
+thumbnail: /Asset/uploads/16-convert-enquiries-viewings.jpg
+og_title: How to Convert Property Enquiries Into Viewing Appointments (Singapore 2026)
+og_description: An enquiry is not a lead until it becomes a viewing. Here is how
+  Singapore agents convert more enquiries into confirmed appointments in 2026.
+secondary_keywords: property enquiry to viewing conversion singapore, how to get
+  more property viewings, property agent convert leads singapore
+category: Lead Generation
+seo:
+  meta_title: How to Convert Property Enquiries Into Viewing Appointments (Singapore 2026)
+  focus_keyword: Convert Property Enquiries
+  meta_description: An enquiry is not a sale. It is not even a lead in any
+    meaningful sense until it converts to a viewing appointment. And yet most
+    agents treat the enquiry as the hard part — when converting that enquiry
+    into a confirmed viewing is where most opportunities are actually lost.
 ---
 
 # How to Convert Property Enquiries Into Viewing Appointments (Singapore 2026)
