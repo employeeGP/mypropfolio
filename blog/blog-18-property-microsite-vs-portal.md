@@ -1,15 +1,30 @@
 ---
-title: "Property Microsite vs Portal Listing: Which Gets More Enquiries for Singapore Agents?"
-date: 2026-07-08
-slug: property-microsite-vs-portal-listing-singapore
-focus_keyword: property microsite vs portal listing singapore
-secondary_keywords: single property website vs propertyguru singapore, property listing microsite benefits, mypropfolio vs propertyguru
-meta_description: "Should Singapore property agents use a dedicated listing microsite or rely on PropertyGuru and 99.co? Here is an honest comparison of both — and why top agents are using both strategically in 2026."
-canonical_url: https://mypropfolio.co/blog/property-microsite-vs-portal-listing-singapore
-og_title: "Property Microsite vs Portal Listing: Which Gets More Enquiries?"
-og_description: "PropertyGuru gets you discovered. A microsite gets you chosen. Here is why Singapore's top agents use both — and how they work together in 2026."
-category: Agent Tips
 reading_time: 7 min
+meta_description: Should Singapore property agents use a dedicated listing
+  microsite or rely on PropertyGuru and 99.co? Here is an honest comparison of
+  both — and why top agents are using both strategically in 2026.
+focus_keyword: property microsite vs portal listing singapore
+canonical_url: https://mypropfolio.co/blog/property-microsite-vs-portal-listing-singapore
+slug: property-microsite-vs-portal-listing-singapore
+title: "Property Microsite vs Portal Listing: Which Gets More Enquiries for
+  Singapore Agents?"
+date: 2026-07-08
+thumbnail: /Asset/uploads/18-property-microsite-vs-portal.jpg
+og_title: "Property Microsite vs Portal Listing: Which Gets More Enquiries?"
+og_description: PropertyGuru gets you discovered. A microsite gets you chosen.
+  Here is why Singapore's top agents use both — and how they work together in
+  2026.
+secondary_keywords: single property website vs propertyguru singapore, property
+  listing microsite benefits, mypropfolio vs propertyguru
+category: Agent Tips
+seo:
+  meta_title: "Property Microsite vs Portal Listing: Which Gets More Enquiries for
+    Singapore Agents?"
+  focus_keyword: Property Microsite vs Portal Listing
+  meta_description: Portals have real value, and dismissing them is not the point.
+    But relying on them exclusively means handing control of your leads, your
+    brand, and your listing presentation to a platform that is simultaneously
+    marketing your competitors.
 ---
 
 # Property Microsite vs Portal Listing: Which Gets More Enquiries for Singapore Agents?
