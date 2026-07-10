@@ -1,15 +1,27 @@
 ---
-title: "How to Set Up Google Business Profile for Singapore Property Agents (2026)"
-date: 2026-07-09
-slug: google-business-profile-property-agent-singapore
-focus_keyword: google business profile property agent singapore
-secondary_keywords: google my business property agent singapore, local seo property agent singapore, property agent google listing singapore
-meta_description: "A Google Business Profile is the highest-ROI free tool available to Singapore property agents. Here is exactly how to set it up, optimise it, and use it to generate leads in 2026."
-canonical_url: https://mypropfolio.co/blog/google-business-profile-property-agent-singapore
-og_title: "How to Set Up Google Business Profile for Singapore Property Agents (2026)"
-og_description: "Free, permanent, and ranking on Google within weeks. Here is how Singapore property agents set up and optimise their Google Business Profile in 2026."
-category: Lead Generation
 reading_time: 6 min
+meta_description: A Google Business Profile is the highest-ROI free tool
+  available to Singapore property agents. Here is exactly how to set it up,
+  optimise it, and use it to generate leads in 2026.
+focus_keyword: google business profile property agent singapore
+canonical_url: https://mypropfolio.co/blog/google-business-profile-property-agent-singapore
+slug: google-business-profile-property-agent-singapore
+title: How to Set Up Google Business Profile for Singapore Property Agents (2026)
+date: 2026-07-09
+thumbnail: /Asset/uploads/26-google-business-profile-property-agent.jpg
+og_title: How to Set Up Google Business Profile for Singapore Property Agents (2026)
+og_description: Free, permanent, and ranking on Google within weeks. Here is how
+  Singapore property agents set up and optimise their Google Business Profile in
+  2026.
+secondary_keywords: google my business property agent singapore, local seo
+  property agent singapore, property agent google listing singapore
+category: Lead Generation
+seo:
+  meta_title: How to Set Up Google Business Profile for Singapore Property Agents (2026)
+  focus_keyword: How to Set Up Google Business Profile
+  meta_description: When someone Googles "HDB agent Tampines" or "property agent
+    Bukit Timah" or your own name, what comes up? For most Singapore property
+    agents, the answer is a PropertyGuru profile — if anything at all.
 ---
 
 # How to Set Up Google Business Profile for Singapore Property Agents (2026)
