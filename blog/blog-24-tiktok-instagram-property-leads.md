@@ -1,15 +1,31 @@
 ---
-title: "How Singapore Property Agents Are Using TikTok and Instagram to Generate Leads in 2026"
-date: 2026-07-09
-slug: tiktok-instagram-property-leads-singapore-agents
-focus_keyword: tiktok instagram property leads singapore agents
-secondary_keywords: property agent tiktok singapore, instagram leads property agent singapore, social media lead generation property agent
-meta_description: "TikTok videos are reaching 10,000 to 50,000 buyers organically at zero cost. Here is exactly how Singapore property agents are using TikTok and Instagram to generate consistent leads in 2026."
-canonical_url: https://mypropfolio.co/blog/tiktok-instagram-property-leads-singapore-agents
-og_title: "How Singapore Property Agents Are Using TikTok and Instagram to Generate Leads in 2026"
-og_description: "A single TikTok video can reach 50,000 buyers at zero cost. Here is how Singapore agents are building social media lead pipelines that work in 2026."
-category: Lead Generation
 reading_time: 8 min
+meta_description: TikTok videos are reaching 10,000 to 50,000 buyers organically
+  at zero cost. Here is exactly how Singapore property agents are using TikTok
+  and Instagram to generate consistent leads in 2026.
+focus_keyword: tiktok instagram property leads singapore agents
+canonical_url: https://mypropfolio.co/blog/tiktok-instagram-property-leads-singapore-agents
+slug: tiktok-instagram-property-leads-singapore-agents
+title: How Singapore Property Agents Are Using TikTok and Instagram to Generate
+  Leads in 2026
+date: 2026-07-09
+thumbnail: /Asset/uploads/24-tiktok-instagram-property-leads.jpg
+og_title: How Singapore Property Agents Are Using TikTok and Instagram to
+  Generate Leads in 2026
+og_description: A single TikTok video can reach 50,000 buyers at zero cost. Here
+  is how Singapore agents are building social media lead pipelines that work in
+  2026.
+secondary_keywords: property agent tiktok singapore, instagram leads property
+  agent singapore, social media lead generation property agent
+category: Lead Generation
+seo:
+  meta_title: How Singapore Property Agents Are Using TikTok and Instagram to
+    Generate Leads in 2026
+  focus_keyword: "Singapore Property Agents "
+  meta_description: A single TikTok video can reach 10,000 to 50,000 potential
+    buyers organically — at zero media cost. For Singapore property agents who
+    have been paying SGD 200-500 per month for featured portal placements with
+    no guaranteed return, this is a number worth paying attention to.
 ---
 
 # How Singapore Property Agents Are Using TikTok and Instagram to Generate Leads in 2026
