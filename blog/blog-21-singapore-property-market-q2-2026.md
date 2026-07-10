@@ -1,15 +1,26 @@
 ---
+reading_time: 8 min
+meta_description: Singapore property market Q2 2026 data is in. HDB resale
+  prices fell for a second consecutive quarter while private CCR surged. Here is
+  what the numbers mean for agents on the ground.
+focus_keyword: singapore property market update 2026
+canonical_url: https://mypropfolio.co/blog/singapore-property-market-update-q2-2026
+slug: singapore-property-market-update-q2-2026
 title: "Singapore Property Market Update Q2 2026: What Agents Need to Know"
 date: 2026-07-09
-slug: singapore-property-market-update-q2-2026
-focus_keyword: singapore property market update 2026
-secondary_keywords: singapore property market q2 2026, hdb resale market 2026, private condo market singapore 2026, singapore property outlook 2026
-meta_description: "Singapore property market Q2 2026 data is in. HDB resale prices fell for a second consecutive quarter while private CCR surged. Here is what the numbers mean for agents on the ground."
-canonical_url: https://mypropfolio.co/blog/singapore-property-market-update-q2-2026
+thumbnail: /Asset/uploads/21-singapore-property-market-q2-2026.jpg
 og_title: "Singapore Property Market Update Q2 2026: What Agents Need to Know"
-og_description: "HDB resale softening. CCR surging. Landed rebounding. Here is what Singapore's Q2 2026 property data means for agents and their clients."
+og_description: HDB resale softening. CCR surging. Landed rebounding. Here is
+  what Singapore's Q2 2026 property data means for agents and their clients.
+secondary_keywords: singapore property market q2 2026, hdb resale market 2026,
+  private condo market singapore 2026, singapore property outlook 2026
 category: Market Updates
-reading_time: 8 min
+seo:
+  meta_title: "Singapore Property Market Update Q2 2026: What Agents Need to Know"
+  focus_keyword: Singapore Property Market
+  meta_description: The Q2 2026 data is in — and it tells two very different
+    stories depending on which segment you are in. For HDB resale agents, the
+    market is cooling more clearly than at any point since 2019.
 ---
 
 # Singapore Property Market Update Q2 2026: What Agents Need to Know
