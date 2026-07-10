@@ -1,15 +1,31 @@
 ---
-title: "Low Cost Lead Generation for Singapore Property Agents: What Actually Works in 2026"
-date: 2026-07-09
-slug: low-cost-lead-generation-singapore-property-agents
-focus_keyword: low cost lead generation property agents singapore
-secondary_keywords: free lead generation property agent singapore, property agent leads without propertyguru, organic lead generation real estate singapore
-meta_description: "PropertyGuru costs are rising. Here are the most effective low-cost and free lead generation strategies Singapore property agents are using in 2026 to fill their pipeline without expensive portal spend."
-canonical_url: https://mypropfolio.co/blog/low-cost-lead-generation-singapore-property-agents
-og_title: "Low Cost Lead Generation for Singapore Property Agents (2026)"
-og_description: "Portal spend is rising and ROI is falling. Here are the most effective free and low-cost lead generation strategies Singapore agents are using in 2026."
-category: Lead Generation
 reading_time: 7 min
+meta_description: PropertyGuru costs are rising. Here are the most effective
+  low-cost and free lead generation strategies Singapore property agents are
+  using in 2026 to fill their pipeline without expensive portal spend.
+focus_keyword: low cost lead generation property agents singapore
+canonical_url: https://mypropfolio.co/blog/low-cost-lead-generation-singapore-property-agents
+slug: low-cost-lead-generation-singapore-property-agents
+title: "Low Cost Lead Generation for Singapore Property Agents: What Actually
+  Works in 2026"
+date: 2026-07-09
+thumbnail: /Asset/uploads/25-low-cost-lead-generation-property-agents.jpg
+og_title: Low Cost Lead Generation for Singapore Property Agents (2026)
+og_description: Portal spend is rising and ROI is falling. Here are the most
+  effective free and low-cost lead generation strategies Singapore agents are
+  using in 2026.
+secondary_keywords: free lead generation property agent singapore, property
+  agent leads without propertyguru, organic lead generation real estate
+  singapore
+category: Lead Generation
+seo:
+  meta_title: "Low Cost Lead Generation for Singapore Property Agents: What
+    Actually Works in 2026"
+  focus_keyword: Low Cost Lead Generation
+  meta_description: Portal advertising costs in Singapore have climbed steadily. A
+    featured listing on PropertyGuru runs SGD 200-500 per month with no
+    guaranteed return. For an agent managing five active listings, that is a
+    significant fixed overhead before generating a single enquiry.
 ---
 
 # Low Cost Lead Generation for Singapore Property Agents: What Actually Works in 2026
