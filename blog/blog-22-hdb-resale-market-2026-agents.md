@@ -1,15 +1,30 @@
 ---
+reading_time: 7 min
+meta_description: HDB resale prices fell for the first time in 7 years in 2026.
+  Here is what the data means for agents — and how to position your listings and
+  conversations with sellers in this new market.
+focus_keyword: hdb resale market 2026 singapore
+canonical_url: https://mypropfolio.co/blog/hdb-resale-market-2026-singapore-agents
+slug: hdb-resale-market-2026-singapore-agents
 title: "HDB Resale Market 2026: What Singapore Property Agents Need to Know"
 date: 2026-07-09
-slug: hdb-resale-market-2026-singapore-agents
-focus_keyword: hdb resale market 2026 singapore
-secondary_keywords: hdb resale price 2026, hdb resale outlook 2026, hdb mop 2026 agents, hdb resale agent tips 2026
-meta_description: "HDB resale prices fell for the first time in 7 years in 2026. Here is what the data means for agents — and how to position your listings and conversations with sellers in this new market."
-canonical_url: https://mypropfolio.co/blog/hdb-resale-market-2026-singapore-agents
+thumbnail: /Asset/uploads/22-hdb-resale-market-2026-agents.jpg
 og_title: "HDB Resale Market 2026: What Singapore Property Agents Need to Know"
-og_description: "First back-to-back price decline since 2019. Nearly double the MOP supply. Here is what the 2026 HDB resale market means for agents on the ground."
+og_description: First back-to-back price decline since 2019. Nearly double the
+  MOP supply. Here is what the 2026 HDB resale market means for agents on the
+  ground.
+secondary_keywords: hdb resale price 2026, hdb resale outlook 2026, hdb mop 2026
+  agents, hdb resale agent tips 2026
 category: Market Updates
-reading_time: 7 min
+seo:
+  meta_title: "HDB Resale Market 2026: What Singapore Property Agents Need to Know"
+  focus_keyword: HDB Resale Market
+  meta_description: Singapore's HDB resale market has entered territory not seen
+    since 2019. The HDB Resale Price Index dipped 0.1% in Q1 2026 — the first
+    quarterly decline in nearly seven years, the last being a 0.2% drop in Q2
+    2019. Q2 2026 followed with a further 0.3% decline, confirming a
+    back-to-back softening that changes how agents need to approach
+    conversations with both sellers and buyers.
 ---
 
 # HDB Resale Market 2026: What Singapore Property Agents Need to Know
