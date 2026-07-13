@@ -1,15 +1,28 @@
 ---
+reading_time: 8 min
+meta_description: Thinking of becoming a property agent in Singapore? Here is
+  the complete step-by-step guide for 2026 — RES course, exam schedule, CEA
+  registration, costs, and what to expect in your first year.
+focus_keyword: how to become property agent singapore 2026
+canonical_url: https://mypropfolio.co/blog/how-to-become-property-agent-singapore-2026
+slug: how-to-become-property-agent-singapore-2026
 title: "How to Become a Property Agent in Singapore: Step-by-Step Guide (2026)"
 date: 2026-07-11
-slug: how-to-become-property-agent-singapore-2026
-focus_keyword: how to become property agent singapore 2026
-secondary_keywords: become real estate agent singapore, res exam singapore 2026, property agent license singapore, cea registration singapore
-meta_description: "Thinking of becoming a property agent in Singapore? Here is the complete step-by-step guide for 2026 — RES course, exam schedule, CEA registration, costs, and what to expect in your first year."
-canonical_url: https://mypropfolio.co/blog/how-to-become-property-agent-singapore-2026
+thumbnail: /Asset/uploads/39.jpg
 og_title: "How to Become a Property Agent in Singapore: Complete Guide (2026)"
-og_description: "RES course, exam, CEA registration, agency selection — here is the complete 2026 roadmap for anyone considering a career as a Singapore property agent."
+og_description: RES course, exam, CEA registration, agency selection — here is
+  the complete 2026 roadmap for anyone considering a career as a Singapore
+  property agent.
+secondary_keywords: become real estate agent singapore, res exam singapore 2026,
+  property agent license singapore, cea registration singapore
 category: Agent Career
-reading_time: 8 min
+seo:
+  meta_title: "How to Become a Property Agent in Singapore: Step-by-Step Guide (2026)"
+  focus_keyword: Become a Property Agent
+  meta_description: "This guide covers everything you need to know to enter the
+    profession in 2026: eligibility requirements, the RES examination process,
+    CEA registration, agency selection, and what the first 12 months actually
+    look like."
 ---
 
 # How to Become a Property Agent in Singapore: Step-by-Step Guide (2026)
