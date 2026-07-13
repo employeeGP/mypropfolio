@@ -1,15 +1,31 @@
 ---
-title: "HDB to Private Property: The Complete Upgrading Guide for Singapore Families (2026)"
-date: 2026-07-10
-slug: hdb-upgrading-private-property-singapore-2026
-focus_keyword: hdb upgrade private property singapore 2026
-secondary_keywords: hdb to condo upgrade singapore, upgrading from hdb to private property, hdb mop upgrade condo singapore 2026
-meta_description: "Approaching your HDB MOP and considering an upgrade to private property? Here is the complete guide — ABSD timing, CPF usage, affordability calculations, and what to expect in 2026."
-canonical_url: https://mypropfolio.co/blog/hdb-upgrading-private-property-singapore-2026
-og_title: "HDB to Private Property: The Complete Upgrading Guide for Singapore Families (2026)"
-og_description: "HDB MOP coming up? Here is everything Singapore families need to know about upgrading to private property in 2026 — costs, timing, ABSD, and what agents won't always tell you."
-category: Buyer Guides
 reading_time: 8 min
+meta_description: Approaching your HDB MOP and considering an upgrade to private
+  property? Here is the complete guide — ABSD timing, CPF usage, affordability
+  calculations, and what to expect in 2026.
+focus_keyword: hdb upgrade private property singapore 2026
+canonical_url: https://mypropfolio.co/blog/hdb-upgrading-private-property-singapore-2026
+slug: hdb-upgrading-private-property-singapore-2026
+title: "HDB to Private Property: The Complete Upgrading Guide for Singapore
+  Families (2026)"
+date: 2026-07-10
+thumbnail: /Asset/uploads/32-hdb-upgrading-private-property-singapore.jpg
+og_title: "HDB to Private Property: The Complete Upgrading Guide for Singapore
+  Families (2026)"
+og_description: HDB MOP coming up? Here is everything Singapore families need to
+  know about upgrading to private property in 2026 — costs, timing, ABSD, and
+  what agents won't always tell you.
+secondary_keywords: hdb to condo upgrade singapore, upgrading from hdb to
+  private property, hdb mop upgrade condo singapore 2026
+category: Buyer Guides
+seo:
+  meta_title: "HDB to Private Property: The Complete Upgrading Guide for Singapore
+    Families (2026)"
+  focus_keyword: HDB to Private Property
+  meta_description: The HDB-to-private upgrade is the most common property wealth
+    milestone for Singapore families. Done well, it allows you to build
+    long-term capital appreciation while moving into a lifestyle that suits
+    where you are in life.
 ---
 
 # HDB to Private Property: The Complete Upgrading Guide for Singapore Families (2026)
