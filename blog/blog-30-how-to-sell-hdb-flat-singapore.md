@@ -1,15 +1,27 @@
 ---
+reading_time: 8 min
+meta_description: Planning to sell your HDB flat in Singapore? Here is the
+  complete step-by-step process for 2026 — from Intent to Sell to completion,
+  with timelines, costs, and the mistakes to avoid.
+focus_keyword: how to sell hdb flat singapore 2026
+canonical_url: https://mypropfolio.co/blog/how-to-sell-hdb-flat-singapore-2026
+slug: how-to-sell-hdb-flat-singapore-2026
 title: "How to Sell Your HDB Flat in Singapore: Step-by-Step Guide (2026)"
 date: 2026-07-10
-slug: how-to-sell-hdb-flat-singapore-2026
-focus_keyword: how to sell hdb flat singapore 2026
-secondary_keywords: hdb resale process singapore 2026, sell hdb flat step by step, hdb resale timeline singapore
-meta_description: "Planning to sell your HDB flat in Singapore? Here is the complete step-by-step process for 2026 — from Intent to Sell to completion, with timelines, costs, and the mistakes to avoid."
-canonical_url: https://mypropfolio.co/blog/how-to-sell-hdb-flat-singapore-2026
+thumbnail: /Asset/uploads/30-how-to-sell-hdb-flat-singapore.jpg
 og_title: "How to Sell Your HDB Flat in Singapore: Step-by-Step Guide (2026)"
-og_description: "Selling your HDB flat in 2026? The process has 4 stages and takes 3-4 months. Here is exactly what happens, when, and what catches sellers off guard."
+og_description: Selling your HDB flat in 2026? The process has 4 stages and
+  takes 3-4 months. Here is exactly what happens, when, and what catches sellers
+  off guard.
+secondary_keywords: hdb resale process singapore 2026, sell hdb flat step by
+  step, hdb resale timeline singapore
 category: Seller Guides
-reading_time: 8 min
+seo:
+  meta_title: "How to Sell Your HDB Flat in Singapore: Step-by-Step Guide (2026)"
+  meta_description: This guide walks through the full 2026 process from the
+    seller's side — what happens at each stage, how long it takes, what it
+    costs, and the mistakes that catch sellers off guard.
+  focus_keyword: Sell Your HDB Flat
 ---
 
 # How to Sell Your HDB Flat in Singapore: Step-by-Step Guide (2026)
