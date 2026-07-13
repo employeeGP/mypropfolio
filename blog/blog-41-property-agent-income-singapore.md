@@ -1,15 +1,30 @@
 ---
-title: "How Much Do Singapore Property Agents Earn? (Realistic 2026 Breakdown)"
-date: 2026-07-11
-slug: property-agent-income-singapore-2026
-focus_keyword: property agent income singapore 2026
-secondary_keywords: how much do property agents earn singapore, property agent salary singapore 2026, real estate agent commission singapore
-meta_description: "Curious about property agent income in Singapore? Here is a realistic, data-driven breakdown of commission rates, first-year earnings, top performer income, and the costs most aspiring agents underestimate in 2026."
-canonical_url: https://mypropfolio.co/blog/property-agent-income-singapore-2026
-og_title: "How Much Do Singapore Property Agents Earn? Realistic 2026 Breakdown"
-og_description: "Top agents earn millions. Most new agents earn SGD 30,000-50,000 in year one. Here is the realistic income picture for Singapore property agents in 2026 — commissions, costs, and what drives the gap."
-category: Agent Career
 reading_time: 7 min
+meta_description: Curious about property agent income in Singapore? Here is a
+  realistic, data-driven breakdown of commission rates, first-year earnings, top
+  performer income, and the costs most aspiring agents underestimate in 2026.
+focus_keyword: property agent income singapore 2026
+canonical_url: https://mypropfolio.co/blog/property-agent-income-singapore-2026
+slug: property-agent-income-singapore-2026
+title: How Much Do Singapore Property Agents Earn? (Realistic 2026 Breakdown)
+date: 2026-07-11
+thumbnail: /Asset/uploads/41.jpg
+og_title: How Much Do Singapore Property Agents Earn? Realistic 2026 Breakdown
+og_description: Top agents earn millions. Most new agents earn SGD 30,000-50,000
+  in year one. Here is the realistic income picture for Singapore property
+  agents in 2026 — commissions, costs, and what drives the gap.
+secondary_keywords: how much do property agents earn singapore, property agent
+  salary singapore 2026, real estate agent commission singapore
+category: Agent Career
+seo:
+  meta_title: How Much Do Singapore Property Agents Earn? (Realistic 2026 Breakdown)
+  focus_keyword: Singapore Property Agents Earn
+  meta_description: Understanding the realistic income picture — not the
+    aspirational top-end, and not the pessimistic bottom — is essential for
+    anyone considering this career. This guide breaks down the commission
+    structure, realistic earnings by experience level, the costs most aspiring
+    agents underestimate, and what actually drives the income gap between agents
+    at the same agency.
 ---
 
 # How Much Do Singapore Property Agents Earn? (Realistic 2026 Breakdown)
