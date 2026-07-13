@@ -1,15 +1,27 @@
 ---
+reading_time: 8 min
+meta_description: Thinking of buying landed property in Singapore? From
+  eligibility rules to GCB restrictions and LDAU approval — here is the complete
+  guide for buyers and the agents who advise them in 2026.
+focus_keyword: buying landed property singapore 2026
+canonical_url: https://mypropfolio.co/blog/buying-landed-property-singapore-2026
+slug: buying-landed-property-singapore-2026
 title: "Buying Landed Property in Singapore: What You Need to Know (2026 Guide)"
 date: 2026-07-10
-slug: buying-landed-property-singapore-2026
-focus_keyword: buying landed property singapore 2026
-secondary_keywords: landed property singapore eligibility, how to buy landed house singapore, landed property singapore guide 2026
-meta_description: "Thinking of buying landed property in Singapore? From eligibility rules to GCB restrictions and LDAU approval — here is the complete guide for buyers and the agents who advise them in 2026."
-canonical_url: https://mypropfolio.co/blog/buying-landed-property-singapore-2026
+thumbnail: /Asset/uploads/33-buying-landed-property-singapore.jpg
 og_title: "Buying Landed Property in Singapore: Complete Guide (2026)"
-og_description: "Landed property is Singapore's most exclusive residential segment — and the most heavily restricted. Here is everything buyers and agents need to know in 2026."
+og_description: Landed property is Singapore's most exclusive residential
+  segment — and the most heavily restricted. Here is everything buyers and
+  agents need to know in 2026.
+secondary_keywords: landed property singapore eligibility, how to buy landed
+  house singapore, landed property singapore guide 2026
 category: Buyer Guides
-reading_time: 8 min
+seo:
+  meta_title: "Buying Landed Property in Singapore: What You Need to Know (2026 Guide)"
+  focus_keyword: Landed Property in Singapore
+  meta_description: "Landed property sits at the top of Singapore's residential
+    hierarchy — scarce, prestigious, and governed by a set of rules that catch
+    many buyers off guard. "
 ---
 
 # Buying Landed Property in Singapore: What You Need to Know (2026 Guide)
