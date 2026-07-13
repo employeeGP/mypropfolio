@@ -1,15 +1,28 @@
 ---
+reading_time: 7 min
+meta_description: Landed or condo — which is the better property investment in
+  Singapore? Here is an honest comparison of capital appreciation, rental yield,
+  liquidity, and lifestyle trade-offs in 2026.
+focus_keyword: landed vs condo singapore investment 2026
+canonical_url: https://mypropfolio.co/blog/landed-vs-condo-singapore-investment-2026
+slug: landed-vs-condo-singapore-investment-2026
 title: "Landed vs Condo in Singapore: Which Is a Better Investment? (2026)"
 date: 2026-07-10
-slug: landed-vs-condo-singapore-investment-2026
-focus_keyword: landed vs condo singapore investment 2026
-secondary_keywords: landed property vs condo singapore, should i buy landed or condo singapore, landed house vs condo comparison singapore
-meta_description: "Landed or condo — which is the better property investment in Singapore? Here is an honest comparison of capital appreciation, rental yield, liquidity, and lifestyle trade-offs in 2026."
-canonical_url: https://mypropfolio.co/blog/landed-vs-condo-singapore-investment-2026
+thumbnail: /Asset/uploads/34.jpg
 og_title: "Landed vs Condo Singapore: Which Is a Better Investment? (2026)"
-og_description: "Landed appreciates more but yields less. Condos are more liquid but more common. Here is the real trade-off for Singapore property investors and upgraders in 2026."
+og_description: Landed appreciates more but yields less. Condos are more liquid
+  but more common. Here is the real trade-off for Singapore property investors
+  and upgraders in 2026.
+secondary_keywords: landed property vs condo singapore, should i buy landed or
+  condo singapore, landed house vs condo comparison singapore
 category: Buyer Guides
-reading_time: 7 min
+seo:
+  meta_title: "Landed vs Condo in Singapore: Which Is a Better Investment? (2026)"
+  focus_keyword: Landed vs Condo in Singapore
+  meta_description: The comparison between landed property and condos is one of
+    the most common questions Singapore property buyers and upgraders wrestle
+    with — particularly at the point where financial capacity allows either
+    option
 ---
 
 # Landed vs Condo in Singapore: Which Is a Better Investment? (2026)
