@@ -1,15 +1,27 @@
 ---
+reading_time: 7 min
+meta_description: EC or private condo? The 15-25% price discount sounds
+  compelling, but the new 10-year MOP changes the calculation. Here is an honest
+  comparison for Singapore buyers in 2026.
+focus_keyword: ec vs private condo singapore 2026
+canonical_url: https://mypropfolio.co/blog/ec-vs-private-condo-singapore-2026
+slug: ec-vs-private-condo-singapore-2026
 title: "EC vs Private Condo Singapore: Which Is the Better Buy in 2026?"
 date: 2026-07-10
-slug: ec-vs-private-condo-singapore-2026
-focus_keyword: ec vs private condo singapore 2026
-secondary_keywords: executive condo vs private condo singapore, should i buy ec or condo singapore, ec or private condo better investment singapore
-meta_description: "EC or private condo? The 15-25% price discount sounds compelling, but the new 10-year MOP changes the calculation. Here is an honest comparison for Singapore buyers in 2026."
-canonical_url: https://mypropfolio.co/blog/ec-vs-private-condo-singapore-2026
+thumbnail: /Asset/uploads/37.jpg
 og_title: "EC vs Private Condo Singapore: Which Is the Better Buy in 2026?"
-og_description: "ECs cost 15-25% less than comparable condos — but the new 10-year MOP and 15-year privatisation changes the investment case. Here is the honest comparison for 2026."
+og_description: ECs cost 15-25% less than comparable condos — but the new
+  10-year MOP and 15-year privatisation changes the investment case. Here is the
+  honest comparison for 2026.
+secondary_keywords: executive condo vs private condo singapore, should i buy ec
+  or condo singapore, ec or private condo better investment singapore
 category: Buyer Guides
-reading_time: 7 min
+seo:
+  meta_title: "EC vs Private Condo Singapore: Which Is the Better Buy in 2026?"
+  focus_keyword: EC vs Private Condo Singapore
+  meta_description: "This guide compares EC and private condo across the
+    dimensions that matter most for 2026 buyers: price, holding period, capital
+    appreciation, rental flexibility, and eligibility constraints."
 ---
 
 # EC vs Private Condo Singapore: Which Is the Better Buy in 2026?
