@@ -1,15 +1,28 @@
 ---
-title: "How to Sell Executive Condos as a Singapore Property Agent (2026 Guide)"
-date: 2026-07-10
-slug: how-to-sell-executive-condo-singapore-agent
-focus_keyword: how to sell executive condo singapore agent
-secondary_keywords: ec agent tips singapore, marketing executive condominium singapore, selling ec singapore 2026 agent guide
-meta_description: "EC sales require a different pre-qualification and presentation approach from private condo. Here is what Singapore property agents need to know to advise EC buyers and sellers effectively in 2026."
-canonical_url: https://mypropfolio.co/blog/how-to-sell-executive-condo-singapore-agent
-og_title: "How to Sell Executive Condos as a Singapore Property Agent (2026 Guide)"
-og_description: "EC buyers need more careful pre-qualification than private condo buyers — income ceiling, citizenship, 30-month rule, MOP timing. Here is the agent guide for 2026."
-category: Agent Tips
 reading_time: 7 min
+meta_description: EC sales require a different pre-qualification and
+  presentation approach from private condo. Here is what Singapore property
+  agents need to know to advise EC buyers and sellers effectively in 2026.
+focus_keyword: how to sell executive condo singapore agent
+canonical_url: https://mypropfolio.co/blog/how-to-sell-executive-condo-singapore-agent
+slug: how-to-sell-executive-condo-singapore-agent
+title: How to Sell Executive Condos as a Singapore Property Agent (2026 Guide)
+date: 2026-07-10
+thumbnail: /Asset/uploads/38.jpg
+og_title: How to Sell Executive Condos as a Singapore Property Agent (2026 Guide)
+og_description: EC buyers need more careful pre-qualification than private condo
+  buyers — income ceiling, citizenship, 30-month rule, MOP timing. Here is the
+  agent guide for 2026.
+secondary_keywords: ec agent tips singapore, marketing executive condominium
+  singapore, selling ec singapore 2026 agent guide
+category: Agent Tips
+seo:
+  meta_title: How to Sell Executive Condos as a Singapore Property Agent (2026 Guide)
+  focus_keyword: Executive Condos
+  meta_description: The agents who consistently perform in EC sales are the ones
+    who master the qualification conversation first, then build their marketing
+    and presentation approach around a well-qualified buyer pipeline. Here is
+    how to do both.
 ---
 
 # How to Sell Executive Condos as a Singapore Property Agent (2026 Guide)
