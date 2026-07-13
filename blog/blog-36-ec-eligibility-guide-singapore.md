@@ -1,15 +1,27 @@
 ---
+reading_time: 8 min
+meta_description: Who can buy an EC in Singapore? Income ceiling, citizenship
+  requirements, the new 10-year MOP rules from May 2026, and the 30-month
+  private property cooling period — here is the complete eligibility guide.
+focus_keyword: executive condo eligibility singapore 2026
+canonical_url: https://mypropfolio.co/blog/executive-condo-eligibility-singapore-2026
+slug: executive-condo-eligibility-singapore-2026
 title: "Executive Condo (EC) Eligibility in Singapore: Complete Guide (2026)"
 date: 2026-07-10
-slug: executive-condo-eligibility-singapore-2026
-focus_keyword: executive condo eligibility singapore 2026
-secondary_keywords: ec eligibility singapore 2026, who can buy ec singapore, executive condominium requirements singapore, ec income ceiling 2026
-meta_description: "Who can buy an EC in Singapore? Income ceiling, citizenship requirements, the new 10-year MOP rules from May 2026, and the 30-month private property cooling period — here is the complete eligibility guide."
-canonical_url: https://mypropfolio.co/blog/executive-condo-eligibility-singapore-2026
+thumbnail: /Asset/uploads/36.jpg
 og_title: "Executive Condo (EC) Eligibility Singapore 2026: Complete Guide"
-og_description: "SGD 16,000 income ceiling. New 10-year MOP from May 2026. 30-month private property cooling period. Here is the complete EC eligibility guide for Singapore buyers in 2026."
+og_description: SGD 16,000 income ceiling. New 10-year MOP from May 2026.
+  30-month private property cooling period. Here is the complete EC eligibility
+  guide for Singapore buyers in 2026.
+secondary_keywords: ec eligibility singapore 2026, who can buy ec singapore,
+  executive condominium requirements singapore, ec income ceiling 2026
 category: Buyer Guides
-reading_time: 8 min
+seo:
+  meta_title: "Executive Condo (EC) Eligibility in Singapore: Complete Guide (2026)"
+  focus_keyword: "Executive Condo (EC) "
+  meta_description: The Executive Condominium is Singapore's most distinctive
+    property type — a hybrid housing scheme that starts as public housing and
+    ends as fully private property.
 ---
 
 # Executive Condo (EC) Eligibility in Singapore: Complete Guide (2026)
