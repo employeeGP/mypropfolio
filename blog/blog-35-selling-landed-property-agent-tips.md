@@ -1,15 +1,27 @@
 ---
+reading_time: 7 min
+meta_description: Selling landed property in Singapore requires a different
+  approach from condo or HDB — smaller buyer pool, longer timelines, and premium
+  presentation standards. Here is what agents need to know in 2026.
+focus_keyword: how to sell landed property singapore agent
+canonical_url: https://mypropfolio.co/blog/how-to-market-sell-landed-property-singapore-agent
+slug: how-to-market-sell-landed-property-singapore-agent
 title: "How to Market and Sell Landed Property in Singapore: Agent Tips (2026)"
 date: 2026-07-10
-slug: how-to-market-sell-landed-property-singapore-agent
-focus_keyword: how to sell landed property singapore agent
-secondary_keywords: marketing landed property singapore, landed property agent tips singapore, sell bungalow singapore agent 2026
-meta_description: "Selling landed property in Singapore requires a different approach from condo or HDB — smaller buyer pool, longer timelines, and premium presentation standards. Here is what agents need to know in 2026."
-canonical_url: https://mypropfolio.co/blog/how-to-market-sell-landed-property-singapore-agent
+thumbnail: /Asset/uploads/35.jpg
 og_title: "How to Market and Sell Landed Property in Singapore: Agent Tips (2026)"
-og_description: "The landed market has a smaller buyer pool, longer timelines, and higher presentation expectations. Here is how agents approach it differently in 2026."
+og_description: The landed market has a smaller buyer pool, longer timelines,
+  and higher presentation expectations. Here is how agents approach it
+  differently in 2026.
+secondary_keywords: marketing landed property singapore, landed property agent
+  tips singapore, sell bungalow singapore agent 2026
 category: Agent Tips
-reading_time: 7 min
+seo:
+  meta_title: "How to Market and Sell Landed Property in Singapore: Agent Tips (2026)"
+  focus_keyword: Landed Property in Singapore
+  meta_description: An agent who applies the same approach to a SGD 6M bungalow as
+    to a SGD 800K HDB flat will not get the same results. Here is how to
+    approach landed differently.
 ---
 
 # How to Market and Sell Landed Property in Singapore: Agent Tips (2026)
