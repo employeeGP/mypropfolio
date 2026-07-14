@@ -1,15 +1,27 @@
 ---
+reading_time: 7 min
+meta_description: Singapore's rental market hit record highs in early 2026
+  before softening. Here is the data — HDB vs private, by region, yield trends —
+  and what it means for agents advising landlords and tenants.
+focus_keyword: singapore rental market 2026 agents
+canonical_url: https://mypropfolio.co/blog/singapore-rental-market-2026-agents
+slug: singapore-rental-market-2026-agents
 title: "Singapore Rental Market 2026: What Property Agents Need to Know"
 date: 2026-07-11
-slug: singapore-rental-market-2026-agents
-focus_keyword: singapore rental market 2026 agents
-secondary_keywords: singapore rental market outlook 2026, hdb rental 2026, condo rental singapore 2026, rental market trends singapore
-meta_description: "Singapore's rental market hit record highs in early 2026 before softening. Here is the data — HDB vs private, by region, yield trends — and what it means for agents advising landlords and tenants."
-canonical_url: https://mypropfolio.co/blog/singapore-rental-market-2026-agents
+thumbnail: /Asset/uploads/42.jpg
 og_title: "Singapore Rental Market 2026: What Agents Need to Know"
-og_description: "Condo rents hit record high in March 2026, then softened. HDB rents easing. CCR holding. Here is the full rental market picture for Singapore agents in 2026."
+og_description: Condo rents hit record high in March 2026, then softened. HDB
+  rents easing. CCR holding. Here is the full rental market picture for
+  Singapore agents in 2026.
+secondary_keywords: singapore rental market outlook 2026, hdb rental 2026, condo
+  rental singapore 2026, rental market trends singapore
 category: Market Updates
-reading_time: 7 min
+seo:
+  meta_title: "Singapore Rental Market 2026: What Property Agents Need to Know"
+  focus_keyword: "Singapore Rental Market "
+  meta_description: "Singapore's rental market entered 2026 in a distinctive
+    position: prices at or near historic highs, but with clear signals of
+    stabilisation after two exceptional years of post-COVID surge"
 ---
 
 # Singapore Rental Market 2026: What Property Agents Need to Know
