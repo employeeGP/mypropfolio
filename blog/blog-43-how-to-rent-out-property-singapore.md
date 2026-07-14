@@ -1,15 +1,28 @@
 ---
+reading_time: 8 min
+meta_description: Planning to rent out your HDB or condo in Singapore? Here is
+  the complete 2026 guide — eligibility rules, HDB approval process, tenancy
+  agreement, tax, and how to find good tenants fast.
+focus_keyword: how to rent out property singapore 2026
+canonical_url: https://mypropfolio.co/blog/how-to-rent-out-property-singapore-landlord-2026
+slug: how-to-rent-out-property-singapore-landlord-2026
 title: "How to Rent Out Your Property in Singapore: Complete Landlord Guide (2026)"
 date: 2026-07-11
-slug: how-to-rent-out-property-singapore-landlord-2026
-focus_keyword: how to rent out property singapore 2026
-secondary_keywords: renting out hdb singapore 2026, landlord guide singapore, how to find tenants singapore, subletting hdb singapore rules
-meta_description: "Planning to rent out your HDB or condo in Singapore? Here is the complete 2026 guide — eligibility rules, HDB approval process, tenancy agreement, tax, and how to find good tenants fast."
-canonical_url: https://mypropfolio.co/blog/how-to-rent-out-property-singapore-landlord-2026
+thumbnail: /Asset/uploads/43.jpg
 og_title: "How to Rent Out Your Property in Singapore: Complete Landlord Guide (2026)"
-og_description: "HDB subletting approval, Non-Citizen Quota check, tenancy agreement, stamp duty, rental income tax — here is everything Singapore landlords need to know in 2026."
+og_description: HDB subletting approval, Non-Citizen Quota check, tenancy
+  agreement, stamp duty, rental income tax — here is everything Singapore
+  landlords need to know in 2026.
+secondary_keywords: renting out hdb singapore 2026, landlord guide singapore,
+  how to find tenants singapore, subletting hdb singapore rules
 category: Seller Guides
-reading_time: 8 min
+seo:
+  meta_title: "How to Rent Out Your Property in Singapore: Complete Landlord Guide (2026)"
+  focus_keyword: " Property in Singapore"
+  meta_description: Renting out property in Singapore — whether an HDB flat you
+    are temporarily not occupying, an investment condo, or a landed home —
+    involves a clear set of rules, processes, and ongoing responsibilities that
+    many first-time landlords underestimate.
 ---
 
 # How to Rent Out Your Property in Singapore: Complete Landlord Guide (2026)
