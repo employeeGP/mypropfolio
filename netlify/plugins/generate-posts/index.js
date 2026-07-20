@@ -224,7 +224,7 @@ const AUTHOR = {
   role : 'Co-founder, mypropfolio',
   bio  : 'Jared spent 7 years as a property agent in Singapore before co-founding mypropfolio. He writes about what actually works for agents who want to stand out in a crowded market.',
   stat : '500+ microsites delivered',
-  wa   : 'https://wa.me/6596273238',
+  wa   : 'https://wa.me/6588190042',
 };
 
 /* ── ToC ─────────────────────────────────────────────────────────────────── */
@@ -522,7 +522,7 @@ function generatePostPage(post, articleHTML, sections, allPosts) {
           <a href="../">Blog</a>
         </div>
         <div class="footer-contact">
-          <a href="https://wa.me/6596273238" target="_blank" rel="noopener">WhatsApp Us</a>
+          <a href="https://wa.me/6588190042" target="_blank" rel="noopener">WhatsApp Us</a>
         </div>
       </div>
       <div class="footer-bottom">
