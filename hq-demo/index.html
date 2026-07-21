@@ -83,6 +83,10 @@ body{
 .hq-pill{font-size:9.5px;font-weight:700;letter-spacing:.14em;color:var(--navy);background:var(--gold);padding:3px 7px;border-radius:6px;margin-left:2px;transform:translateY(-1px)}
 .bell{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;position:relative;color:var(--muted);font-size:15px}
 .bell::after{content:"";position:absolute;top:8px;right:9px;width:7px;height:7px;background:var(--red);border-radius:50%;border:2px solid var(--navy)}
+.offer-link{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;letter-spacing:.02em;color:var(--navy);background:linear-gradient(135deg,var(--gold),oklch(74% 0.11 88));padding:8px 12px;border-radius:10px;text-decoration:none;box-shadow:0 6px 16px -6px oklch(78% 0.11 82 / .6);transition:.2s}
+.offer-link:active{transform:scale(.96)}
+.pitch-cta{display:inline-flex;align-items:center;gap:8px;margin-top:22px;font-size:14.5px;font-weight:700;color:var(--navy);background:linear-gradient(135deg,var(--gold),oklch(74% 0.11 88));padding:14px 22px;border-radius:13px;text-decoration:none;box-shadow:0 12px 28px -10px oklch(78% 0.11 82 / .6);transition:.2s}
+.pitch-cta:hover{transform:translateY(-2px)}
 
 /* body scroll */
 .body{flex:1;overflow-y:auto;overflow-x:hidden;padding:4px 16px 96px;scrollbar-width:none}
@@ -290,6 +294,7 @@ body{
       <span class="tag">1-tap microsites</span>
     </div>
     <div class="brandline">Built for <b>Dane Kau Group</b> · ERA Realty Network</div>
+    <a class="pitch-cta" href="offer/">View the Founding Partner offer →</a>
   </div>
 
   <div class="phone">
@@ -306,7 +311,7 @@ body{
           <div class="wm">mypropfolio<span></span></div>
           <span class="hq-pill">HQ</span>
         </div>
-        <div class="bell">◔</div>
+        <a class="offer-link" href="offer/">Pricing →</a>
       </div>
 
       <div class="body">
